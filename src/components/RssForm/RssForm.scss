@@ -1,0 +1,30 @@
+@import '../App/App.scss';
+
+.rss-input {
+	margin-bottom: 12px;
+}
+
+.rss-input + .invalid-feedback {
+	position: absolute;
+	transform: translateY(75px);
+}
+
+small.form-text {
+	font-size: 16px;
+}
+
+@media (max-width: 384px) {
+	.rss-input + .invalid-feedback {
+		transform: translateY(100px);
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.rss-input {
+		margin-bottom: 0;
+	}
+
+	.rss-input + .invalid-feedback {
+		transform: translateY(28px);
+	}
+}
