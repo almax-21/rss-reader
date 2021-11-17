@@ -1,1 +1,11 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+
+.rss-input {
+	margin-bottom: 12px;
+}
+
+@include media-breakpoint-up(md) {
+	.rss-input {
+		margin-bottom: 0;
+	}
+}
