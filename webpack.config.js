@@ -65,7 +65,11 @@ module.exports = {
 	devServer: {
 		port: 3000,
 		hot: isDevMode,
+		client: {
+			overlay: false,
+		},
 	},
+	stats: 'errors-only',
 	devtool: isDevMode ? 'source-map' : false,
 	module: {
 		rules: [
