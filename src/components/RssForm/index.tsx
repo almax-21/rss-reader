@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -10,7 +10,7 @@ import rssSlice from '../../store/reducers/rssSlice';
 import useTypedDispatch from '../../hooks/useTypedDispatch';
 
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import {
 	Form,
 	Button,
@@ -77,9 +77,22 @@ const RssForm: FC = () => {
 
 	const intl = useIntl();
 
-	const handleSubmit = async (values: FormValues) => {
+	const rssInputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (rssInputRef.current) {
+			rssInputRef.current.focus();
+		}
+	}, [urls]);
+
+	const handleSubmit = async (
+		values: FormValues,
+		{ resetForm }: FormikHelpers<FormValues>
+	) => {
 		const newUrl = values[RSS_URL];
+
 		dispatch(addUrl(newUrl));
+		resetForm();
 	};
 
 	return (
@@ -114,6 +127,7 @@ const RssForm: FC = () => {
 										isInvalid={!isValid}
 										className="rss-input pb-2 pt-4"
 										placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
+										ref={rssInputRef}
 									/>
 									<Form.Control.Feedback type={isValid ? 'valid' : 'invalid'}>
 										{errors[RSS_URL]}
