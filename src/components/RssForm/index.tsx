@@ -1,4 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
+import axios from 'axios';
+
+import { FormattedMessage, useIntl } from 'react-intl';
+import { MESSAGES } from '../../i18n/types';
+import { IntlShape } from '@formatjs/intl';
 
 import useTypedSelector from '../../hooks/useTypedSelector';
 import rssSlice from '../../store/reducers/rssSlice';
@@ -16,8 +21,6 @@ import {
 } from 'react-bootstrap';
 
 import './RssForm.scss';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { MESSAGES } from '../../i18n/types';
 
 const RSS_URL = 'RSS_URL';
 
@@ -29,8 +32,43 @@ const initValues: FormValues = {
 	[RSS_URL]: '',
 };
 
-const sleep = (ms: number): Promise<void> =>
-	new Promise((r) => setTimeout(() => r(), ms));
+const setValidationSchema = (
+	intl: IntlShape<string | ReactNode>,
+	urls: string[]
+) => {
+	const validUrlSchema = Yup.string()
+		.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
+		.url(intl.formatMessage({ id: MESSAGES.ERROR_INVALID_URL }));
+
+	return Yup.object().shape({
+		[RSS_URL]: validUrlSchema.test({
+			test: async function (value: string | undefined) {
+				if (value && urls.includes(value)) {
+					return this.createError({
+						message: intl.formatMessage({ id: MESSAGES.ERROR_ALREADY_EXIST }),
+					});
+				}
+
+				if (!validUrlSchema.isValidSync(value)) {
+					return false;
+				}
+
+				const isNetworkError: boolean = await new Promise((resolve) => {
+					axios
+						.head(value)
+						.then(() => resolve(false))
+						.catch(() => resolve(true));
+				});
+
+				return isNetworkError
+					? this.createError({
+							message: intl.formatMessage({ id: MESSAGES.ERROR_NETWORK }),
+					  })
+					: true;
+			},
+		}),
+	});
+};
 
 const RssForm: FC = () => {
 	const { urls } = useTypedSelector((state) => state.rss);
@@ -39,21 +77,7 @@ const RssForm: FC = () => {
 
 	const intl = useIntl();
 
-	const validateForm = (values: FormValues) => {
-		const errors = {} as FormValues;
-
-		if (urls.includes(values[RSS_URL])) {
-			errors[RSS_URL] = intl.formatMessage({
-				id: MESSAGES.ERROR_ALREADY_EXIST,
-			});
-		}
-
-		return errors;
-	};
-
 	const handleSubmit = async (values: FormValues) => {
-		await sleep(1500);
-
 		const newUrl = values[RSS_URL];
 		dispatch(addUrl(newUrl));
 	};
@@ -61,13 +85,8 @@ const RssForm: FC = () => {
 	return (
 		<>
 			<Formik
-				validate={validateForm}
 				onSubmit={handleSubmit}
-				validationSchema={Yup.object().shape({
-					[RSS_URL]: Yup.string()
-						.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
-						.url(intl.formatMessage({ id: MESSAGES.ERROR_INVALID_URL })),
-				})}
+				validationSchema={setValidationSchema(intl, urls)}
 				initialValues={initValues}
 				validateOnChange={false}
 				validateOnBlur={false}
@@ -83,7 +102,10 @@ const RssForm: FC = () => {
 					<Form noValidate onSubmit={handleSubmit} className="pb-4">
 						<Form.Group as={Row} className="mb-2">
 							<Col md="9" className="text-dark">
-								<FloatingLabel controlId="floatingInput" label="Ссылка RSS">
+								<FloatingLabel
+									controlId="floatingInput"
+									label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
+								>
 									<Form.Control
 										type="text"
 										name={RSS_URL}
@@ -123,7 +145,10 @@ const RssForm: FC = () => {
 								</Button>
 							</Col>
 						</Form.Group>
-						<Form.Text>Пример: https://ru.hexlet.io/lessons.rss</Form.Text>
+						<Form.Text>
+							<FormattedMessage id={MESSAGES.EXAMPLE} />:
+							https://ru.hexlet.io/lessons.rss
+						</Form.Text>
 					</Form>
 				)}
 			</Formik>
