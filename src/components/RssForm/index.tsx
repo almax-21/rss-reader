@@ -1,15 +1,12 @@
-import React, { FC, ReactNode, useEffect, useRef } from 'react';
-import axios from 'axios';
+import React, { FC, useEffect, useRef } from 'react';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 import { MESSAGES } from '../../i18n/types';
-import { IntlShape } from '@formatjs/intl';
 
 import useTypedSelector from '../../hooks/useTypedSelector';
 import rssSlice from '../../store/reducers/rssSlice';
 import useTypedDispatch from '../../hooks/useTypedDispatch';
 
-import * as Yup from 'yup';
 import { Formik, FormikHelpers } from 'formik';
 import {
 	Form,
@@ -19,10 +16,10 @@ import {
 	FloatingLabel,
 	Spinner,
 } from 'react-bootstrap';
+import { RSS_URL } from './constants';
+import setValidationSchema from './setValidationSchema';
 
 import './RssForm.scss';
-
-const RSS_URL = 'RSS_URL';
 
 interface FormValues {
 	[RSS_URL]: string;
@@ -30,44 +27,6 @@ interface FormValues {
 
 const initValues: FormValues = {
 	[RSS_URL]: '',
-};
-
-const setValidationSchema = (
-	intl: IntlShape<string | ReactNode>,
-	urls: string[]
-) => {
-	const validUrlSchema = Yup.string()
-		.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
-		.url(intl.formatMessage({ id: MESSAGES.ERROR_INVALID_URL }));
-
-	return Yup.object().shape({
-		[RSS_URL]: validUrlSchema.test({
-			test: async function (value: string | undefined) {
-				if (value && urls.includes(value)) {
-					return this.createError({
-						message: intl.formatMessage({ id: MESSAGES.ERROR_ALREADY_EXIST }),
-					});
-				}
-
-				if (!validUrlSchema.isValidSync(value)) {
-					return false;
-				}
-
-				const isNetworkError: boolean = await new Promise((resolve) => {
-					axios
-						.head(value)
-						.then(() => resolve(false))
-						.catch(() => resolve(true));
-				});
-
-				return isNetworkError
-					? this.createError({
-							message: intl.formatMessage({ id: MESSAGES.ERROR_NETWORK }),
-					  })
-					: true;
-			},
-		}),
-	});
 };
 
 const RssForm: FC = () => {
