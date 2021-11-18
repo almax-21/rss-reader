@@ -1,14 +1,18 @@
 import { LOCALES } from './locales';
 
+export type LocaleType = typeof LOCALES[keyof typeof LOCALES];
+
 export interface ILocale {
 	[key: string]: string;
 }
 
 export interface IMessages {
 	[LOCALES.RUSSIAN]: ILocale;
+	[LOCALES.ENGLISH]: ILocale;
 }
 
 export enum MESSAGES {
+	LANGUAGE = 'LANGUAGE',
 	MAIN_HEADER = 'MAIN_HEADER',
 	LEAD = 'LEAD',
 	RSS_INPUT = 'RSS_INPUT',
@@ -17,6 +21,7 @@ export enum MESSAGES {
 	EXAMPLE = 'EXAMPLE',
 	ERROR_EMPTY = 'ERROR_EMPTY',
 	ERROR_INVALID_URL = 'ERROR_INVALID_URL',
+	ERROR_NETWORK = 'ERROR_NETWORK',
 	ERROR_ALREADY_EXIST = 'ERROR_ALREADY_EXIST',
 	COPYRIGHT_CREATE = 'COPYRIGHT_CREATE',
 	COPYRIGHT_COMPANY = 'COPYRIGHT_COMPANY',
