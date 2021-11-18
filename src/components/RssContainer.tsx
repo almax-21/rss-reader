@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-
-import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { MESSAGES } from '../i18n/types';
+
+import { Col, Container, Row } from 'react-bootstrap';
 import LocaleSwitcher from './LocaleSwitcher';
 import RssForm from './RssForm';
 

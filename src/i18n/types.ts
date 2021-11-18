@@ -14,6 +14,8 @@ export interface IMessages {
 export enum MESSAGES {
 	LANGUAGE = 'LANGUAGE',
 	MAIN_HEADER = 'MAIN_HEADER',
+	DESCRIPTION = 'DESCRIPTION',
+	KEYWORDS = 'KEYWORDS',
 	LEAD = 'LEAD',
 	RSS_INPUT = 'RSS_INPUT',
 	ADD = 'ADD',

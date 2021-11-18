@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 
 import { IntlProvider } from 'react-intl';
 import { messages } from '../../i18n/messages';
 import useTypedSelector from '../../hooks/useTypedSelector';
 
+import AppHelmet from '../AppHelmet';
 import RssContainer from '../RssContainer';
 import Footer from '../Footer';
 
@@ -14,15 +14,13 @@ const App: FC = () => {
 	const { locale } = useTypedSelector((state) => state);
 
 	return (
-		<>
-			<Helmet htmlAttributes={{ lang: locale }} />
-			<IntlProvider locale={locale} messages={messages[locale]}>
-				<main>
-					<RssContainer />
-					<Footer />
-				</main>
-			</IntlProvider>
-		</>
+		<IntlProvider locale={locale} messages={messages[locale]}>
+			<AppHelmet />
+			<main>
+				<RssContainer />
+				<Footer />
+			</main>
+		</IntlProvider>
 	);
 };
 
