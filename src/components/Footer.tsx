@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import { MESSAGES } from '../i18n/types';
 
 const Footer: FC = () => {

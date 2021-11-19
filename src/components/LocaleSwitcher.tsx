@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
-import useTypedDispatch from '../hooks/useTypedDispatch';
-import localeSlice from '../store/reducers/localeSlice';
 import { useIntl } from 'react-intl';
-import { LocaleType, MESSAGES } from '../i18n/types';
+
+import useTypedDispatch from '../hooks/useTypedDispatch';
 import { LOCALES } from '../i18n/locales';
+import { LocaleType, MESSAGES } from '../i18n/types';
+import localeSlice from '../store/slices/localeSlice';
 
 const LocaleSwitcher: FC = () => {
 	const { setLocale } = localeSlice.actions;
@@ -21,6 +22,7 @@ const LocaleSwitcher: FC = () => {
 			as={ButtonGroup}
 			onSelect={localeHandler}
 			title={intl.formatMessage({ id: MESSAGES.LANGUAGE })}
+			size="sm"
 		>
 			<Dropdown.Item eventKey={LOCALES.RUSSIAN}>
 				{LOCALES.RUSSIAN}

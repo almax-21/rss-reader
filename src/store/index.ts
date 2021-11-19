@@ -1,5 +1,12 @@
+import localeSlice from './slices/localeSlice';
+import rssSlice from './slices/rssSlice';
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import { combineReducers } from '@reduxjs/toolkit';
+
+export const rootReducer = combineReducers({
+	locale: localeSlice.reducer,
+	rss: rssSlice.reducer,
+});
 
 export const setupStore = () => {
 	return configureStore({
@@ -7,7 +14,3 @@ export const setupStore = () => {
 		devTools: true,
 	});
 };
-
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];

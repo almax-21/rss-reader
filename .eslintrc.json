@@ -3,16 +3,27 @@
 	"parserOptions": {
 		"ecmaVersion": "latest"
 	},
-	"plugins": ["@typescript-eslint", "react-hooks"],
+	"plugins": ["@typescript-eslint", "react-hooks", "simple-import-sort"],
 	"extends": [
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended"
 	],
 	"rules": {
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
+		"react-hooks/exhaustive-deps": "off",
 		"react/prop-types": "off",
-		"react/react-in-jsx-scope": "off"
+		"react/react-in-jsx-scope": "off",
+		"simple-import-sort/imports": [
+			"error",
+			{
+				"groups": [
+					[
+						"^\\u0000", // Side effect imports.
+						"^react" // `react` related packages come first.
+					]
+				]
+			}
+		]
 	},
 	"settings": {
 		"react": {
