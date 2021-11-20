@@ -1,3 +1,4 @@
+import './style.scss';
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
@@ -19,9 +20,9 @@ const Notification: FC<NotificationProps> = ({ data, isShow, onClose }) => {
 			show={isShow}
 			onClose={onClose}
 			variant={variant}
-			className="fixed-top"
+			className="notification fixed-top"
 		>
-			<Icon variant={variant} />
+			<Icon variant={variant} className="notification__icon" />
 			{message}
 		</Alert>
 	);
