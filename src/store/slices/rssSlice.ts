@@ -1,11 +1,11 @@
 import { getRSSFeed } from '../async-actions/getRSSFeed';
-import { RssFeedData, RssState } from '../types';
+import { FEED_LOADED_STATE, RssFeedData, RssState } from '../types';
 import { createSlice,PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: RssState = {
 	isLoading: false,
-	isSuccessfullyLoaded: false,
-	error: '',
+	feedLoadedState: FEED_LOADED_STATE.NULL,
+	errorMessage: '',
 	urls: [],
 	feeds: {},
 	posts: [],
@@ -19,8 +19,8 @@ const rssSlice = createSlice({
 	extraReducers: {
 		[getRSSFeed.pending.type]: (state) => {
 			state.isLoading = true;
-			state.isSuccessfullyLoaded = false;
-			state.error = '';
+			state.feedLoadedState = FEED_LOADED_STATE.NULL;
+			state.errorMessage = '';
 		},
 		[getRSSFeed.fulfilled.type]: (
 			state,
@@ -29,7 +29,7 @@ const rssSlice = createSlice({
 			const { id, title, description, posts, url } = action.payload;
 
 			state.isLoading = false;
-			state.isSuccessfullyLoaded = true;
+			state.feedLoadedState = FEED_LOADED_STATE.SUCCESS;
 
 			state.urls = [...state.urls, url];
 			state.feeds[id] = { id, title, description };
@@ -38,7 +38,8 @@ const rssSlice = createSlice({
 		},
 		[getRSSFeed.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false;
-			state.error = action.payload;
+			state.feedLoadedState = FEED_LOADED_STATE.ERROR;
+			state.errorMessage = action.payload;
 		},
 	},
 });

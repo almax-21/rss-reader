@@ -1,16 +1,69 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import useTypedSelector from '../hooks/useTypedSelector';
 import { MESSAGES } from '../i18n/types';
+import { FEED_LOADED_STATE } from '../store/types';
 import LocaleSwitcher from './LocaleSwitcher';
-import Notification from './Notification';
+import Notification, {
+	NOTIFICATION_VARIANT,
+	NotificationData,
+} from './Notification';
 import RssForm from './RssForm';
 
 const RssContainer: FC = () => {
+	const { feedLoadedState, errorMessage } = useTypedSelector(
+		(state) => state.rss
+	);
+
+	const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
+	const notificationRef = useRef<NotificationData>({
+		variant: '',
+		message: '',
+	});
+
+	const intl = useIntl();
+
+	useEffect(() => {
+		if (feedLoadedState && !isShowNotification) {
+			switch (feedLoadedState) {
+				case FEED_LOADED_STATE.SUCCESS:
+					notificationRef.current = {
+						variant: NOTIFICATION_VARIANT.SUCCESS,
+						message: intl.formatMessage({ id: MESSAGES.SUCCESSFULLY_LOADED }),
+					};
+					break;
+				case FEED_LOADED_STATE.ERROR:
+					notificationRef.current = {
+						variant: NOTIFICATION_VARIANT.ERROR,
+						message: errorMessage,
+					};
+					break;
+				default:
+					console.error(`Unexpected "${feedLoadedState}" state!`);
+			}
+
+			setIsShowNotification(true);
+
+			setTimeout(() => {
+				setIsShowNotification(false);
+				notificationRef.current = { variant: '', message: '' };
+			}, 3500);
+		}
+	}, [feedLoadedState]);
+
+	const onCloseNotification = () => {
+		setIsShowNotification(false);
+	};
+
 	return (
 		<>
-			<Notification />
+			<Notification
+				data={notificationRef.current}
+				isShow={isShowNotification}
+				onClose={onCloseNotification}
+			/>
 			<Container className="bg-dark p-5 pt-4 pb-4" as="section" fluid>
 				<Row className="justify-content-center">
 					<Col md="10" lg="8" className="d-flex justify-content-end">
