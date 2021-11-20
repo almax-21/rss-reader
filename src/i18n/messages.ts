@@ -21,8 +21,7 @@ export const messages: IMessages = {
 		[MESSAGES.SUCCESSFULLY_LOADED]: 'RSS успешно загружен!',
 		[MESSAGES.ERROR_EMPTY]: 'Поле не должно быть пустым',
 		[MESSAGES.ERROR_INVALID_URL]: 'Ссылка должна быть валидным URL',
-		[MESSAGES.ERROR_NETWORK]:
-			'Ошибка сети. Проверьте корректность ссылки или подключение к интернету',
+		[MESSAGES.ERROR_NETWORK]: 'Ошибка сети. Проверьте подключение к интернету',
 		[MESSAGES.ERROR_ALREADY_EXIST]: 'RSS уже существует',
 		[MESSAGES.COPYRIGHT_CREATE]: 'Создано',
 		[MESSAGES.COPYRIGHT_COMPANY]: 'Hexlet',
@@ -46,8 +45,7 @@ export const messages: IMessages = {
 		[MESSAGES.SUCCESSFULLY_LOADED]: 'RSS successfully loaded!',
 		[MESSAGES.ERROR_EMPTY]: 'The field must not be empty',
 		[MESSAGES.ERROR_INVALID_URL]: 'The link must be a valid URL',
-		[MESSAGES.ERROR_NETWORK]:
-			'Network error. Check the correctness of the link or the Internet connection',
+		[MESSAGES.ERROR_NETWORK]: 'Network error. Check your internet connection',
 		[MESSAGES.ERROR_ALREADY_EXIST]: 'RSS already exists',
 		[MESSAGES.COPYRIGHT_CREATE]: 'Created by',
 		[MESSAGES.COPYRIGHT_COMPANY]: 'Hexlet',
