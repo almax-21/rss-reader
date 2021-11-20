@@ -26,7 +26,7 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => {
 							<h3 className="h5 fw-bold">{title}</h3>
 							{description}
 						</div>
-						<Badge pill>
+						<Badge pill bg="danger">
 							{postsCount}
 						</Badge>
 					</ListGroup.Item>
