@@ -16,7 +16,7 @@ import { MESSAGES } from '../../i18n/types';
 import { getRSSFeed } from '../../store/async-actions/getRSSFeed';
 import { RSS_URL } from './constants';
 import setValidationSchema from './setValidationSchema';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 
 interface FormValues {
 	[RSS_URL]: string;
@@ -30,11 +30,13 @@ const RssForm: FC = () => {
 	const { urls, isLoading } = useTypedSelector((state) => state.rss);
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
+
+	const formikRef = useRef<FormikProps<FormValues>>(null);
 	const rssInputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
-		if (rssInputRef.current) {
-			rssInputRef.current.value = '';
+		if (formikRef.current && rssInputRef.current) {
+			formikRef.current.setFieldValue(RSS_URL, '');
 			rssInputRef.current.focus();
 		}
 	}, [urls]);
@@ -54,6 +56,7 @@ const RssForm: FC = () => {
 			initialValues={initValues}
 			validateOnChange={false}
 			validateOnBlur={false}
+			innerRef={formikRef}
 		>
 			{({
 				handleSubmit,
