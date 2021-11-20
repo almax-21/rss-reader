@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import useTypedDispatch from '../hooks/useTypedDispatch';
 import { LOCALES } from '../i18n/locales';
@@ -25,10 +25,10 @@ const LocaleSwitcher: FC = () => {
 			size="sm"
 		>
 			<Dropdown.Item eventKey={LOCALES.RUSSIAN}>
-				{LOCALES.RUSSIAN}
+				<FormattedMessage id={MESSAGES.RUSSIAN} />
 			</Dropdown.Item>
 			<Dropdown.Item eventKey={LOCALES.ENGLISH}>
-				{LOCALES.ENGLISH}
+				<FormattedMessage id={MESSAGES.ENGLISH} />
 			</Dropdown.Item>
 		</DropdownButton>
 	);

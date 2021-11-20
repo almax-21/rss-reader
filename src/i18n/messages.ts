@@ -4,6 +4,8 @@ import { IMessages, MESSAGES } from './types';
 export const messages: IMessages = {
 	[LOCALES.RUSSIAN]: {
 		[MESSAGES.LANGUAGE]: 'Язык',
+		[MESSAGES.RUSSIAN]: 'Русский',
+		[MESSAGES.ENGLISH]: 'Английский',
 		[MESSAGES.MAIN_HEADER]: 'RSS агрегатор',
 		[MESSAGES.DESCRIPTION]:
 			'RSS агрегатор - одна из лучших возможностей держать руку на пульсе событий. Например, подборка последних новостей поможет быть в курсе дел вашей ниши или хобби.',
@@ -27,6 +29,8 @@ export const messages: IMessages = {
 	},
 	[LOCALES.ENGLISH]: {
 		[MESSAGES.LANGUAGE]: 'Language',
+		[MESSAGES.RUSSIAN]: 'Russian',
+		[MESSAGES.ENGLISH]: 'English',
 		[MESSAGES.MAIN_HEADER]: 'RSS aggregator',
 		[MESSAGES.DESCRIPTION]:
 			'RSS aggregator is one of the best ways to keep your finger on the pulse of events. For example, a compilation of the latest news will help you stay on top of your niche or hobby.',
