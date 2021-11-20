@@ -1,4 +1,4 @@
-import './App.scss';
+import './style.scss';
 import React, { FC } from 'react';
 import { IntlProvider } from 'react-intl';
 

@@ -6,11 +6,12 @@ import useTypedSelector from '../hooks/useTypedSelector';
 import { MESSAGES } from '../i18n/types';
 import { FEED_LOADED_STATE } from '../store/types';
 import LocaleSwitcher from './LocaleSwitcher';
-import Notification, {
+import RssForm from './RssForm';
+import Notification from './UI/Notification';
+import {
 	NOTIFICATION_VARIANT,
 	NotificationData,
-} from './Notification';
-import RssForm from './RssForm';
+} from './UI/Notification/types';
 
 const RssContainer: FC = () => {
 	const { feedLoadedState, errorMessage } = useTypedSelector(

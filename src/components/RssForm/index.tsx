@@ -1,4 +1,4 @@
-import './RssForm.scss';
+import './style.scss';
 import React, { FC, useEffect, useRef } from 'react';
 import {
 	Button,
