@@ -14,6 +14,8 @@ interface ReturnedHookData {
 	onCloseNotification: () => void;
 }
 
+type TimeoutId = ReturnType<typeof setTimeout>;
+
 const useFeedNotification = (
 	feedLoadedState: FEED_LOADED_STATE,
 	errorMessage: string
@@ -24,6 +26,7 @@ const useFeedNotification = (
 		variant: '',
 		message: '',
 	});
+	const timeoutIdRef = useRef<TimeoutId>(-1 as unknown as TimeoutId);
 
 	const intl = useIntl();
 
@@ -49,7 +52,7 @@ const useFeedNotification = (
 
 			setIsShowNotification(true);
 
-			setTimeout(() => {
+			timeoutIdRef.current = setTimeout(() => {
 				setIsShowNotification(false);
 				notificationRef.current = { variant: '', message: '' };
 			}, 3500);
@@ -57,6 +60,7 @@ const useFeedNotification = (
 	}, [feedLoadedState]);
 
 	const onCloseNotification = () => {
+		clearTimeout(timeoutIdRef.current);
 		setIsShowNotification(false);
 	};
 
