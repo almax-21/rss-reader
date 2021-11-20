@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../hooks/useTypedSelector';
+import { MESSAGES } from '../i18n/types';
 import { RootState, RssState } from '../store/types';
 import FeedList from './FeedList';
 import PostList from './PostList';
@@ -25,7 +27,9 @@ const ContentContainer: FC = () => {
 		<Container fluid className="container-xxl p-5">
 			<Row className="flex-wrap-reverse">
 				{feeds.length === 0 ? (
-					<h2 className="display-5 mt-4 text-center">Фидов пока нет</h2>
+					<h2 className="display-5 mt-4 text-center">
+						<FormattedMessage id={MESSAGES.NO_FEEDS} />
+					</h2>
 				) : (
 					<>
 						<Col as="section" className="mb-5">
