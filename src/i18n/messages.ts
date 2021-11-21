@@ -24,8 +24,8 @@ export const messages: IMessages = {
 		[MESSAGES.ERROR_NETWORK]: 'Network error. Check your internet connection',
 		[MESSAGES.ERROR_INCORRECT_RSS]: "Resource doesn't contain valid RSS",
 		[MESSAGES.ERROR_ALREADY_EXIST]: 'RSS already exists',
-		[MESSAGES.COPYRIGHT_CREATE]: 'Created by',
-		[MESSAGES.COPYRIGHT_COMPANY]: 'Hexlet',
+		[MESSAGES.INSPIRED_BY]: 'Inspired by',
+		[MESSAGES.HEXLET_COMPANY]: 'Hexlet',
 	},
 	[LOCALES.RUSSIAN]: {
 		[MESSAGES.LANGUAGE]: 'Язык',
@@ -49,7 +49,7 @@ export const messages: IMessages = {
 		[MESSAGES.ERROR_NETWORK]: 'Ошибка сети. Проверьте подключение к интернету',
 		[MESSAGES.ERROR_INCORRECT_RSS]: 'Ресурс не содержит валидный RSS',
 		[MESSAGES.ERROR_ALREADY_EXIST]: 'RSS уже существует',
-		[MESSAGES.COPYRIGHT_CREATE]: 'Создано',
-		[MESSAGES.COPYRIGHT_COMPANY]: 'Hexlet',
+		[MESSAGES.INSPIRED_BY]: 'Вдохновлено',
+		[MESSAGES.HEXLET_COMPANY]: 'Хекслет',
 	},
 };

@@ -1,1 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+
+main {
+	min-height: calc(100vh - 57px);
+}

@@ -18,8 +18,8 @@ const App: FC = () => {
 			<main>
 				<RSSContainer />
 				<ContentContainer />
-				<Footer />
 			</main>
+			<Footer />
 		</IntlProvider>
 	);
 };
