@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import useTypedDispatch from '../hooks/useTypedDispatch';
+import useTypedDispatch from '../hooks/redux/useTypedDispatch';
 import { LOCALES } from '../i18n/locales';
 import { LocaleType, MESSAGES } from '../i18n/types';
 import localeSlice from '../store/slices/localeSlice';

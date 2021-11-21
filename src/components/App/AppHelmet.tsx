@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
 
-import useTypedSelector from '../hooks/useTypedSelector';
-import { MESSAGES } from '../i18n/types';
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import { MESSAGES } from '../../i18n/types';
 
 const AppHelmet: FC = () => {
 	const { locale } = useTypedSelector((state) => state);

@@ -2,12 +2,12 @@ import './style.scss';
 import React, { FC } from 'react';
 import { IntlProvider } from 'react-intl';
 
-import useTypedSelector from '../../hooks/useTypedSelector';
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
-import AppHelmet from '../AppHelmet';
 import ContentContainer from '../ContentContainer';
 import Footer from '../Footer';
 import RssContainer from '../RssContainer';
+import AppHelmet from './AppHelmet';
 
 const App: FC = () => {
 	const { locale } = useTypedSelector((state) => state);

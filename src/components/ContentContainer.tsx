@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedSelector from '../hooks/useTypedSelector';
+import useTypedSelector from '../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../i18n/types';
 import { RootState, RssState } from '../store/types';
 import FeedList from './FeedList';
