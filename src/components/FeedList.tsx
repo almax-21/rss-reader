@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { Badge, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { MESSAGES } from '../i18n/types';
 import { IFeed } from '../models/IFeed';
+import FeedItem from './FeedItem';
 
 interface FeedListProps {
 	feeds: IFeed[];
@@ -17,19 +18,12 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => {
 			</h2>
 			<ListGroup as="ol" numbered>
 				{feeds.map(({ id, title, description, postsCount }) => (
-					<ListGroup.Item
+					<FeedItem
 						key={id}
-						as="li"
-						className="d-flex justify-content-between align-items-start"
-					>
-						<div className="ms-2 me-auto">
-							<h3 className="h5 fw-bold">{title}</h3>
-							{description}
-						</div>
-						<Badge pill bg="danger">
-							{postsCount}
-						</Badge>
-					</ListGroup.Item>
+						title={title}
+						description={description}
+						postsCount={postsCount as number}
+					/>
 				))}
 			</ListGroup>
 		</div>
