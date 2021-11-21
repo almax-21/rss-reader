@@ -1,6 +1,5 @@
 import './style.scss';
 import React, { FC, useEffect, useRef } from 'react';
-import { Button } from 'react-bootstrap';
 
 import throttle from 'lodash/throttle';
 
@@ -30,11 +29,11 @@ const BackToTopBtn: FC = () => {
 	};
 
 	return (
-		<Button
-			variant="outline-primary"
-			className="back-to-top"
-			onClick={handleBackToTop}
-			ref={buttonRef}
+		<button
+		type="button"
+		onClick={handleBackToTop}
+		ref={buttonRef}
+		className="back-to-top"
 		>
 			<svg width="20" height="20" viewBox="0 0 24 24">
 				<path d="M0 0h24v24H0V0z" fill="none" />
@@ -43,7 +42,7 @@ const BackToTopBtn: FC = () => {
 					d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
 				/>
 			</svg>
-		</Button>
+		</button>
 	);
 };
 
