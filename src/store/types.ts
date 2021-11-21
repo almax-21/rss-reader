@@ -23,10 +23,10 @@ export interface RssState {
 		[key: string]: IFeed;
 	};
 	posts: IPost[];
-	allIds: string[];
+	allFeedIds: string[];
 }
 
-export interface RssFeedData {
+export interface RSSFeedData {
 	id: string;
 	title: string;
 	description: string;

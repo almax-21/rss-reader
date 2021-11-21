@@ -1,6 +1,6 @@
 import { getRSSFeed } from '../async-actions/getRSSFeed';
-import { FEED_LOADED_STATE, RssFeedData, RssState } from '../types';
-import { createSlice,PayloadAction } from '@reduxjs/toolkit';
+import { FEED_LOADED_STATE, RSSFeedData, RssState } from '../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: RssState = {
 	isLoading: false,
@@ -9,7 +9,7 @@ const initialState: RssState = {
 	urls: [],
 	feeds: {},
 	posts: [],
-	allIds: [],
+	allFeedIds: [],
 };
 
 const rssSlice = createSlice({
@@ -24,7 +24,7 @@ const rssSlice = createSlice({
 		},
 		[getRSSFeed.fulfilled.type]: (
 			state,
-			action: PayloadAction<RssFeedData>
+			action: PayloadAction<RSSFeedData>
 		) => {
 			const { id, title, description, posts, url } = action.payload;
 
@@ -34,7 +34,7 @@ const rssSlice = createSlice({
 			state.urls = [...state.urls, url];
 			state.feeds[id] = { id, title, description };
 			state.posts = [...posts, ...state.posts];
-			state.allIds = [id, ...state.allIds];
+			state.allFeedIds = [id, ...state.allFeedIds];
 		},
 		[getRSSFeed.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false;

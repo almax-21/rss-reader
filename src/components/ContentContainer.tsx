@@ -13,7 +13,7 @@ const selectDataLists = createSelector(
 	(state: RootState) => state.rss,
 	(rss: RssState) => ({
 		posts: rss.posts,
-		feeds: rss.allIds.map((id) => ({
+		feeds: rss.allFeedIds.map((id) => ({
 			...rss.feeds[id],
 			postsCount: rss.posts.filter((post) => post.feedId === id).length,
 		})),

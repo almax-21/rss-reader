@@ -6,10 +6,10 @@ import useTypedSelector from '../hooks/redux/useTypedSelector';
 import useFeedNotification from '../hooks/useFeedNotification';
 import { MESSAGES } from '../i18n/types';
 import LocaleSwitcher from './LocaleSwitcher';
-import RssForm from './RssForm';
+import RSSForm from './RSSForm';
 import Notification from './UI/Notification';
 
-const RssContainer: FC = () => {
+const RSSContainer: FC = () => {
 	const { feedLoadedState, errorMessage } = useTypedSelector(
 		(state) => state.rss
 	);
@@ -40,7 +40,7 @@ const RssContainer: FC = () => {
 							<FormattedMessage id={MESSAGES.LEAD} />
 						</p>
 						{/* form's here */}
-						<RssForm />
+						<RSSForm />
 					</Col>
 				</Row>
 			</Container>
@@ -48,4 +48,4 @@ const RssContainer: FC = () => {
 	);
 };
 
-export default RssContainer;
+export default RSSContainer;

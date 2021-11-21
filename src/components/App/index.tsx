@@ -6,7 +6,7 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
 import ContentContainer from '../ContentContainer';
 import Footer from '../Footer';
-import RssContainer from '../RssContainer';
+import RSSContainer from '../RSSContainer';
 import AppHelmet from './AppHelmet';
 
 const App: FC = () => {
@@ -16,7 +16,7 @@ const App: FC = () => {
 		<IntlProvider locale={locale} messages={messages[locale]}>
 			<AppHelmet />
 			<main>
-				<RssContainer />
+				<RSSContainer />
 				<ContentContainer />
 				<Footer />
 			</main>

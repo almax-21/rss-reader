@@ -26,7 +26,7 @@ const initValues: FormValues = {
 	[RSS_URL]: '',
 };
 
-const RssForm: FC = () => {
+const RSSForm: FC = () => {
 	const { urls, isLoading } = useTypedSelector((state) => state.rss);
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
@@ -42,11 +42,9 @@ const RssForm: FC = () => {
 	}, [urls]);
 
 	const handleSubmit = (values: FormValues) => {
-		const newUrl = values[RSS_URL];
+		const feedUrl = values[RSS_URL];
 
-		dispatch(
-			getRSSFeed([newUrl, intl.formatMessage({ id: MESSAGES.ERROR_NETWORK })])
-		);
+		dispatch(getRSSFeed({ feedUrl, intl }));
 	};
 
 	return (
@@ -122,4 +120,4 @@ const RssForm: FC = () => {
 	);
 };
 
-export default RssForm;
+export default RSSForm;
