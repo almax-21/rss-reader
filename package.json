@@ -1,7 +1,7 @@
 {
-	"name": "@hexlet/code",
-	"version": "0.2.0",
-	"description": "RSS aggregator",
+	"name": "rss-aggregator",
+	"version": "0.8.0",
+	"description": "Start reading RSS today! It's easy, it's beautiful",
 	"private": true,
 	"browserslist": "> 0.25%, not dead",
 	"scripts": {
@@ -19,14 +19,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/almax-21/frontend-project-lvl3.git"
+		"url": "git+https://github.com/almax-21/rss-aggregator.git"
 	},
 	"author": "Maksim Almaev <almaev21.max@gmail.com>",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/almax-21/frontend-project-lvl3/issues"
+		"url": "https://github.com/almax-21/rss-aggregator/issues"
 	},
-	"homepage": "https://github.com/almax-21/frontend-project-lvl3#readme",
+	"homepage": "https://github.com/almax-21/rss-aggregator#readme",
 	"devDependencies": {
 		"@babel/core": "^7.16.0",
 		"@babel/plugin-proposal-class-properties": "^7.16.0",
