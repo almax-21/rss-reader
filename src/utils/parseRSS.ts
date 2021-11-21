@@ -1,6 +1,7 @@
 import { MESSAGES } from '../i18n/types';
 import { IPost } from '../models/IPost';
 import { RSSFeedData } from '../store/types';
+import filterTextFromTags from './filterTextFromTags';
 import { v4 as uuid4 } from 'uuid';
 
 const parseRSS = (serializedData: string, feedUrl: string) => {
@@ -20,34 +21,37 @@ const parseRSS = (serializedData: string, feedUrl: string) => {
 	const feedChannel = rssXML.querySelector('channel');
 	const feedId = uuid4();
 
-	const feedTitle = feedChannel?.querySelector('channel > title');
+	const feedTitleText =
+		feedChannel?.querySelector('channel > title')?.textContent;
 
-	const feedDescription = feedChannel?.querySelector('channel > description');
+	const feedDescriptionText = feedChannel?.querySelector(
+		'channel > description'
+	)?.textContent;
 
 	const feedItemNodeList: NodeListOf<Element> | undefined =
 		feedChannel?.querySelectorAll('item');
 
 	const feedItems: Element[] = Array.from(feedItemNodeList || []);
 
-	if (feedTitle && feedDescription) {
+	if (feedTitleText && feedDescriptionText) {
 		const feedData: RSSFeedData = {
 			id: feedId,
-			title: feedTitle?.textContent as string,
-			description: feedDescription?.textContent as string,
+			title: feedTitleText,
+			description: filterTextFromTags(feedDescriptionText),
 			url: feedUrl,
 			posts: [
 				...feedItems?.map((feedItem: Element) => {
 					if (feedItem) {
-						const title = feedItem.querySelector('title')
-							?.textContent as string;
-						const description = feedItem.querySelector('description')
-							?.textContent as string;
+						const title = feedItem.querySelector('title')?.textContent;
+
+						const description =
+							feedItem.querySelector('description')?.textContent;
 
 						return {
 							id: uuid4(),
 							feedId,
 							title,
-							description,
+							description: filterTextFromTags(description as string),
 						};
 					}
 				}),
