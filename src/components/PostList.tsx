@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { MESSAGES } from '../i18n/types';
 import { IPost } from '../models/IPost';
+import PostItem from './PostItem';
 
 interface PostListProps {
 	posts: IPost[];
@@ -16,14 +17,13 @@ const PostList: FC<PostListProps> = ({ posts }) => {
 				<FormattedMessage id={MESSAGES.POSTS} />
 			</h2>
 			<ListGroup as="ul">
-				{posts.map(({ title, id }) => (
-					<ListGroup.Item key={id} as="li" className="mb-3 p-0 border-0">
-						<Card className="border-0">
-							<Card.Title className="h6 fw-bold">
-								<Card.Link href="#">{title}</Card.Link>
-							</Card.Title>
-						</Card>
-					</ListGroup.Item>
+				{posts.map(({ title, description, id, url }) => (
+					<PostItem
+						key={id}
+						title={title}
+						description={description}
+						url={url}
+					/>
 				))}
 			</ListGroup>
 		</div>

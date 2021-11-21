@@ -3,4 +3,5 @@ export interface IPost {
 	feedId: string;
 	title: string;
 	description: string;
+	url: string;
 }

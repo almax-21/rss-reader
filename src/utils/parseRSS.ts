@@ -43,15 +43,17 @@ const parseRSS = (serializedData: string, feedUrl: string) => {
 				...feedItems?.map((feedItem: Element) => {
 					if (feedItem) {
 						const title = feedItem.querySelector('title')?.textContent;
-
 						const description =
 							feedItem.querySelector('description')?.textContent;
+
+						const postUrl = feedItem.querySelector('link')?.textContent;
 
 						return {
 							id: uuid4(),
 							feedId,
 							title,
 							description: filterTextFromTags(description as string),
+							url: postUrl,
 						};
 					}
 				}),
