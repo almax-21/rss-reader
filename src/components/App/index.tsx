@@ -7,6 +7,7 @@ import { messages } from '../../i18n/messages';
 import ContentContainer from '../ContentContainer';
 import Footer from '../Footer';
 import RSSContainer from '../RSSContainer';
+import BackToTopBtn from '../UI/BackToTopBtn';
 import AppHelmet from './AppHelmet';
 
 const App: FC = () => {
@@ -20,6 +21,7 @@ const App: FC = () => {
 				<ContentContainer />
 			</main>
 			<Footer />
+			<BackToTopBtn />
 		</IntlProvider>
 	);
 };

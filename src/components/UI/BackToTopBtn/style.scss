@@ -1,0 +1,20 @@
+.back-to-top {
+	display: none;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+
+	width: 45px;
+	height: 45px;
+
+	border-radius: 50%;
+	transition: 0.2s ease-in-out;
+
+	svg {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		transform: translate(-50%, -50%);
+	}
+}
