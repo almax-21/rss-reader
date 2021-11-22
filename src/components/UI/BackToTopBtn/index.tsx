@@ -1,7 +1,7 @@
-import './style.scss';
 import React, { FC, useEffect, useRef } from 'react';
-
 import throttle from 'lodash/throttle';
+
+import './style.scss';
 
 const BackToTopBtn: FC = () => {
 	const buttonRef = useRef<HTMLButtonElement>(null);

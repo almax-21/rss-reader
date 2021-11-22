@@ -1,4 +1,3 @@
-import './style.scss';
 import React, { FC } from 'react';
 import { IntlProvider } from 'react-intl';
 
@@ -8,7 +7,10 @@ import ContentContainer from '../ContentContainer';
 import Footer from '../Footer';
 import RSSContainer from '../RSSContainer';
 import BackToTopBtn from '../UI/BackToTopBtn';
+
 import AppHelmet from './AppHelmet';
+
+import './style.scss';
 
 const App: FC = () => {
 	const { locale } = useTypedSelector((state) => state);

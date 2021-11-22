@@ -1,7 +1,8 @@
-import localeSlice from './slices/localeSlice';
-import rssSlice from './slices/rssSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
+
+import localeSlice from './slices/localeSlice';
+import rssSlice from './slices/rssSlice';
 
 export const rootReducer = combineReducers({
 	locale: localeSlice.reducer,

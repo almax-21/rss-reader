@@ -1,4 +1,3 @@
-import './style.scss';
 import React, { FC, useEffect, useRef } from 'react';
 import {
 	Button,
@@ -9,14 +8,17 @@ import {
 	Spinner,
 } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { Formik, FormikProps } from 'formik';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { getRSSFeed } from '../../store/async-actions/getRSSFeed';
+
 import { RSS_URL } from './constants';
 import setValidationSchema from './setValidationSchema';
-import { Formik, FormikProps } from 'formik';
+
+import './style.scss';
 
 interface FormValues {
 	[RSS_URL]: string;

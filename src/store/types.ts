@@ -1,5 +1,6 @@
 import { IFeed } from '../models/IFeed';
 import { IPost } from '../models/IPost';
+
 import { rootReducer } from './index';
 import { setupStore } from './index';
 

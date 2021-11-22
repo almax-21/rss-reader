@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
-
-import { MESSAGES } from '../../i18n/types';
-import { RSS_URL } from './constants';
 import { IntlShape } from '@formatjs/intl';
 import * as Yup from 'yup';
+
+import { MESSAGES } from '../../i18n/types';
+
+import { RSS_URL } from './constants';
 
 const setValidationSchema = (
 	urls: string[],

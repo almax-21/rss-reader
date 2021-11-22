@@ -1,9 +1,10 @@
-import './style.scss';
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
 import Icon from './Icon';
 import { NotificationData } from './types';
+
+import './style.scss';
 
 interface NotificationProps {
 	data: NotificationData;

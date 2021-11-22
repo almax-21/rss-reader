@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { MESSAGES } from '../i18n/types';
 import { IFeed } from '../models/IFeed';
+
 import FeedItem from './FeedItem';
 
 interface FeedListProps {

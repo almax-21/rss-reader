@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { MESSAGES } from '../i18n/types';
 import { IPost } from '../models/IPost';
+
 import PostItem from './PostItem';
 
 interface PostListProps {

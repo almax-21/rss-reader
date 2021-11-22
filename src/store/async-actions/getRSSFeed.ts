@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-
-import { MESSAGES } from '../../i18n/types';
-import parseRSS from '../../utils/parseRSS';
 import { IntlShape } from '@formatjs/intl';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+import { MESSAGES } from '../../i18n/types';
+import parseRSS from '../../utils/parseRSS';
 
 interface AsyncFeedActionData {
 	feedUrl: string;

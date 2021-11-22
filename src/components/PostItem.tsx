@@ -3,6 +3,7 @@ import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { MESSAGES } from '../i18n/types';
+
 import PreviewModal from './UI/PreviewModal';
 
 interface PostItemProps {

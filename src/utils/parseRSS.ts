@@ -1,8 +1,10 @@
+import { v4 as uuid4 } from 'uuid';
+
 import { MESSAGES } from '../i18n/types';
 import { IPost } from '../models/IPost';
 import { RSSFeedData } from '../store/types';
+
 import filterTextFromTags from './filterTextFromTags';
-import { v4 as uuid4 } from 'uuid';
 
 const parseRSS = (serializedData: string, feedUrl: string) => {
 	const parser = new DOMParser();

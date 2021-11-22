@@ -1,6 +1,7 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { getRSSFeed } from '../async-actions/getRSSFeed';
 import { FEED_LOADED_STATE, RSSFeedData, RssState } from '../types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: RssState = {
 	isLoading: false,

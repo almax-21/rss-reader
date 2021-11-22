@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { createSelector } from 'reselect';
 
 import useTypedSelector from '../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../i18n/types';
 import { RootState, RssState } from '../store/types';
+
 import FeedList from './FeedList';
 import PostList from './PostList';
-import { createSelector } from 'reselect';
 
 const selectDataLists = createSelector(
 	(state: RootState) => state.rss,

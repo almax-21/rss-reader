@@ -1,6 +1,7 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { LOCALES } from '../../i18n/locales';
 import { LocaleType } from '../../i18n/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const BROWSER_LANGUAGE: LocaleType = navigator
 	.language
