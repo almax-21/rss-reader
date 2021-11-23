@@ -5,10 +5,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import useTypedDispatch from '../hooks/redux/useTypedDispatch';
 import { LOCALES } from '../i18n/locales';
 import { LocaleType, MESSAGES } from '../i18n/types';
-import localeSlice from '../store/slices/localeSlice';
+import { setLocale } from '../store/slices/localeSlice';
 
 const LocaleSwitcher: FC = () => {
-	const { setLocale } = localeSlice.actions;
 	const dispatch = useTypedDispatch();
 
 	const intl = useIntl();

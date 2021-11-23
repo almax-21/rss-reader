@@ -17,9 +17,11 @@ const FeedItem: FC<FeedItemProps> = ({ title, description, postsCount }) => {
 				<h3 className="h5 fw-bold">{title}</h3>
 				{description}
 			</div>
-			<Badge pill bg="danger">
-				{postsCount}
-			</Badge>
+			{!!postsCount && (
+				<Badge pill bg="danger">
+					{postsCount}
+				</Badge>
+			)}
 		</ListGroup.Item>
 	);
 };

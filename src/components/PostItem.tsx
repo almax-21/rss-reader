@@ -2,20 +2,33 @@ import React, { FC, useState } from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
+import useTypedDispatch from '../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../i18n/types';
+import { IPost } from '../models/IPost';
+import { setPostRead } from '../store/slices/rssSlice';
 
 import PreviewModal from './UI/PreviewModal';
 
 interface PostItemProps {
-	title: string;
-	description: string;
-	url: string;
+	post: IPost;
 }
 
-const PostItem: FC<PostItemProps> = ({ title, description, url }) => {
+const PostItem: FC<PostItemProps> = ({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-	const handleOpenModal = () => {
+	const { title, description, id, url, isRead } = post;
+	const dispatch = useTypedDispatch();
+
+	const handlePostRead = (id: string) => () => {
+		if (isRead) {
+			return;
+		}
+
+		dispatch(setPostRead(id));
+	};
+
+	const handleOpenModal = (id: string) => () => {
+		handlePostRead(id)();
 		setIsShowModal(true);
 	};
 
@@ -37,16 +50,18 @@ const PostItem: FC<PostItemProps> = ({ title, description, url }) => {
 		>
 			<Card className="border-0">
 				<Card.Title className="h6 fw-bold">
-					<Card.Link href={url} target="_blank" rel="noreferrer">
+					<Card.Link
+						href={url}
+						target="_blank"
+						rel="noreferrer"
+						onClick={handlePostRead(id)}
+						className={isRead ? 'text-secondary' : 'text-primary'}
+					>
 						{title}
 					</Card.Link>
 				</Card.Title>
 			</Card>
-			<Button
-				onClick={handleOpenModal}
-				variant="outline-primary"
-				size="sm"
-			>
+			<Button onClick={handleOpenModal(id)} variant="outline-primary" size="sm">
 				<FormattedMessage id={MESSAGES.PREVIEW} />
 			</Button>
 			<PreviewModal

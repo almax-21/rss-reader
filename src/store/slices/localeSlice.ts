@@ -23,4 +23,6 @@ const localeSlice = createSlice({
 	},
 });
 
-export default localeSlice;
+export const { setLocale } = localeSlice.actions;
+
+export default localeSlice.reducer;

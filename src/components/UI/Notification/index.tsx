@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
+import { NotificationData } from '../../../types';
+
 import Icon from './Icon';
-import { NotificationData } from './types';
 
 import './style.scss';
 

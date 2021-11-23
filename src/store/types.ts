@@ -19,20 +19,14 @@ export interface RssState {
 	isLoading: boolean;
 	feedLoadedState: FEED_LOADED_STATE;
 	errorMessage: string;
-	urls: string[];
 	feeds: {
-		[key: string]: IFeed;
+		entities: {
+			[key: string]: IFeed;
+		};
+		ids: string[];
 	};
-	posts: IPost[];
-	allFeedIds: string[];
-}
-
-export interface RSSFeedData {
-	id: string;
-	title: string;
-	description: string;
-	url: string;
-	posts: IPost[];
+	allPosts: IPost[],
+	urls: string[],
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

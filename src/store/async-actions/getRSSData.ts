@@ -2,8 +2,10 @@ import { ReactNode } from 'react';
 import { IntlShape } from '@formatjs/intl';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { v4 as uuid4 } from 'uuid';
 
 import { MESSAGES } from '../../i18n/types';
+import { ParsedRSS, RSSData } from '../../types';
 import parseRSS from '../../utils/parseRSS';
 
 interface AsyncFeedActionData {
@@ -11,8 +13,8 @@ interface AsyncFeedActionData {
 	intl: IntlShape<string | ReactNode>;
 }
 
-export const getRSSFeed = createAsyncThunk(
-	'rss/getRSSFeed',
+export const getRSSData = createAsyncThunk(
+	'rss/getRSSData',
 	async ({ feedUrl, intl }: AsyncFeedActionData, thunkAPI) => {
 		try {
 			const { data } = await axios.get(
@@ -22,9 +24,22 @@ export const getRSSFeed = createAsyncThunk(
 			);
 
 			const serializedContent: XMLHttpRequestResponseType = data.contents;
-			const feedData = parseRSS(serializedContent, feedUrl);
+			const { parsedFeed, parsedPosts }: ParsedRSS = parseRSS(
+				serializedContent
+			) as ParsedRSS;
 
-			return feedData;
+			const feedId = uuid4();
+
+			const rssData: RSSData = {
+				feed: {
+					...parsedFeed,
+					id: feedId,
+					url: feedUrl,
+				},
+				posts: parsedPosts.map((post) => ({ ...post, feedId, id: uuid4(), isRead: false })),
+			};
+
+			return rssData;
 		} catch (err) {
 			return navigator.onLine
 				? thunkAPI.rejectWithValue(

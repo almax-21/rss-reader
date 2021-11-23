@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-	NOTIFICATION_VARIANT,
-	NotificationData,
-} from '../components/UI/Notification/types';
 import { MESSAGES } from '../i18n/types';
 import { FEED_LOADED_STATE } from '../store/types';
+import { NOTIFICATION_VARIANT, NotificationData, TimeoutId } from '../types';
 
 interface ReturnedHookData {
 	isShowNotification: boolean;
 	notificationData: NotificationData;
 	onCloseNotification: () => void;
 }
-
-type TimeoutId = ReturnType<typeof setTimeout>;
 
 const useFeedNotification = (
 	feedLoadedState: FEED_LOADED_STATE,

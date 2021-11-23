@@ -1,43 +1,53 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getRSSFeed } from '../async-actions/getRSSFeed';
-import { FEED_LOADED_STATE, RSSFeedData, RssState } from '../types';
+import { RSSData } from '../../types';
+import { getRSSData } from '../async-actions/getRSSData';
+import { FEED_LOADED_STATE, RssState } from '../types';
 
 const initialState: RssState = {
 	isLoading: false,
 	feedLoadedState: FEED_LOADED_STATE.NULL,
 	errorMessage: '',
+	feeds: {
+		entities: {},
+		ids: [],
+	},
+	allPosts: [],
 	urls: [],
-	feeds: {},
-	posts: [],
-	allFeedIds: [],
 };
 
 const rssSlice = createSlice({
 	name: 'rss',
 	initialState,
-	reducers: {},
+	reducers: {
+		setPostRead: (state, action: PayloadAction<string>) => {
+			state.allPosts = state.allPosts.map((post) => {
+				return post.id === action.payload
+					? { ...post, isRead: true }
+					: post;
+			});
+		},
+	},
 	extraReducers: {
-		[getRSSFeed.pending.type]: (state) => {
+		[getRSSData.pending.type]: (state) => {
 			state.isLoading = true;
 			state.feedLoadedState = FEED_LOADED_STATE.NULL;
 			state.errorMessage = '';
 		},
-		[getRSSFeed.fulfilled.type]: (
-			state,
-			action: PayloadAction<RSSFeedData>
-		) => {
-			const { id, title, description, posts, url } = action.payload;
+		[getRSSData.fulfilled.type]: (state, action: PayloadAction<RSSData>) => {
+			const { feed, posts } = action.payload;
 
 			state.isLoading = false;
 			state.feedLoadedState = FEED_LOADED_STATE.SUCCESS;
 
-			state.urls = [...state.urls, url];
-			state.feeds[id] = { id, title, description };
-			state.posts = [...posts, ...state.posts];
-			state.allFeedIds = [id, ...state.allFeedIds];
+			state.feeds.entities[feed.id] = feed;
+			state.feeds.ids = [feed.id, ...state.feeds.ids];
+
+			state.allPosts = [...posts, ...state.allPosts];
+
+			state.urls.push(feed.url);
 		},
-		[getRSSFeed.rejected.type]: (state, action: PayloadAction<string>) => {
+		[getRSSData.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false;
 			state.feedLoadedState = FEED_LOADED_STATE.ERROR;
 			state.errorMessage = action.payload;
@@ -45,4 +55,6 @@ const rssSlice = createSlice({
 	},
 });
 
-export default rssSlice;
+export const { setPostRead } = rssSlice.actions;
+
+export default rssSlice.reducer;

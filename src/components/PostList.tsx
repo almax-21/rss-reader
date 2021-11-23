@@ -18,13 +18,8 @@ const PostList: FC<PostListProps> = ({ posts }) => {
 				<FormattedMessage id={MESSAGES.POSTS} />
 			</h2>
 			<ListGroup as="ul">
-				{posts.map(({ title, description, id, url }) => (
-					<PostItem
-						key={id}
-						title={title}
-						description={description}
-						url={url}
-					/>
+				{posts.map((post) => (
+					<PostItem key={post.id} post={post} />
 				))}
 			</ListGroup>
 		</div>

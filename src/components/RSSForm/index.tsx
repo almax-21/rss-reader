@@ -13,7 +13,7 @@ import { Formik, FormikProps } from 'formik';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { getRSSFeed } from '../../store/async-actions/getRSSFeed';
+import { getRSSData } from '../../store/async-actions/getRSSData';
 
 import { RSS_URL } from './constants';
 import setValidationSchema from './setValidationSchema';
@@ -46,7 +46,7 @@ const RSSForm: FC = () => {
 	const handleSubmit = (values: FormValues) => {
 		const feedUrl = values[RSS_URL];
 
-		dispatch(getRSSFeed({ feedUrl, intl }));
+		dispatch(getRSSData({ feedUrl, intl }));
 	};
 
 	return (
