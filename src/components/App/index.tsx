@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { IntlProvider } from 'react-intl';
+import LoadingBar from 'react-redux-loading-bar';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
@@ -18,6 +19,7 @@ const App: FC = () => {
 	return (
 		<IntlProvider locale={locale} messages={messages[locale]}>
 			<AppHelmet />
+			<LoadingBar className="loading-bar" />
 			<main>
 				<RSSContainer />
 				<ContentContainer />

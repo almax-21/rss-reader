@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { IntlShape } from '@formatjs/intl';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -17,6 +18,8 @@ export const getRSSData = createAsyncThunk(
 	'rss/getRSSData',
 	async ({ feedUrl, intl }: AsyncFeedActionData, thunkAPI) => {
 		try {
+			thunkAPI.dispatch(showLoading());
+
 			const { data } = await axios.get(
 				`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
 					feedUrl
@@ -36,7 +39,12 @@ export const getRSSData = createAsyncThunk(
 					id: feedId,
 					url: feedUrl,
 				},
-				posts: parsedPosts.map((post) => ({ ...post, feedId, id: uuid4(), isRead: false })),
+				posts: parsedPosts.map((post) => ({
+					...post,
+					feedId,
+					id: uuid4(),
+					isRead: false,
+				})),
 			};
 
 			return rssData;
@@ -48,6 +56,8 @@ export const getRSSData = createAsyncThunk(
 				: thunkAPI.rejectWithValue(
 						intl.formatMessage({ id: MESSAGES.ERROR_NETWORK })
 				  );
+		} finally {
+			thunkAPI.dispatch(hideLoading());
 		}
 	}
 );
