@@ -1,7 +1,7 @@
 import { MESSAGES } from '../i18n/types';
 import { ParsedPost, ParsedRSS } from '../types';
 
-import filterTextFromTags from './filterTextFromTags';
+import { filterTextFromTags } from './text';
 
 const parseRSS = (serializedData: string) => {
 	const parser = new DOMParser();

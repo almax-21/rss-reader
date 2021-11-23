@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
 
+import { truncateText } from '../utils/text';
+
 interface FeedItemProps {
 	title: string;
 	description: string;
@@ -15,7 +17,7 @@ const FeedItem: FC<FeedItemProps> = ({ title, description, postsCount }) => {
 		>
 			<div className="ms-2 me-auto">
 				<h3 className="h5 fw-bold">{title}</h3>
-				{description}
+				<span>{truncateText(description)}</span>
 			</div>
 			{!!postsCount && (
 				<Badge pill bg="danger">
