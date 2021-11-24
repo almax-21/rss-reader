@@ -1,0 +1,17 @@
+@import '../../App/style.scss';
+
+.page-item {
+	width: 45px;
+
+	.page-link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+@include media-breakpoint-down(sm) {
+	.page-item {
+		width: 30px;
+	}
+}
