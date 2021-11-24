@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedSelector from '../hooks/redux/useTypedSelector';
-import useFeedNotification from '../hooks/useFeedNotification';
-import { MESSAGES } from '../i18n/types';
-
-import Notification from './UI/Notification';
-import LocaleSwitcher from './LocaleSwitcher';
-import RSSForm from './RSSForm';
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import useFeedNotification from '../../hooks/useFeedNotification';
+import { MESSAGES } from '../../i18n/types';
+import LocaleSwitcher from '../LocaleSwitcher';
+import Notification from '../Notification';
+import RSSForm from '../RSSForm';
 
 const RSSContainer: FC = () => {
 	const { feedLoadedState, errorMessage } = useTypedSelector(

@@ -4,9 +4,9 @@ import LoadingBar from 'react-redux-loading-bar';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../containers/ContentContainer';
+import RSSContainer from '../containers/RSSContainer';
 import Footer from '../Footer';
-import RSSContainer from '../RSSContainer';
 import BackToTopBtn from '../UI/BackToTopBtn';
 
 import AppHelmet from './AppHelmet';

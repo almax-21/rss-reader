@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RSSData } from '../../types';
 import { getRSSData } from '../async-actions/getRSSData';
-import { FEED_LOADED_STATE, RssState } from '../types';
+import { FEED_LOADED_STATE, RSSData, RssState } from '../types';
 
 const initialState: RssState = {
 	isLoading: false,

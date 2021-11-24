@@ -3,14 +3,13 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 
-import useTypedSelector from '../hooks/redux/useTypedSelector';
-import { MESSAGES } from '../i18n/types';
-import { RootState, RssState } from '../store/types';
-import { getPagesCount, showCurrentItems } from '../utils/pages';
-
-import Paginator from './UI/Paginator';
-import FeedList from './FeedList';
-import PostList from './PostList';
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import { MESSAGES } from '../../i18n/types';
+import { RootState, RssState } from '../../store/types';
+import { getPagesCount, showCurrentItems } from '../../utils/page';
+import FeedList from '../feeds/FeedList';
+import Paginator from '../Paginator/index';
+import PostList from '../posts/PostList';
 
 const getRssState = (state: RootState) => state.rss;
 

@@ -6,8 +6,9 @@ import axios from 'axios';
 import { v4 as uuid4 } from 'uuid';
 
 import { MESSAGES } from '../../i18n/types';
-import { ParsedRSS, RSSData } from '../../types';
-import parseRSS from '../../utils/parseRSS';
+import parseRSS from '../../utils/parser';
+import { ParsedRSS } from '../../utils/parser/types';
+import { RSSData } from '../types';
 
 interface AsyncFeedActionData {
 	feedUrl: string;

@@ -1,7 +1,7 @@
-import { MESSAGES } from '../i18n/types';
-import { ParsedPost, ParsedRSS } from '../types';
+import { MESSAGES } from '../../i18n/types';
+import { filterTextFromTags } from '../text';
 
-import { filterTextFromTags } from './text';
+import { ParsedPost, ParsedRSS } from './types';
 
 const parseRSS = (serializedData: string) => {
 	const parser = new DOMParser();
@@ -19,13 +19,12 @@ const parseRSS = (serializedData: string) => {
 
 	const feedChannel = rssXML.querySelector('channel');
 
-	const feedTitleText = feedChannel
-		?.querySelector('channel > title')
-		?.textContent;
+	const feedTitleText =
+		feedChannel?.querySelector('channel > title')?.textContent;
 
-	const feedDescriptionText = feedChannel
-		?.querySelector('channel > description')
-		?.textContent;
+	const feedDescriptionText = feedChannel?.querySelector(
+		'channel > description'
+	)?.textContent;
 
 	const feedItemNodeList: NodeListOf<Element> | undefined =
 		feedChannel?.querySelectorAll('item');

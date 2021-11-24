@@ -1,36 +1,18 @@
-import { Variant } from 'react-bootstrap/esm/types';
-
-import { IFeed } from '../models/IFeed';
-import { IPost } from '../models/IPost';
-
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
-export interface ParsedFeed {
+export interface IFeed {
+	id: string;
 	title: string;
 	description: string;
-}
-
-export interface ParsedPost extends ParsedFeed {
 	url: string;
+	postsCount?: number;
 }
 
-export interface ParsedRSS {
-	parsedFeed: ParsedFeed;
-	parsedPosts: ParsedPost[];
-}
-
-export interface RSSData {
-	feed: IFeed;
-	posts: IPost[];
-}
-
-export enum NOTIFICATION_VARIANT {
-	SUCCESS = 'success',
-	WARNING = 'warning',
-	ERROR = 'danger',
-}
-
-export interface NotificationData {
-	variant: Variant;
-	message: string;
+export interface IPost {
+	id: string;
+	feedId: string;
+	title: string;
+	description: string;
+	url: string;
+	isRead: boolean;
 }

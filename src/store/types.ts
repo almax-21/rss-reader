@@ -1,5 +1,4 @@
-import { IFeed } from '../models/IFeed';
-import { IPost } from '../models/IPost';
+import { IFeed, IPost } from '../types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';
@@ -15,6 +14,11 @@ export type FEED_LOADED_STATE_TYPE =
 	| FEED_LOADED_STATE.ERROR
 	| FEED_LOADED_STATE.NULL;
 
+export interface RSSData {
+	feed: IFeed;
+	posts: IPost[];
+}
+
 export interface RssState {
 	isLoading: boolean;
 	feedLoadedState: FEED_LOADED_STATE;
@@ -25,8 +29,8 @@ export interface RssState {
 		};
 		ids: string[];
 	};
-	allPosts: IPost[],
-	urls: string[],
+	allPosts: IPost[];
+	urls: string[];
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

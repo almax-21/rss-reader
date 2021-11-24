@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { IFeed } from '../models/IFeed';
+import { IFeed } from '../../types';
 
 import FeedItem from './FeedItem';
 

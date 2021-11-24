@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { IPost } from '../models/IPost';
+import { IPost } from '../../types';
 
 import PostItem from './PostItem';
 

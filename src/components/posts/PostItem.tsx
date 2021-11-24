@@ -2,12 +2,11 @@ import React, { FC, useState } from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedDispatch from '../hooks/redux/useTypedDispatch';
-import { MESSAGES } from '../i18n/types';
-import { IPost } from '../models/IPost';
-import { setPostRead } from '../store/slices/rssSlice';
-
-import PreviewModal from './UI/PreviewModal';
+import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
+import { MESSAGES } from '../../i18n/types';
+import { setPostRead } from '../../store/slices/rssSlice';
+import { IPost } from '../../types';
+import PreviewModal from '../PreviewModal';
 
 interface PostItemProps {
 	post: IPost;

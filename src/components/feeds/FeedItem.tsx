@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
 
-import { truncateText } from '../utils/text';
+import { truncateText } from '../../utils/text';
 
 interface FeedItemProps {
 	title: string;
