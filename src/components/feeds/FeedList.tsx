@@ -15,6 +15,7 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => {
 			{feeds.map(({ id, title, description, postsCount }) => (
 				<FeedItem
 					key={id}
+					id={id}
 					title={title}
 					description={description}
 					postsCount={postsCount as number}

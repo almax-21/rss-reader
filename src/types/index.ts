@@ -16,3 +16,8 @@ export interface IPost {
 	url: string;
 	isRead: boolean;
 }
+
+export interface FeedUrlData {
+	feedId: string;
+	url: string;
+}

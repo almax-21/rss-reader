@@ -14,6 +14,7 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { getRSSData } from '../../store/async-actions/getRSSData';
+import { selectUrls } from '../../store/selectors';
 
 import { RSS_URL } from './constants';
 import setValidationSchema from './setValidationSchema';
@@ -29,18 +30,23 @@ const initValues: FormValues = {
 };
 
 const RSSForm: FC = () => {
-	const { urls, isLoading } = useTypedSelector((state) => state.rss);
+	const { urls, isLoading } = useTypedSelector(selectUrls);
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
 	const formikRef = useRef<FormikProps<FormValues>>(null);
 	const rssInputRef = useRef<HTMLInputElement>(null);
+	const urlCountRef = useRef<number>(-1);
 
 	useEffect(() => {
-		if (formikRef.current && rssInputRef.current) {
-			formikRef.current.setFieldValue(RSS_URL, '');
-			rssInputRef.current.focus();
+		const newUrlCount = urls.length;
+
+		if (urlCountRef.current < newUrlCount) {
+			formikRef?.current?.setFieldValue(RSS_URL, '');
+			rssInputRef?.current?.focus();
 		}
+
+		urlCountRef.current = newUrlCount;
 	}, [urls]);
 
 	const handleSubmit = (values: FormValues) => {

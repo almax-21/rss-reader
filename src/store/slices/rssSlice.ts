@@ -12,7 +12,7 @@ const initialState: RssState = {
 		ids: [],
 	},
 	allPosts: [],
-	urls: [],
+	urlDataColl: [],
 };
 
 const rssSlice = createSlice({
@@ -21,10 +21,20 @@ const rssSlice = createSlice({
 	reducers: {
 		setPostRead: (state, action: PayloadAction<string>) => {
 			state.allPosts = state.allPosts.map((post) => {
-				return post.id === action.payload
-					? { ...post, isRead: true }
-					: post;
+				return post.id === action.payload ? { ...post, isRead: true } : post;
 			});
+		},
+		deleteFeed: (state, action: PayloadAction<string>) => {
+			delete state.feeds.entities[action.payload];
+			state.feeds.ids = state.feeds.ids.filter((id) => id !== action.payload);
+
+			state.allPosts = state.allPosts.filter(
+				({ feedId }) => feedId !== action.payload
+			);
+
+			state.urlDataColl = state.urlDataColl.filter(
+				({ feedId }) => feedId !== action.payload
+			);
 		},
 	},
 	extraReducers: {
@@ -44,7 +54,8 @@ const rssSlice = createSlice({
 
 			state.allPosts = [...posts, ...state.allPosts];
 
-			state.urls.push(feed.url);
+			const feedUrlData = { feedId: feed.id, url: feed.url };
+			state.urlDataColl.push(feedUrlData);
 		},
 		[getRSSData.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false;
@@ -54,6 +65,6 @@ const rssSlice = createSlice({
 	},
 });
 
-export const { setPostRead } = rssSlice.actions;
+export const { setPostRead, deleteFeed } = rssSlice.actions;
 
 export default rssSlice.reducer;

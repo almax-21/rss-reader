@@ -1,35 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { createSelector } from 'reselect';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { RootState, RssState } from '../../store/types';
+import { selectFeedsAndPosts } from '../../store/selectors/index';
 import { getPagesCount, showCurrentItems } from '../../utils/page';
 import FeedList from '../feeds/FeedList';
 import Paginator from '../Paginator/index';
 import PostList from '../posts/PostList';
-
-const getRssState = (state: RootState) => state.rss;
-
-const getPostsCount = (rss: RssState, feedId: string) =>
-	rss.allPosts
-		.filter((post) => post.feedId === feedId)
-		.filter(({ isRead }) => !isRead).length;
-
-const getFeeds = (rss: RssState) =>
-	rss.feeds.ids
-		.map((id) => rss.feeds.entities[id])
-		.map((feed) => ({
-			...feed,
-			postsCount: getPostsCount(rss, feed.id),
-		}));
-
-const selectDataLists = createSelector(getRssState, (rss: RssState) => ({
-	feeds: getFeeds(rss),
-	allPosts: rss.allPosts,
-}));
 
 const POSTS_LIMIT = 20;
 
@@ -37,7 +16,7 @@ const ContentContainer: FC = () => {
 	const [totalPostPages, setTotalPostPages] = useState<number>(0);
 	const [activePage, setActivePage] = useState<number>(1);
 
-	const { feeds, allPosts } = useTypedSelector(selectDataLists);
+	const { feeds, allPosts } = useTypedSelector(selectFeedsAndPosts);
 
 	useEffect(() => {
 		const postsCount = allPosts.length;

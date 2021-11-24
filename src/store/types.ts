@@ -1,4 +1,4 @@
-import { IFeed, IPost } from '../types';
+import { FeedUrlData, IFeed, IPost } from '../types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';
@@ -30,7 +30,7 @@ export interface RssState {
 		ids: string[];
 	};
 	allPosts: IPost[];
-	urls: string[];
+	urlDataColl: FeedUrlData[];
 }
 
 export type RootState = ReturnType<typeof rootReducer>;
