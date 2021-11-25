@@ -19,10 +19,6 @@ const usePaginator = (items: any[], limit: number): ReturnedHookData => {
 		const itemsCount = items.length;
 		const newPagesCount = getPagesCount(itemsCount, limit);
 
-		if (activePage > newPagesCount) {
-			setActivePage(1);
-		}
-
 		setTotalPages(newPagesCount);
 	}, [items]);
 

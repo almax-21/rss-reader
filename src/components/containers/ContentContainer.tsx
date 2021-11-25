@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,12 +14,22 @@ import PostList from '../posts/PostList';
 const POSTS_LIMIT = 20;
 
 const ContentContainer: FC = () => {
-	const { feeds, posts } = useTypedSelector(selectFeedsAndPosts);
+	const { feeds, posts, activeFeedId } = useTypedSelector(selectFeedsAndPosts);
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
 		posts,
 		POSTS_LIMIT
 	);
+
+	const prevActiveFeedId = useRef<string | null>(null);
+
+	useEffect(() => {
+		if (activeFeedId !== prevActiveFeedId?.current) {
+			setActivePage(1);
+		}
+
+		prevActiveFeedId.current = activeFeedId;
+	}, [activeFeedId]);
 
 	if (feeds.length === 0) {
 		return (

@@ -20,6 +20,7 @@ export const selectFeedsAndPosts = createSelector(
 	(rss: RssState) => ({
 		feeds: getFeeds(rss),
 		posts: rss.activeFeedId ? rss.postsByFeedId[rss.activeFeedId] : [],
+		activeFeedId: rss.activeFeedId,
 	})
 );
 
