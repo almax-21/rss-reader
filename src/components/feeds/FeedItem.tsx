@@ -60,7 +60,7 @@ const FeedItem: FC<FeedItemProps> = ({
 				action
 				active={isActiveFeed}
 				onClick={handleUpdateActiveFeed}
-				title="Показать посты конкретного фида"
+				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
 				className="d-flex justify-content-between align-items-start"
 				style={{ cursor: isActiveFeed ? 'default' : 'pointer' }}
 			>
