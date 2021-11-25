@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
 import { selectFeedsAndPosts } from '../../store/selectors/index';
-import { getPagesCount, showCurrentItems } from '../../utils/page';
+import { showCurrentItems } from '../../utils/page';
 import FeedList from '../feeds/FeedList';
 import Paginator from '../Paginator/index';
 import PostList from '../posts/PostList';
@@ -13,17 +14,12 @@ import PostList from '../posts/PostList';
 const POSTS_LIMIT = 20;
 
 const ContentContainer: FC = () => {
-	const [totalPostPages, setTotalPostPages] = useState<number>(0);
-	const [activePage, setActivePage] = useState<number>(1);
-
 	const { feeds, allPosts } = useTypedSelector(selectFeedsAndPosts);
 
-	useEffect(() => {
-		const postsCount = allPosts.length;
-		const newPagesCount = getPagesCount(postsCount, POSTS_LIMIT);
-
-		setTotalPostPages(newPagesCount);
-	}, [allPosts]);
+	const { totalPages, activePage, setActivePage } = usePaginator(
+		allPosts,
+		POSTS_LIMIT
+	);
 
 	const currentPosts = showCurrentItems(allPosts, activePage, POSTS_LIMIT);
 
@@ -43,14 +39,14 @@ const ContentContainer: FC = () => {
 										<FormattedMessage id={MESSAGES.POSTS} />
 									</h2>
 									<Paginator
-										totalPages={totalPostPages}
+										totalPages={totalPages}
 										activePage={activePage}
 										setActivePage={setActivePage}
 									/>
 									<PostList posts={currentPosts} />
 									{currentPosts.length > 10 && (
 										<Paginator
-											totalPages={totalPostPages}
+											totalPages={totalPages}
 											activePage={activePage}
 											setActivePage={setActivePage}
 										/>

@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/no-explicit-any: "off" */
 
 export const getPagesCount = (totalCount: number, limit: number): number => {
-	return Math.ceil(totalCount / limit);
+	return Math.ceil(totalCount / limit) || 1;
 };
 
 export const getPagesColl = (pagesCount: number): number[] =>
