@@ -14,54 +14,58 @@ import PostList from '../posts/PostList';
 const POSTS_LIMIT = 20;
 
 const ContentContainer: FC = () => {
-	const { feeds, allPosts } = useTypedSelector(selectFeedsAndPosts);
+	const { feeds, posts } = useTypedSelector(selectFeedsAndPosts);
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
-		allPosts,
+		posts,
 		POSTS_LIMIT
 	);
 
-	const currentPosts = showCurrentItems(allPosts, activePage, POSTS_LIMIT);
+	if (feeds.length === 0) {
+		return (
+			<Container fluid className="container-xxl p-5">
+				<Row className="flex-wrap-reverse">
+					<h2 className="display-5 mt-4 text-center">
+						<FormattedMessage id={MESSAGES.NO_FEEDS} />
+					</h2>
+				</Row>
+			</Container>
+		);
+	}
+
+	const currentPosts = showCurrentItems(posts, activePage, POSTS_LIMIT);
 
 	return (
 		<Container fluid className="container-xxl p-5">
 			<Row className="flex-wrap-reverse">
-				{feeds.length === 0 ? (
-					<h2 className="display-5 mt-4 text-center">
-						<FormattedMessage id={MESSAGES.NO_FEEDS} />
-					</h2>
-				) : (
-					<>
-						<Col as="section" className="mb-5">
-							{allPosts.length && (
-								<>
-									<h2 className="h3 mb-4">
-										<FormattedMessage id={MESSAGES.POSTS} />
-									</h2>
-									<Paginator
-										totalPages={totalPages}
-										activePage={activePage}
-										setActivePage={setActivePage}
-									/>
-									<PostList posts={currentPosts} />
-									{currentPosts.length > 10 && (
-										<Paginator
-											totalPages={totalPages}
-											activePage={activePage}
-											setActivePage={setActivePage}
-										/>
-									)}
-								</>
-							)}
-						</Col>
-						<Col as="section" className="mb-5">
+				<Col as="section" className="mb-5">
+					{posts.length && (
+						<>
 							<h2 className="h3 mb-4">
-								<FormattedMessage id={MESSAGES.FEEDS} />
+								<FormattedMessage id={MESSAGES.POSTS} />
 							</h2>
-							<FeedList feeds={feeds} />
-						</Col>
-					</>
-				)}
+							<Paginator
+								totalPages={totalPages}
+								activePage={activePage}
+								setActivePage={setActivePage}
+							/>
+							<PostList posts={currentPosts} />
+							{currentPosts.length > 10 && (
+								<Paginator
+									totalPages={totalPages}
+									activePage={activePage}
+									setActivePage={setActivePage}
+								/>
+							)}
+						</>
+					)}
+				</Col>
+				<Col as="section" className="mb-5">
+					<h2 className="h3 mb-4">
+						<FormattedMessage id={MESSAGES.FEEDS} />
+					</h2>
+					<FeedList feeds={feeds} />
+				</Col>
 			</Row>
 		</Container>
 	);

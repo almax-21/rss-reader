@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { PostIDs } from '../../types';
 import { getRSSData } from '../async-actions/getRSSData';
 import { FEED_LOADED_STATE, RSSData, RssState } from '../types';
 
@@ -11,7 +12,8 @@ const initialState: RssState = {
 		entities: {},
 		ids: [],
 	},
-	allPosts: [],
+	activeFeedId: null,
+	postsByFeedId: {},
 	urlDataColl: [],
 };
 
@@ -19,22 +21,30 @@ const rssSlice = createSlice({
 	name: 'rss',
 	initialState,
 	reducers: {
-		setPostRead: (state, action: PayloadAction<string>) => {
-			state.allPosts = state.allPosts.map((post) => {
-				return post.id === action.payload ? { ...post, isRead: true } : post;
+		setPostRead: (state, action: PayloadAction<PostIDs>) => {
+			const { id, feedId } = action.payload;
+
+			state.postsByFeedId[feedId] = state.postsByFeedId[feedId].map((post) => {
+				return post.id === id ? { ...post, isRead: true } : post;
 			});
+		},
+		updateActiveFeed: (state, action: PayloadAction<string>) => {
+			state.activeFeedId = action.payload;
 		},
 		deleteFeed: (state, action: PayloadAction<string>) => {
 			delete state.feeds.entities[action.payload];
-			state.feeds.ids = state.feeds.ids.filter((id) => id !== action.payload);
+			const newFeedIDs = state.feeds.ids.filter((id) => id !== action.payload);
+			state.feeds.ids = newFeedIDs;
 
-			state.allPosts = state.allPosts.filter(
-				({ feedId }) => feedId !== action.payload
-			);
+			delete state.postsByFeedId[action.payload];
 
 			state.urlDataColl = state.urlDataColl.filter(
 				({ feedId }) => feedId !== action.payload
 			);
+
+			if (state.activeFeedId === action.payload) {
+				state.activeFeedId = newFeedIDs[0] ?? null;
+			}
 		},
 	},
 	extraReducers: {
@@ -52,7 +62,9 @@ const rssSlice = createSlice({
 			state.feeds.entities[feed.id] = feed;
 			state.feeds.ids = [feed.id, ...state.feeds.ids];
 
-			state.allPosts = [...posts, ...state.allPosts];
+			state.activeFeedId = feed.id;
+
+			state.postsByFeedId[feed.id] = posts;
 
 			const feedUrlData = { feedId: feed.id, url: feed.url };
 			state.urlDataColl.push(feedUrlData);
@@ -65,6 +77,6 @@ const rssSlice = createSlice({
 	},
 });
 
-export const { setPostRead, deleteFeed } = rssSlice.actions;
+export const { setPostRead, updateActiveFeed, deleteFeed } = rssSlice.actions;
 
 export default rssSlice.reducer;

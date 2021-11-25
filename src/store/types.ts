@@ -29,7 +29,10 @@ export interface RssState {
 		};
 		ids: string[];
 	};
-	allPosts: IPost[];
+	activeFeedId: string | null;
+	postsByFeedId: {
+		[key: string]: IPost[];
+	};
 	urlDataColl: FeedUrlData[];
 }
 

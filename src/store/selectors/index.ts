@@ -5,9 +5,7 @@ import { RootState, RssState } from '../types';
 const getRssState = (state: RootState) => state.rss;
 
 const getPostsCount = (rss: RssState, feedId: string) =>
-	rss.allPosts
-		.filter((post) => post.feedId === feedId)
-		.filter(({ isRead }) => !isRead).length;
+	rss.postsByFeedId[feedId].filter(({ isRead }) => !isRead).length;
 
 const getFeeds = (rss: RssState) =>
 	rss.feeds.ids
@@ -21,7 +19,7 @@ export const selectFeedsAndPosts = createSelector(
 	getRssState,
 	(rss: RssState) => ({
 		feeds: getFeeds(rss),
-		allPosts: rss.allPosts,
+		posts: rss.activeFeedId ? rss.postsByFeedId[rss.activeFeedId] : [],
 	})
 );
 
