@@ -66,7 +66,7 @@ const FeedItem: FC<FeedItemProps> = ({
 				handleClose={handleCloseModal}
 				handleAction={handleDeleteFeed(id)}
 				title={title}
-				description={intl.formatMessage({ id: MESSAGES.DELETE_WARNING })}
+				description={intl.formatMessage({ id: MESSAGES.FEEDS_DELETE_WARNING })}
 			/>
 		</ListGroup.Item>
 	);
