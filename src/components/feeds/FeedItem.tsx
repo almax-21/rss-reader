@@ -1,9 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Badge, CloseButton, ListGroup } from 'react-bootstrap';
+import { useIntl } from 'react-intl';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
+import { MESSAGES } from '../../i18n/types';
 import { deleteFeed } from '../../store/slices/rssSlice';
 import { truncateText } from '../../utils/text';
+import MyModal from '../MyModal/index';
+import { MODAL_TYPES } from '../MyModal/types';
 
 interface FeedItemProps {
 	id: string;
@@ -18,7 +22,22 @@ const FeedItem: FC<FeedItemProps> = ({
 	description,
 	postsCount,
 }) => {
+	const [isShowModal, setIsShowModal] = useState<boolean>(false);
+
 	const dispatch = useTypedDispatch();
+	const intl = useIntl();
+
+	const handleDeleteFeed = (id: string) => () => {
+		dispatch(deleteFeed(id));
+	};
+
+	const handleOpenModal = () => {
+		setIsShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsShowModal(false);
+	};
 
 	return (
 		<ListGroup.Item
@@ -38,9 +57,17 @@ const FeedItem: FC<FeedItemProps> = ({
 			</div>
 			{!!postsCount && (
 				<div>
-					<CloseButton onClick={() => dispatch(deleteFeed(id))} />
+					<CloseButton onClick={handleOpenModal} />
 				</div>
 			)}
+			<MyModal
+				type={MODAL_TYPES.DELETE}
+				isShow={isShowModal}
+				handleClose={handleCloseModal}
+				handleAction={handleDeleteFeed(id)}
+				title={title}
+				description={intl.formatMessage({ id: MESSAGES.DELETE_WARNING })}
+			/>
 		</ListGroup.Item>
 	);
 };

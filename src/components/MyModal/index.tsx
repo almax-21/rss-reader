@@ -2,19 +2,16 @@ import React, { FC } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import { MESSAGES } from '../i18n/types';
+import { MESSAGES } from '../../i18n/types';
 
-interface PreviewModalProps {
-	isShow: boolean;
-	onClose: () => void;
-	title: string;
-	description: string;
-	url: string;
-}
+import ModalActionBtn from './ModalActionBtn';
+import { MyModalProps } from './types';
 
-const PreviewModal: FC<PreviewModalProps> = ({
+const MyModal: FC<MyModalProps> = ({
+	type,
 	isShow,
-	onClose: handleClose,
+	handleClose,
+	handleAction,
 	title,
 	description,
 	url,
@@ -26,14 +23,7 @@ const PreviewModal: FC<PreviewModalProps> = ({
 			</Modal.Header>
 			<Modal.Body>{description}</Modal.Body>
 			<Modal.Footer>
-				<a
-					className="btn btn-primary"
-					href={url}
-					target="_blank"
-					rel="noreferrer"
-				>
-					<FormattedMessage id={MESSAGES.READ_MORE} />
-				</a>
+				<ModalActionBtn type={type} handleAction={handleAction} url={url} />
 				<Button variant="secondary" onClick={handleClose}>
 					<FormattedMessage id={MESSAGES.CLOSE} />
 				</Button>
@@ -42,4 +32,4 @@ const PreviewModal: FC<PreviewModalProps> = ({
 	);
 };
 
-export default PreviewModal;
+export default MyModal;

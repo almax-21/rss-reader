@@ -6,7 +6,8 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../../i18n/types';
 import { setPostRead } from '../../store/slices/rssSlice';
 import { IPost } from '../../types';
-import PreviewModal from '../PreviewModal';
+import MyModal from '../MyModal';
+import { MODAL_TYPES } from '../MyModal/types';
 
 interface PostItemProps {
 	post: IPost;
@@ -63,9 +64,10 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 			<Button onClick={handleOpenModal(id)} variant="outline-primary" size="sm">
 				<FormattedMessage id={MESSAGES.PREVIEW} />
 			</Button>
-			<PreviewModal
+			<MyModal
+				type={MODAL_TYPES.PREVIEW}
 				isShow={isShowModal}
-				onClose={handleCloseModal}
+				handleClose={handleCloseModal}
 				title={title}
 				description={description}
 				url={url}
