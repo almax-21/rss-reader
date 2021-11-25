@@ -6,8 +6,8 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../../i18n/types';
 import { setPostRead } from '../../store/slices/rssSlice';
 import { IPost, PostIDs } from '../../types';
-import MyModal from '../MyModal';
-import { MODAL_TYPES } from '../MyModal/types';
+import MyModal from '../UI/MyModal';
+import { MODAL_TYPES } from '../UI/MyModal/types';
 
 interface PostItemProps {
 	post: IPost;

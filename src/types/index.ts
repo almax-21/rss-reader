@@ -1,3 +1,5 @@
+// most used types or common
+
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
 export interface IFeed {

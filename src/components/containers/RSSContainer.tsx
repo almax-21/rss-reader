@@ -6,8 +6,8 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import useFeedNotification from '../../hooks/useFeedNotification';
 import { MESSAGES } from '../../i18n/types';
 import LocaleSwitcher from '../LocaleSwitcher';
-import Notification from '../Notification';
 import RSSForm from '../RSSForm';
+import Notification from '../UI/Notification';
 
 const RSSContainer: FC = () => {
 	const { feedLoadedState, errorMessage } = useTypedSelector(

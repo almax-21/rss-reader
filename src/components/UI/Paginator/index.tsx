@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { getPagesColl } from '../../utils/page';
+import { getPagesColl } from '../../../utils/page';
 
 import ExtraPagination from './mode/ExtraPagination';
 import SimplePagination from './mode/SimplePagination';

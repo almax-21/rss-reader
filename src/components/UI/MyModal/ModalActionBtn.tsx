@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import { MESSAGES } from '../../i18n/types';
+import { MESSAGES } from '../../../i18n/types';
 
 import { MODAL_TYPES, ModalActionBtnProps } from './types';
 

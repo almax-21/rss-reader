@@ -7,8 +7,8 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { deleteFeed, updateActiveFeed } from '../../store/slices/rssSlice';
 import { truncateText } from '../../utils/text';
-import MyModal from '../MyModal/index';
-import { MODAL_TYPES } from '../MyModal/types';
+import MyModal from '../UI/MyModal/index';
+import { MODAL_TYPES } from '../UI/MyModal/types';
 
 interface FeedItemProps {
 	id: string;

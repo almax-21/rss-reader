@@ -8,8 +8,8 @@ import { MESSAGES } from '../../i18n/types';
 import { selectFeedsAndPosts } from '../../store/selectors/index';
 import { showCurrentItems } from '../../utils/page';
 import FeedList from '../feeds/FeedList';
-import Paginator from '../Paginator/index';
 import PostList from '../posts/PostList';
+import Paginator from '../UI/Paginator/index';
 
 const POSTS_LIMIT = 20;
 
