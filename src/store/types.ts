@@ -1,18 +1,21 @@
-import { FeedUrlData, IFeed, IPost } from '../types';
+import { FeedUrlData, IFeed, IPost, IPostFilter } from '../types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';
 
-export enum FEED_LOADED_STATE {
+export enum FEED_LOADED_STATES {
 	SUCCESS = 'SUCCESS',
 	ERROR = 'ERROR',
 	NULL = '',
 }
 
-export type FEED_LOADED_STATE_TYPE =
-	| FEED_LOADED_STATE.SUCCESS
-	| FEED_LOADED_STATE.ERROR
-	| FEED_LOADED_STATE.NULL;
+export enum POST_STATES {
+	READ = 'READ',
+	UNREAD = 'UNREAD',
+	ALL = 'ALL',
+}
+
+export type POST_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
 
 export interface RSSData {
 	feed: IFeed;
@@ -21,17 +24,20 @@ export interface RSSData {
 
 export interface RssState {
 	isLoading: boolean;
-	feedLoadedState: FEED_LOADED_STATE;
+	feedLoadedState: FEED_LOADED_STATES;
 	errorMessage: string;
 	feeds: {
 		entities: {
 			[key: string]: IFeed;
 		};
 		ids: string[];
+		activeFeedId: string | null;
 	};
-	activeFeedId: string | null;
-	postsByFeedId: {
-		[key: string]: IPost[];
+	posts: {
+		byFeedId: {
+			[key: string]: IPost[];
+		};
+		filter: IPostFilter;
 	};
 	urlDataColl: FeedUrlData[];
 }

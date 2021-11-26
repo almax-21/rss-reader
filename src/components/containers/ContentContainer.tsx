@@ -5,16 +5,19 @@ import { FormattedMessage } from 'react-intl';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts } from '../../store/selectors/index';
+import { selectFeedsAndPosts, selectFilter } from '../../store/selectors/rss';
 import { showCurrentItems } from '../../utils/page';
 import FeedList from '../feeds/FeedList';
+import PostFilter from '../posts/PostFilter';
 import PostList from '../posts/PostList';
 import Paginator from '../UI/Paginator/index';
 
 const POSTS_LIMIT = 20;
+const MIN_POSTS_COUNT = 10;
 
 const ContentContainer: FC = () => {
 	const { feeds, posts, activeFeedId } = useTypedSelector(selectFeedsAndPosts);
+	const postFilter = useTypedSelector(selectFilter);
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
 		posts,
@@ -23,9 +26,13 @@ const ContentContainer: FC = () => {
 
 	const prevActiveFeedId = useRef<string | null>(null);
 
+	const resetActivePage = () => {
+		setActivePage(1);
+	};
+
 	useEffect(() => {
 		if (activeFeedId !== prevActiveFeedId?.current) {
-			setActivePage(1);
+			resetActivePage();
 		}
 
 		prevActiveFeedId.current = activeFeedId;
@@ -35,7 +42,7 @@ const ContentContainer: FC = () => {
 		return (
 			<Container fluid className="container-xxl p-5">
 				<Row className="flex-wrap-reverse">
-					<h2 className="display-5 mt-4 text-center">
+					<h2 className="display-5 text-center">
 						<FormattedMessage id={MESSAGES.NO_FEEDS} />
 					</h2>
 				</Row>
@@ -49,26 +56,35 @@ const ContentContainer: FC = () => {
 		<Container fluid className="container-xxl p-5">
 			<Row className="flex-wrap-reverse">
 				<Col as="section" className="mb-5">
-					{posts.length && (
-						<>
-							<h2 className="h3 mb-4">
-								<FormattedMessage id={MESSAGES.POSTS} />
-							</h2>
+					<>
+						<h2 className="h3 mb-4">
+							<FormattedMessage id={MESSAGES.POSTS} />
+						</h2>
+						<PostFilter
+							postFilter={postFilter}
+							resetActivePage={resetActivePage}
+						/>
+						<Paginator
+							totalPages={totalPages}
+							activePage={activePage}
+							setActivePage={setActivePage}
+						/>
+						{posts.length === 0 ? (
+							<h3 className="h4 mt-4">
+								<FormattedMessage id={MESSAGES.NOT_FOUND} />
+							</h3>
+						) : (
+							<PostList posts={currentPosts} />
+						)}
+						<PostList posts={currentPosts} />
+						{currentPosts.length > MIN_POSTS_COUNT && (
 							<Paginator
 								totalPages={totalPages}
 								activePage={activePage}
 								setActivePage={setActivePage}
 							/>
-							<PostList posts={currentPosts} />
-							{currentPosts.length > 10 && (
-								<Paginator
-									totalPages={totalPages}
-									activePage={activePage}
-									setActivePage={setActivePage}
-								/>
-							)}
-						</>
-					)}
+						)}
+					</>
 				</Col>
 				<Col as="section" className="mb-5">
 					<h2 className="h3 mb-4">

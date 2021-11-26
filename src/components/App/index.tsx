@@ -4,6 +4,7 @@ import LoadingBar from 'react-redux-loading-bar';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
+import { selectLocale } from '../../store/selectors/locale';
 import ContentContainer from '../containers/ContentContainer';
 import RSSContainer from '../containers/RSSContainer';
 import Footer from '../Footer';
@@ -14,7 +15,7 @@ import AppHelmet from './AppHelmet';
 import './style.scss';
 
 const App: FC = () => {
-	const { locale } = useTypedSelector((state) => state);
+	const locale = useTypedSelector(selectLocale);
 
 	return (
 		<IntlProvider locale={locale} messages={messages[locale]}>

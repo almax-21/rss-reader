@@ -4,9 +4,10 @@ import { useIntl } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
+import { selectLocale } from '../../store/selectors/locale';
 
 const AppHelmet: FC = () => {
-	const { locale } = useTypedSelector((state) => state);
+	const locale = useTypedSelector(selectLocale);
 	const intl = useIntl();
 
 	return (

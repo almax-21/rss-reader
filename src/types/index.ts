@@ -1,5 +1,7 @@
 // most used types or common
 
+import { POST_TYPE } from '../store/types';
+
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
 export interface IFeed {
@@ -7,7 +9,7 @@ export interface IFeed {
 	title: string;
 	description: string;
 	url: string;
-	postsCount?: number;
+	unreadPostsCount?: number;
 }
 
 export interface IPost {
@@ -16,7 +18,12 @@ export interface IPost {
 	title: string;
 	description: string;
 	url: string;
-	isRead: boolean;
+	state: POST_TYPE;
+}
+
+export interface IPostFilter {
+	state: POST_TYPE;
+	query: string;
 }
 
 export interface PostIDs {

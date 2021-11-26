@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../../i18n/types';
 import { setPostRead } from '../../store/slices/rssSlice';
+import { POST_STATES } from '../../store/types';
 import { IPost, PostIDs } from '../../types';
 import MyModal from '../UI/MyModal';
 import { MODAL_TYPES } from '../UI/MyModal/types';
@@ -16,22 +17,23 @@ interface PostItemProps {
 const PostItem: FC<PostItemProps> = ({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-	const { title, description, id, feedId, url, isRead } = post;
+	const { title, description, id, feedId, url, state } = post;
 	const dispatch = useTypedDispatch();
 
 	const handlePostRead = (postIDs: PostIDs) => () => {
-		if (isRead) {
+		if (state === POST_STATES.READ) {
 			return;
 		}
 
 		dispatch(setPostRead(postIDs));
 	};
 
-	const handleOpenModal = (id: string) => () => {
-		handlePostRead({ id, feedId })();
+	const handleOpenModal = () => {
 		setIsShowModal(true);
 	};
-	const handleCloseModal = () => {
+
+	const handleCloseModal = (postIDs: PostIDs) => () => {
+		handlePostRead(postIDs)();
 		setIsShowModal(false);
 	};
 
@@ -55,24 +57,22 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 							target="_blank"
 							rel="noreferrer"
 							onClick={handlePostRead({ id, feedId })}
-							className={isRead ? 'text-secondary' : 'text-primary'}
+							className={
+								state === POST_STATES.READ ? 'text-secondary' : 'text-primary'
+							}
 						>
 							{title}
 						</Card.Link>
 					</Card.Title>
 				</Card>
-				<Button
-					onClick={handleOpenModal(id)}
-					variant="outline-primary"
-					size="sm"
-				>
+				<Button onClick={handleOpenModal} variant="outline-primary" size="sm">
 					<FormattedMessage id={MESSAGES.PREVIEW} />
 				</Button>
 			</ListGroup.Item>
 			<MyModal
 				type={MODAL_TYPES.PREVIEW}
 				isShow={isShowModal}
-				handleClose={handleCloseModal}
+				handleClose={handleCloseModal({ id, feedId })}
 				title={title}
 				description={description}
 				url={url}

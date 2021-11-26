@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
+import { selectActiveFeedId } from '../../store/selectors/rss';
 import { deleteFeed, updateActiveFeed } from '../../store/slices/rssSlice';
 import { truncateText } from '../../utils/text';
 import MyModal from '../UI/MyModal/index';
@@ -14,18 +15,18 @@ interface FeedItemProps {
 	id: string;
 	title: string;
 	description: string;
-	postsCount: number;
+	unreadPostsCount: number;
 }
 
 const FeedItem: FC<FeedItemProps> = ({
 	id,
 	title,
 	description,
-	postsCount,
+	unreadPostsCount,
 }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-	const { activeFeedId } = useTypedSelector((state) => state.rss);
+	const activeFeedId = useTypedSelector(selectActiveFeedId);
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
@@ -70,12 +71,12 @@ const FeedItem: FC<FeedItemProps> = ({
 							{title}
 						</h3>
 						<Badge pill bg="danger" className="mb-2">
-							{postsCount}
+							{unreadPostsCount}
 						</Badge>
 					</div>
 					<span>{truncateText(description)}</span>
 				</div>
-				{!!postsCount && (
+				{!!unreadPostsCount && (
 					<div>
 						<CloseButton onClick={handleOpenModal} />
 					</div>

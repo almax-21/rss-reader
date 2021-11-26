@@ -12,13 +12,13 @@ interface FeedListProps {
 const FeedList: FC<FeedListProps> = ({ feeds }) => {
 	return (
 		<ListGroup as="ol" numbered>
-			{feeds.map(({ id, title, description, postsCount }) => (
+			{feeds.map(({ id, title, description, unreadPostsCount }) => (
 				<FeedItem
 					key={id}
 					id={id}
 					title={title}
 					description={description}
-					postsCount={postsCount as number}
+					unreadPostsCount={unreadPostsCount as number}
 				/>
 			))}
 		</ListGroup>

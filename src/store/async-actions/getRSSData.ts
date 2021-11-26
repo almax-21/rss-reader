@@ -8,7 +8,7 @@ import { v4 as uuid4 } from 'uuid';
 import { MESSAGES } from '../../i18n/types';
 import parseRSS from '../../utils/parser';
 import { ParsedRSS } from '../../utils/parser/types';
-import { RSSData } from '../types';
+import { POST_STATES, RSSData } from '../types';
 
 interface AsyncFeedActionData {
 	feedUrl: string;
@@ -44,7 +44,7 @@ export const getRSSData = createAsyncThunk(
 					...post,
 					feedId,
 					id: uuid4(),
-					isRead: false,
+					state: POST_STATES.UNREAD,
 				})),
 			};
 

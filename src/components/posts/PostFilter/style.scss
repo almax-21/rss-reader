@@ -1,0 +1,25 @@
+.filter {
+	margin-bottom: 20px;
+
+	&__group {
+		display: flex;
+		flex-wrap: wrap;
+
+		margin-bottom: 20px;
+	}
+
+	&__input {
+		display: block;
+
+		min-width: 155px !important;
+		max-width: 405px !important;
+	}
+
+	&__btn {
+		width: 70px;
+	}
+
+	.dropdown-toggle {
+		width: 150px;
+	}
+}

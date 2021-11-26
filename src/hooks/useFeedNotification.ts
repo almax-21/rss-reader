@@ -6,7 +6,7 @@ import {
 	NotificationData,
 } from '../components/UI/Notification/types';
 import { MESSAGES } from '../i18n/types';
-import { FEED_LOADED_STATE } from '../store/types';
+import { FEED_LOADED_STATES } from '../store/types';
 import { TimeoutId } from '../types';
 
 interface ReturnedHookData {
@@ -16,7 +16,7 @@ interface ReturnedHookData {
 }
 
 const useFeedNotification = (
-	feedLoadedState: FEED_LOADED_STATE,
+	feedLoadedState: FEED_LOADED_STATES,
 	errorMessage: string
 ): ReturnedHookData => {
 	const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
@@ -32,13 +32,13 @@ const useFeedNotification = (
 	useEffect(() => {
 		if (feedLoadedState && !isShowNotification) {
 			switch (feedLoadedState) {
-				case FEED_LOADED_STATE.SUCCESS:
+				case FEED_LOADED_STATES.SUCCESS:
 					notificationRef.current = {
 						variant: NOTIFICATION_VARIANT.SUCCESS,
 						message: intl.formatMessage({ id: MESSAGES.SUCCESSFULLY_LOADED }),
 					};
 					break;
-				case FEED_LOADED_STATE.ERROR:
+				case FEED_LOADED_STATES.ERROR:
 					notificationRef.current = {
 						variant: NOTIFICATION_VARIANT.ERROR,
 						message: errorMessage,
