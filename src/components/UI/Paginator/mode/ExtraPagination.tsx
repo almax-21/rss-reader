@@ -20,9 +20,9 @@ const ExtraPagination: FC<PaginationProps> = ({
 					onClick={handleSetActivePage(activePage - 1)}
 				/>
 				<PaginationMedium
-					pages={firstPages}
 					activePage={activePage}
 					handleSetActivePage={handleSetActivePage}
+					pages={firstPages}
 				/>
 				<Pagination.Ellipsis disabled />
 				<Pagination.Last onClick={handleSetActivePage(pages.length)}>
@@ -50,9 +50,9 @@ const ExtraPagination: FC<PaginationProps> = ({
 				</Pagination.First>
 				<Pagination.Ellipsis disabled />
 				<PaginationMedium
-					pages={lastPages}
 					activePage={activePage}
 					handleSetActivePage={handleSetActivePage}
+					pages={lastPages}
 				/>
 				<Pagination.Next
 					disabled={activePage === pages.length}
@@ -74,8 +74,8 @@ const ExtraPagination: FC<PaginationProps> = ({
 	return (
 		<Pagination>
 			<Pagination.Prev
-				onClick={handleSetActivePage(activePage - 1)}
 				disabled={activePage === 1}
+				onClick={handleSetActivePage(activePage - 1)}
 			/>
 			<Pagination.First
 				active={activePage === 1}
@@ -85,9 +85,9 @@ const ExtraPagination: FC<PaginationProps> = ({
 			</Pagination.First>
 			<Pagination.Ellipsis disabled />
 			<PaginationMedium
-				pages={innerPages}
 				activePage={activePage}
 				handleSetActivePage={handleSetActivePage}
+				pages={innerPages}
 			/>
 			<Pagination.Ellipsis disabled />
 			<Pagination.Last
@@ -97,8 +97,8 @@ const ExtraPagination: FC<PaginationProps> = ({
 				{pages.length}
 			</Pagination.Last>
 			<Pagination.Next
-				onClick={handleSetActivePage(activePage + 1)}
 				disabled={activePage === pages.length}
+				onClick={handleSetActivePage(activePage + 1)}
 			/>
 		</Pagination>
 	);

@@ -11,8 +11,8 @@ const Footer: FC = () => {
 				&nbsp;
 				<a
 					href="https://ru.hexlet.io/"
-					target="_blank"
 					rel="noreferrer"
+					target="_blank"
 				>
 					<FormattedMessage id={MESSAGES.HEXLET_COMPANY} />
 				</a>

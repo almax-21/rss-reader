@@ -13,6 +13,17 @@
 		"react-hooks/exhaustive-deps": "off",
 		"react/prop-types": "off",
 		"react/react-in-jsx-scope": "off",
+		"react/jsx-sort-props": [
+			"warn",
+			{
+				"callbacksLast": true,
+				"shorthandFirst": true,
+				"shorthandLast": false,
+				"ignoreCase": false,
+				"noSortAlphabetically": false,
+				"reservedFirst": true
+			}
+		],
 		"simple-import-sort/imports": [
 			"warn",
 			{

@@ -23,7 +23,7 @@ const MyModal: FC<MyModalProps> = ({
 			</Modal.Header>
 			<Modal.Body>{description}</Modal.Body>
 			<Modal.Footer>
-				<ModalActionBtn type={type} handleAction={handleAction} url={url} />
+				<ModalActionBtn handleAction={handleAction} type={type} url={url} />
 				<Button variant="secondary" onClick={handleClose}>
 					<FormattedMessage id={MESSAGES.CLOSE} />
 				</Button>

@@ -53,28 +53,28 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 				<Card className="border-0">
 					<Card.Title className="h6 fw-bold">
 						<Card.Link
-							href={url}
-							target="_blank"
-							rel="noreferrer"
-							onClick={handlePostRead({ id, feedId })}
 							className={
 								state === POST_STATES.READ ? 'text-secondary' : 'text-primary'
 							}
+							href={url}
+							rel="noreferrer"
+							target="_blank"
+							onClick={handlePostRead({ id, feedId })}
 						>
 							{title}
 						</Card.Link>
 					</Card.Title>
 				</Card>
-				<Button onClick={handleOpenModal} variant="outline-primary" size="sm">
+				<Button size="sm" variant="outline-primary" onClick={handleOpenModal}>
 					<FormattedMessage id={MESSAGES.PREVIEW} />
 				</Button>
 			</ListGroup.Item>
 			<MyModal
-				type={MODAL_TYPES.PREVIEW}
-				isShow={isShowModal}
-				handleClose={handleCloseModal({ id, feedId })}
-				title={title}
 				description={description}
+				handleClose={handleCloseModal({ id, feedId })}
+				isShow={isShowModal}
+				title={title}
+				type={MODAL_TYPES.PREVIEW}
 				url={url}
 			/>
 		</>

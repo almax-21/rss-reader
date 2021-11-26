@@ -21,7 +21,7 @@ const MyDropDown: FC<MyDropDownProps<POST_TYPE>> = ({
 	handleSetActiveValue,
 }) => {
 	return (
-		<DropdownButton variant={variant} title={title}>
+		<DropdownButton title={title} variant={variant}>
 			{values.map((value) => (
 				<Dropdown.Item
 					key={value}

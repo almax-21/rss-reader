@@ -14,12 +14,12 @@ const AppHelmet: FC = () => {
 		<Helmet htmlAttributes={{ lang: locale }}>
 			<title>{intl.formatMessage({ id: MESSAGES.MAIN_HEADER })}</title>
 			<meta
-				name="description"
 				content={intl.formatMessage({ id: MESSAGES.DESCRIPTION })}
+				name="description"
 			/>
 			<meta
-				name="keywords"
 				content={intl.formatMessage({ id: MESSAGES.KEYWORDS })}
+				name="keywords"
 			/>
 		</Helmet>
 	);

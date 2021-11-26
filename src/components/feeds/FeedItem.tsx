@@ -59,13 +59,13 @@ const FeedItem: FC<FeedItemProps> = ({
 	return (
 		<>
 			<ListGroup.Item
-				as="li"
 				action={feeds.length > 1}
 				active={isActiveFeed && feeds.length > 1}
-				onClick={handleUpdateActiveFeed}
-				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
+				as="li"
 				className="d-flex justify-content-between align-items-start"
 				style={{ cursor: isActiveFeed ? 'default' : 'pointer' }}
+				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
+				onClick={handleUpdateActiveFeed}
 			>
 				<div className="ms-2 me-auto">
 					<div className="d-flex align-items-center">
@@ -85,12 +85,12 @@ const FeedItem: FC<FeedItemProps> = ({
 				)}
 			</ListGroup.Item>
 			<MyModal
-				type={MODAL_TYPES.DELETE}
-				isShow={isShowModal}
-				handleClose={handleCloseModal}
-				handleAction={handleDeleteFeed}
-				title={title}
 				description={intl.formatMessage({ id: MESSAGES.FEEDS_DELETE_WARNING })}
+				handleAction={handleDeleteFeed}
+				handleClose={handleCloseModal}
+				isShow={isShowModal}
+				title={title}
+				type={MODAL_TYPES.DELETE}
 			/>
 		</>
 	);

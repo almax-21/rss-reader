@@ -19,9 +19,9 @@ const SimplePagination: FC<PaginationProps> = ({
 				/>
 			)}
 			<PaginationMedium
-				pages={pages}
 				activePage={activePage}
 				handleSetActivePage={handleSetActivePage}
+				pages={pages}
 			/>
 			{pages.length >= 5 && (
 				<Pagination.Next

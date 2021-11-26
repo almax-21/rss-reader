@@ -19,9 +19,9 @@ const LocaleSwitcher: FC = () => {
 	return (
 		<DropdownButton
 			as={ButtonGroup}
-			onSelect={localeHandler}
-			title={intl.formatMessage({ id: MESSAGES.LANGUAGE })}
 			size="sm"
+			title={intl.formatMessage({ id: MESSAGES.LANGUAGE })}
+			onSelect={localeHandler}
 		>
 			<Dropdown.Item eventKey={LOCALES.RUSSIAN}>
 				<FormattedMessage id={MESSAGES.RUSSIAN} />

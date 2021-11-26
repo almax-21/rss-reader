@@ -31,15 +31,15 @@ const Paginator: FC<PaginatorProps> = ({
 
 	return totalPages < PAGINATOR_CAPACITY.EXTRA ? (
 		<SimplePagination
-			pages={pagesColl}
 			activePage={activePage}
 			handleSetActivePage={handleSetActivePage}
+			pages={pagesColl}
 		/>
 	) : (
 		<ExtraPagination
-			pages={pagesColl}
 			activePage={activePage}
 			handleSetActivePage={handleSetActivePage}
+			pages={pagesColl}
 		/>
 	);
 };

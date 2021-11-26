@@ -60,15 +60,15 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 			<Form onSubmit={handleSubmit}>
 				<InputGroup className="filter__group">
 					<Form.Control
+						aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
+						className="filter__input"
+						placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
 						type="text"
 						value={searchQuery}
 						onChange={handleChangeQuery}
-						className="filter__input"
-						placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
-						aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
 					/>
 					{searchQuery ? (
-						<Button className="filter__btn" variant="primary" type="submit">
+						<Button className="filter__btn" type="submit" variant="primary">
 							<FormattedMessage id={MESSAGES.FIND} />
 						</Button>
 					) : (
@@ -85,11 +85,11 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 
 			<div className="d-flex flex-wrap-reverse">
 				<MyDropDown
-					variant="outline-secondary"
-					title={intl.formatMessage({ id: postFilter.state })}
-					values={filterValues}
 					activeValue={postFilter.state}
 					handleSetActiveValue={handleSwitchFilterState}
+					title={intl.formatMessage({ id: postFilter.state })}
+					values={filterValues}
+					variant="outline-secondary"
 				/>
 				{postFilter.query && (
 					<Badge pill bg="light" text="dark">

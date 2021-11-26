@@ -70,9 +70,9 @@ const ContentContainer: FC = () => {
 							resetActivePage={resetActivePage}
 						/>
 						<Paginator
-							totalPages={totalPages}
 							activePage={activePage}
 							setActivePage={setActivePage}
+							totalPages={totalPages}
 						/>
 						{posts.length === 0 ? (
 							<h3 className="h4 mt-4">
@@ -83,9 +83,9 @@ const ContentContainer: FC = () => {
 						)}
 						{currentPosts.length > MIN_POSTS_COUNT && (
 							<Paginator
-								totalPages={totalPages}
 								activePage={activePage}
 								setActivePage={setActivePage}
+								totalPages={totalPages}
 							/>
 						)}
 					</>

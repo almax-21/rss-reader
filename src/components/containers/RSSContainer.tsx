@@ -23,15 +23,15 @@ const RSSContainer: FC = () => {
 				isShow={isShowNotification}
 				onClose={onCloseNotification}
 			/>
-			<Container className="bg-dark p-5 pt-4 pb-4" as="section" fluid>
+			<Container fluid as="section" className="bg-dark p-5 pt-4 pb-4">
 				<Row className="justify-content-center">
-					<Col md="10" lg="8" className="d-flex justify-content-end">
+					<Col className="d-flex justify-content-end" lg="8" md="10">
 						{/* change language select */}
 						<LocaleSwitcher />
 					</Col>
 				</Row>
 				<Row className="justify-content-center">
-					<Col md="10" lg="8" className="text-white">
+					<Col className="text-white" lg="8" md="10">
 						<h1 className="display-3 mb-0">
 							<FormattedMessage id={MESSAGES.MAIN_HEADER} />
 						</h1>

@@ -57,12 +57,12 @@ const RSSForm: FC = () => {
 
 	return (
 		<Formik
-			onSubmit={handleSubmit}
-			validationSchema={setValidationSchema(urls, intl)}
 			initialValues={initValues}
-			validateOnChange={false}
-			validateOnBlur={false}
 			innerRef={formikRef}
+			validateOnBlur={false}
+			validateOnChange={false}
+			validationSchema={setValidationSchema(urls, intl)}
+			onSubmit={handleSubmit}
 		>
 			{({
 				handleSubmit,
@@ -71,42 +71,42 @@ const RSSForm: FC = () => {
 				isValid,
 				errors: validationFormErrors,
 			}) => (
-				<Form noValidate onSubmit={handleSubmit} className="pb-4">
+				<Form noValidate className="pb-4" onSubmit={handleSubmit}>
 					<Form.Group as={Row} className="mb-2">
-						<Col md="9" className="text-dark">
+						<Col className="text-dark" md="9">
 							<FloatingLabel
 								controlId="floatingInput"
 								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
 							>
 								<Form.Control
-									type="text"
+									ref={rssInputRef}
+									className="rss-input pb-2 pt-4"
+									isInvalid={!isValid}
 									name={RSS_URL}
+									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
+									type="text"
 									value={values[RSS_URL]}
 									onChange={handleChange}
-									isInvalid={!isValid}
-									className="rss-input pb-2 pt-4"
-									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
-									ref={rssInputRef}
 								/>
 								<Form.Control.Feedback type="invalid">
 									{validationFormErrors[RSS_URL]}
 								</Form.Control.Feedback>
 							</FloatingLabel>
 						</Col>
-						<Col xs="9" sm="5" md="3">
+						<Col md="3" sm="5" xs="9">
 							<Button
 								className="w-100 h-100"
+								disabled={isLoading}
+								size="lg"
 								type="submit"
 								variant="primary"
-								size="lg"
-								disabled={isLoading}
 							>
 								{isLoading ? (
 									<Spinner
-										as="span"
 										animation="border"
-										role="status"
 										aria-hidden="true"
+										as="span"
+										role="status"
 									>
 										<span className="visually-hidden">
 											<FormattedMessage id={MESSAGES.LOADING} />

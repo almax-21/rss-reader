@@ -19,12 +19,12 @@ const Notification: FC<NotificationProps> = ({ data, isShow, onClose }) => {
 	return (
 		<Alert
 			dismissible
-			show={isShow}
-			onClose={onClose}
-			variant={variant}
 			className="notification fixed-top"
+			show={isShow}
+			variant={variant}
+			onClose={onClose}
 		>
-			<Icon variant={variant} className="notification__icon" />
+			<Icon className="notification__icon" variant={variant} />
 			{message}
 		</Alert>
 	);

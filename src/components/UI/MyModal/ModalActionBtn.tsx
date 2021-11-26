@@ -17,8 +17,8 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 				<a
 					className="btn btn-primary"
 					href={url}
-					target="_blank"
 					rel="noreferrer"
+					target="_blank"
 				>
 					<FormattedMessage id={MESSAGES.READ_MORE} />
 				</a>
