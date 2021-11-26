@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Badge, Button, Form, InputGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
@@ -83,13 +83,21 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 				</InputGroup>
 			</Form>
 
-			<MyDropDown
-				variant="outline-secondary"
-				title={intl.formatMessage({ id: postFilter.state })}
-				values={filterValues}
-				activeValue={postFilter.state}
-				handleSetActiveValue={handleSwitchFilterState}
-			/>
+			<div className="d-flex flex-wrap-reverse">
+				<MyDropDown
+					variant="outline-secondary"
+					title={intl.formatMessage({ id: postFilter.state })}
+					values={filterValues}
+					activeValue={postFilter.state}
+					handleSetActiveValue={handleSwitchFilterState}
+				/>
+				{postFilter.query && (
+					<Badge pill bg="light" text="dark">
+						<FormattedMessage id={MESSAGES.SEARCH_BY_REQUEST} />:{' '}
+						{postFilter.query}
+					</Badge>
+				)}
+			</div>
 		</div>
 	);
 };
