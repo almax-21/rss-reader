@@ -17,6 +17,7 @@ const MIN_POSTS_COUNT = 10;
 
 const ContentContainer: FC = () => {
 	const { feeds, posts, activeFeedId } = useTypedSelector(selectFeedsAndPosts);
+
 	const postFilter = useTypedSelector(selectFilter);
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
@@ -76,7 +77,6 @@ const ContentContainer: FC = () => {
 						) : (
 							<PostList posts={currentPosts} />
 						)}
-						<PostList posts={currentPosts} />
 						{currentPosts.length > MIN_POSTS_COUNT && (
 							<Paginator
 								totalPages={totalPages}
