@@ -13,7 +13,16 @@ export const selectUnreadPostsCount = (rss: RssState, feedId: string) => {
 	return filteredPosts.length;
 };
 
-export const selectFeeds = (rss: RssState) => {
+export const selectFeeds = (state: RootState) => {
+	const feeds = state.rss.feeds.ids.map((id) => state.rss.feeds.entities[id]);
+
+	return feeds;
+};
+
+export const selectActiveFeedId = (state: RootState) =>
+	state.rss.feeds.activeFeedId;
+
+export const selectFeedsWithCounter = (rss: RssState) => {
 	const feeds = rss.feeds.ids.map((id) => rss.feeds.entities[id]);
 
 	const feedsWithCounter = feeds.map((feed) => ({
@@ -51,13 +60,10 @@ export const selectFilteredPosts = (rss: RssState) => {
 
 export const selectFilter = (state: RootState) => state.rss.posts.filter;
 
-export const selectActiveFeedId = (state: RootState) =>
-	state.rss.feeds.activeFeedId;
-
 export const selectFeedsAndPosts = createSelector(
 	selectRSS,
 	(rss: RssState) => ({
-		feeds: selectFeeds(rss),
+		feeds: selectFeedsWithCounter(rss),
 		posts: selectFilteredPosts(rss),
 		activeFeedId: rss.feeds.activeFeedId,
 	})

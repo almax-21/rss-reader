@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectActiveFeedId } from '../../store/selectors/rss';
+import { selectActiveFeedId, selectFeeds } from '../../store/selectors/rss';
 import { deleteFeed, updateActiveFeed } from '../../store/slices/rssSlice';
 import { truncateText } from '../../utils/text';
 import MyModal from '../UI/MyModal/index';
@@ -27,7 +27,9 @@ const FeedItem: FC<FeedItemProps> = ({
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
+	const feeds = useTypedSelector(selectFeeds);
 	const dispatch = useTypedDispatch();
+
 	const intl = useIntl();
 
 	const isActiveFeed = id === activeFeedId;
@@ -58,8 +60,8 @@ const FeedItem: FC<FeedItemProps> = ({
 		<>
 			<ListGroup.Item
 				as="li"
-				action
-				active={isActiveFeed}
+				action={feeds.length > 1}
+				active={isActiveFeed && feeds.length > 1}
 				onClick={handleUpdateActiveFeed}
 				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
 				className="d-flex justify-content-between align-items-start"
