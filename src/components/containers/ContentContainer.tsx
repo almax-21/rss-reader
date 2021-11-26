@@ -2,10 +2,12 @@ import React, { FC, useEffect, useRef } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
+import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
 import { selectFeedsAndPosts, selectFilter } from '../../store/selectors/rss';
+import { updateFilterQuery } from '../../store/slices/rssSlice';
 import { showCurrentItems } from '../../utils/page';
 import FeedList from '../feeds/FeedList';
 import PostFilter from '../posts/PostFilter';
@@ -19,6 +21,7 @@ const ContentContainer: FC = () => {
 	const { feeds, posts, activeFeedId } = useTypedSelector(selectFeedsAndPosts);
 
 	const postFilter = useTypedSelector(selectFilter);
+	const dispatch = useTypedDispatch();
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
 		posts,
@@ -33,6 +36,7 @@ const ContentContainer: FC = () => {
 
 	useEffect(() => {
 		if (activeFeedId !== prevActiveFeedId?.current) {
+			dispatch(updateFilterQuery(''));
 			resetActivePage();
 		}
 
