@@ -1,6 +1,5 @@
 .filter {
 	max-width: 475px;
-	margin-bottom: 20px;
 
 	&__group {
 		display: flex;
@@ -23,6 +22,7 @@
 	.dropdown-toggle {
 		width: 150px;
 		margin-right: 20px;
+		margin-bottom: 20px;
 	}
 
 	.badge {
