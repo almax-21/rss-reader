@@ -2,11 +2,14 @@
 
 const path = require('path');
 
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -48,9 +51,20 @@ module.exports = {
 		new HtmlPlugin({
 			template: './index.html',
 		}),
+		new webpack.ProgressPlugin(),
 		new CleanWebpackPlugin(),
+		new CopyPlugin({
+			patterns: [
+				{ from: 'assets/icons', to: 'icons/' },
+				{ from: 'manifest.webmanifest' },
+			],
+		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css',
+		}),
+		new InjectManifest({
+			swSrc: './sw.ts',
+			swDest: 'sw.js',
 		}),
 		new ForkTsCheckerWebpackPlugin({
 			async: false,
