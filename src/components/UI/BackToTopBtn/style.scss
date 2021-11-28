@@ -27,10 +27,6 @@
 	animation: smooth-translate $animation-time;
 	transition: background-color $animation-time;
 
-	&:hover {
-		background-color: lightgray;
-	}
-
 	svg {
 		position: absolute;
 		top: 50%;
