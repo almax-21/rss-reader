@@ -1,0 +1,10 @@
+@import '../../App/style.scss';
+
+.post-list {
+	opacity: 1;
+	transition: opacity $animation-time;
+}
+
+.post-list.invisible {
+	opacity: 0;
+}

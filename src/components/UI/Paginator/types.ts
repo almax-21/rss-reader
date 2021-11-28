@@ -10,3 +10,7 @@ export interface PaginationProps {
 	activePage: number;
 	handleSetActivePage: (page: number) => () => void;
 }
+
+export interface PaginationMediumProps extends PaginationProps {
+	disableAnimation?: boolean;
+}

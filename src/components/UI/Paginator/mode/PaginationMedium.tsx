@@ -1,22 +1,29 @@
 import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
+import cn from 'classnames';
 
-import { PaginationProps } from '../types';
+import { PaginationMediumProps } from '../types';
 
-const PaginationMedium: FC<PaginationProps> = ({
+const PaginationMedium: FC<PaginationMediumProps> = ({
 	pages,
 	activePage,
 	handleSetActivePage,
+	disableAnimation = false,
 }) => (
 	<Pagination>
-		{pages.map((pageNumber: number) => {
+		{pages.map((page: number) => {
+			const classes = cn({
+				animated: !disableAnimation && page === activePage,
+			});
+
 			return (
 				<Pagination.Item
-					key={pageNumber}
-					active={pageNumber === activePage}
-					onClick={handleSetActivePage(pageNumber)}
+					key={page}
+					active={page === activePage}
+					className={classes}
+					onClick={handleSetActivePage(page)}
 				>
-					{pageNumber}
+					{page}
 				</Pagination.Item>
 			);
 		})}

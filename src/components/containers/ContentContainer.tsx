@@ -74,12 +74,12 @@ const ContentContainer: FC = () => {
 							setActivePage={setActivePage}
 							totalPages={totalPages}
 						/>
-						{posts.length === 0 ? (
+						{currentPosts.length === 0 ? (
 							<h3 className="h4 mt-4">
 								<FormattedMessage id={MESSAGES.NOT_FOUND} />
 							</h3>
 						) : (
-							<PostList posts={currentPosts} />
+							<PostList activePage={activePage} posts={currentPosts} />
 						)}
 						{currentPosts.length > MIN_POSTS_COUNT && (
 							<Paginator

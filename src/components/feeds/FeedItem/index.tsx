@@ -2,14 +2,16 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { Badge, CloseButton, ListGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
-import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
-import useTypedSelector from '../../hooks/redux/useTypedSelector';
-import { MESSAGES } from '../../i18n/types';
-import { selectActiveFeedId, selectFeeds } from '../../store/selectors/rss';
-import { deleteFeed, updateActiveFeed } from '../../store/slices/rssSlice';
-import { truncateText } from '../../utils/text';
-import MyModal from '../UI/MyModal/index';
-import { MODAL_TYPES } from '../UI/MyModal/types';
+import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
+import useTypedSelector from '../../../hooks/redux/useTypedSelector';
+import { MESSAGES } from '../../../i18n/types';
+import { selectActiveFeedId, selectFeeds } from '../../../store/selectors/rss';
+import { deleteFeed, updateActiveFeed } from '../../../store/slices/rssSlice';
+import { truncateText } from '../../../utils/text';
+import MyModal from '../../UI/MyModal/index';
+import { MODAL_TYPES } from '../../UI/MyModal/types';
+
+import './style.scss';
 
 interface FeedItemProps {
 	id: string;
@@ -62,16 +64,13 @@ const FeedItem: FC<FeedItemProps> = ({
 				action={feeds.length > 1}
 				active={isActiveFeed && feeds.length > 1}
 				as="li"
-				className="d-flex justify-content-between align-items-start"
-				style={{ cursor: isActiveFeed ? 'default' : 'pointer' }}
+				className="feed-item d-flex justify-content-center align-items-start"
 				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
 				onClick={handleUpdateActiveFeed}
 			>
 				<div className="ms-2 me-auto">
 					<div className="d-flex align-items-center">
-						<h3 className="h5 fw-bold" style={{ marginRight: 5 }}>
-							{title}
-						</h3>
+						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						<Badge pill bg="danger" className="mb-2">
 							{unreadPostsCount}
 						</Badge>

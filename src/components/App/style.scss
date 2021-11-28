@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 
+$animation-time: 0.2s;
+
 main {
 	min-height: calc(100vh - 57px);
 }

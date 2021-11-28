@@ -1,0 +1,13 @@
+.feed-item {
+	cursor: pointer !important;
+
+	transition: background-color 0.2s;
+
+	&__title {
+		margin-right: 5px;
+	}
+}
+
+.feed-item.active {
+	cursor: default !important;
+}

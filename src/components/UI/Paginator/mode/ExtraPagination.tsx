@@ -85,6 +85,7 @@ const ExtraPagination: FC<PaginationProps> = ({
 			</Pagination.First>
 			<Pagination.Ellipsis disabled />
 			<PaginationMedium
+				disableAnimation
 				activePage={activePage}
 				handleSetActivePage={handleSetActivePage}
 				pages={innerPages}
