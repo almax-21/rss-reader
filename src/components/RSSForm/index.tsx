@@ -120,7 +120,7 @@ const RSSForm: FC = () => {
 					</Form.Group>
 					<Form.Text>
 						<FormattedMessage id={MESSAGES.EXAMPLE} />:
-						https://ru.hexlet.io/lessons.rss
+						https://3dnews.ru/news/rss/
 					</Form.Text>
 				</Form>
 			)}
