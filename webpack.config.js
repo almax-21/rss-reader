@@ -62,10 +62,11 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css',
 		}),
-		new InjectManifest({
-			swSrc: './sw.ts',
-			swDest: 'sw.js',
-		}),
+		!isDevMode &&
+			new InjectManifest({
+				swSrc: './sw.ts',
+				swDest: 'sw.js',
+			}),
 		new ForkTsCheckerWebpackPlugin({
 			async: false,
 			typescript: {
@@ -75,7 +76,7 @@ module.exports = {
 		new ESLintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
 		}),
-	],
+	].filter(Boolean),
 	devServer: {
 		port: 3000,
 		hot: isDevMode,
