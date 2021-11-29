@@ -1,6 +1,6 @@
 {
-  "name": "RSS aggregator",
-  "short_name": "RSSag",
+  "name": "RSS Reader",
+  "short_name": "RssReader",
   "theme_color": "#0d6efd",
   "background_color": "#212529",
   "display": "standalone",

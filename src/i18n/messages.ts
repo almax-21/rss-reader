@@ -6,9 +6,9 @@ export const messages: IMessages = {
 		[MESSAGES.LANGUAGE]: 'Language',
 		[MESSAGES.ENGLISH]: 'English',
 		[MESSAGES.RUSSIAN]: 'Russian',
-		[MESSAGES.MAIN_HEADER]: 'RSS aggregator',
+		[MESSAGES.MAIN_HEADER]: 'RSS Reader',
 		[MESSAGES.DESCRIPTION]:
-			'RSS aggregator is one of the best ways to keep your finger on the pulse of events. For example, a compilation of the latest news will help you stay on top of your niche or hobby.',
+			'RSS Reader is one of the best ways to keep your finger on the pulse of events. For example, a compilation of the latest news will help you stay on top of your niche or hobby.',
 		[MESSAGES.KEYWORDS]: 'rss, feed, news',
 		[MESSAGES.LEAD]: "Start reading RSS today! It's easy, it's beautiful.",
 		[MESSAGES.RSS_INPUT]: 'RSS link',
@@ -47,9 +47,9 @@ export const messages: IMessages = {
 		[MESSAGES.LANGUAGE]: 'Язык',
 		[MESSAGES.ENGLISH]: 'Английский',
 		[MESSAGES.RUSSIAN]: 'Русский',
-		[MESSAGES.MAIN_HEADER]: 'RSS агрегатор',
+		[MESSAGES.MAIN_HEADER]: 'RSS Reader',
 		[MESSAGES.DESCRIPTION]:
-			'RSS агрегатор - одна из лучших возможностей держать руку на пульсе событий. Например, подборка последних новостей поможет быть в курсе дел вашей ниши или хобби.',
+			'RSS Reader - одна из лучших возможностей держать руку на пульсе событий. Например, подборка последних новостей поможет быть в курсе дел вашей ниши или хобби.',
 		[MESSAGES.KEYWORDS]: 'rss, лента, новости',
 		[MESSAGES.LEAD]: 'Начните читать RSS сегодня! Это легко, это красиво.',
 		[MESSAGES.RSS_INPUT]: 'Ссылка RSS',
