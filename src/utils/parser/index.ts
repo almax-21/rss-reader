@@ -1,5 +1,5 @@
 import { MESSAGES } from '../../i18n/types';
-import { filterTextFromTags } from '../text';
+import { filterText } from '../text';
 
 import { ParsedPost, ParsedRSS } from './types';
 
@@ -41,7 +41,7 @@ const parseRSS = (serializedData: string) => {
 
 				return {
 					title,
-					description: filterTextFromTags(description as string),
+					description: filterText(description as string),
 					url: postUrl,
 				};
 			}
@@ -52,7 +52,7 @@ const parseRSS = (serializedData: string) => {
 		const parsedRSSData: ParsedRSS = {
 			parsedFeed: {
 				title: feedTitleText,
-				description: filterTextFromTags(feedDescriptionText),
+				description: filterText(feedDescriptionText),
 			},
 			parsedPosts: feedPosts,
 		};

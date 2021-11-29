@@ -6,8 +6,8 @@ export const truncateText = (text: string, limit = 150): string => {
 	}
 };
 
-export const filterTextFromTags = (text: string): string => {
-	const regExString = /(<([^>]+)>)/gi;
+export const filterText = (text: string): string => {
+	const TagAndMnemonicRegEx = /(<([^>]+)>)|&\w*;/gi;
 
-	return text.replace(regExString, '');
+	return text.replace(TagAndMnemonicRegEx, ' ');
 };
