@@ -26,20 +26,22 @@ export interface RssState {
 	isLoading: boolean;
 	feedLoadedState: FEED_LOADED_STATES;
 	errorMessage: string;
-	feeds: {
-		entities: {
-			[key: string]: IFeed;
-		};
-		ids: string[];
-		activeFeedId: string | null;
-	};
-	posts: {
-		byFeedId: {
-			[key: string]: IPost[];
-		};
-		filter: IPostFilter;
-	};
 	urlDataset: FeedUrlData[];
+}
+
+export interface FeedsState {
+	entities: {
+		[key: string]: IFeed;
+	};
+	ids: string[];
+	activeFeedId: string | null;
+}
+
+export interface PostsState {
+	byFeedId: {
+		[key: string]: IPost[];
+	};
+	filter: IPostFilter;
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

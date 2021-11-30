@@ -4,7 +4,7 @@ import LoadingBar from 'react-redux-loading-bar';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
-import { selectLocale } from '../../store/selectors/locale';
+import { selectLocale } from '../../store/selectors/localeSelector';
 import ContentContainer from '../containers/ContentContainer';
 import RSSContainer from '../containers/RSSContainer';
 import Footer from '../Footer';

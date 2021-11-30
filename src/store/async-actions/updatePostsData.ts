@@ -13,7 +13,7 @@ const updatePostsData = createAsyncThunk(
 	'rss/updatePostsData',
 	async (urlData: FeedUrlData, thunkAPI) => {
 		try {
-			const { rss } = thunkAPI.getState() as unknown as RootState;
+			const { posts } = thunkAPI.getState() as unknown as RootState;
 			const { url, feedId } = urlData;
 
 			const response = await ProxyService.getXML(url);
@@ -23,7 +23,7 @@ const updatePostsData = createAsyncThunk(
 
 			const differencedPosts = pullAllBy(
 				parsedPosts,
-				rss.posts.byFeedId[feedId],
+				posts.byFeedId[feedId],
 				'title'
 			);
 

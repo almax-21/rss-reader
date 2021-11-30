@@ -5,8 +5,8 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts, selectFilter } from '../../store/selectors/rss';
-import { updateFilterQuery } from '../../store/slices/rssSlice';
+import { selectFeedsAndPosts, selectFilter } from '../../store/selectors';
+import { updateFilterQuery } from '../../store/slices/postsSlice';
 import { showCurrentItems } from '../../utils/page';
 import Paginator from '../UI/Paginator/index';
 

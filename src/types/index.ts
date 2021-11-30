@@ -29,7 +29,7 @@ export interface IPostFilter {
 	query: string;
 }
 
-export interface PostIDs {
+export interface PostIdData {
 	id: string;
 	feedId: string;
 }

@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../../i18n/types';
-import { setPostRead } from '../../store/slices/rssSlice';
+import { setPostRead } from '../../store/slices/postsSlice';
 import { POST_STATES } from '../../store/types';
-import { IPost, PostIDs } from '../../types';
+import { IPost, PostIdData } from '../../types';
 import MyModal from '../UI/MyModal';
 import { MODAL_TYPES } from '../UI/MyModal/types';
 
@@ -20,7 +20,7 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 	const { title, description, id, feedId, url, state } = post;
 	const dispatch = useTypedDispatch();
 
-	const handlePostRead = (postIDs: PostIDs) => () => {
+	const handlePostRead = (postIDs: PostIdData) => () => {
 		if (state === POST_STATES.READ) {
 			return;
 		}
@@ -32,7 +32,7 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 		setIsShowModal(true);
 	};
 
-	const handleCloseModal = (postIDs: PostIDs) => () => {
+	const handleCloseModal = (postIDs: PostIdData) => () => {
 		handlePostRead(postIDs)();
 		setIsShowModal(false);
 	};

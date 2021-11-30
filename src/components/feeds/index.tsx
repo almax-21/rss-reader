@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts } from '../../store/selectors/rss';
+import { selectFeedsAndPosts } from '../../store/selectors';
 
 import FeedList from './FeedList';
 

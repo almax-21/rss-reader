@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import useNotification from '../../hooks/useNotification';
 import { MESSAGES } from '../../i18n/types';
-import { selectRSS } from '../../store/selectors/rss';
+import { selectRSS } from '../../store/selectors';
 import LocaleSwitcher from '../LocaleSwitcher';
 import RSSForm from '../RSSForm';
 import Notification from '../UI/Notification';

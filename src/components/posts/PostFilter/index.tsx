@@ -7,7 +7,7 @@ import { MESSAGES } from '../../../i18n/types';
 import {
 	switchFilterState,
 	updateFilterQuery,
-} from '../../../store/slices/rssSlice';
+} from '../../../store/slices/postsSlice';
 import { POST_STATES, POST_TYPE } from '../../../store/types';
 import { IPostFilter } from '../../../types';
 import MyDropDown from '../../UI/MyDropDown';
