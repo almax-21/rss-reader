@@ -6,7 +6,7 @@ import {
 	NotificationData,
 } from '../components/UI/Notification/types';
 import { MESSAGES } from '../i18n/types';
-import { FEED_LOADED_STATES } from '../store/types';
+import { RSS_LOADED_STATES } from '../store/types';
 import { TimeoutId } from '../types';
 
 interface ReturnedHookData {
@@ -16,12 +16,13 @@ interface ReturnedHookData {
 }
 
 const useNotification = (
-	feedLoadedState: FEED_LOADED_STATES,
-	errorMessage: string
+	rssLoadedState: RSS_LOADED_STATES,
+	errorMessage: string,
+	timeMs: number
 ): ReturnedHookData => {
 	const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
 
-	const notificationRef = useRef<NotificationData>({
+	const notificationDataRef = useRef<NotificationData>({
 		variant: '',
 		message: '',
 	});
@@ -30,22 +31,22 @@ const useNotification = (
 	const intl = useIntl();
 
 	useEffect(() => {
-		if (feedLoadedState && !isShowNotification) {
-			switch (feedLoadedState) {
-				case FEED_LOADED_STATES.SUCCESS:
-					notificationRef.current = {
+		if (rssLoadedState && !isShowNotification) {
+			switch (rssLoadedState) {
+				case RSS_LOADED_STATES.SUCCESS:
+					notificationDataRef.current = {
 						variant: NOTIFICATION_VARIANT.SUCCESS,
 						message: intl.formatMessage({ id: MESSAGES.SUCCESSFULLY_LOADED }),
 					};
 					break;
-				case FEED_LOADED_STATES.ERROR:
-					notificationRef.current = {
+				case RSS_LOADED_STATES.ERROR:
+					notificationDataRef.current = {
 						variant: NOTIFICATION_VARIANT.ERROR,
 						message: errorMessage,
 					};
 					break;
 				default:
-					console.error(`Unexpected "${feedLoadedState}" state!`);
+					console.error(`Unexpected "${rssLoadedState}" state!`);
 					return;
 			}
 
@@ -53,10 +54,10 @@ const useNotification = (
 
 			timeoutIdRef.current = setTimeout(() => {
 				setIsShowNotification(false);
-				notificationRef.current = { variant: '', message: '' };
-			}, 3500);
+				notificationDataRef.current = { variant: '', message: '' };
+			}, timeMs);
 		}
-	}, [feedLoadedState]);
+	}, [rssLoadedState]);
 
 	const onCloseNotification = () => {
 		clearTimeout(timeoutIdRef.current);
@@ -65,7 +66,7 @@ const useNotification = (
 
 	return {
 		isShowNotification,
-		notificationData: notificationRef.current,
+		notificationData: notificationDataRef.current,
 		onCloseNotification,
 	};
 };

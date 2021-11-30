@@ -3,7 +3,7 @@ import { FeedUrlData, IFeed, IPost, IPostFilter } from '../types';
 import { rootReducer } from './index';
 import { setupStore } from './index';
 
-export enum FEED_LOADED_STATES {
+export enum RSS_LOADED_STATES {
 	SUCCESS = 'SUCCESS',
 	ERROR = 'ERROR',
 	NULL = '',
@@ -24,7 +24,7 @@ export interface RSSData {
 
 export interface RssState {
 	isLoading: boolean;
-	feedLoadedState: FEED_LOADED_STATES;
+	rssLoadedState: RSS_LOADED_STATES;
 	errorMessage: string;
 	urlDataset: FeedUrlData[];
 }

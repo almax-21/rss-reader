@@ -10,11 +10,13 @@ import LocaleSwitcher from '../LocaleSwitcher';
 import RSSForm from '../RSSForm';
 import Notification from '../UI/Notification';
 
+const NOTIFICATION_SHOW_TIME = 3500;
+
 const RSSContainer: FC = () => {
-	const { feedLoadedState, errorMessage } = useTypedSelector(selectRSS);
+	const { rssLoadedState, errorMessage } = useTypedSelector(selectRSS);
 
 	const { isShowNotification, notificationData, onCloseNotification } =
-		useNotification(feedLoadedState, errorMessage);
+		useNotification(rssLoadedState, errorMessage, NOTIFICATION_SHOW_TIME);
 
 	return (
 		<>
