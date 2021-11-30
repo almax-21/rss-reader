@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import _ from 'lodash';
 import { AnyAction } from 'redux';
 
 import updatePostsData from '../store/async-actions/updatePostsData';
@@ -6,39 +7,44 @@ import { FeedUrlData } from '../types';
 
 import useTypedDispatch from './redux/useTypedDispatch';
 
-const useAutoUpdate = (urlDataColl: FeedUrlData[], timeMs: number): void => {
+const useAutoUpdate = (urlDataset: FeedUrlData[], timeMs: number): void => {
 	const dispatch = useTypedDispatch();
 
+	const prevUrlDatasetRef = useRef<FeedUrlData[]>([]);
+
 	useEffect(() => {
-		if (urlDataColl.length === 0) {
+		if (urlDataset.length === 0) {
+			prevUrlDatasetRef.current = [];
+
 			return;
 		}
 
-		const checkForUpdate = (
-			urlData: FeedUrlData,
-			totalUrlCount: number,
-			timeMs: number
-		) => {
+		const checkForUpdate = (urlData: FeedUrlData, timeMs: number) => {
 			setTimeout(() => {
-        console.log(urlData);
-				dispatch(updatePostsData({ urlData, totalUrlCount })).then(
-					(action: AnyAction) => {
-						const needToCancel = action?.meta?.condition ?? false;
+				dispatch(updatePostsData(urlData)).then((action: AnyAction) => {
+					const needToCancel = action?.meta?.condition ?? false;
 
-						if (needToCancel) {
-							return;
-						}
-
-						checkForUpdate(urlData, urlDataColl.length, timeMs);
+					if (needToCancel) {
+						return;
 					}
-				);
+
+					checkForUpdate(urlData, timeMs);
+				});
 			}, timeMs);
 		};
 
-		urlDataColl.forEach((urlData) => {
-			checkForUpdate(urlData, urlDataColl.length, timeMs);
+		const newUrlDataset = _.pullAllBy(
+			urlDataset.slice(),
+			prevUrlDatasetRef.current,
+			'feedId'
+		);
+
+		newUrlDataset.forEach((urlData) => {
+			checkForUpdate(urlData, timeMs);
 		});
-	}, [urlDataColl]);
+
+		prevUrlDatasetRef.current = urlDataset;
+	}, [urlDataset]);
 };
 
 export default useAutoUpdate;

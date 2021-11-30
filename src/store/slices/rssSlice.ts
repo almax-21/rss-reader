@@ -27,7 +27,7 @@ const initialState: RssState = {
 			query: '',
 		},
 	},
-	urlDataColl: [],
+	urlDataset: [],
 };
 
 const rssSlice = createSlice({
@@ -45,7 +45,7 @@ const rssSlice = createSlice({
 			}
 
 			state.feeds.ids = newFeedIDs;
-			state.urlDataColl = state.urlDataColl.filter(
+			state.urlDataset = state.urlDataset.filter(
 				({ feedId }) => feedId !== action.payload
 			);
 
@@ -88,7 +88,7 @@ const rssSlice = createSlice({
 			state.posts.byFeedId[feed.id] = posts;
 
 			const feedUrlData = { feedId: feed.id, url: feed.url };
-			state.urlDataColl.push(feedUrlData);
+			state.urlDataset.push(feedUrlData);
 		},
 		[getRSSData.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoading = false;

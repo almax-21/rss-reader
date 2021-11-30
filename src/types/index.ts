@@ -9,7 +9,10 @@ export interface IFeed {
 	title: string;
 	description: string;
 	url: string;
-	unreadPostsCount?: number;
+}
+
+export interface IFeedWithCounter extends IFeed {
+	unreadPostsCount: number;
 }
 
 export interface IPost {
@@ -34,11 +37,6 @@ export interface PostIDs {
 export interface FeedUrlData {
 	feedId: string;
 	url: string;
-}
-
-export interface CheckUpdateData {
-	urlData: FeedUrlData;
-	totalUrlCount?: number;
 }
 
 export interface NewPostsData {

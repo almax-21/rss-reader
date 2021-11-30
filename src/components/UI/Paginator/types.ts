@@ -2,7 +2,7 @@ export enum PAGINATOR_CAPACITY {
 	MIN = 2,
 	EXTRA = 8,
 	MIDPOINT = 5,
-	MIDDLE_PAGES = 3,
+	RANGE = 3,
 }
 
 export interface PaginationProps {
@@ -11,6 +11,6 @@ export interface PaginationProps {
 	handleSetActivePage: (page: number) => () => void;
 }
 
-export interface PaginationMediumProps extends PaginationProps {
+export interface PaginationInnerProps extends PaginationProps {
 	disableAnimation?: boolean;
 }

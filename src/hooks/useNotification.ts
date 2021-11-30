@@ -15,7 +15,7 @@ interface ReturnedHookData {
 	onCloseNotification: () => void;
 }
 
-const useFeedNotification = (
+const useNotification = (
 	feedLoadedState: FEED_LOADED_STATES,
 	errorMessage: string
 ): ReturnedHookData => {
@@ -70,4 +70,4 @@ const useFeedNotification = (
 	};
 };
 
-export default useFeedNotification;
+export default useNotification;

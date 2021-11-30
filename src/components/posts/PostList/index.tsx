@@ -10,19 +10,23 @@ interface PostListProps {
 	activePage: number;
 }
 
+const INVISIBLE_TIME = 15;
+
 const PostList: FC<PostListProps> = ({ posts, activePage }) => {
 	const [isInvisible, setisInvisible] = useState<boolean>(false);
 
 	const prevActivePageRef = useRef<number>(0);
 
 	useEffect(() => {
+		// active page still the same
 		if (prevActivePageRef.current === activePage) {
 			return;
 		}
 
+		// applying animation
 		if (!isInvisible) {
 			setisInvisible(true);
-			setTimeout(() => setisInvisible(false), 15);
+			setTimeout(() => setisInvisible(false), INVISIBLE_TIME);
 		}
 
 		prevActivePageRef.current = activePage;

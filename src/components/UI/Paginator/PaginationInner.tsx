@@ -2,15 +2,15 @@ import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 import cn from 'classnames';
 
-import { PaginationMediumProps } from '../types';
+import { PaginationInnerProps } from './types';
 
-const PaginationMedium: FC<PaginationMediumProps> = ({
+const PaginationInner: FC<PaginationInnerProps> = ({
 	pages,
 	activePage,
 	handleSetActivePage,
 	disableAnimation = false,
 }) => (
-	<Pagination>
+	<>
 		{pages.map((page: number) => {
 			const classes = cn({
 				animated: !disableAnimation && page === activePage,
@@ -27,7 +27,7 @@ const PaginationMedium: FC<PaginationMediumProps> = ({
 				</Pagination.Item>
 			);
 		})}
-	</Pagination>
+	</>
 );
 
-export default PaginationMedium;
+export default PaginationInner;

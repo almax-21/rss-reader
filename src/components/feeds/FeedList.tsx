@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { IFeed } from '../../types';
+import { IFeedWithCounter } from '../../types';
 
 import FeedItem from './FeedItem';
 
 interface FeedListProps {
-	feeds: IFeed[];
+	feeds: IFeedWithCounter[];
 }
 
 const FeedList: FC<FeedListProps> = ({ feeds }) => (
@@ -17,7 +17,7 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => (
 				description={description}
 				id={id}
 				title={title}
-				unreadPostsCount={unreadPostsCount as number}
+				unreadPostsCount={unreadPostsCount}
 			/>
 		))}
 	</ListGroup>

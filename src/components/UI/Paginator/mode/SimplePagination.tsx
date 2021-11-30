@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 
+import PaginationInner from '../PaginationInner';
 import { PaginationProps } from '../types';
-
-import PaginationMedium from './PaginationMedium';
 
 const SimplePagination: FC<PaginationProps> = ({
 	pages,
@@ -18,7 +17,7 @@ const SimplePagination: FC<PaginationProps> = ({
 					onClick={handleSetActivePage(activePage - 1)}
 				/>
 			)}
-			<PaginationMedium
+			<PaginationInner
 				activePage={activePage}
 				handleSetActivePage={handleSetActivePage}
 				pages={pages}

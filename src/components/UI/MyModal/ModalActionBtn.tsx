@@ -13,7 +13,7 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 }) => {
 	switch (type) {
 		case MODAL_TYPES.PREVIEW: {
-			return (
+			return url ? (
 				<a
 					className="btn btn-primary"
 					href={url}
@@ -22,7 +22,7 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 				>
 					<FormattedMessage id={MESSAGES.READ_MORE} />
 				</a>
-			);
+			) : null;
 		}
 		case MODAL_TYPES.DELETE: {
 			return (

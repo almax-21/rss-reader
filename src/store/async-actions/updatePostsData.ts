@@ -6,14 +6,12 @@ import { v4 as uuid4 } from 'uuid';
 
 import ProxyService from '../../services/ProxyService';
 import { FeedUrlData, IPost } from '../../types';
-import { CheckUpdateData } from '../../types/index';
 import parseRSS from '../../utils/parser';
-import { ParsedRSS } from '../../utils/parser/types';
 import { POST_STATES, RootState } from '../types';
 
 const updatePostsData = createAsyncThunk(
 	'rss/updatePostsData',
-	async ({ urlData }: CheckUpdateData, thunkAPI) => {
+	async (urlData: FeedUrlData, thunkAPI) => {
 		try {
 			const { rss } = thunkAPI.getState() as unknown as RootState;
 			const { url, feedId } = urlData;
@@ -21,7 +19,7 @@ const updatePostsData = createAsyncThunk(
 			const response = await ProxyService.getXML(url);
 			const serializedContent = response.data.contents;
 
-			const { parsedPosts } = parseRSS(serializedContent) as ParsedRSS;
+			const { parsedPosts } = parseRSS(serializedContent);
 
 			const differencedPosts = pullAllBy(
 				parsedPosts,
@@ -29,12 +27,12 @@ const updatePostsData = createAsyncThunk(
 				'title'
 			);
 
-			const newPosts = differencedPosts.map((post) => ({
+			const newPosts: IPost[] = differencedPosts.map((post) => ({
 				...post,
 				feedId,
 				id: uuid4(),
 				state: POST_STATES.UNREAD,
-			})) as IPost[];
+			}));
 
 			return {
 				feedId,
@@ -48,19 +46,11 @@ const updatePostsData = createAsyncThunk(
 		}
 	},
 	{
-		condition: (
-			{ urlData, totalUrlCount: dispatchedUrlCount },
-			{ getState }
-		) => {
+		condition: (urlData, { getState }) => {
 			const { rss } = getState() as any;
-			const currentUrlsCount = rss.urlDataColl.length;
 			const dispatchedFeedId = urlData.feedId;
 
-			if (dispatchedUrlCount !== currentUrlsCount) {
-				return false;
-			}
-
-			const isStillExist = rss.urlDataColl.some(
+			const isStillExist = rss.urlDataset.some(
 				({ feedId }: FeedUrlData) => feedId === dispatchedFeedId
 			);
 

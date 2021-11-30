@@ -13,7 +13,9 @@ const LocaleSwitcher: FC = () => {
 	const intl = useIntl();
 
 	const localeHandler = (value: string | null) => {
-		dispatch(setLocale(value as LocaleType));
+		if (value) {
+			dispatch(setLocale(value as LocaleType));
+		}
 	};
 
 	return (

@@ -71,17 +71,17 @@ const FeedItem: FC<FeedItemProps> = ({
 				<div className="ms-2 me-auto">
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
-						<Badge pill bg="danger" className="mb-2">
-							{unreadPostsCount}
-						</Badge>
+						{!!unreadPostsCount && (
+							<Badge pill bg="danger" className="mb-2">
+								{unreadPostsCount}
+							</Badge>
+						)}
 					</div>
 					<span>{truncateText(description)}</span>
 				</div>
-				{!!unreadPostsCount && (
-					<div>
-						<CloseButton onClick={handleOpenModal} />
-					</div>
-				)}
+				<div>
+					<CloseButton onClick={handleOpenModal} />
+				</div>
 			</ListGroup.Item>
 			<MyModal
 				description={intl.formatMessage({ id: MESSAGES.FEEDS_DELETE_WARNING })}

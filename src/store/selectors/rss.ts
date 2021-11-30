@@ -1,10 +1,14 @@
 import { createSelector } from 'reselect';
 
+import { IFeedWithCounter } from '../../types/index';
 import { POST_STATES, RootState, RssState } from '../types';
 
 export const selectRSS = (state: RootState) => state.rss;
 
-export const selectUnreadPostsCount = (rss: RssState, feedId: string) => {
+export const selectUnreadPostsCount = (
+	rss: RssState,
+	feedId: string
+): number => {
 	const posts = rss.posts.byFeedId[feedId];
 	const filteredPosts = posts.filter(
 		({ state }) => state === POST_STATES.UNREAD
@@ -22,7 +26,7 @@ export const selectFeeds = (state: RootState) => {
 export const selectActiveFeedId = (state: RootState) =>
 	state.rss.feeds.activeFeedId;
 
-export const selectFeedsWithCounter = (rss: RssState) => {
+export const selectFeedsWithCounter = (rss: RssState): IFeedWithCounter[] => {
 	const feeds = rss.feeds.ids.map((id) => rss.feeds.entities[id]);
 
 	const feedsWithCounter = feeds.map((feed) => ({
@@ -71,5 +75,5 @@ export const selectFeedsAndPosts = createSelector(
 
 export const selectUrls = createSelector(selectRSS, (rss: RssState) => ({
 	isLoading: rss.isLoading,
-	urls: rss.urlDataColl.map(({ url }) => url),
+	urls: rss.urlDataset.map(({ url }) => url),
 }));

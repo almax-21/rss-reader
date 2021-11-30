@@ -39,7 +39,7 @@ export interface RssState {
 		};
 		filter: IPostFilter;
 	};
-	urlDataColl: FeedUrlData[];
+	urlDataset: FeedUrlData[];
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

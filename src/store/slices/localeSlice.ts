@@ -3,9 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LOCALES } from '../../i18n/locales';
 import { LocaleType } from '../../i18n/types';
 
-const BROWSER_LANGUAGE: LocaleType = navigator
-	.language
-	.split('-')[0] as LocaleType;
+const BROWSER_LANGUAGE = navigator.language.split('-')[0] as LocaleType;
 
 const initialState: LocaleType = Object.values(LOCALES).includes(
 	BROWSER_LANGUAGE

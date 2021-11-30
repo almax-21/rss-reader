@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 
+import PaginationInner from '../PaginationInner';
 import { PaginationProps, PAGINATOR_CAPACITY } from '../types';
-
-import PaginationMedium from './PaginationMedium';
 
 const ExtraPagination: FC<PaginationProps> = ({
 	pages,
 	activePage,
 	handleSetActivePage,
 }) => {
+	// first pages of pagination
 	if (activePage < PAGINATOR_CAPACITY.MIDPOINT) {
 		const firstPages = pages.slice(0, PAGINATOR_CAPACITY.MIDPOINT);
 
@@ -19,7 +19,7 @@ const ExtraPagination: FC<PaginationProps> = ({
 					disabled={activePage === 1}
 					onClick={handleSetActivePage(activePage - 1)}
 				/>
-				<PaginationMedium
+				<PaginationInner
 					activePage={activePage}
 					handleSetActivePage={handleSetActivePage}
 					pages={firstPages}
@@ -36,6 +36,7 @@ const ExtraPagination: FC<PaginationProps> = ({
 		);
 	}
 
+	// last pages of pagination
 	if (activePage > pages.length - PAGINATOR_CAPACITY.MIDPOINT + 1) {
 		const lastPages = pages.slice(-PAGINATOR_CAPACITY.MIDPOINT);
 
@@ -49,7 +50,7 @@ const ExtraPagination: FC<PaginationProps> = ({
 					{1}
 				</Pagination.First>
 				<Pagination.Ellipsis disabled />
-				<PaginationMedium
+				<PaginationInner
 					activePage={activePage}
 					handleSetActivePage={handleSetActivePage}
 					pages={lastPages}
@@ -62,14 +63,17 @@ const ExtraPagination: FC<PaginationProps> = ({
 		);
 	}
 
-	const leftBorder =
-		activePage - PAGINATOR_CAPACITY.MIDDLE_PAGES < 0
+	// middle pages of pagination
+
+	const rangeMin =
+		activePage - PAGINATOR_CAPACITY.RANGE < 0
 			? 0
-			: activePage - PAGINATOR_CAPACITY.MIDDLE_PAGES;
+			: activePage - PAGINATOR_CAPACITY.RANGE;
 
 	const innerPages = pages
+		// cutting off the first and last pages
 		.slice(1, pages.length - 1)
-		.slice(leftBorder, activePage);
+		.slice(rangeMin, activePage);
 
 	return (
 		<Pagination>
@@ -84,7 +88,7 @@ const ExtraPagination: FC<PaginationProps> = ({
 				{1}
 			</Pagination.First>
 			<Pagination.Ellipsis disabled />
-			<PaginationMedium
+			<PaginationInner
 				disableAnimation
 				activePage={activePage}
 				handleSetActivePage={handleSetActivePage}

@@ -7,7 +7,6 @@ import { v4 as uuid4 } from 'uuid';
 import { MESSAGES } from '../../i18n/types';
 import ProxyService from '../../services/ProxyService';
 import parseRSS from '../../utils/parser';
-import { ParsedRSS } from '../../utils/parser/types';
 import { POST_STATES, RSSData } from '../types';
 
 interface AsyncFeedActionData {
@@ -24,9 +23,7 @@ export const getRSSData = createAsyncThunk(
 			const response = await ProxyService.getXML(feedUrl);
 			const serializedContent = response.data.contents;
 
-			const { parsedFeed, parsedPosts } = parseRSS(
-				serializedContent
-			) as ParsedRSS;
+			const { parsedFeed, parsedPosts } = parseRSS(serializedContent);
 
 			const feedId = uuid4();
 

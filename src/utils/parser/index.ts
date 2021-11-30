@@ -3,62 +3,63 @@ import { filterText } from '../text';
 
 import { ParsedPost, ParsedRSS } from './types';
 
-const parseRSS = (serializedData: string) => {
+const parseRSS = (serializedData: string): ParsedRSS => {
 	const parser = new DOMParser();
 
-	const rssXML: XMLDocument = parser.parseFromString(
+	const XMLDoc: XMLDocument = parser.parseFromString(
 		serializedData,
 		'application/xml'
 	);
 
-	const parseError = rssXML.querySelector('parsererror');
+	const parseError = XMLDoc.querySelector('parsererror');
 
 	if (parseError) {
 		throw new Error(MESSAGES.ERROR_INCORRECT_RSS);
 	}
 
-	const feedChannel = rssXML.querySelector('channel');
+	const feedChannel = XMLDoc.querySelector('channel');
 
 	const feedTitleText =
 		feedChannel?.querySelector('channel > title')?.textContent;
 
-	const feedDescriptionText = feedChannel?.querySelector(
-		'channel > description'
-	)?.textContent;
+	if (!feedChannel || !feedTitleText) {
+		throw new Error(MESSAGES.ERROR_INCORRECT_RSS);
+	}
 
-	const feedItemNodeList: NodeListOf<Element> | undefined =
+	const feedDescriptionText =
+		feedChannel?.querySelector('channel > description')?.textContent || '';
+
+	const feedItemNodeList: NodeListOf<Element> =
 		feedChannel?.querySelectorAll('item');
 
-	const feedItems: Element[] = Array.from(feedItemNodeList || []);
+	const feedItems: Element[] = Array.from(feedItemNodeList) || [];
 
-	const feedPosts: ParsedPost[] = [
-		...feedItems?.map((feedItem: Element) => {
-			if (feedItem) {
-				const title = feedItem.querySelector('title')?.textContent;
-				const description = feedItem.querySelector('description')?.textContent;
+	const feedPosts: ParsedPost[] = feedItems.map((feedItem: Element) => {
+		const title = feedItem.querySelector('title')?.textContent;
+		const description = feedItem.querySelector('description')?.textContent;
 
-				const postUrl = feedItem.querySelector('link')?.textContent;
+		if (!title || !description) {
+			throw new Error(MESSAGES.ERROR_INCORRECT_RSS);
+		}
 
-				return {
-					title,
-					description: filterText(description as string),
-					url: postUrl,
-				};
-			}
-		}),
-	] as ParsedPost[];
+		const postUrl = feedItem.querySelector('link')?.textContent || '';
 
-	if (feedTitleText && feedDescriptionText) {
-		const parsedRSSData: ParsedRSS = {
-			parsedFeed: {
-				title: feedTitleText,
-				description: filterText(feedDescriptionText),
-			},
-			parsedPosts: feedPosts,
+		return {
+			title,
+			description: filterText(description),
+			url: postUrl,
 		};
+	});
 
-		return parsedRSSData;
-	}
+	const parsedRSSData: ParsedRSS = {
+		parsedFeed: {
+			title: feedTitleText,
+			description: filterText(feedDescriptionText),
+		},
+		parsedPosts: feedPosts,
+	};
+
+	return parsedRSSData;
 };
 
 export default parseRSS;
