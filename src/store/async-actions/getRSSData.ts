@@ -2,10 +2,10 @@ import { ReactNode } from 'react';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { IntlShape } from '@formatjs/intl';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { v4 as uuid4 } from 'uuid';
 
 import { MESSAGES } from '../../i18n/types';
+import ProxyService from '../../services/ProxyService';
 import parseRSS from '../../utils/parser';
 import { ParsedRSS } from '../../utils/parser/types';
 import { POST_STATES, RSSData } from '../types';
@@ -15,22 +15,16 @@ interface AsyncFeedActionData {
 	intl: IntlShape<string | ReactNode>;
 }
 
-const TIMEOUT_MS = 30000; 
-
 export const getRSSData = createAsyncThunk(
 	'rss/getRSSData',
 	async ({ feedUrl, intl }: AsyncFeedActionData, thunkAPI) => {
 		try {
 			thunkAPI.dispatch(showLoading());
 
-			const proxedUrl = `https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(
-				feedUrl
-			)}`;
+			const response = await ProxyService.getXML(feedUrl);
+			const serializedContent = response.data.contents;
 
-			const { data } = await axios.get(proxedUrl, { timeout: TIMEOUT_MS });
-
-			const serializedContent: XMLHttpRequestResponseType = data.contents;
-			const { parsedFeed, parsedPosts }: ParsedRSS = parseRSS(
+			const { parsedFeed, parsedPosts } = parseRSS(
 				serializedContent
 			) as ParsedRSS;
 
@@ -53,7 +47,7 @@ export const getRSSData = createAsyncThunk(
 			return rssData;
 		} catch (err) {
 			const message = (err as Error).message;
-			const isTimeoutError = (/^timeout.*exceeded$/).test(message);
+			const isTimeoutError = /^timeout.*exceeded$/.test(message);
 
 			if (isTimeoutError) {
 				return thunkAPI.rejectWithValue(

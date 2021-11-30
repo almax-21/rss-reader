@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { PostIDs } from '../../types';
+import { NewPostsData, PostIDs } from '../../types';
 import { getRSSData } from '../async-actions/getRSSData';
+import updatePostsData from '../async-actions/updatePostsData';
 import {
 	FEED_LOADED_STATES,
 	POST_STATES,
@@ -37,19 +38,19 @@ const rssSlice = createSlice({
 			state.feeds.activeFeedId = action.payload;
 		},
 		deleteFeed: (state, action: PayloadAction<string>) => {
-			delete state.feeds.entities[action.payload];
 			const newFeedIDs = state.feeds.ids.filter((id) => id !== action.payload);
-			state.feeds.ids = newFeedIDs;
-
-			delete state.posts.byFeedId[action.payload];
-
-			state.urlDataColl = state.urlDataColl.filter(
-				({ feedId }) => feedId !== action.payload
-			);
 
 			if (state.feeds.activeFeedId === action.payload) {
 				state.feeds.activeFeedId = newFeedIDs[0] ?? null;
 			}
+
+			state.feeds.ids = newFeedIDs;
+			state.urlDataColl = state.urlDataColl.filter(
+				({ feedId }) => feedId !== action.payload
+			);
+
+			delete state.feeds.entities[action.payload];
+			delete state.posts.byFeedId[action.payload];
 		},
 		setPostRead: (state, action: PayloadAction<PostIDs>) => {
 			const { id, feedId } = action.payload;
@@ -93,6 +94,14 @@ const rssSlice = createSlice({
 			state.isLoading = false;
 			state.feedLoadedState = FEED_LOADED_STATES.ERROR;
 			state.errorMessage = action.payload;
+		},
+		[updatePostsData.fulfilled.type]: (
+			state,
+			action: PayloadAction<NewPostsData>
+		) => {
+			const { feedId, newPosts } = action.payload;
+
+			state.posts.byFeedId[feedId].unshift(...newPosts);
 		},
 	},
 });

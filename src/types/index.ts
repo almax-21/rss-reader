@@ -35,3 +35,13 @@ export interface FeedUrlData {
 	feedId: string;
 	url: string;
 }
+
+export interface CheckUpdateData {
+	urlData: FeedUrlData;
+	totalUrlCount?: number;
+}
+
+export interface NewPostsData {
+	feedId: string;
+	newPosts: IPost[];
+}

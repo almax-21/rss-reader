@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import useAutoUpdate from '../../hooks/useAutoUpdate';
 import useFeedNotification from '../../hooks/useFeedNotification';
 import { MESSAGES } from '../../i18n/types';
 import { selectRSS } from '../../store/selectors/rss';
@@ -10,11 +11,16 @@ import LocaleSwitcher from '../LocaleSwitcher';
 import RSSForm from '../RSSForm';
 import Notification from '../UI/Notification';
 
+const UPDATE_PERIOD_MS = 5000;
+
 const RSSContainer: FC = () => {
-	const { feedLoadedState, errorMessage } = useTypedSelector(selectRSS);
+	const { feedLoadedState, errorMessage, urlDataColl } =
+		useTypedSelector(selectRSS);
 
 	const { isShowNotification, notificationData, onCloseNotification } =
 		useFeedNotification(feedLoadedState, errorMessage);
+
+	useAutoUpdate(urlDataColl, UPDATE_PERIOD_MS);
 
 	return (
 		<>
