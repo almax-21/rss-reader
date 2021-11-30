@@ -61,7 +61,7 @@ const PostContent: FC = () => {
 					<FormattedMessage id={MESSAGES.NOT_FOUND} />
 				</h3>
 			) : (
-				<PostList activePage={activePage} posts={currentPosts} />
+				<PostList posts={currentPosts} />
 			)}
 			{currentPosts.length > MIN_POSTS_COUNT && (
 				<Paginator
