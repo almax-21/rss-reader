@@ -16,6 +16,9 @@ const feedsSlice = createSlice({
 		updateActiveFeed: (state, action: PayloadAction<string>) => {
 			state.activeFeedId = action.payload;
 		},
+		updateFeedsOrder: (state, action: PayloadAction<string[]>) => {
+			state.ids = [...action.payload];
+		},
 		deleteFeed: (state, action: PayloadAction<string>) => {
 			const newFeedIDs = state.ids.filter((id) => id !== action.payload);
 
@@ -38,6 +41,7 @@ const feedsSlice = createSlice({
 	},
 });
 
-export const { updateActiveFeed, deleteFeed } = feedsSlice.actions;
+export const { updateActiveFeed, updateFeedsOrder, deleteFeed } =
+	feedsSlice.actions;
 
 export default feedsSlice.reducer;

@@ -4,11 +4,13 @@ import { useIntl } from 'react-intl';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
+import { DragHandlers } from '../../../hooks/useDraggableList';
 import { MESSAGES } from '../../../i18n/types';
 import { selectFeeds } from '../../../store/selectors/contentSelectors';
 import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
 import { deleteFeed, updateActiveFeed } from '../../../store/slices/feedsSlice';
 import { truncateText } from '../../../utils/text';
+import DnDBtn from '../../UI/DnDBtn';
 import MyModal from '../../UI/MyModal/index';
 import { MODAL_TYPES } from '../../UI/MyModal/types';
 
@@ -18,7 +20,9 @@ interface FeedItemProps {
 	id: string;
 	title: string;
 	description: string;
+	order: number;
 	unreadPostsCount: number;
+	dragHandlers: DragHandlers;
 }
 
 const FeedItem: FC<FeedItemProps> = ({
@@ -26,11 +30,15 @@ const FeedItem: FC<FeedItemProps> = ({
 	title,
 	description,
 	unreadPostsCount,
+	order,
+	dragHandlers,
 }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
+	const [isDraggable, setIsDraggable] = useState<boolean>(false);
 
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
 	const feeds = useTypedSelector(selectFeeds);
+
 	const dispatch = useTypedDispatch();
 
 	const intl = useIntl();
@@ -59,17 +67,35 @@ const FeedItem: FC<FeedItemProps> = ({
 		dispatch(deleteFeed(id));
 	};
 
+	const setDraggable = () => () => {
+		setIsDraggable(true);
+	};
+
+	const {
+		handleDragStart,
+		handleDragOver,
+		handleDragLeave,
+		handleDragEnd,
+		handleDrop,
+	} = dragHandlers;
+
 	return (
 		<>
 			<ListGroup.Item
 				action={feeds.length > 1}
 				active={isActiveFeed && feeds.length > 1}
 				as="li"
-				className="feed-item d-flex justify-content-center align-items-start"
+				className="feed-item d-flex justify-content-center"
+				draggable={isDraggable}
 				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP })}
 				onClick={handleUpdateActiveFeed}
+				onDragEnd={handleDragEnd(() => setIsDraggable(false))}
+				onDragLeave={handleDragLeave}
+				onDragOver={handleDragOver}
+				onDragStart={handleDragStart(order)}
+				onDrop={handleDrop(order)}
 			>
-				<div className="ms-2 me-auto">
+				<div className="ms-2 me-auto pe-none">
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						{!!unreadPostsCount && (
@@ -80,8 +106,9 @@ const FeedItem: FC<FeedItemProps> = ({
 					</div>
 					<span>{truncateText(description)}</span>
 				</div>
-				<div>
+				<div className="d-flex flex-column justify-content-between">
 					<CloseButton onClick={handleOpenModal} />
+					<DnDBtn setAncestorDraggable={setDraggable()} />
 				</div>
 			</ListGroup.Item>
 			<MyModal

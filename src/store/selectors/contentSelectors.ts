@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 import { IPost } from '../../types';
 import { POST_STATES, RootState } from '../types';
 
+export const selectFeedIds = (state: RootState) => state.feeds.ids;
+
 export const selectFeeds = (state: RootState) => {
 	const feeds = state.feeds.ids.map((id) => state.feeds.entities[id]);
 
