@@ -10,7 +10,7 @@ import { selectRSS } from '../../store/selectors/rssSelectors';
 import FeedContent from '../feeds';
 import PostContent from '../posts';
 
-const UPDATE_PERIOD_MS = 6000;
+const UPDATE_PERIOD_MS = 60000;
 
 const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
