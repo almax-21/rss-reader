@@ -26,6 +26,13 @@ const postsSlice = createSlice({
 				return post.id === id ? { ...post, state: POST_STATES.READ } : post;
 			});
 		},
+		setAllActivePostsRead: (state, action: PayloadAction<string>) => {
+			const activeFeedId = action.payload;
+
+			state.byFeedId[activeFeedId] = state.byFeedId[activeFeedId].map(
+				(post) => ({ ...post, state: POST_STATES.READ })
+			);
+		},
 		switchFilterState: (state, action: PayloadAction<POST_TYPE>) => {
 			state.filter.state = action.payload;
 		},
@@ -53,7 +60,11 @@ const postsSlice = createSlice({
 	},
 });
 
-export const { setPostRead, switchFilterState, updateFilterQuery } =
-	postsSlice.actions;
+export const {
+	setPostRead,
+	setAllActivePostsRead,
+	switchFilterState,
+	updateFilterQuery,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;

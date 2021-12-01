@@ -16,7 +16,18 @@ export const selectActiveFeedId = (state: RootState) =>
 
 export const selectPostEntities = (state: RootState) => state.posts.byFeedId;
 
-export const selectUnreadPostsCount = (postsByFeedId: IPost[]) => {
+export const selectUnreadPostsCount = createSelector(
+	[selectActiveFeedId, selectPostEntities],
+	(activeFeedId, postEntities) => {
+		const filteredPosts = postEntities[activeFeedId as string].filter(
+			({ state }) => state === POST_STATES.UNREAD
+		);
+
+		return filteredPosts.length;
+	}
+);
+
+export const selectUnreadPostsCountDynamically = (postsByFeedId: IPost[]) => {
 	const filteredPosts = postsByFeedId.filter(
 		({ state }) => state === POST_STATES.UNREAD
 	);
@@ -29,7 +40,7 @@ export const selectFeedsWithCounter = createSelector(
 	(feeds, postEntities) => {
 		const feedsWithCounter = feeds.map((feed) => ({
 			...feed,
-			unreadPostsCount: selectUnreadPostsCount(postEntities[feed.id]),
+			unreadPostsCount: selectUnreadPostsCountDynamically(postEntities[feed.id]),
 		}));
 
 		return feedsWithCounter;

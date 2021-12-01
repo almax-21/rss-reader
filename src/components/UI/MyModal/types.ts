@@ -1,5 +1,6 @@
 export enum MODAL_TYPES {
 	PREVIEW = 'PREVIEW',
+	MARK = 'MARK',
 	DELETE = 'DELETE',
 }
 

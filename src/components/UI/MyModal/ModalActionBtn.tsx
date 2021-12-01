@@ -31,6 +31,13 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 				</Button>
 			);
 		}
+		case MODAL_TYPES.MARK: {
+			return (
+				<Button variant="danger" onClick={handleAction}>
+					<FormattedMessage id={MESSAGES.MARK} />
+				</Button>
+			);
+		}
 	}
 };
 
