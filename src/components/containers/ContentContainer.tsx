@@ -5,14 +5,15 @@ import { FormattedMessage } from 'react-intl';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import useAutoUpdate from '../../hooks/useAutoUpdate';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts, selectRSS } from '../../store/selectors';
+import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
+import { selectRSS } from '../../store/selectors/rssSelectors';
 import FeedContent from '../feeds';
 import PostContent from '../posts';
 
 const UPDATE_PERIOD_MS = 6000;
 
 const ContentContainer: FC = () => {
-	const { feeds } = useTypedSelector(selectFeedsAndPosts);
+	const feeds = useTypedSelector(selectFeedsWithCounter);
 	const { urlDataset } = useTypedSelector(selectRSS);
 
 	useAutoUpdate(urlDataset, UPDATE_PERIOD_MS);

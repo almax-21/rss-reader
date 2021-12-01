@@ -14,7 +14,7 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { getRSSData } from '../../store/async-actions/getRSSData';
-import { selectUrls } from '../../store/selectors';
+import { selectUrls } from '../../store/selectors/rssSelectors';
 
 import { RSS_URL } from './constants';
 import setValidationSchema from './setValidationSchema';

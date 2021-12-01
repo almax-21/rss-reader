@@ -5,7 +5,11 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts, selectFilter } from '../../store/selectors';
+import {
+	selectActiveFeedId,
+	selectFilter,
+	selectFilteredPosts,
+} from '../../store/selectors/contentSelectors';
 import { updateFilterQuery } from '../../store/slices/postsSlice';
 import { showCurrentItems } from '../../utils/page';
 import Paginator from '../UI/Paginator/index';
@@ -17,7 +21,8 @@ const POSTS_LIMIT = 20;
 const MIN_POSTS_COUNT = 10;
 
 const PostContent: FC = () => {
-	const { posts, activeFeedId } = useTypedSelector(selectFeedsAndPosts);
+	const posts = useTypedSelector(selectFilteredPosts);
+	const activeFeedId = useTypedSelector(selectActiveFeedId);
 
 	const postFilter = useTypedSelector(selectFilter);
 	const dispatch = useTypedDispatch();

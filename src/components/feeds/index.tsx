@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectFeedsAndPosts } from '../../store/selectors';
+import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
 
 import FeedList from './FeedList';
 
 const FeedContent: FC = () => {
-	const { feeds } = useTypedSelector(selectFeedsAndPosts);
+	const feeds = useTypedSelector(selectFeedsWithCounter);
 
 	return (
 		<div>
