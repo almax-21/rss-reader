@@ -6,7 +6,7 @@ import { FeedsState, RSSData } from '../types';
 const initialState: FeedsState = {
 	entities: {},
 	ids: [],
-	activeFeedId: null,
+	activeFeedId: '',
 };
 
 const feedsSlice = createSlice({
@@ -23,7 +23,7 @@ const feedsSlice = createSlice({
 			const newFeedIDs = state.ids.filter((id) => id !== action.payload);
 
 			if (state.activeFeedId === action.payload) {
-				state.activeFeedId = newFeedIDs[0] ?? null;
+				state.activeFeedId = newFeedIDs[0] ?? '';
 			}
 
 			delete state.entities[action.payload];

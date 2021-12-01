@@ -32,7 +32,7 @@ const PostContent: FC = () => {
 		POSTS_LIMIT
 	);
 
-	const prevActiveFeedId = useRef<string | null>(null);
+	const prevActiveFeedId = useRef<string>('');
 
 	const resetActivePage = () => {
 		setActivePage(1);

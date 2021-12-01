@@ -139,7 +139,7 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 			</div>
 			<MyModal
 				description={intl.formatMessage({ id: MESSAGES.MARK_ALL_READ_WARNING })}
-				handleAction={handleMarkAllRead(activeFeedId as string)}
+				handleAction={handleMarkAllRead(activeFeedId)}
 				handleClose={handleCloseModal}
 				isShow={isShowModal}
 				title={intl.formatMessage({ id: MESSAGES.POSTS })}

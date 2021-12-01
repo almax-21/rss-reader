@@ -34,7 +34,7 @@ export interface FeedsState {
 		[key: string]: IFeed;
 	};
 	ids: string[];
-	activeFeedId: string | null;
+	activeFeedId: string;
 }
 
 export interface PostsState {

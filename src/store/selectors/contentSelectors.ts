@@ -19,7 +19,7 @@ export const selectPostEntities = (state: RootState) => state.posts.byFeedId;
 export const selectUnreadPostsCount = createSelector(
 	[selectActiveFeedId, selectPostEntities],
 	(activeFeedId, postEntities) => {
-		const filteredPosts = postEntities[activeFeedId as string].filter(
+		const filteredPosts = postEntities[activeFeedId].filter(
 			({ state }) => state === POST_STATES.UNREAD
 		);
 
