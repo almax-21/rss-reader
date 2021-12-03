@@ -1,0 +1,19 @@
+{
+	"name": "@rss-reader/server",
+	"version": "0.8.0",
+	"description": "backend part",
+	"scripts": {
+		"test": "npx eslint .",
+		"start": "node index.js"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"config": "^3.3.6",
+		"express": "^4.17.1",
+		"mongoose": "^6.0.14"
+	},
+	"devDependencies": {
+		"eslint": "^8.2.0",
+		"nodemon": "^2.0.15"
+	}
+}
