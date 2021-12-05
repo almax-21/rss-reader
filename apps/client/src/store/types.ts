@@ -1,3 +1,4 @@
+import { IUser } from '../models/IUser';
 import { FeedUrlData, IFeed, IPost, IPostFilter } from '../types';
 
 import { rootReducer } from './index';
@@ -20,6 +21,11 @@ export type POST_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
 export interface RSSData {
 	feed: IFeed;
 	posts: IPost[];
+}
+
+export interface UserState {
+	isAuth: boolean;
+	userData: IUser;
 }
 
 export interface RssState {

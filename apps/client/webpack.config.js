@@ -80,6 +80,7 @@ module.exports = {
 	devServer: {
 		port: 3000,
 		hot: isDevMode,
+		historyApiFallback: true,
 		client: {
 			overlay: false,
 		},

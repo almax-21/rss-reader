@@ -4,6 +4,11 @@ import { POST_TYPE } from '../store/types';
 
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
+export interface UserData {
+	username: string;
+	password: string;
+}
+
 export interface IFeed {
 	id: string;
 	title: string;

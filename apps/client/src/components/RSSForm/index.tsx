@@ -13,20 +13,19 @@ import { Formik, FormikProps } from 'formik';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
+import setRSSFormSchema from '../../schemas/setRSSFormSchema';
+import { RSS_FORM } from '../../schemas/types';
 import { getRSSData } from '../../store/async-actions/getRSSData';
 import { selectUrls } from '../../store/selectors/rssSelectors';
 
-import { RSS_URL } from './constants';
-import setValidationSchema from './setValidationSchema';
-
 import './style.scss';
 
-interface FormValues {
-	[RSS_URL]: string;
+interface RSSFormValues {
+	[RSS_FORM.URL]: string;
 }
 
-const initValues: FormValues = {
-	[RSS_URL]: '',
+const initValues: RSSFormValues = {
+	[RSS_FORM.URL]: '',
 };
 
 const RSSForm: FC = () => {
@@ -34,7 +33,7 @@ const RSSForm: FC = () => {
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
-	const formikRef = useRef<FormikProps<FormValues>>(null);
+	const formikRef = useRef<FormikProps<RSSFormValues>>(null);
 	const rssInputRef = useRef<HTMLInputElement>(null);
 	const urlCountRef = useRef<number>(-1);
 
@@ -42,15 +41,15 @@ const RSSForm: FC = () => {
 		const newUrlCount = urls.length;
 
 		if (urlCountRef.current < newUrlCount) {
-			formikRef?.current?.setFieldValue(RSS_URL, '');
+			formikRef?.current?.setFieldValue(RSS_FORM.URL, '');
 			rssInputRef?.current?.focus();
 		}
 
 		urlCountRef.current = newUrlCount;
 	}, [urls]);
 
-	const handleSubmit = (values: FormValues) => {
-		const feedUrl = values[RSS_URL];
+	const handleSubmit = (values: RSSFormValues) => {
+		const feedUrl = values[RSS_FORM.URL];
 
 		dispatch(getRSSData({ feedUrl, intl }));
 	};
@@ -61,7 +60,7 @@ const RSSForm: FC = () => {
 			innerRef={formikRef}
 			validateOnBlur={false}
 			validateOnChange={false}
-			validationSchema={setValidationSchema(urls, intl)}
+			validationSchema={setRSSFormSchema(urls, intl)}
 			onSubmit={handleSubmit}
 		>
 			{({
@@ -82,14 +81,14 @@ const RSSForm: FC = () => {
 									ref={rssInputRef}
 									className="rss-input pb-2 pt-4"
 									isInvalid={!isValid}
-									name={RSS_URL}
+									name={RSS_FORM.URL}
 									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
 									type="text"
-									value={values[RSS_URL]}
+									value={values[RSS_FORM.URL]}
 									onChange={handleChange}
 								/>
 								<Form.Control.Feedback type="invalid">
-									{validationFormErrors[RSS_URL]}
+									{validationFormErrors[RSS_FORM.URL]}
 								</Form.Control.Feedback>
 							</FloatingLabel>
 						</Col>

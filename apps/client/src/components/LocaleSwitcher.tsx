@@ -7,7 +7,11 @@ import { LOCALES } from '../i18n/locales';
 import { LocaleType, MESSAGES } from '../i18n/types';
 import { setLocale } from '../store/slices/localeSlice';
 
-const LocaleSwitcher: FC = () => {
+interface LocaleSwitcherProps {
+	classes: string;
+}
+
+const LocaleSwitcher: FC<LocaleSwitcherProps> = ({ classes }) => {
 	const dispatch = useTypedDispatch();
 
 	const intl = useIntl();
@@ -21,6 +25,7 @@ const LocaleSwitcher: FC = () => {
 	return (
 		<DropdownButton
 			as={ButtonGroup}
+			className={classes}
 			size="sm"
 			title={intl.formatMessage({ id: MESSAGES.LANGUAGE })}
 			onSelect={localeHandler}

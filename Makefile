@@ -2,4 +2,4 @@ install:
 	npx lerna bootstrap --hoist
 
 lint:
-	npx eslint .
+	npx lerna run test

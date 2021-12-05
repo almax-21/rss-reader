@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 import { IntlShape } from '@formatjs/intl';
 import * as Yup from 'yup';
 
-import { MESSAGES } from '../../i18n/types';
+import { MESSAGES } from '../i18n/types';
 
-import { RSS_URL } from './constants';
+import { RSS_FORM } from './types';
 
-const setValidationSchema = (
+const setRSSFormSchema = (
 	urls: string[],
 	intl: IntlShape<string | ReactNode>
 ) => {
 	return Yup.object().shape({
-		[RSS_URL]: Yup.string()
+		[RSS_FORM.URL]: Yup.string()
 			.trim()
 			.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
 			.url(intl.formatMessage({ id: MESSAGES.ERROR_INVALID_URL }))
@@ -24,4 +24,4 @@ const setValidationSchema = (
 	});
 };
 
-export default setValidationSchema;
+export default setRSSFormSchema;
