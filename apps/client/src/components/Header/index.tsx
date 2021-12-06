@@ -16,7 +16,7 @@ const Header: FC = () => {
 	return (
 		<Container fluid as="header" className="bg-dark p-5 pt-4 pb-5 pb-0">
 			<Row className="justify-content-center">
-				<Col className="d-flex justify-content-between flex-wrap" md="8">
+				<Col className="d-flex justify-content-between flex-wrap" lg="8" md="10">
 					<LocaleSwitcher classes="header__locale-switcher" />
 					{isAuth && <NavBar />}
 				</Col>

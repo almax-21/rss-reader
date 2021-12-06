@@ -12,7 +12,7 @@ const SignPage = () => {
 	return (
 		<Container fluid as="section" className="p-5">
 			<Row className="d-flex justify-content-center align-items-center">
-				<Col className="mb-5" md="8">
+				<Col className="mb-5" lg="8" md="10">
 					{location.pathname === ROUTES.SIGN_IN ? (
 						<SignInForm />
 					) : (

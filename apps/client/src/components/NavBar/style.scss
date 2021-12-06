@@ -1,3 +1,5 @@
+@import '../App/style.scss';
+
 .navigation {
 	padding-top: 2px;
 
@@ -22,12 +24,12 @@
 }
 
 .navigation__link {
-	color: white;
+	color: $info;
 
 	cursor: pointer;
 
 	&:hover {
-		color: lightgray;
+		color: $danger;
 	}
 }
 
@@ -37,6 +39,6 @@
 	cursor: default;
 
 	&:hover {
-		color: white;
+		color: $info;
 	}
 }
