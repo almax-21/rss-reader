@@ -17,7 +17,7 @@ const setRSSFormSchema = (
 			.url(intl.formatMessage({ id: MESSAGES.ERROR_INVALID_URL }))
 			.test({
 				name: 'there should be no duplicate links',
-				message: intl.formatMessage({ id: MESSAGES.ERROR_ALREADY_EXIST }),
+				message: intl.formatMessage({ id: MESSAGES.ERROR_RSS_ALREADY_EXIST }),
 				test: (value: string | undefined): boolean =>
 					!(value && urls.includes(value)),
 			}),

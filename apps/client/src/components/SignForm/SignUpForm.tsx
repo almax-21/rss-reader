@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+/* eslint @typescript-eslint/no-explicit-any: "off" */
+
+import React, { FC, useRef } from 'react';
 import {
 	Button,
 	Card,
@@ -9,67 +11,67 @@ import {
 	Spinner,
 } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Formik } from 'formik';
 
 import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
-import setSignInSchema from '../../schemas/setSignInSchema';
 import setSignUpSchema from '../../schemas/setSignUpSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
 
+import { SignUpFormValues } from './types';
+
 import './style.scss';
 
-interface SignFormProps {
-	formType: MESSAGES.SIGN_IN | MESSAGES.SIGN_UP;
-}
-
-interface SignFormValues {
-	[SIGN_FORM.USERNAME]: string;
-	[SIGN_FORM.PASSWORD]: string;
-	[SIGN_FORM.PASSWORD_CONFIRMATION]: string;
-}
-
-const initValues: SignFormValues = {
+const initValues: SignUpFormValues = {
 	[SIGN_FORM.USERNAME]: '',
 	[SIGN_FORM.PASSWORD]: '',
 	[SIGN_FORM.PASSWORD_CONFIRMATION]: '',
 };
 
-const SignForm: FC<SignFormProps> = ({ formType }) => {
-	const [createUser, { isLoading: isLoadingCreate }] =
+const SignUpForm: FC = () => {
+	const [createUser, { isLoading: isLoading, error: registrationError }] =
 		userAPI.useCreateUserMutation();
-	const [loginUser, { isLoading: isLoadingAuth }] =
-		userAPI.useLoginUserMutation();
 
+	const registrationErrorRef = useRef<string>('');
+
+	const router = useHistory();
 	const intl = useIntl();
 
-	const currentValidationSchema =
-		formType === MESSAGES.SIGN_IN
-			? setSignInSchema(intl)
-			: setSignUpSchema(intl);
+	if (registrationError) {
+		const statusCode = (registrationError as FetchBaseQueryError).status;
+		const isUserExistError =
+			(registrationError as any).data.message === 'User already exists';
 
-	const handleRegistration = async (values: SignFormValues) => {
+		if (statusCode === 400 && isUserExistError) {
+			registrationErrorRef.current = intl.formatMessage({
+				id: MESSAGES.ERROR_USER_ALREADY_EXIST,
+			});
+		} else {
+			registrationErrorRef.current = '';
+		}
+	}
+
+	const handleRegistration = (values: SignUpFormValues) => {
 		const { username, password } = values;
 
-		await createUser({ username, password });
-		loginUser({ username, password });
-	};
+		createUser({ username, password }).then((res) => {
+			if ('error' in res) {
+				return;
+			}
 
-	const handleLogin = (values: SignFormValues) => {
-		const { username, password } = values;
-
-		loginUser({ username, password });
+			router.push(ROUTES.SIGN_IN);
+		});
 	};
 
 	return (
 		<Formik
 			initialValues={initValues}
-			validationSchema={currentValidationSchema}
-			onSubmit={
-				formType === MESSAGES.SIGN_IN ? handleLogin : handleRegistration
-			}
+			validationSchema={setSignUpSchema(intl)}
+			onSubmit={handleRegistration}
 		>
 			{({ handleSubmit, handleChange, values, touched, errors }) => (
 				<Card>
@@ -88,8 +90,9 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 								onSubmit={handleSubmit}
 							>
 								<h2 className="mb-4">
-									<FormattedMessage id={formType} />
+									<FormattedMessage id={MESSAGES.SIGN_UP} />
 								</h2>
+
 								<FloatingLabel
 									className="sign__label"
 									controlId="floatingUsername"
@@ -98,8 +101,9 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 									<Form.Control
 										className="pb-2 pt-4"
 										isInvalid={
-											touched[SIGN_FORM.USERNAME] &&
-											!!errors[SIGN_FORM.USERNAME]
+											(touched[SIGN_FORM.USERNAME] &&
+												!!errors[SIGN_FORM.USERNAME]) ||
+											!!registrationErrorRef.current
 										}
 										name={SIGN_FORM.USERNAME}
 										placeholder={intl.formatMessage({ id: MESSAGES.USERNAME })}
@@ -108,9 +112,10 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 										onChange={handleChange}
 									/>
 									<Form.Control.Feedback tooltip type="invalid">
-										{errors[SIGN_FORM.USERNAME]}
+										{errors[SIGN_FORM.USERNAME] || registrationErrorRef.current}
 									</Form.Control.Feedback>
 								</FloatingLabel>
+
 								<FloatingLabel
 									className="sign__label"
 									controlId="floatingPassword"
@@ -132,42 +137,41 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 										{errors[SIGN_FORM.PASSWORD]}
 									</Form.Control.Feedback>
 								</FloatingLabel>
-								{formType === MESSAGES.SIGN_UP && (
-									<FloatingLabel
-										className="sign__label"
-										controlId="floatingRepeatPassword"
-										label={intl.formatMessage({
+
+								<FloatingLabel
+									className="sign__label"
+									controlId="floatingRepeatPassword"
+									label={intl.formatMessage({
+										id: MESSAGES.PASSWORD_CONFIRMATION,
+									})}
+								>
+									<Form.Control
+										className="pb-2 pt-4"
+										isInvalid={
+											touched[SIGN_FORM.PASSWORD_CONFIRMATION] &&
+											!!errors[SIGN_FORM.PASSWORD_CONFIRMATION]
+										}
+										name={SIGN_FORM.PASSWORD_CONFIRMATION}
+										placeholder={intl.formatMessage({
 											id: MESSAGES.PASSWORD_CONFIRMATION,
 										})}
-									>
-										<Form.Control
-											className="pb-2 pt-4"
-											isInvalid={
-												touched[SIGN_FORM.PASSWORD_CONFIRMATION] &&
-												!!errors[SIGN_FORM.PASSWORD_CONFIRMATION]
-											}
-											name={SIGN_FORM.PASSWORD_CONFIRMATION}
-											placeholder={intl.formatMessage({
-												id: MESSAGES.PASSWORD_CONFIRMATION,
-											})}
-											type="password"
-											value={values[SIGN_FORM.PASSWORD_CONFIRMATION]}
-											onChange={handleChange}
-										/>
-										<Form.Control.Feedback tooltip type="invalid">
-											{errors[SIGN_FORM.PASSWORD_CONFIRMATION]}
-										</Form.Control.Feedback>
-									</FloatingLabel>
-								)}
+										type="password"
+										value={values[SIGN_FORM.PASSWORD_CONFIRMATION]}
+										onChange={handleChange}
+									/>
+									<Form.Control.Feedback tooltip type="invalid">
+										{errors[SIGN_FORM.PASSWORD_CONFIRMATION]}
+									</Form.Control.Feedback>
+								</FloatingLabel>
 
 								<Form.Group className="d-flex justify-content-start align-items-center flex-wrap">
 									<Button
 										className="sign__btn mb-3"
-										disabled={isLoadingCreate || isLoadingAuth}
+										disabled={isLoading}
 										type="submit"
 										variant="outline-primary"
 									>
-										{isLoadingCreate || isLoadingAuth ? (
+										{isLoading ? (
 											<Spinner
 												animation="border"
 												aria-hidden="true"
@@ -180,24 +184,14 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 												</span>
 											</Spinner>
 										) : (
-											<FormattedMessage id={formType} />
+											<FormattedMessage id={MESSAGES.SIGN_UP} />
 										)}
 									</Button>
 
 									<p className="mt-0 mb-3">
-										{formType === MESSAGES.SIGN_IN ? (
-											<>
-												<FormattedMessage id={MESSAGES.NO_ACCOUNT} />
-												?&nbsp;
-												<Link to={ROUTES.SIGN_UP}>
-													<FormattedMessage id={MESSAGES.SIGN_UP} />
-												</Link>
-											</>
-										) : (
-											<Link to={ROUTES.SIGN_IN}>
-												<FormattedMessage id={MESSAGES.BACK} />
-											</Link>
-										)}
+										<Link to={ROUTES.SIGN_IN}>
+											<FormattedMessage id={MESSAGES.BACK} />
+										</Link>
 									</p>
 								</Form.Group>
 							</Form>
@@ -209,4 +203,4 @@ const SignForm: FC<SignFormProps> = ({ formType }) => {
 	);
 };
 
-export default SignForm;
+export default SignUpForm;

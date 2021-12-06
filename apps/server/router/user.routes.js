@@ -33,7 +33,7 @@ router.post(
 			if (isUserExist) {
 				res
 					.status(400)
-					.json({ message: `User with name ${username} already exist` });
+					.json({ message: 'User already exists' });
 			}
 
 			const hashPassword = await bcrypt.hash(password, 7);

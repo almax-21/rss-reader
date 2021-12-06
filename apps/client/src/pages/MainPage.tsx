@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import ContentContainer from '../components/containers/ContentContainer';
 import RSSContainer from '../components/containers/RSSContainer';
 
-const Main: FC = () => {
+const MainPage: FC = () => {
 	return (
 		<>
 			<RSSContainer />
@@ -12,4 +12,4 @@ const Main: FC = () => {
 	);
 };
 
-export default Main;
+export default MainPage;
