@@ -18,7 +18,7 @@ const Header: FC = () => {
 			<Row className="justify-content-center">
 				<Col className="d-flex justify-content-between flex-wrap" md="8">
 					<LocaleSwitcher classes="header__locale-switcher" />
-					{isAuth && <NavBar classes="header__navbar" />}
+					{isAuth && <NavBar />}
 				</Col>
 			</Row>
 			<Row className="justify-content-center">
