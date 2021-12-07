@@ -93,7 +93,7 @@ const SignUpForm: FC = () => {
 
 				return (
 					<Card>
-						<Card.Body as={Row} className="align-items-center p-4">
+						<Card.Body as={Row} className="align-items-start p-4">
 							<Col className="sign__logo" md="5">
 								<Icon
 									fill="#0d6efd"
