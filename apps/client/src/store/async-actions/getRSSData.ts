@@ -1,6 +1,4 @@
-import { ReactNode } from 'react';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { IntlShape } from '@formatjs/intl';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuid4 } from 'uuid';
 
@@ -9,14 +7,9 @@ import ProxyService from '../../services/ProxyService';
 import parseRSS from '../../utils/parser';
 import { POST_STATES, RSSData } from '../types';
 
-interface AsyncFeedActionData {
-	feedUrl: string;
-	intl: IntlShape<string | ReactNode>;
-}
-
 export const getRSSData = createAsyncThunk(
 	'rss/getRSSData',
-	async ({ feedUrl, intl }: AsyncFeedActionData, thunkAPI) => {
+	async (feedUrl: string, thunkAPI) => {
 		try {
 			thunkAPI.dispatch(showLoading());
 
@@ -47,24 +40,16 @@ export const getRSSData = createAsyncThunk(
 			const isTimeoutError = /^timeout.*exceeded$/.test(message);
 
 			if (isTimeoutError) {
-				return thunkAPI.rejectWithValue(
-					intl.formatMessage({ id: MESSAGES.ERROR_TIMEOUT })
-				);
+				return thunkAPI.rejectWithValue(MESSAGES.ERROR_TIMEOUT);
 			}
 
 			if (message === MESSAGES.ERROR_INCORRECT_RSS) {
-				return thunkAPI.rejectWithValue(
-					intl.formatMessage({ id: MESSAGES.ERROR_INCORRECT_RSS })
-				);
+				return thunkAPI.rejectWithValue(MESSAGES.ERROR_INCORRECT_RSS);
 			}
 
 			return navigator.onLine
-				? thunkAPI.rejectWithValue(
-						intl.formatMessage({ id: MESSAGES.ERROR_UNKNOWN })
-				  )
-				: thunkAPI.rejectWithValue(
-						intl.formatMessage({ id: MESSAGES.ERROR_NETWORK })
-				  );
+				? thunkAPI.rejectWithValue(MESSAGES.ERROR_UNKNOWN)
+				: thunkAPI.rejectWithValue(MESSAGES.ERROR_NETWORK);
 		} finally {
 			thunkAPI.dispatch(hideLoading());
 		}

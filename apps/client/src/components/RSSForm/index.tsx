@@ -51,7 +51,7 @@ const RSSForm: FC = () => {
 	const handleSubmit = (values: RSSFormValues) => {
 		const feedUrl = values[RSS_FORM.URL];
 
-		dispatch(getRSSData({ feedUrl, intl }));
+		dispatch(getRSSData(feedUrl));
 	};
 
 	return (

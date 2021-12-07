@@ -6,6 +6,7 @@ import userAPI from '../services/UserService';
 
 import feedsReducer from './slices/feedsSlice';
 import localeReducer from './slices/localeSlice';
+import notificationReducer from './slices/notificationSlice';
 import postsReducer from './slices/postsSlice';
 import rssReducer from './slices/rssSlice';
 import userReducer from './slices/userSlice';
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
 	locale: localeReducer,
 	user: userReducer,
 	rss: rssReducer,
+	notification: notificationReducer,
 	feeds: feedsReducer,
 	posts: postsReducer,
 	[userAPI.reducerPath]: userAPI.reducer,

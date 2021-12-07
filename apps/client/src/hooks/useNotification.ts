@@ -5,20 +5,20 @@ import {
 	NOTIFICATION_VARIANT,
 	NotificationData,
 } from '../components/UI/Notification/types';
-import { MESSAGES } from '../i18n/types';
-import { RSS_LOADED_STATES } from '../store/types';
+import { COMPLETED_LOAD_STATUS } from '../store/types';
 import { TimeoutId } from '../types';
 
 interface ReturnedHookData {
 	isShowNotification: boolean;
 	notificationData: NotificationData;
-	onCloseNotification: () => void;
+	hideNotification: () => void;
 }
 
 const useNotification = (
-	rssLoadedState: RSS_LOADED_STATES,
+	completedLoadStatus: COMPLETED_LOAD_STATUS,
+	successMessage: string,
 	errorMessage: string,
-	timeMs: number
+	timeMs = 3500
 ): ReturnedHookData => {
 	const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
 
@@ -30,23 +30,28 @@ const useNotification = (
 
 	const intl = useIntl();
 
+	const hideNotification = () => {
+		clearTimeout(timeoutIdRef.current);
+		setIsShowNotification(false);
+	};
+
 	useEffect(() => {
-		if (rssLoadedState && !isShowNotification) {
-			switch (rssLoadedState) {
-				case RSS_LOADED_STATES.SUCCESS:
+		if (completedLoadStatus && !isShowNotification) {
+			switch (completedLoadStatus) {
+				case COMPLETED_LOAD_STATUS.SUCCESS:
 					notificationDataRef.current = {
 						variant: NOTIFICATION_VARIANT.SUCCESS,
-						message: intl.formatMessage({ id: MESSAGES.SUCCESSFULLY_LOADED }),
+						message: intl.formatMessage({ id: successMessage })
 					};
 					break;
-				case RSS_LOADED_STATES.ERROR:
+				case COMPLETED_LOAD_STATUS.FAILURE:
 					notificationDataRef.current = {
 						variant: NOTIFICATION_VARIANT.ERROR,
-						message: errorMessage,
+						message: intl.formatMessage({ id: errorMessage }),
 					};
 					break;
 				default:
-					console.error(`Unexpected "${rssLoadedState}" state!`);
+					console.error(`Unexpected "${completedLoadStatus}" state!`);
 					return;
 			}
 
@@ -57,17 +62,16 @@ const useNotification = (
 				notificationDataRef.current = { variant: '', message: '' };
 			}, timeMs);
 		}
-	}, [rssLoadedState]);
 
-	const onCloseNotification = () => {
-		clearTimeout(timeoutIdRef.current);
-		setIsShowNotification(false);
-	};
+		return () => {
+			hideNotification();
+		};
+	}, [completedLoadStatus]);
 
 	return {
 		isShowNotification,
 		notificationData: notificationDataRef.current,
-		onCloseNotification,
+		hideNotification,
 	};
 };
 

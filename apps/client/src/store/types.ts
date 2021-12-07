@@ -4,10 +4,10 @@ import { FeedUrlData, IFeed, IPost, IPostFilter } from '../types';
 import { rootReducer } from './index';
 import { setupStore } from './index';
 
-export enum RSS_LOADED_STATES {
+export enum COMPLETED_LOAD_STATUS {
 	SUCCESS = 'SUCCESS',
-	ERROR = 'ERROR',
-	NULL = '',
+	FAILURE = 'FAILURE',
+	IDLE = '',
 }
 
 export enum POST_STATES {
@@ -30,9 +30,13 @@ export interface UserState {
 
 export interface RssState {
 	isLoading: boolean;
-	rssLoadedState: RSS_LOADED_STATES;
-	errorMessage: string;
 	urlDataset: FeedUrlData[];
+}
+
+export interface NotificationState {
+	completedLoadStatus: COMPLETED_LOAD_STATUS;
+	successMessage: string;
+	errorMessage: string;
 }
 
 export interface FeedsState {

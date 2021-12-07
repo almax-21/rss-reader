@@ -28,6 +28,12 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addMatcher(
+			userAPI.endpoints.createUser.matchFulfilled,
+			(state, action: PayloadAction<IUser>) => {
+				state.userData = action.payload;
+			}
+		);
+		builder.addMatcher(
 			userAPI.endpoints.loginUser.matchFulfilled,
 			(state, action: PayloadAction<IUser>) => {
 				state.isAuth = true;

@@ -1,14 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getRSSData } from '../async-actions/getRSSData';
-import { RSS_LOADED_STATES, RSSData, RssState } from '../types';
+import { RSSData, RssState } from '../types';
 
 import { deleteFeed } from './feedsSlice';
 
 const initialState: RssState = {
 	isLoading: false,
-	rssLoadedState: RSS_LOADED_STATES.NULL,
-	errorMessage: '',
 	urlDataset: [],
 };
 
@@ -19,22 +17,17 @@ const rssSlice = createSlice({
 	extraReducers: {
 		[getRSSData.pending.type]: (state) => {
 			state.isLoading = true;
-			state.rssLoadedState = RSS_LOADED_STATES.NULL;
-			state.errorMessage = '';
 		},
 		[getRSSData.fulfilled.type]: (state, action: PayloadAction<RSSData>) => {
 			const { feed } = action.payload;
 
 			state.isLoading = false;
-			state.rssLoadedState = RSS_LOADED_STATES.SUCCESS;
 
 			const feedUrlData = { feedId: feed.id, url: feed.url };
 			state.urlDataset.push(feedUrlData);
 		},
-		[getRSSData.rejected.type]: (state, action: PayloadAction<string>) => {
+		[getRSSData.rejected.type]: (state) => {
 			state.isLoading = false;
-			state.rssLoadedState = RSS_LOADED_STATES.ERROR;
-			state.errorMessage = action.payload;
 		},
 		[deleteFeed.type]: (state, action: PayloadAction<string>) => {
 			state.urlDataset = state.urlDataset.filter(
