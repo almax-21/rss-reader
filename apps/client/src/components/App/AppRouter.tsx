@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Redirect, Route } from 'react-router';
-import { CSSTransition } from 'react-transition-group';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import useNotification from '../../hooks/useNotification';
@@ -30,20 +29,12 @@ const AppRouter: FC = () => {
 				{isAuth ? (
 					<>
 						{privateRoutes.map(({ path, Component, exact }) => (
-							<Route key={path} exact={exact} path={path}>
-								{({ match }) => (
-									<CSSTransition
-										unmountOnExit
-										classNames="page"
-										in={match !== null}
-										timeout={300}
-									>
-										<div className="page">
-											<Component />
-										</div>
-									</CSSTransition>
-								)}
-							</Route>
+							<Route
+								key={path}
+								component={Component}
+								exact={exact}
+								path={path}
+							/>
 						))}
 						<Redirect to={ROUTES.ROOT} />
 					</>
