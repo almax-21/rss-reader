@@ -21,6 +21,7 @@ import { ROUTES } from '../../router/types';
 import setSignUpSchema from '../../schemas/setSignUpSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
+import Icon from '../UI/Icon';
 
 import { SignUpFormValues } from './types';
 
@@ -96,10 +97,10 @@ const SignUpForm: FC = () => {
 					<Card>
 						<Card.Body as={Row} className="align-items-center p-4">
 							<Col className="sign__logo" md="5">
-								<img
-									alt={intl.formatMessage({ id: MESSAGES.APP_LOGO })}
+								<Icon
+									fill="#0d6efd"
 									height="284"
-									src="./icons/app-icon-384x384.png"
+									variant="success"
 									width="284"
 								/>
 							</Col>
