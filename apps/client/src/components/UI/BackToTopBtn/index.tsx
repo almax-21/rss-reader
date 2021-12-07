@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
-import throttle from 'lodash/throttle';
+
+import { throttle } from '../../../utils/perfomance';
 
 import './style.scss';
 

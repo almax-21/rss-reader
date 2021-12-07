@@ -1,11 +1,9 @@
-/* eslint @typescript-eslint/no-explicit-any: "off" */
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { pullAllBy } from 'lodash';
 import { v4 as uuid4 } from 'uuid';
 
 import ProxyService from '../../services/ProxyService';
 import { FeedUrlData, IPost } from '../../types';
+import { getDiffBy } from '../../utils/collection';
 import parseRSS from '../../utils/parser';
 import { POST_STATES, RootState } from '../types';
 
@@ -21,7 +19,7 @@ const updatePostsData = createAsyncThunk(
 
 			const { parsedPosts } = parseRSS(serializedContent);
 
-			const differencedPosts = pullAllBy(
+			const differencedPosts = getDiffBy(
 				parsedPosts,
 				posts.byFeedId[feedId],
 				'title'

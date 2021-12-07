@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-explicit-any: "off" */
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { MESSAGES } from '../i18n/types';

@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-explicit-any: "off" */
-
 import { useEffect, useState } from 'react';
 
 import { getPagesCount } from '../utils/page';

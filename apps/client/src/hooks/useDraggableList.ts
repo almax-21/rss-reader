@@ -1,7 +1,7 @@
 import { DragEvent, useRef } from 'react';
 
 import { updateFeedsOrder } from '../store/slices/feedsSlice';
-import { getNewOrder } from '../utils/sort';
+import { getNewOrder } from '../utils/collection';
 
 import useTypedDispatch from './redux/useTypedDispatch';
 

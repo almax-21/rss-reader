@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import _ from 'lodash';
 import { AnyAction } from 'redux';
 
 import updatePostsData from '../store/async-actions/updatePostsData';
 import { FeedUrlData } from '../types';
+import { getDiffBy } from '../utils/collection';
 
 import useTypedDispatch from './redux/useTypedDispatch';
 
@@ -33,7 +33,7 @@ const useAutoUpdate = (urlDataset: FeedUrlData[], timeMs: number): void => {
 			}, timeMs);
 		};
 
-		const newUrlDataset = _.pullAllBy(
+		const newUrlDataset = getDiffBy(
 			urlDataset.slice(),
 			prevUrlDatasetRef.current,
 			'feedId'
