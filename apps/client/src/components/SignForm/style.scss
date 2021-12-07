@@ -1,25 +1,33 @@
 @import '../App/style.scss';
 
 .sign__logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .sign__label {
-  margin-bottom: 35px;
+	margin-bottom: 35px;
 }
 
 .sign__btn {
-  width: 200px;
+	width: 200px;
 
-  margin-right: 15px;
+	margin-right: 15px;
+}
+
+.invalid-tooltip {
+	font-size: 12px !important;
 }
 
 @include media-breakpoint-up(md) {
 	.sign__logo {
-    margin-bottom: 0;
-  }
+		margin-bottom: 0;
+	}
+
+	.invalid-tooltip {
+		font-size: 14px !important;
+	}
 }
