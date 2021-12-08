@@ -11,7 +11,6 @@ import userAPI from '../../services/UserService';
 import { selectLocale } from '../../store/selectors/localeSelectors';
 import Footer from '../Footer';
 import Header from '../Header';
-import BackToTopBtn from '../UI/BackToTopBtn';
 
 import AppHelmet from './AppHelmet';
 import AppRouter from './AppRouter';
@@ -48,7 +47,6 @@ const App: FC = () => {
 					<AppRouter />
 				)}
 				<Footer />
-				<BackToTopBtn />
 			</BrowserRouter>
 		</IntlProvider>
 	);
