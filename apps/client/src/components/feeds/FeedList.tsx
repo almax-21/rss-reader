@@ -18,7 +18,7 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => {
 	const dragHandlers = useDraggableList(feedIds);
 
 	return (
-		<ListGroup numbered as="ol" className="shadow">
+		<ListGroup numbered as="ol">
 			{feeds.map((feed, order) => (
 				<FeedItem
 					key={feed.id}
