@@ -1,11 +1,4 @@
-import React, {
-	ChangeEvent,
-	FC,
-	FormEvent,
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -46,10 +39,13 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
-	const formRef = useRef<HTMLFormElement | null>(null);
+	const searchRef = useRef<HTMLInputElement | null>(null);
 
 	useEffect(() => {
-		formRef.current?.reset();
+		if (searchRef.current) {
+			const input = searchRef.current;
+			input.value = '';
+		}
 	}, [activeFeedId]);
 
 	const handleSearch = debounce((evt: ChangeEvent<HTMLInputElement>) => {
@@ -57,15 +53,6 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 
 		dispatch(updateFilterQuery(value));
 	}, 300);
-
-	const handleReset = (evt: FormEvent<HTMLFormElement>) => {
-		evt.preventDefault();
-
-		formRef.current?.reset();
-
-		dispatch(updateFilterQuery(''));
-		resetActivePage();
-	};
 
 	const handleSwitchFilterState = (value: POST_TYPE) => () => {
 		if (value === postFilter.state) {
@@ -93,24 +80,16 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 	return (
 		<>
 			<div className="filter">
-				<Form ref={formRef} onSubmit={handleReset}>
-					<InputGroup className="filter__group">
-						<Form.Control
-							aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
-							className="filter__input"
-							placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
-							type="text"
-							onChange={handleSearch}
-						/>
-						<Button
-							className="filter__btn"
-							type="submit"
-							variant="outline-info"
-						>
-							<FormattedMessage id={MESSAGES.RESET} />
-						</Button>
-					</InputGroup>
-				</Form>
+				<InputGroup className="filter__group">
+					<Form.Control
+						ref={searchRef}
+						aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
+						className="filter__input"
+						placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
+						type="text"
+						onChange={handleSearch}
+					/>
+				</InputGroup>
 
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
 					<MyDropDown

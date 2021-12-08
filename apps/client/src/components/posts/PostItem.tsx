@@ -14,7 +14,7 @@ interface PostItemProps {
 	post: IPost;
 }
 
-const PostItem: FC<PostItemProps> = ({ post }) => {
+const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
 	const { title, description, id, feedId, url, state } = post;
@@ -79,6 +79,8 @@ const PostItem: FC<PostItemProps> = ({ post }) => {
 			/>
 		</>
 	);
-};
+});
+
+PostItem.displayName = 'PostItem';
 
 export default PostItem;

@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 import {
 	Button,
 	Card,
@@ -14,11 +14,13 @@ import { Link } from 'react-router-dom';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Formik } from 'formik';
 
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
 import setSignUpSchema from '../../schemas/setSignUpSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
+import { selectLocale } from '../../store/selectors/localeSelectors';
 import Icon from '../UI/Icon';
 
 import { SignUpFormValues } from './types';
@@ -35,10 +37,14 @@ const SignUpForm: FC = () => {
 	const [createUser, { isLoading, error: registrationError }] =
 		userAPI.useCreateUserMutation();
 
+	const locale = useTypedSelector(selectLocale);
+
 	const registrationErrorRef = useRef<string>('');
 
 	const router = useHistory();
 	const intl = useIntl();
+
+	const validationSchema = useMemo(() => setSignUpSchema(intl), [locale]);
 
 	if (registrationError && 'data' in registrationError) {
 		const statusCode = (registrationError as FetchBaseQueryError).status;
@@ -69,7 +75,7 @@ const SignUpForm: FC = () => {
 	return (
 		<Formik
 			initialValues={initValues}
-			validationSchema={setSignUpSchema(intl)}
+			validationSchema={validationSchema}
 			onSubmit={handleRegistration}
 		>
 			{({

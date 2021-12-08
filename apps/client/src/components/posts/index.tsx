@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
@@ -48,7 +48,10 @@ const PostContent: FC = () => {
 		prevActiveFeedId.current = activeFeedId;
 	}, [activeFeedId]);
 
-	const currentPosts = showCurrentItems(posts, activePage, POSTS_LIMIT);
+	const currentPosts = useMemo(
+		() => showCurrentItems(posts, activePage, POSTS_LIMIT),
+		[posts, activePage, POSTS_LIMIT]
+	);
 
 	return (
 		<div>

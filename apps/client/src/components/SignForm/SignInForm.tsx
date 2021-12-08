@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 import {
 	Button,
 	Card,
@@ -12,11 +12,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
 import setSignInSchema from '../../schemas/setSignInSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
+import { selectLocale } from '../../store/selectors/localeSelectors';
 
 import { SignInFormValues } from './types';
 
@@ -31,9 +33,13 @@ const SignInForm: FC = () => {
 	const [loginUser, { isLoading, error: loginError }] =
 		userAPI.useLoginUserMutation();
 
+	const locale = useTypedSelector(selectLocale);
+
 	const loginErrorRef = useRef<string>('');
 
 	const intl = useIntl();
+
+	const validationSchema = useMemo(() => setSignInSchema(intl), [locale]);
 
 	if (loginError && 'status' in loginError) {
 		const statusCode = loginError.status;
@@ -56,7 +62,7 @@ const SignInForm: FC = () => {
 	return (
 		<Formik
 			initialValues={initValues}
-			validationSchema={setSignInSchema(intl)}
+			validationSchema={validationSchema}
 			onSubmit={handleLogin}
 		>
 			{({

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 import {
 	Button,
 	Col,
@@ -16,6 +16,7 @@ import { MESSAGES } from '../../i18n/types';
 import setRSSFormSchema from '../../schemas/setRSSFormSchema';
 import { RSS_FORM } from '../../schemas/types';
 import { getRSSData } from '../../store/async-actions/getRSSData';
+import { selectLocale } from '../../store/selectors/localeSelectors';
 import { selectUrls } from '../../store/selectors/rssSelectors';
 
 import './style.scss';
@@ -30,12 +31,19 @@ const initValues: RSSFormValues = {
 
 const RSSForm: FC = () => {
 	const { urls, isLoading } = useTypedSelector(selectUrls);
+	const locale = useTypedSelector(selectLocale);
+
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
 	const formikRef = useRef<FormikProps<RSSFormValues>>(null);
 	const rssInputRef = useRef<HTMLInputElement>(null);
 	const urlCountRef = useRef<number>(-1);
+
+	const validationSchema = useMemo(
+		() => setRSSFormSchema(urls, intl),
+		[urls, locale]
+	);
 
 	useEffect(() => {
 		const newUrlCount = urls.length;
@@ -60,7 +68,7 @@ const RSSForm: FC = () => {
 			innerRef={formikRef}
 			validateOnBlur={false}
 			validateOnChange={false}
-			validationSchema={setRSSFormSchema(urls, intl)}
+			validationSchema={validationSchema}
 			onSubmit={handleSubmit}
 		>
 			{({
