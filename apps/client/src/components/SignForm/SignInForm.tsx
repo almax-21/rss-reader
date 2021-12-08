@@ -83,7 +83,7 @@ const SignInForm: FC = () => {
 					!!loginErrorRef.current;
 
 				return (
-					<Card>
+					<Card className="shadow">
 						<Card.Body as={Row} className="align-items-start p-4">
 							<Col className="sign__logo" md="5">
 								<img

@@ -98,7 +98,7 @@ const SignUpForm: FC = () => {
 					!!validationErrors[SIGN_FORM.PASSWORD_CONFIRMATION];
 
 				return (
-					<Card>
+					<Card className="shadow">
 						<Card.Body as={Row} className="align-items-start p-4">
 							<Col className="sign__logo" md="5">
 								<Icon

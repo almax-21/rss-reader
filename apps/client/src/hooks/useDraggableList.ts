@@ -27,23 +27,23 @@ const useDraggableList = (ids: string[]): DragHandlers => {
 	const handleDragOver = (event: DragEvent) => {
 		event.preventDefault();
 
-		(event.target as HTMLElement).style.opacity = '0.5';
+		(event.target as HTMLElement).style.filter = 'blur(0.8px)';
 	};
 
 	const handleDragLeave = (event: DragEvent) => {
-		(event.target as HTMLElement).style.opacity = '1';
+		(event.target as HTMLElement).style.filter = '';
 	};
 
 	const handleDragEnd =
 		(setNonDraggableItem: () => void) => (event: DragEvent) => {
-			(event.target as HTMLElement).style.opacity = '1';
+			(event.target as HTMLElement).style.filter = '';
 
 			setNonDraggableItem();
 		};
 
 	const handleDrop = (newItemOrder: number) => (event: DragEvent) => {
 		event.preventDefault();
-		(event.target as HTMLElement).style.opacity = '1';
+		(event.target as HTMLElement).style.filter = '';
 
 		const currentItemOrder = currentItemOrderRef.current;
 
