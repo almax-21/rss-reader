@@ -21,6 +21,16 @@
 
 		border-radius: 0 !important;
 	}
+
+	&:first-child .page-link {
+		border-top-left-radius: 5px !important;
+		border-bottom-left-radius: 5px !important;
+	}
+
+	&:last-child .page-link {
+		border-top-right-radius: 5px !important;
+		border-bottom-right-radius: 5px !important;
+	}
 }
 
 .animated .page-link {
