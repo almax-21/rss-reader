@@ -12,12 +12,12 @@ import { UserData } from '../types';
 const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://rss-reader-backend.herokuapp.com/',
+		baseUrl: 'https://rss-reader-backend.herokuapp.com/user',
 	}),
 	endpoints: (build) => ({
 		createUser: build.mutation<IUser, UserData>({
 			query: (userData) => ({
-				url: '/api/user/registration',
+				url: '/registration',
 				method: 'POST',
 				body: userData,
 			}),
@@ -50,7 +50,7 @@ const userAPI = createApi({
 		}),
 		loginUser: build.mutation<IUser, UserData>({
 			query: (userData) => ({
-				url: '/api/user/login',
+				url: '/login',
 				method: 'POST',
 				body: userData,
 			}),
@@ -81,7 +81,7 @@ const userAPI = createApi({
 		}),
 		authUser: build.query<IUser, string | null>({
 			query: (token) => ({
-				url: '/api/user/auth',
+				url: '/auth',
 				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${token}`,
