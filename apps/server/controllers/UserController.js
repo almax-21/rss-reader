@@ -12,7 +12,7 @@ class UserController {
 			const isUserExist = await User.findOne({ username });
 
 			if (isUserExist) {
-				res.status(400).json({ message: 'User already exists' });
+				return res.status(400).json({ message: 'User already exists' });
 			}
 
 			await UserService.createUser(username, password);
@@ -31,13 +31,13 @@ class UserController {
 			const user = await User.findOne({ username });
 
 			if (!user) {
-				res.status(404).json({ message: `User not found` });
+				return res.status(404).json({ message: `User not found` });
 			}
 
 			const isPasswordValid = bcrypt.compareSync(password, user.password);
 
 			if (!isPasswordValid) {
-				res.status(400).json({ message: `Invalid password` });
+				return res.status(400).json({ message: `Invalid password` });
 			}
 
 			const token = jwt.sign({ id: user.id }, config.get('secretKey'), {
