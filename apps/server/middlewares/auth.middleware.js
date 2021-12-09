@@ -13,9 +13,9 @@ const authMiddleware = (req, res, next) => {
 			return res.status(401).json({ message: 'Auth error' });
 		}
 
-		const decodedUser = jwt.verify(token, config.get('secretKey'));
+		const decodedUserId = jwt.verify(token, config.get('secretKey'));
 
-		req.user = decodedUser;
+		req.user = decodedUserId;
 		next();
 	} catch (err) {
 		return res.status(401).json({ message: 'Auth error' });
