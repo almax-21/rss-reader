@@ -12,7 +12,7 @@ import { UserData } from '../types';
 const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://rss-reader-backend.herokuapp.com//user',
+		baseUrl: 'https://rss-reader-backend.herokuapp.com/user',
 	}),
 	endpoints: (build) => ({
 		createUser: build.mutation<IUser, UserData>({
