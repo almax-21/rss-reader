@@ -1,9 +1,9 @@
 import { MESSAGES } from '../../i18n/types';
 import { filterText } from '../text';
 
-import { ParsedPost, ParsedRSS } from './types';
+import { ParsedFeedData, ParsedPost } from './types';
 
-const parseRSS = (serializedData: string): ParsedRSS => {
+const parseRSS = (serializedData: string): ParsedFeedData => {
 	const parser = new DOMParser();
 
 	const XMLDoc: XMLDocument = parser.parseFromString(
@@ -51,7 +51,7 @@ const parseRSS = (serializedData: string): ParsedRSS => {
 		};
 	});
 
-	const parsedRSSData: ParsedRSS = {
+	const parsedFeedData: ParsedFeedData = {
 		parsedFeed: {
 			title: feedTitleText,
 			description: filterText(feedDescriptionText),
@@ -59,7 +59,7 @@ const parseRSS = (serializedData: string): ParsedRSS => {
 		parsedPosts: feedPosts,
 	};
 
-	return parsedRSSData;
+	return parsedFeedData;
 };
 
 export default parseRSS;

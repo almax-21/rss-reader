@@ -17,7 +17,11 @@ const MyModal: FC<MyModalProps> = ({
 	url,
 }) => {
 	return (
-		<Modal show={isShow} onHide={handleClose}>
+		<Modal
+			centered={window.matchMedia('(hover: none)').matches}
+			show={isShow}
+			onHide={handleClose}
+		>
 			<Modal.Header closeButton>
 				<Modal.Title>{title}</Modal.Title>
 			</Modal.Header>

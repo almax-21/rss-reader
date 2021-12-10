@@ -1,5 +1,7 @@
+import { IFeed } from '../models/IFeed';
+import { IPost } from '../models/IPost';
 import { IUser } from '../models/IUser';
-import { FeedUrlData, IFeed, IPost, IPostFilter } from '../types';
+import { FeedUrlData, IPostFilter } from '../types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';
@@ -18,8 +20,13 @@ export enum POST_STATES {
 
 export type POST_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
 
-export interface RSSData {
+export interface ApiFeedData {
 	feed: IFeed;
+	posts: IPost[];
+}
+
+export interface ApiContentData {
+	feeds: IFeed[];
 	posts: IPost[];
 }
 
@@ -29,7 +36,9 @@ export interface UserState {
 }
 
 export interface RssState {
-	isLoading: boolean;
+	isLoadingFromApi: boolean;
+	isLoadingFromRssSource: boolean;
+	isFeedDeleteInProcess: boolean;
 	urlDataset: FeedUrlData[];
 }
 

@@ -1,0 +1,19 @@
+.content-skeleton__item:last-child {
+	display: none;
+}
+
+@media (min-width: 481px) {
+	.content-skeleton {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.content-skeleton__item {
+		width: 45%;
+
+		&:last-child {
+			display: block;
+		}
+	}
+}

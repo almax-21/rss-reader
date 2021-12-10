@@ -6,25 +6,24 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import useAutoUpdate from '../../hooks/useAutoUpdate';
 import { MESSAGES } from '../../i18n/types';
 import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
-import { selectRSS } from '../../store/selectors/rssSelectors';
+import { selectRssMeta } from '../../store/selectors/rssMetaSelectors';
 import FeedContent from '../feeds';
 import PostContent from '../posts';
+import ContentSkeleton from '../UI/ContentSkeleton';
 
 const UPDATE_PERIOD_MS = 60000;
 
 const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
-	const { urlDataset } = useTypedSelector(selectRSS);
+	const { isLoadingFromApi, urlDataset } = useTypedSelector(selectRssMeta);
 
 	useAutoUpdate(urlDataset, UPDATE_PERIOD_MS);
 
-	if (feeds.length === 0) {
+	if (isLoadingFromApi) {
 		return (
 			<Container fluid className="container-xxl p-5">
-				<Row className="flex-wrap-reverse">
-					<h2 className="display-5 text-center">
-						<FormattedMessage id={MESSAGES.NO_FEEDS} />
-					</h2>
+				<Row>
+					<ContentSkeleton />
 				</Row>
 			</Container>
 		);
@@ -32,14 +31,22 @@ const ContentContainer: FC = () => {
 
 	return (
 		<Container fluid className="container-xxl p-5">
-			<Row className="flex-wrap-reverse">
-				<Col as="section" className="mb-5">
-					<PostContent />
-				</Col>
-				<Col as="section" className="mb-5">
-					<FeedContent />
-				</Col>
-			</Row>
+			{feeds.length === 0 ? (
+				<Row>
+					<h2 className="display-5 text-center">
+						<FormattedMessage id={MESSAGES.NO_FEEDS} />
+					</h2>
+				</Row>
+			) : (
+				<Row className="flex-wrap-reverse">
+					<Col as="section" className="mb-5">
+						<PostContent />
+					</Col>
+					<Col as="section" className="mb-5">
+						<FeedContent />
+					</Col>
+				</Row>
+			)}
 		</Container>
 	);
 };

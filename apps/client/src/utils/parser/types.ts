@@ -7,7 +7,7 @@ export interface ParsedPost extends ParsedFeed {
 	url: string;
 }
 
-export interface ParsedRSS {
+export interface ParsedFeedData {
 	parsedFeed: ParsedFeed;
 	parsedPosts: ParsedPost[];
 }

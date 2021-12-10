@@ -5,15 +5,18 @@ interface SerializedXMLContent {
 }
 
 class ProxyService {
-	static async getXML(
+	static baseUrl = 'https://hexlet-allorigins.herokuapp.com/';
+
+	static getXML(
 		url: string,
 		timeout = 30000
 	): Promise<AxiosResponse<SerializedXMLContent>> {
-		const proxedUrl = `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${encodeURIComponent(
-			url
-		)}`;
+		const { href: endpointUrl } = new URL(
+			`get?disableCache=true&url=${encodeURIComponent(url)}`,
+			this.baseUrl
+		);
 
-		return axios.get(proxedUrl, { timeout });
+		return axios.get(endpointUrl, { timeout });
 	}
 }
 

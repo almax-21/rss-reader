@@ -14,7 +14,7 @@ export const getNewOrder = (
 	items: any[],
 	currentItemOrder: number,
 	newItemOrder: number
-) => {
+): string[] => {
 	const newItemsOrder = items.reduce((acc: string[], id: string, index) => {
 		if (index === newItemOrder) {
 			acc[currentItemOrder] = id;

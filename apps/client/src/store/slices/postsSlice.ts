@@ -1,11 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { IPost } from '../../models/IPost';
 import { NewPostsData, PostIdData } from '../../types';
-import { getRSSData } from '../async-actions/getRSSData';
+import deleteFeed from '../async-actions/deleteFeed';
+import getDataFromApi from '../async-actions/getAllContentFromApi';
+import getContentFromRssSource from '../async-actions/getContentFromRssSource';
+import setAllActivePostsRead from '../async-actions/setAllActivePostsRead';
+import setPostRead from '../async-actions/setPostRead';
 import updatePostsData from '../async-actions/updatePostsData';
-import { POST_STATES, POST_TYPE, PostsState, RSSData } from '../types';
+import {
+	ApiContentData,
+	ApiFeedData,
+	POST_STATES,
+	POST_TYPE,
+	PostsState,
+} from '../types';
 
-import { deleteFeed } from './feedsSlice';
+import { logoutUser } from './userSlice';
 
 const initialState: PostsState = {
 	byFeedId: {},
@@ -19,20 +30,6 @@ const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
 	reducers: {
-		setPostRead: (state, action: PayloadAction<PostIdData>) => {
-			const { id, feedId } = action.payload;
-
-			state.byFeedId[feedId] = state.byFeedId[feedId].map((post) => {
-				return post.id === id ? { ...post, state: POST_STATES.READ } : post;
-			});
-		},
-		setAllActivePostsRead: (state, action: PayloadAction<string>) => {
-			const activeFeedId = action.payload;
-
-			state.byFeedId[activeFeedId] = state.byFeedId[activeFeedId].map(
-				(post) => ({ ...post, state: POST_STATES.READ })
-			);
-		},
 		switchFilterState: (state, action: PayloadAction<POST_TYPE>) => {
 			state.filter.state = action.payload;
 		},
@@ -41,10 +38,47 @@ const postsSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[getRSSData.fulfilled.type]: (state, action: PayloadAction<RSSData>) => {
+		[getDataFromApi.fulfilled.type]: (
+			state,
+			action: PayloadAction<ApiContentData>
+		) => {
+			const { posts } = action.payload;
+
+			posts.forEach((post: IPost) => {
+				if (!state.byFeedId[post.feedId]) {
+					state.byFeedId[post.feedId] = [];
+				}
+
+				state.byFeedId[post.feedId] = [...state.byFeedId[post.feedId], post];
+			});
+		},
+		[getContentFromRssSource.fulfilled.type]: (
+			state,
+			action: PayloadAction<ApiFeedData>
+		) => {
 			const { feed, posts } = action.payload;
 
-			state.byFeedId[feed.id] = posts;
+			state.byFeedId[feed._id] = posts;
+		},
+		[setPostRead.fulfilled.type]: (
+			state,
+			action: PayloadAction<PostIdData>
+		) => {
+			const { _id, feedId } = action.payload;
+
+			state.byFeedId[feedId] = state.byFeedId[feedId].map((post) => {
+				return post._id === _id ? { ...post, state: POST_STATES.READ } : post;
+			});
+		},
+		[setAllActivePostsRead.fulfilled.type]: (
+			state,
+			action: PayloadAction<string>
+		) => {
+			const activeFeedId = action.payload;
+
+			state.byFeedId[activeFeedId] = state.byFeedId[activeFeedId].map(
+				(post) => ({ ...post, state: POST_STATES.READ })
+			);
 		},
 		[updatePostsData.fulfilled.type]: (
 			state,
@@ -54,17 +88,19 @@ const postsSlice = createSlice({
 
 			state.byFeedId[feedId].unshift(...newPosts);
 		},
-		[deleteFeed.type]: (state, action: PayloadAction<string>) => {
+		[deleteFeed.fulfilled.type]: (state, action: PayloadAction<string>) => {
 			delete state.byFeedId[action.payload];
+		},
+		[logoutUser.type]: (state) => {
+			state.byFeedId = {};
+			state.filter = {
+				state: POST_STATES.ALL,
+				query: '',
+			};
 		},
 	},
 });
 
-export const {
-	setPostRead,
-	setAllActivePostsRead,
-	switchFilterState,
-	updateFilterQuery,
-} = postsSlice.actions;
+export const { switchFilterState, updateFilterQuery } = postsSlice.actions;
 
 export default postsSlice.reducer;

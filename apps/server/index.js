@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const dotenv = require('dotenv');
-
 const cors = require('cors');
+
 const userRouter = require('./router/user.routes');
+const feedRouter = require('./router/feed.routes');
+const postRouter = require('./router/post.routes');
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRouter);
+app.use('/feeds', feedRouter);
+app.use('/posts', postRouter);
 
 dotenv.config();
 

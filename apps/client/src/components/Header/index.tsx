@@ -4,19 +4,23 @@ import { FormattedMessage } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectAuthState } from '../../store/selectors/userSelectors';
+import { selectUser } from '../../store/selectors/userSelectors';
 import LocaleSwitcher from '../LocaleSwitcher';
 import NavBar from '../NavBar';
 
 import './style.scss';
 
 const Header: FC = () => {
-	const isAuth = useTypedSelector(selectAuthState);
+	const { isAuth } = useTypedSelector(selectUser);
 
 	return (
 		<Container fluid as="header" className="bg-dark p-5 pt-4 pb-5 pb-0">
 			<Row className="justify-content-center">
-				<Col className="d-flex justify-content-between flex-wrap" lg="8" md="10">
+				<Col
+					className="d-flex justify-content-between flex-wrap"
+					lg="8"
+					md="10"
+				>
 					<LocaleSwitcher classes="header__locale-switcher" />
 					{isAuth && <NavBar />}
 				</Col>

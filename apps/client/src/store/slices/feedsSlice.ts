@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getRSSData } from '../async-actions/getRSSData';
-import { FeedsState, RSSData } from '../types';
+import { IFeed } from '../../models/IFeed';
+import deleteFeed from '../async-actions/deleteFeed';
+import getDataFromApi from '../async-actions/getAllContentFromApi';
+import getContentFromRssSource from '../async-actions/getContentFromRssSource';
+import { ApiContentData, ApiFeedData, FeedsState } from '../types';
+
+import { logoutUser } from './userSlice';
 
 const initialState: FeedsState = {
 	entities: {},
@@ -19,7 +24,31 @@ const feedsSlice = createSlice({
 		updateFeedsOrder: (state, action: PayloadAction<string[]>) => {
 			state.ids = [...action.payload];
 		},
-		deleteFeed: (state, action: PayloadAction<string>) => {
+	},
+	extraReducers: {
+		[getDataFromApi.fulfilled.type]: (
+			state,
+			action: PayloadAction<ApiContentData>
+		) => {
+			const { feeds } = action.payload;
+
+			feeds.forEach((feed: IFeed) => {
+				state.entities[feed._id] = feed;
+				state.ids = [feed._id, ...state.ids];
+				state.activeFeedId = feed._id;
+			});
+		},
+		[getContentFromRssSource.fulfilled.type]: (
+			state,
+			action: PayloadAction<ApiFeedData>
+		) => {
+			const { feed } = action.payload;
+
+			state.entities[feed._id] = feed;
+			state.ids = [feed._id, ...state.ids];
+			state.activeFeedId = feed._id;
+		},
+		[deleteFeed.fulfilled.type]: (state, action: PayloadAction<string>) => {
 			const newFeedIDs = state.ids.filter((id) => id !== action.payload);
 
 			if (state.activeFeedId === action.payload) {
@@ -29,19 +58,14 @@ const feedsSlice = createSlice({
 			delete state.entities[action.payload];
 			state.ids = newFeedIDs;
 		},
-	},
-	extraReducers: {
-		[getRSSData.fulfilled.type]: (state, action: PayloadAction<RSSData>) => {
-			const { feed } = action.payload;
-
-			state.entities[feed.id] = feed;
-			state.ids = [feed.id, ...state.ids];
-			state.activeFeedId = feed.id;
+		[logoutUser.type]: (state) => {
+			state.entities = {};
+			state.ids = [];
+			state.activeFeedId = '';
 		},
 	},
 });
 
-export const { updateActiveFeed, updateFeedsOrder, deleteFeed } =
-	feedsSlice.actions;
+export const { updateActiveFeed, updateFeedsOrder } = feedsSlice.actions;
 
 export default feedsSlice.reducer;

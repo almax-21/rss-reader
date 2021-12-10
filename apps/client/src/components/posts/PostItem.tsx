@@ -4,9 +4,10 @@ import { FormattedMessage } from 'react-intl';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import { MESSAGES } from '../../i18n/types';
-import { setPostRead } from '../../store/slices/postsSlice';
+import { IPost } from '../../models/IPost';
+import setPostRead from '../../store/async-actions/setPostRead';
 import { POST_STATES } from '../../store/types';
-import { IPost, PostIdData } from '../../types';
+import { PostIdData } from '../../types';
 import MyModal from '../UI/MyModal';
 import { MODAL_TYPES } from '../UI/MyModal/types';
 
@@ -17,7 +18,7 @@ interface PostItemProps {
 const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-	const { title, description, id, feedId, url, state } = post;
+	const { title, description, _id, feedId, url, state } = post;
 	const dispatch = useTypedDispatch();
 
 	const handlePostRead = (postIDs: PostIdData) => () => {
@@ -59,7 +60,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 							href={url}
 							rel="noreferrer"
 							target="_blank"
-							onClick={handlePostRead({ id, feedId })}
+							onClick={handlePostRead({ _id, feedId })}
 						>
 							{title}
 						</Card.Link>
@@ -71,7 +72,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 			</ListGroup.Item>
 			<MyModal
 				description={description}
-				handleClose={handleCloseModal({ id, feedId })}
+				handleClose={handleCloseModal({ _id, feedId })}
 				isShow={isShowModal}
 				title={title}
 				type={MODAL_TYPES.PREVIEW}

@@ -1,16 +1,18 @@
-import React, { FC } from 'react';
-import { Spinner } from 'react-bootstrap';
-import { FormattedMessage, IntlProvider } from 'react-intl';
+import React, { FC, useEffect } from 'react';
+import { IntlProvider } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter } from 'react-router-dom';
 
+import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
-import { MESSAGES } from '../../i18n/types';
 import userAPI from '../../services/UserService';
+import getAllContentFromApi from '../../store/async-actions/getAllContentFromApi';
 import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectUser } from '../../store/selectors/userSelectors';
 import Footer from '../Footer';
 import Header from '../Header';
+import MySpinner from '../UI/MySpinner';
 
 import AppHelmet from './AppHelmet';
 import AppRouter from './AppRouter';
@@ -18,11 +20,22 @@ import AppRouter from './AppRouter';
 import './style.scss';
 
 const App: FC = () => {
-	const locale = useTypedSelector(selectLocale);
-
 	const { isLoading: isAuthPending } = userAPI.useAuthUserQuery(
 		localStorage.getItem('token')
 	);
+
+	const locale = useTypedSelector(selectLocale);
+	const { isAuth, userData } = useTypedSelector(selectUser);
+
+	const dispatch = useTypedDispatch();
+
+	const userToken = userData.token;
+
+	useEffect(() => {
+		if (isAuth && userToken) {
+			dispatch(getAllContentFromApi(userToken));
+		}
+	}, [isAuth, userToken]);
 
 	return (
 		<IntlProvider locale={locale} messages={messages[locale]}>
@@ -32,16 +45,7 @@ const App: FC = () => {
 				<Header />
 				{isAuthPending ? (
 					<div className="d-flex justify-content-center mt-5">
-						<Spinner
-							animation="border"
-							aria-hidden="true"
-							as="span"
-							role="status"
-						>
-							<span className="visually-hidden">
-								<FormattedMessage id={MESSAGES.LOADING} />
-							</span>
-						</Spinner>
+						<MySpinner />
 					</div>
 				) : (
 					<AppRouter />

@@ -8,13 +8,13 @@ import feedsReducer from './slices/feedsSlice';
 import localeReducer from './slices/localeSlice';
 import notificationReducer from './slices/notificationSlice';
 import postsReducer from './slices/postsSlice';
-import rssReducer from './slices/rssSlice';
+import rssMetaReducer from './slices/rssMetaSlice';
 import userReducer from './slices/userSlice';
 
 export const rootReducer = combineReducers({
 	locale: localeReducer,
 	user: userReducer,
-	rss: rssReducer,
+	rssMeta: rssMetaReducer,
 	notification: notificationReducer,
 	feeds: feedsReducer,
 	posts: postsReducer,

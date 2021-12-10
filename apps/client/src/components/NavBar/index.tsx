@@ -4,13 +4,15 @@ import { FormattedMessage } from 'react-intl';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectUserData } from '../../store/selectors/userSelectors';
+import { selectUser } from '../../store/selectors/userSelectors';
 import { logoutUser } from '../../store/slices/userSlice';
 
 import './style.scss';
 
 const NavBar: FC = () => {
-	const { username } = useTypedSelector(selectUserData);
+	const { userData } = useTypedSelector(selectUser);
+	const { username } = userData;
+
 	const dispatch = useTypedDispatch();
 
 	const handleSignOut = () => {

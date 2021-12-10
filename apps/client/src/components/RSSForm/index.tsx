@@ -1,12 +1,5 @@
 import React, { FC, useEffect, useMemo, useRef } from 'react';
-import {
-	Button,
-	Col,
-	FloatingLabel,
-	Form,
-	Row,
-	Spinner,
-} from 'react-bootstrap';
+import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 
@@ -15,9 +8,13 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import setRSSFormSchema from '../../schemas/setRSSFormSchema';
 import { RSS_FORM } from '../../schemas/types';
-import { getRSSData } from '../../store/async-actions/getRSSData';
+import getContentFromRssSource from '../../store/async-actions/getContentFromRssSource';
 import { selectLocale } from '../../store/selectors/localeSelectors';
-import { selectUrls } from '../../store/selectors/rssSelectors';
+import {
+	selectRssMeta,
+	selectUrls,
+} from '../../store/selectors/rssMetaSelectors';
+import MySpinner from '../UI/MySpinner';
 
 import './style.scss';
 
@@ -30,14 +27,19 @@ const initValues: RSSFormValues = {
 };
 
 const RSSForm: FC = () => {
-	const { urls, isLoading } = useTypedSelector(selectUrls);
+	const { isLoadingFromRssSource, isLoadingFromApi } =
+		useTypedSelector(selectRssMeta);
+
+	const isContentLoading = isLoadingFromRssSource || isLoadingFromApi;
+
+	const urls = useTypedSelector(selectUrls);
+
 	const locale = useTypedSelector(selectLocale);
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
 	const formikRef = useRef<FormikProps<RSSFormValues>>(null);
-	const rssInputRef = useRef<HTMLInputElement>(null);
 	const urlCountRef = useRef<number>(-1);
 
 	const validationSchema = useMemo(
@@ -50,7 +52,6 @@ const RSSForm: FC = () => {
 
 		if (urlCountRef.current < newUrlCount) {
 			formikRef?.current?.setFieldValue(RSS_FORM.URL, '');
-			rssInputRef?.current?.focus();
 		}
 
 		urlCountRef.current = newUrlCount;
@@ -59,7 +60,7 @@ const RSSForm: FC = () => {
 	const handleSubmit = (values: RSSFormValues) => {
 		const feedUrl = values[RSS_FORM.URL];
 
-		dispatch(getRSSData(feedUrl));
+		dispatch(getContentFromRssSource(feedUrl));
 	};
 
 	return (
@@ -86,7 +87,6 @@ const RSSForm: FC = () => {
 								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
 							>
 								<Form.Control
-									ref={rssInputRef}
 									className="rss-input pb-2 pt-4"
 									isInvalid={!isValid}
 									name={RSS_FORM.URL}
@@ -103,22 +103,13 @@ const RSSForm: FC = () => {
 						<Col md="3" sm="5" xs="9">
 							<Button
 								className="w-100 h-100"
-								disabled={isLoading}
+								disabled={isContentLoading}
 								size="lg"
 								type="submit"
 								variant="primary"
 							>
-								{isLoading ? (
-									<Spinner
-										animation="border"
-										aria-hidden="true"
-										as="span"
-										role="status"
-									>
-										<span className="visually-hidden">
-											<FormattedMessage id={MESSAGES.LOADING} />
-										</span>
-									</Spinner>
+								{isContentLoading ? (
+									<MySpinner />
 								) : (
 									<FormattedMessage id={MESSAGES.ADD} />
 								)}

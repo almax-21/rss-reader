@@ -3,16 +3,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { MESSAGES } from '../i18n/types';
 import { IUser } from '../models/IUser';
 import {
-	requestFailure,
-	requestPending,
-	requestSuccess,
+	notificationReqFailure,
+	notificationReqPending,
+	notificationReqSuccess,
 } from '../store/slices/notificationSlice';
 import { UserData } from '../types';
 
 const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://rss-reader-backend.herokuapp.com/user',
+		baseUrl: 'https://rss-reader-backend.herokuapp.com//user',
 	}),
 	endpoints: (build) => ({
 		createUser: build.mutation<IUser, UserData>({
@@ -23,12 +23,12 @@ const userAPI = createApi({
 			}),
 			onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
 				try {
-					dispatch(requestPending());
+					dispatch(notificationReqPending());
 
 					await queryFulfilled;
 
 					dispatch(
-						requestSuccess(MESSAGES.REGISTRATION_SUCCESSFULLY_COMPLETED)
+						notificationReqSuccess(MESSAGES.REGISTRATION_SUCCESSFULLY_COMPLETED)
 					);
 				} catch (e) {
 					const errorData = e as any;
@@ -40,10 +40,10 @@ const userAPI = createApi({
 							const errorMessage = navigator.onLine
 								? MESSAGES.ERROR_UNKNOWN
 								: MESSAGES.ERROR_NETWORK;
-							dispatch(requestFailure(errorMessage));
+							dispatch(notificationReqFailure(errorMessage));
 						}
 					} else {
-						dispatch(requestFailure(MESSAGES.ERROR_UNKNOWN));
+						dispatch(notificationReqFailure(MESSAGES.ERROR_UNKNOWN));
 					}
 				}
 			},
@@ -56,7 +56,7 @@ const userAPI = createApi({
 			}),
 			onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
 				try {
-					dispatch(requestPending());
+					dispatch(notificationReqPending());
 
 					const { data } = await queryFulfilled;
 
@@ -71,10 +71,10 @@ const userAPI = createApi({
 							const errorMessage = navigator.onLine
 								? MESSAGES.ERROR_UNKNOWN
 								: MESSAGES.ERROR_NETWORK;
-							dispatch(requestFailure(errorMessage));
+							dispatch(notificationReqFailure(errorMessage));
 						}
 					} else {
-						dispatch(requestFailure(MESSAGES.ERROR_UNKNOWN));
+						dispatch(notificationReqFailure(MESSAGES.ERROR_UNKNOWN));
 					}
 				}
 			},

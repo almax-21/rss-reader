@@ -5,12 +5,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../../i18n/types';
+import setAllActivePostsRead from '../../../store/async-actions/setAllActivePostsRead';
 import {
 	selectActiveFeedId,
 	selectUnreadPostsCount,
 } from '../../../store/selectors/contentSelectors';
 import {
-	setAllActivePostsRead,
 	switchFilterState,
 	updateFilterQuery,
 } from '../../../store/slices/postsSlice';

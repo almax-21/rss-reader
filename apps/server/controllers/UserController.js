@@ -21,7 +21,7 @@ class UserController {
 		} catch (err) {
 			console.error(err.message);
 
-			res.send({ message: 'Server Error' });
+			res.status(500).send({ message: 'Server Error' });
 		}
 	}
 
@@ -52,7 +52,7 @@ class UserController {
 		} catch (err) {
 			console.error(err.message);
 
-			res.send({ message: 'Server Error' });
+			res.status(500).send({ message: 'Server Error' });
 		}
 	}
 
@@ -64,7 +64,7 @@ class UserController {
 		} catch (err) {
 			console.error(err.message);
 
-			res.send({ message: 'Server Error' });
+			res.status(500).send({ message: 'Server Error' });
 		}
 	}
 }

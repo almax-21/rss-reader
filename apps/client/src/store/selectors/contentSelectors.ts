@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { IPost } from '../../types';
+import { IPost } from '../../models/IPost';
 import { POST_STATES, RootState } from '../types';
 
 export const selectFeedIds = (state: RootState) => state.feeds.ids;
@@ -40,7 +40,9 @@ export const selectFeedsWithCounter = createSelector(
 	(feeds, postEntities) => {
 		const feedsWithCounter = feeds.map((feed) => ({
 			...feed,
-			unreadPostsCount: selectUnreadPostsCountDynamically(postEntities[feed.id]),
+			unreadPostsCount: selectUnreadPostsCountDynamically(
+				postEntities[feed._id]
+			),
 		}));
 
 		return feedsWithCounter;

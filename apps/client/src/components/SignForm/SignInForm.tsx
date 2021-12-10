@@ -1,13 +1,5 @@
-import React, { FC, useMemo, useRef } from 'react';
-import {
-	Button,
-	Card,
-	Col,
-	FloatingLabel,
-	Form,
-	Row,
-	Spinner,
-} from 'react-bootstrap';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
+import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -19,6 +11,7 @@ import setSignInSchema from '../../schemas/setSignInSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
 import { selectLocale } from '../../store/selectors/localeSelectors';
+import MySpinner from '../UI/MySpinner';
 
 import { SignInFormValues } from './types';
 
@@ -33,10 +26,10 @@ const SignInForm: FC = () => {
 	const [loginUser, { isLoading, error: loginError }] =
 		userAPI.useLoginUserMutation();
 
-	const locale = useTypedSelector(selectLocale);
-
+	const usernameInputRef = useRef<HTMLInputElement | null>(null);
 	const loginErrorRef = useRef<string>('');
 
+	const locale = useTypedSelector(selectLocale);
 	const intl = useIntl();
 
 	const validationSchema = useMemo(() => setSignInSchema(intl), [locale]);
@@ -52,6 +45,10 @@ const SignInForm: FC = () => {
 	} else {
 		loginErrorRef.current = '';
 	}
+
+	useEffect(() => {
+		usernameInputRef?.current?.focus();
+	}, []);
 
 	const handleLogin = (values: SignInFormValues) => {
 		const { username, password } = values;
@@ -72,15 +69,17 @@ const SignInForm: FC = () => {
 				touched,
 				errors: validationErrors,
 			}) => {
+				const isUsernameValidationError =
+					touched[SIGN_FORM.USERNAME] && !!validationErrors[SIGN_FORM.USERNAME];
+
 				const isInvalidUsername =
-					(touched[SIGN_FORM.USERNAME] &&
-						!!validationErrors[SIGN_FORM.USERNAME]) ||
-					!!loginErrorRef.current;
+					isUsernameValidationError || !!loginErrorRef.current;
+
+				const isPasswordValidationError =
+					touched[SIGN_FORM.PASSWORD] && !!validationErrors[SIGN_FORM.PASSWORD];
 
 				const isInvalidPassowrd =
-					(touched[SIGN_FORM.PASSWORD] &&
-						!!validationErrors[SIGN_FORM.PASSWORD]) ||
-					!!loginErrorRef.current;
+					isPasswordValidationError || !!loginErrorRef.current;
 
 				return (
 					<Card className="shadow">
@@ -108,6 +107,7 @@ const SignInForm: FC = () => {
 										label={intl.formatMessage({ id: MESSAGES.USERNAME })}
 									>
 										<Form.Control
+											ref={usernameInputRef}
 											className="pb-2 pt-4"
 											isInvalid={isInvalidUsername}
 											name={SIGN_FORM.USERNAME}
@@ -154,17 +154,7 @@ const SignInForm: FC = () => {
 											variant="outline-primary"
 										>
 											{isLoading ? (
-												<Spinner
-													animation="border"
-													aria-hidden="true"
-													as="span"
-													role="status"
-													size="sm"
-												>
-													<span className="visually-hidden">
-														<FormattedMessage id={MESSAGES.LOADING} />
-													</span>
-												</Spinner>
+												<MySpinner size="sm" />
 											) : (
 												<FormattedMessage id={MESSAGES.SIGN_IN} />
 											)}
