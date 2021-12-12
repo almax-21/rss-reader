@@ -1,19 +1,23 @@
+.content-skeleton {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
 .content-skeleton__item:last-child {
-	display: none;
+	margin-bottom: 30px;
 }
 
 @media (min-width: 481px) {
 	.content-skeleton {
-		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 	}
 
 	.content-skeleton__item {
-		width: 45%;
+		width: 49%;
 
 		&:last-child {
-			display: block;
+			margin-bottom: 0;
 		}
 	}
 }
