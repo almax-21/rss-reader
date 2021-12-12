@@ -51,7 +51,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 				border-0
 			"
 			>
-				<Card className="border-0">
+				<Card className="border-0" style={{ paddingRight: '10px' }}>
 					<Card.Title className="h6 fw-bold">
 						<Card.Link
 							className={
