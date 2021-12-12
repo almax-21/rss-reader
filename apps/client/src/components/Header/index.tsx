@@ -30,9 +30,11 @@ const Header: FC = () => {
 					<h1 className="display-3 mb-0">
 						<FormattedMessage id={MESSAGES.MAIN_HEADER} />
 					</h1>
-					<p className="lead">
-						<FormattedMessage id={MESSAGES.LEAD} />
-					</p>
+					{!isAuth && (
+						<p className="lead">
+							<FormattedMessage id={MESSAGES.LEAD} />
+						</p>
+					)}
 				</Col>
 			</Row>
 		</Container>
