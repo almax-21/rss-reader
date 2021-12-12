@@ -8,14 +8,14 @@ const UserService = require('../services/UserService');
 class UserController {
 	static async createUser(req, res) {
 		try {
-			const { username, password } = req.body;
+			const { username, password, lang } = req.body;
 			const isUserExist = await User.findOne({ username });
 
 			if (isUserExist) {
 				return res.status(400).json({ message: 'User already exists' });
 			}
 
-			await UserService.createUser(username, password);
+			await UserService.createUser(username, password, lang);
 
 			return res.json({ message: 'User was created' });
 		} catch (err) {

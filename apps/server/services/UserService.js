@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 class UserService {
-	static async createUser(username, password) {
+	static async createUser(username, password, lang) {
 		const hashPassword = await bcrypt.hash(password, 7);
-		const user = new User({ username, password: hashPassword });
+		const user = new User({ username, password: hashPassword, lang });
 
 		return user.save();
 	}

@@ -34,7 +34,7 @@ const SignUpForm: FC = () => {
 	const registrationErrorRef = useRef<string>('');
 
 	const router = useHistory();
-	const lang = useTypedSelector(selectLang);
+	const { lang } = useTypedSelector(selectLang);
 	const intl = useIntl();
 
 	const validationSchema = useMemo(() => setSignUpSchema(intl), [lang]);
@@ -60,7 +60,7 @@ const SignUpForm: FC = () => {
 	const handleRegistration = (values: SignUpFormValues) => {
 		const { username, password } = values;
 
-		createUser({ username, password }).then((res) => {
+		createUser({ username, password, lang }).then((res) => {
 			if ('error' in res) {
 				return;
 			}

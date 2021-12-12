@@ -7,7 +7,7 @@ import {
 	notificationReqPending,
 	notificationReqSuccess,
 } from '../store/slices/notificationSlice';
-import { SignUserData } from '../types';
+import { SignInUserData, SignUpUserData } from '../types';
 
 const userAPI = createApi({
 	reducerPath: 'userAPI',
@@ -15,7 +15,7 @@ const userAPI = createApi({
 		baseUrl: 'https://rss-reader-backend.herokuapp.com/user',
 	}),
 	endpoints: (build) => ({
-		createUser: build.mutation<IUser, SignUserData>({
+		createUser: build.mutation<IUser, SignUpUserData>({
 			query: (userData) => ({
 				url: '/registration',
 				method: 'POST',
@@ -48,7 +48,7 @@ const userAPI = createApi({
 				}
 			},
 		}),
-		loginUser: build.mutation<IUser, SignUserData>({
+		loginUser: build.mutation<IUser, SignInUserData>({
 			query: (userData) => ({
 				url: '/login',
 				method: 'POST',
