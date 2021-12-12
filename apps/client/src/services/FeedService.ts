@@ -4,7 +4,7 @@ import { ApiContentData, ApiFeedData } from '../store/types';
 import { ParsedFeedData } from '../utils/parser/types';
 
 class FeedService {
-	static baseUrl = 'https://rss-reader-backend.herokuapp.com/';
+	static baseUrl = 'https://rss-reader-backend.herokuapp.com';
 
 	static uploadFeedData(
 		parsedfeedData: ParsedFeedData,

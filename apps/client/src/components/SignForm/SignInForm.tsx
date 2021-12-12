@@ -10,7 +10,7 @@ import { ROUTES } from '../../router/types';
 import setSignInSchema from '../../schemas/setSignInSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
-import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectLang } from '../../store/selectors/langSelectors';
 import MySpinner from '../UI/MySpinner';
 
 import { SignInFormValues } from './types';
@@ -29,10 +29,10 @@ const SignInForm: FC = () => {
 	const usernameInputRef = useRef<HTMLInputElement | null>(null);
 	const loginErrorRef = useRef<string>('');
 
-	const locale = useTypedSelector(selectLocale);
+	const { lang } = useTypedSelector(selectLang);
 	const intl = useIntl();
 
-	const validationSchema = useMemo(() => setSignInSchema(intl), [locale]);
+	const validationSchema = useMemo(() => setSignInSchema(intl), [lang]);
 
 	if (loginError && 'status' in loginError) {
 		const statusCode = loginError.status;

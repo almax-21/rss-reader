@@ -23,7 +23,14 @@ class UserService {
 			token,
 			id: user.id,
 			username: user.username,
+			lang: user.lang,
 		};
+	}
+
+	static switchLang(lang, _id) {
+		const newLang = { lang };
+
+		return User.updateOne({ _id }, newLang);
 	}
 }
 

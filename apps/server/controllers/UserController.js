@@ -48,6 +48,7 @@ class UserController {
 				token,
 				id: user.id,
 				username: user.username,
+				lang: user.lang,
 			});
 		} catch (err) {
 			console.error(err.message);
@@ -61,6 +62,20 @@ class UserController {
 			const userData = await UserService.authorizeUser(req.user.id);
 
 			return res.json(userData);
+		} catch (err) {
+			console.error(err.message);
+
+			res.status(500).send({ message: 'Server Error' });
+		}
+	}
+
+	static async switchLang(req, res) {
+		try {
+			const { lang } = req.body;
+
+			await UserService.switchLang(lang, req.user.id);
+
+			return res.json(lang);
 		} catch (err) {
 			console.error(err.message);
 

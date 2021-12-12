@@ -8,7 +8,7 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
 import userAPI from '../../services/UserService';
 import getAllContentFromApi from '../../store/async-actions/getAllContentFromApi';
-import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectLang } from '../../store/selectors/langSelectors';
 import { selectUser } from '../../store/selectors/userSelectors';
 import Footer from '../Footer';
 import Header from '../Header';
@@ -20,11 +20,9 @@ import AppRouter from './AppRouter';
 import './style.scss';
 
 const App: FC = () => {
-	const { isLoading: isAuthPending } = userAPI.useAuthUserQuery(
-		localStorage.getItem('token')
-	);
+	const { isLoading: isAuthPending } = userAPI.useAuthUserQuery();
 
-	const locale = useTypedSelector(selectLocale);
+	const { lang } = useTypedSelector(selectLang);
 	const { isAuth, userData } = useTypedSelector(selectUser);
 
 	const dispatch = useTypedDispatch();
@@ -38,7 +36,7 @@ const App: FC = () => {
 	}, [isAuth, userToken]);
 
 	return (
-		<IntlProvider locale={locale} messages={messages[locale]}>
+		<IntlProvider locale={lang} messages={messages[lang]}>
 			<AppHelmet />
 			<LoadingBar className="loading-bar" />
 			<BrowserRouter>

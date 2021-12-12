@@ -1,3 +1,4 @@
+import { LocaleType } from '../i18n/types';
 import { IFeed } from '../models/IFeed';
 import { IPost } from '../models/IPost';
 import { IUser } from '../models/IUser';
@@ -28,6 +29,11 @@ export interface ApiFeedData {
 export interface ApiContentData {
 	feeds: IFeed[];
 	posts: IPost[];
+}
+
+export interface LangState {
+	lang: LocaleType;
+	isSwitchLangInProcess: boolean;
 }
 
 export interface UserState {

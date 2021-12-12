@@ -5,7 +5,7 @@ import { POST_TYPE } from '../store/types';
 
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
-export interface UserData {
+export interface SignUserData {
 	username: string;
 	password: string;
 }

@@ -12,7 +12,7 @@ import { ROUTES } from '../../router/types';
 import setSignUpSchema from '../../schemas/setSignUpSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
-import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectLang } from '../../store/selectors/langSelectors';
 import Icon from '../UI/Icon';
 import MySpinner from '../UI/MySpinner';
 
@@ -34,10 +34,10 @@ const SignUpForm: FC = () => {
 	const registrationErrorRef = useRef<string>('');
 
 	const router = useHistory();
-	const locale = useTypedSelector(selectLocale);
+	const lang = useTypedSelector(selectLang);
 	const intl = useIntl();
 
-	const validationSchema = useMemo(() => setSignUpSchema(intl), [locale]);
+	const validationSchema = useMemo(() => setSignUpSchema(intl), [lang]);
 
 	if (registrationError && 'data' in registrationError) {
 		const statusCode = (registrationError as FetchBaseQueryError).status;

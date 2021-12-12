@@ -5,7 +5,7 @@ class PostController {
 		try {
 			await PostService.setPostRead(req.body.id, req.user.id);
 
-			return res.json('Post state has updated');
+			return res.json('Post state has been updated');
 		} catch (err) {
 			console.error(err.message);
 

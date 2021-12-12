@@ -5,14 +5,14 @@ import { combineReducers } from '@reduxjs/toolkit';
 import userAPI from '../services/UserService';
 
 import feedsReducer from './slices/feedsSlice';
-import localeReducer from './slices/localeSlice';
+import langReducer from './slices/langSlice';
 import notificationReducer from './slices/notificationSlice';
 import postsReducer from './slices/postsSlice';
 import rssMetaReducer from './slices/rssMetaSlice';
 import userReducer from './slices/userSlice';
 
 export const rootReducer = combineReducers({
-	locale: localeReducer,
+	lang: langReducer,
 	user: userReducer,
 	rssMeta: rssMetaReducer,
 	notification: notificationReducer,

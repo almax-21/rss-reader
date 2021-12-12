@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { MESSAGES } from '../i18n/types';
+import { LocaleType, MESSAGES } from '../i18n/types';
 import { IUser } from '../models/IUser';
 import {
 	notificationReqFailure,
 	notificationReqPending,
 	notificationReqSuccess,
 } from '../store/slices/notificationSlice';
-import { UserData } from '../types';
+import { SignUserData } from '../types';
 
 const userAPI = createApi({
 	reducerPath: 'userAPI',
@@ -15,7 +15,7 @@ const userAPI = createApi({
 		baseUrl: 'https://rss-reader-backend.herokuapp.com/user',
 	}),
 	endpoints: (build) => ({
-		createUser: build.mutation<IUser, UserData>({
+		createUser: build.mutation<IUser, SignUserData>({
 			query: (userData) => ({
 				url: '/registration',
 				method: 'POST',
@@ -48,7 +48,7 @@ const userAPI = createApi({
 				}
 			},
 		}),
-		loginUser: build.mutation<IUser, UserData>({
+		loginUser: build.mutation<IUser, SignUserData>({
 			query: (userData) => ({
 				url: '/login',
 				method: 'POST',
@@ -79,14 +79,32 @@ const userAPI = createApi({
 				}
 			},
 		}),
-		authUser: build.query<IUser, string | null>({
-			query: (token) => ({
-				url: '/auth',
-				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			}),
+		authUser: build.query<IUser, void>({
+			query: () => {
+				const token = localStorage.getItem('token');
+
+				return {
+					url: '/auth',
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
+		}),
+		switchLang: build.mutation<string, LocaleType>({
+			query: (lang) => {
+				const token = localStorage.getItem('token');
+
+				return {
+					url: '/lang',
+					method: 'PUT',
+					body: { lang },
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
 		}),
 	}),
 });

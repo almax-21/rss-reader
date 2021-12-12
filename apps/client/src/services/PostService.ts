@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 class PostService {
-	static baseUrl = 'https://rss-reader-backend.herokuapp.com/';
+	static baseUrl = 'https://rss-reader-backend.herokuapp.com';
 
 	static setPostRead(id: string): Promise<AxiosResponse<string>> {
 		const { href: endpointUrl } = new URL('/posts', this.baseUrl);

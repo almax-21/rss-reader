@@ -9,7 +9,7 @@ import { MESSAGES } from '../../i18n/types';
 import setRSSFormSchema from '../../schemas/setRSSFormSchema';
 import { RSS_FORM } from '../../schemas/types';
 import getContentFromRssSource from '../../store/async-actions/getContentFromRssSource';
-import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectLang } from '../../store/selectors/langSelectors';
 import {
 	selectRssMeta,
 	selectUrls,
@@ -34,7 +34,7 @@ const RSSForm: FC = () => {
 
 	const urls = useTypedSelector(selectUrls);
 
-	const locale = useTypedSelector(selectLocale);
+	const lang = useTypedSelector(selectLang);
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
@@ -44,7 +44,7 @@ const RSSForm: FC = () => {
 
 	const validationSchema = useMemo(
 		() => setRSSFormSchema(urls, intl),
-		[urls, locale]
+		[urls, lang]
 	);
 
 	useEffect(() => {

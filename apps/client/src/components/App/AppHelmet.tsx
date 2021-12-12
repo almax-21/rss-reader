@@ -4,14 +4,14 @@ import { useIntl } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectLocale } from '../../store/selectors/localeSelectors';
+import { selectLang } from '../../store/selectors/langSelectors';
 
 const AppHelmet: FC = () => {
-	const locale = useTypedSelector(selectLocale);
+	const { lang } = useTypedSelector(selectLang);
 	const intl = useIntl();
 
 	return (
-		<Helmet htmlAttributes={{ lang: locale }}>
+		<Helmet htmlAttributes={{ lang }}>
 			<title>{intl.formatMessage({ id: MESSAGES.MAIN_HEADER })}</title>
 			<meta
 				content={intl.formatMessage({ id: MESSAGES.DESCRIPTION })}

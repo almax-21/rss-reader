@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { LocaleType } from '../../i18n/types';
 import { IUser } from '../../models/IUser';
 import userAPI from '../../services/UserService';
 import { UserState } from '../types';
@@ -10,6 +11,7 @@ const initialState: UserState = {
 		id: '',
 		token: '',
 		username: '',
+		lang: '' as LocaleType,
 	},
 };
 
@@ -23,6 +25,7 @@ const userSlice = createSlice({
 				id: '',
 				token: '',
 				username: '',
+				lang: '' as LocaleType,
 			};
 		},
 	},

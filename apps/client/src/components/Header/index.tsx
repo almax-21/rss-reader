@@ -14,7 +14,7 @@ const Header: FC = () => {
 	const { isAuth } = useTypedSelector(selectUser);
 
 	return (
-		<Container fluid as="header" className="bg-dark p-5 pt-4 pb-5 pb-0">
+		<Container fluid as="header" className="bg-dark p-5 pt-4 pb-4">
 			<Row className="justify-content-center">
 				<Col
 					className="d-flex justify-content-between flex-wrap"
