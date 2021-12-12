@@ -1,5 +1,5 @@
 {
-	"name": "@rss-reader/server",
+	"name": "@rss-reader/api",
 	"version": "0.8.0",
 	"description": "backend part",
 	"scripts": {
