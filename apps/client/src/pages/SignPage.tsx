@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-import SignInForm from '../components/SignForm/SignInForm';
-import SignUpForm from '../components/SignForm/SignUpForm';
+import SignInForm from '../components/SignForm/SignIn';
+import SignUpForm from '../components/SignForm/SignUp';
 import { ROUTES } from '../router/types';
 
 const SignPage = () => {
