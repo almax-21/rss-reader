@@ -17,7 +17,8 @@ interface LocaleSwitcherProps {
 
 const LocaleSwitcher: FC<LocaleSwitcherProps> = ({ classes }) => {
 	const { isAuth } = useTypedSelector(selectUser);
-	const { isSwitchLangInProcess } = useTypedSelector(selectLang);
+	const { isSwitchLangInProcess, lang: currentLang } =
+		useTypedSelector(selectLang);
 
 	const [switchLang] = userAPI.useSwitchLangMutation();
 
@@ -26,10 +27,14 @@ const LocaleSwitcher: FC<LocaleSwitcherProps> = ({ classes }) => {
 	}
 
 	const localeHandler = (value: string | null) => {
-		if (value) {
-			const lang = value as LocaleType;
+		if (value === currentLang) {
+			return;
+		}
 
-			switchLang(lang);
+		if (value) {
+			const newLang = value as LocaleType;
+
+			switchLang(newLang);
 		}
 	};
 
