@@ -14,11 +14,11 @@ const Header: FC = () => {
 	const { isAuth } = useTypedSelector(selectUser);
 
 	return (
-		<Container fluid as="header" className="bg-dark p-5 pt-4 pb-4">
+		<Container fluid as="header" className="bg-dark p-4">
 			<Row className="justify-content-center">
 				<Col
 					className="d-flex justify-content-between flex-wrap"
-					lg="8"
+					lg="9"
 					md="10"
 				>
 					<LocaleSwitcher classes="header__locale-switcher" />
@@ -26,7 +26,7 @@ const Header: FC = () => {
 				</Col>
 			</Row>
 			<Row className="justify-content-center">
-				<Col className="text-white" lg="8" md="10">
+				<Col className="text-white" lg="9" md="10">
 					<h1 className="display-3 mb-0">
 						<FormattedMessage id={MESSAGES.MAIN_HEADER} />
 					</h1>

@@ -5,9 +5,9 @@ import RSSForm from '../RSSForm';
 
 const RSSContainer: FC = () => {
 	return (
-		<Container fluid as="section" className="bg-dark p-5 pt-0 pb-4">
+		<Container fluid as="section" className="bg-dark p-4 pt-0">
 			<Row className="justify-content-center">
-				<Col className="text-white" lg="8" md="10">
+				<Col className="text-white" lg="9" md="10">
 					<RSSForm />
 				</Col>
 			</Row>
