@@ -21,6 +21,7 @@ const ContentSkeleton: FC = () => {
 				>
 					<Placeholder.Button animation="wave" xs={3} />
 					<Placeholder.Button animation="wave" xs={3} />
+					<Placeholder.Button animation="wave" xs={3} />
 				</Placeholder>
 				<Placeholder
 					animation="glow"
