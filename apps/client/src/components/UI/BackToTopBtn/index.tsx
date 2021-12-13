@@ -13,7 +13,7 @@ const BackToTopBtn: FC = () => {
 				buttonRef.current.style.display =
 					window.scrollY > 300 ? 'block' : 'none';
 			}
-		}, 150);
+		}, 100);
 
 		window.addEventListener('scroll', scrollHandler);
 
