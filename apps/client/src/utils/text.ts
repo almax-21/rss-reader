@@ -1,4 +1,4 @@
-export const truncateText = (text: string, limit = 150): string => {
+export const truncateText = (text: string, limit = 100): string => {
 	if (text.length > limit) {
 		return `${text.slice(0, limit)}...`;
 	} else {
