@@ -12,6 +12,25 @@ class PostService {
 
 		return Post.updateMany({ feedId, userId }, newState);
 	}
+
+	static uploadNewPosts(newPostsData, userId) {
+		const { newPosts, feedId } = newPostsData;
+
+		const posts = newPosts
+			.map(
+				(post) =>
+					new Post({
+						...post,
+						state: 'UNREAD',
+						feedId,
+						userId,
+						date: Date.now(),
+					})
+			)
+			.reverse();
+
+		return Post.insertMany(posts);
+	}
 }
 
 module.exports = PostService;

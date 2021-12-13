@@ -44,12 +44,12 @@ const postsSlice = createSlice({
 		) => {
 			const { posts } = action.payload;
 
-			posts.forEach((post: IPost) => {
-				if (!state.byFeedId[post.feedId]) {
-					state.byFeedId[post.feedId] = [];
-				}
+			posts.reverse().forEach((post: IPost) => {
+				const { feedId } = post;
 
-				state.byFeedId[post.feedId] = [...state.byFeedId[post.feedId], post];
+				state.byFeedId[feedId] = state.byFeedId[feedId] ?? [];
+
+				state.byFeedId[feedId].push(post);
 			});
 		},
 		[getContentFromRssSource.fulfilled.type]: (
@@ -58,7 +58,7 @@ const postsSlice = createSlice({
 		) => {
 			const { feed, posts } = action.payload;
 
-			state.byFeedId[feed._id] = posts;
+			state.byFeedId[feed._id] = posts.reverse();
 		},
 		[setPostRead.fulfilled.type]: (
 			state,
@@ -86,7 +86,7 @@ const postsSlice = createSlice({
 		) => {
 			const { feedId, newPosts } = action.payload;
 
-			state.byFeedId[feedId].unshift(...newPosts);
+			state.byFeedId[feedId].unshift(...newPosts.reverse());
 		},
 		[deleteFeed.fulfilled.type]: (state, action: PayloadAction<string>) => {
 			delete state.byFeedId[action.payload];

@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { v4 as uuid4 } from 'uuid';
 
-import { IPost } from '../../models/IPost';
+import PostService from '../../services/PostService';
 import ProxyService from '../../services/ProxyService';
 import { FeedUrlData } from '../../types';
 import { getDiffBy } from '../../utils/collection';
 import parseRSS from '../../utils/parser';
-import { POST_STATES, RootState } from '../types';
+import { RootState } from '../types';
 
 const updatePostsData = createAsyncThunk(
 	'content/updatePostsData',
@@ -26,16 +25,14 @@ const updatePostsData = createAsyncThunk(
 				'title'
 			);
 
-			const newPosts: IPost[] = differencedPosts.map((post) => ({
-				...post,
-				feedId,
-				id: uuid4(),
-				state: POST_STATES.UNREAD,
-			}));
+			const apiResponse = await PostService.uploadNewPosts(
+				differencedPosts,
+				feedId
+			);
 
 			return {
+				newPosts: apiResponse.data,
 				feedId,
-				newPosts,
 			};
 		} catch (err) {
 			const message = (err as Error).message;

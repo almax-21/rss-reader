@@ -23,7 +23,7 @@ const getContentFromRssSource = createAsyncThunk(
 
 			const parsedFeedData = parseRSS(serializedContent);
 
-			const apiResponse = await FeedService.uploadFeedData(
+			const apiResponse = await FeedService.uploadNewFeedData(
 				parsedFeedData,
 				feedUrl
 			);

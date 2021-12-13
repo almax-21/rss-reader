@@ -11,13 +11,11 @@ import FeedContent from '../feeds';
 import PostContent from '../posts';
 import ContentSkeleton from '../UI/ContentSkeleton';
 
-const UPDATE_PERIOD_MS = 60000;
-
 const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
 	const { isLoadingFromApi, urlDataset } = useTypedSelector(selectRssMeta);
 
-	useAutoUpdate(urlDataset, UPDATE_PERIOD_MS);
+	useAutoUpdate(urlDataset);
 
 	if (isLoadingFromApi) {
 		return (

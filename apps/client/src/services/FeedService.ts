@@ -6,7 +6,7 @@ import { ParsedFeedData } from '../utils/parser/types';
 class FeedService {
 	static baseUrl = 'https://rss-reader-express-api.herokuapp.com';
 
-	static uploadFeedData(
+	static uploadNewFeedData(
 		parsedfeedData: ParsedFeedData,
 		feedUrl: string
 	): Promise<AxiosResponse<ApiFeedData>> {

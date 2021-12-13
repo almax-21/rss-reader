@@ -3,7 +3,10 @@ const Post = require('../models/Post');
 
 class FeedService {
 	static getAllContent(userId) {
-		return Promise.all([Feed.find({ userId }), Post.find({ userId })]);
+		return Promise.all([
+			Feed.find({ userId }),
+			Post.find({ userId }),
+		]);
 	}
 
 	static uploadFeed(data, userId) {
@@ -21,8 +24,9 @@ class FeedService {
 					state: 'UNREAD',
 					feedId: feed._id,
 					userId,
+					date: Date.now(),
 				})
-		);
+		).reverse();
 
 		return Promise.all([feed.save(), Post.insertMany(posts)]);
 	}

@@ -1,5 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
+import { IPost } from '../models/IPost';
+import { ParsedPost } from '../utils/parser/types';
+
 class PostService {
 	static baseUrl = 'https://rss-reader-express-api.herokuapp.com';
 
@@ -25,6 +28,24 @@ class PostService {
 		return axios.put(
 			endpointUrl,
 			{ feedId },
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
+	}
+
+	static uploadNewPosts(
+		newPosts: ParsedPost[],
+		feedId: string
+	): Promise<AxiosResponse<IPost[]>> {
+		const { href: endpointUrl } = new URL('/posts/upload', this.baseUrl);
+		const token = localStorage.getItem('token');
+
+		return axios.post(
+			endpointUrl,
+			{ newPosts, feedId },
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,

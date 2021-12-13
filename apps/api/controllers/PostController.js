@@ -24,6 +24,18 @@ class PostController {
 			res.status(500).send({ message: 'Server Error' });
 		}
 	}
+
+	static async uploadNewPosts(req, res) {
+		try {
+			const posts = await PostService.uploadNewPosts(req.body, req.user.id);
+
+			return res.json(posts);
+		} catch (err) {
+			console.error(err.message);
+
+			res.status(500).send({ message: 'Server Error' });
+		}
+	}
 }
 
 module.exports = PostController;
