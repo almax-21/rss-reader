@@ -12,11 +12,13 @@ import {
 } from '../../../store/selectors/contentSelectors';
 import {
 	switchFilterState,
+	switchSortType,
 	updateFilterQuery,
 } from '../../../store/slices/postsSlice';
-import { POST_STATES, POST_TYPE } from '../../../store/types';
-import { IPostFilter } from '../../../types';
+import { POST_STATE_TYPE, POST_STATES } from '../../../store/types';
+import { IPostFilter, SORT_TYPE } from '../../../types';
 import { debounce } from '../../../utils/perfomance';
+import FilterSort from '../../UI/FilterSort';
 import MyDropDown from '../../UI/MyDropDown';
 import MyModal from '../../UI/MyModal/index';
 import { MODAL_TYPES } from '../../UI/MyModal/types';
@@ -54,7 +56,15 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 		dispatch(updateFilterQuery(value));
 	}, 300);
 
-	const handleSwitchFilterState = (value: POST_TYPE) => () => {
+	const handleSwitchSortType = (newType: SORT_TYPE) => () => {
+		if (newType === postFilter.sort) {
+			return;
+		}
+
+		dispatch(switchSortType(newType));
+	};
+
+	const handleSwitchFilterState = (value: POST_STATE_TYPE) => () => {
 		if (value === postFilter.state) {
 			return;
 		}
@@ -98,6 +108,11 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 						title={intl.formatMessage({ id: postFilter.state })}
 						values={filterValues}
 						variant="outline-secondary"
+					/>
+					<FilterSort
+						activeSortType={postFilter.sort}
+						classes="filter__sort"
+						sortHandler={handleSwitchSortType}
 					/>
 					<Button
 						className="filter__btn filter__btn--mark-all"

@@ -1,5 +1,5 @@
 .filter {
-	max-width: 475px;
+	max-width: 540px;
 
 	&__group {
 		display: flex;
@@ -18,6 +18,12 @@
 		width: 70px;
 	}
 
+	&__sort {
+		margin-left: 15px;
+		margin-right: 15px;
+		margin-bottom: 20px;
+	}
+
 	&__btn--mark-all {
 		width: auto;
 
@@ -28,7 +34,6 @@
 
 	.dropdown-toggle {
 		width: 150px;
-		margin-right: 20px;
 		margin-bottom: 20px;
 	}
 }

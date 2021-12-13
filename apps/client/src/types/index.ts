@@ -2,7 +2,7 @@
 
 import { LocaleType } from '../i18n/types';
 import { IPost } from '../models/IPost';
-import { POST_TYPE } from '../store/types';
+import { POST_STATE_TYPE } from '../store/types';
 
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
@@ -15,9 +15,17 @@ export interface SignUpUserData extends SignInUserData {
 	lang: LocaleType;
 }
 
+export enum SORTS {
+	NEW_FIRST = 'NEW_FIRST',
+	OLD_FIRST = 'OLD_FIRST',
+}
+
+export type SORT_TYPE = typeof SORTS[keyof typeof SORTS];
+
 export interface IPostFilter {
-	state: POST_TYPE;
 	query: string;
+	state: POST_STATE_TYPE;
+	sort: SORT_TYPE;
 }
 
 export interface PostIdData {

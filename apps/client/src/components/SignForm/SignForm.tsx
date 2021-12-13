@@ -8,8 +8,9 @@ import { ObjectSchema } from 'yup';
 import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
 import { SIGN_FORM } from '../../schemas/types';
-import Icon from '../UI/Icon';
 import MySpinner from '../UI/MySpinner';
+import SvgIcon from '../UI/SvgIcon';
+import { SVG_ICON_VARIANTS } from '../UI/SvgIcon/types';
 
 import { SIGN_FORM_TYPES, SignFormType, SignFormValues } from './types';
 
@@ -84,10 +85,10 @@ const SignForm: FC<SignFormProps> = ({
 										width="284"
 									/>
 								) : (
-									<Icon
+									<SvgIcon
 										fill="#0d6efd"
 										height="284"
-										variant="success"
+										variant={SVG_ICON_VARIANTS.SUCCESS}
 										width="284"
 									/>
 								)}

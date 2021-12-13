@@ -41,6 +41,9 @@ export const messages: IMessages = {
 		[MESSAGES.MARK_ALL_AS_READ]: 'Mark all as read',
 		[MESSAGES.MARK_ALL_READ_WARNING]:
 			'Are you sure you want to mark everything as read?',
+		[MESSAGES.SORTING_POSTS]: 'Sorting posts',
+		[MESSAGES.NEW_FIRST]: 'New first',
+		[MESSAGES.OLD_FIRST]: 'Old first',
 		[MESSAGES.UNREAD]: 'Unread',
 		[MESSAGES.CLOSE]: 'Close',
 		[MESSAGES.FEEDS]: 'Feeds',
@@ -105,6 +108,9 @@ export const messages: IMessages = {
 		[MESSAGES.MARK_ALL_AS_READ]: 'Отметить все прочитанным',
 		[MESSAGES.MARK_ALL_READ_WARNING]:
 			'Вы уверены, что хотите отметить все прочитанным?',
+			[MESSAGES.SORTING_POSTS]: 'Сортировка постов',
+		[MESSAGES.NEW_FIRST]: 'Сначала новые',
+		[MESSAGES.OLD_FIRST]: 'Сначала старые',
 		[MESSAGES.CLOSE]: 'Закрыть',
 		[MESSAGES.FEEDS]: 'Фиды',
 		[MESSAGES.NO_FEEDS]: 'Фидов пока нет',

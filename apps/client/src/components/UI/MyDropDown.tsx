@@ -3,7 +3,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 import { FormattedMessage } from 'react-intl';
 
-import { POST_TYPE } from '../../store/types';
+import { POST_STATE_TYPE } from '../../store/types';
 
 interface MyDropDownProps<T> {
 	variant: Variant;
@@ -13,7 +13,7 @@ interface MyDropDownProps<T> {
 	handleSetActiveValue: (value: T) => () => void;
 }
 
-const MyDropDown: FC<MyDropDownProps<POST_TYPE>> = ({
+const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 	variant,
 	title,
 	values,

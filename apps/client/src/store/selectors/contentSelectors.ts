@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { IPost } from '../../models/IPost';
+import { SORTS } from '../../types';
 import { POST_STATES, RootState } from '../types';
 
 export const selectFeedIds = (state: RootState) => state.feeds.ids;
@@ -64,11 +65,14 @@ export const selectFilteredPosts = createSelector(
 			post.title.toLowerCase().includes(filter.query.toLowerCase())
 		);
 
+		const sortedPosts =
+			filter.sort === SORTS.OLD_FIRST ? searchedPosts.reverse() : searchedPosts;
+
 		if (filter.state === POST_STATES.ALL) {
-			return searchedPosts;
+			return sortedPosts;
 		}
 
-		const filteredPosts = searchedPosts.filter(
+		const filteredPosts = sortedPosts.filter(
 			(post) => post.state === filter.state
 		);
 

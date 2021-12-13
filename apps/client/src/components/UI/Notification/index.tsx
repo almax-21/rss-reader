@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
-import Icon from '../Icon';
+import SvgIcon from '../SvgIcon';
 
 import { NotificationData } from './types';
 
@@ -24,7 +24,7 @@ const Notification: FC<NotificationProps> = ({ data, isShow, onClose }) => {
 			variant={variant}
 			onClose={onClose}
 		>
-			<Icon className="notification__icon" variant={variant} />
+			<SvgIcon className="notification__icon" variant={variant} />
 			{message}
 		</Alert>
 	);

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IPost } from '../../models/IPost';
-import { NewPostsData, PostIdData } from '../../types';
+import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '../../types';
 import deleteFeed from '../async-actions/deleteFeed';
 import getDataFromApi from '../async-actions/getAllContentFromApi';
 import getContentFromRssSource from '../async-actions/getContentFromRssSource';
@@ -11,8 +11,8 @@ import updatePostsData from '../async-actions/updatePostsData';
 import {
 	ApiContentData,
 	ApiFeedData,
+	POST_STATE_TYPE,
 	POST_STATES,
-	POST_TYPE,
 	PostsState,
 } from '../types';
 
@@ -21,8 +21,9 @@ import { logoutUser } from './userSlice';
 const initialState: PostsState = {
 	byFeedId: {},
 	filter: {
-		state: POST_STATES.ALL,
 		query: '',
+		state: POST_STATES.ALL,
+		sort: SORTS.NEW_FIRST,
 	},
 };
 
@@ -30,11 +31,14 @@ const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
 	reducers: {
-		switchFilterState: (state, action: PayloadAction<POST_TYPE>) => {
-			state.filter.state = action.payload;
-		},
 		updateFilterQuery: (state, action: PayloadAction<string>) => {
 			state.filter.query = action.payload;
+		},
+		switchSortType: (state, action: PayloadAction<SORT_TYPE>) => {
+			state.filter.sort = action.payload;
+		},
+		switchFilterState: (state, action: PayloadAction<POST_STATE_TYPE>) => {
+			state.filter.state = action.payload;
 		},
 	},
 	extraReducers: {
@@ -94,13 +98,15 @@ const postsSlice = createSlice({
 		[logoutUser.type]: (state) => {
 			state.byFeedId = {};
 			state.filter = {
-				state: POST_STATES.ALL,
 				query: '',
+				state: POST_STATES.ALL,
+				sort: SORTS.NEW_FIRST,
 			};
 		},
 	},
 });
 
-export const { switchFilterState, updateFilterQuery } = postsSlice.actions;
+export const { updateFilterQuery, switchSortType, switchFilterState } =
+	postsSlice.actions;
 
 export default postsSlice.reducer;

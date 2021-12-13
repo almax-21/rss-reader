@@ -19,7 +19,8 @@ export enum POST_STATES {
 	ALL = 'ALL',
 }
 
-export type POST_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
+
+export type POST_STATE_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
 
 export interface ApiFeedData {
 	feed: IFeed;
