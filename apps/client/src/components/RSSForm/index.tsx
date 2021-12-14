@@ -79,8 +79,8 @@ const RSSForm: FC = () => {
 				isValid,
 				errors: validationFormErrors,
 			}) => (
-				<Form noValidate className="pb-4" onSubmit={handleSubmit}>
-					<Form.Group as={Row} className="mb-2">
+				<Form noValidate onSubmit={handleSubmit}>
+					<Form.Group as={Row} className="mb-3">
 						<Col className="text-dark" md="9">
 							<FloatingLabel
 								controlId="floatingInput"
@@ -116,10 +116,6 @@ const RSSForm: FC = () => {
 							</Button>
 						</Col>
 					</Form.Group>
-					<Form.Text>
-						<FormattedMessage id={MESSAGES.EXAMPLE} />:
-						https://3dnews.ru/news/rss/
-					</Form.Text>
 				</Form>
 			)}
 		</Formik>

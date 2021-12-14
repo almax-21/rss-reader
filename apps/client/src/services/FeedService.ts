@@ -52,7 +52,7 @@ class FeedService {
 		);
 	}
 
-	static deleteFeedData(id: string): Promise<AxiosResponse<string>> {
+	static deleteFeedData(id: string, timeout = 30000): Promise<AxiosResponse<string>> {
 		const { href: endpointUrl } = new URL(`/feeds?id=${id}`, API_ORIGIN);
 		const token = localStorage.getItem('token');
 
@@ -60,6 +60,7 @@ class FeedService {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+			timeout,
 		});
 	}
 }

@@ -6,17 +6,11 @@
 
 .rss-input + .invalid-feedback {
 	position: absolute;
-	transform: translateY(75px);
+	transform: translateY(50px);
 }
 
 small.form-text {
 	font-size: 16px;
-}
-
-@media (max-width: 384px) {
-	.rss-input + .invalid-feedback {
-		transform: translateY(100px);
-	}
 }
 
 @include media-breakpoint-up(md) {
@@ -25,6 +19,6 @@ small.form-text {
 	}
 
 	.rss-input + .invalid-feedback {
-		transform: translateY(28px);
+		transform: translateY(5px);
 	}
 }

@@ -99,7 +99,7 @@ const SignForm: FC<SignFormProps> = ({
 									onSubmit={handleSubmit}
 								>
 									<h2 className="mb-4">
-										<FormattedMessage id={MESSAGES.SIGN_IN} />
+										<FormattedMessage id={type} />
 									</h2>
 
 									<FloatingLabel
@@ -188,7 +188,7 @@ const SignForm: FC<SignFormProps> = ({
 											{isLoading ? (
 												<MySpinner size="sm" />
 											) : (
-												<FormattedMessage id={MESSAGES.SIGN_IN} />
+												<FormattedMessage id={type} />
 											)}
 										</Button>
 

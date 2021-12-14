@@ -18,6 +18,11 @@ const deleteFeed = createAsyncThunk(
 			return id;
 		} catch (err) {
 			const message = (err as Error).message;
+			const isTimeoutError = /^timeout.*exceeded$/.test(message);
+
+			if (isTimeoutError) {
+				thunkAPI.dispatch(notificationReqFailure(MESSAGES.ERROR_TIMEOUT));
+			}
 
 			navigator.onLine
 				? thunkAPI.dispatch(notificationReqFailure(MESSAGES.ERROR_UNKNOWN))

@@ -7,7 +7,6 @@ import { getDiffBy } from '../utils/collection';
 
 import useTypedDispatch from './redux/useTypedDispatch';
 
-const FIRST_UPDATE_MS = 5000;
 const UPDATE_PERIOD_MS = 60000;
 
 const useAutoUpdate = (urlDataset: FeedUrlData[]): void => {
@@ -37,13 +36,13 @@ const useAutoUpdate = (urlDataset: FeedUrlData[]): void => {
 		};
 
 		const newUrlDataset = getDiffBy(
-			urlDataset.slice(),
+			urlDataset,
 			prevUrlDatasetRef.current,
 			'feedId'
 		);
 
 		newUrlDataset.forEach((urlData) => {
-			checkForUpdate(urlData, FIRST_UPDATE_MS);
+			checkForUpdate(urlData, 0);
 		});
 
 		prevUrlDatasetRef.current = urlDataset;
