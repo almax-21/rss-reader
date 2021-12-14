@@ -4,6 +4,10 @@ import { LocaleType } from '../i18n/types';
 import { IPost } from '../models/IPost';
 import { POST_STATE_TYPE } from '../store/types';
 
+export const API_ORIGIN = 'https://rss-reader-express-api.herokuapp.com';
+
+export const DELETE_AUTH_CACHE = 'deleteAuthCache';
+
 export type TimeoutId = ReturnType<typeof setTimeout>;
 
 export interface SignInUserData {

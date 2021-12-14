@@ -8,11 +8,12 @@ import {
 	notificationReqSuccess,
 } from '../store/slices/notificationSlice';
 import { SignInUserData, SignUpUserData } from '../types';
+import { API_ORIGIN } from '../types/index';
 
 const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://rss-reader-express-api.herokuapp.com/user',
+		baseUrl: `${API_ORIGIN}/user`,
 	}),
 	endpoints: (build) => ({
 		createUser: build.mutation<IUser, SignUpUserData>({

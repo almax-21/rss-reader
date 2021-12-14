@@ -1,13 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { IPost } from '../models/IPost';
+import { API_ORIGIN } from '../types/index';
 import { ParsedPost } from '../utils/parser/types';
 
 class PostService {
-	static baseUrl = 'https://rss-reader-express-api.herokuapp.com';
-
 	static setPostRead(id: string): Promise<AxiosResponse<string>> {
-		const { href: endpointUrl } = new URL('/posts', this.baseUrl);
+		const { href: endpointUrl } = new URL('/posts', API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.put(
@@ -22,7 +21,7 @@ class PostService {
 	}
 
 	static setAllActivePostsRead(feedId: string): Promise<AxiosResponse<string>> {
-		const { href: endpointUrl } = new URL('/posts/all', this.baseUrl);
+		const { href: endpointUrl } = new URL('/posts/all', API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.put(
@@ -40,7 +39,7 @@ class PostService {
 		newPosts: ParsedPost[],
 		feedId: string
 	): Promise<AxiosResponse<IPost[]>> {
-		const { href: endpointUrl } = new URL('/posts/upload', this.baseUrl);
+		const { href: endpointUrl } = new URL('/posts/upload', API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.post(

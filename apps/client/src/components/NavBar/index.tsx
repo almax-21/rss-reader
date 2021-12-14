@@ -6,6 +6,7 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { selectUser } from '../../store/selectors/userSelectors';
 import { logoutUser } from '../../store/slices/userSlice';
+import { DELETE_AUTH_CACHE } from '../../types';
 
 import './style.scss';
 
@@ -16,6 +17,10 @@ const NavBar: FC = () => {
 	const dispatch = useTypedDispatch();
 
 	const handleSignOut = () => {
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.controller?.postMessage(DELETE_AUTH_CACHE);
+		}
+
 		dispatch(logoutUser());
 		localStorage.removeItem('token');
 	};

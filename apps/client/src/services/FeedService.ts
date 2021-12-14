@@ -1,16 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { ApiContentData, ApiFeedData } from '../store/types';
+import { API_ORIGIN } from '../types/index';
 import { ParsedFeedData } from '../utils/parser/types';
 
 class FeedService {
-	static baseUrl = 'https://rss-reader-express-api.herokuapp.com';
-
 	static uploadNewFeedData(
 		parsedfeedData: ParsedFeedData,
 		feedUrl: string
 	): Promise<AxiosResponse<ApiFeedData>> {
-		const { href: endpointUrl } = new URL('/feeds/upload', this.baseUrl);
+		const { href: endpointUrl } = new URL('/feeds/upload', API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.post(
@@ -27,7 +26,7 @@ class FeedService {
 	static downloadContentData(
 		token: string | null
 	): Promise<AxiosResponse<ApiContentData>> {
-		const { href: endpointUrl } = new URL('/feeds', this.baseUrl);
+		const { href: endpointUrl } = new URL('/feeds', API_ORIGIN);
 
 		return axios.get(endpointUrl, {
 			headers: {
@@ -39,7 +38,7 @@ class FeedService {
 	static updateFeedsOrder(
 		newOrder: string[]
 	): Promise<AxiosResponse<ApiContentData>> {
-		const { href: endpointUrl } = new URL('/feeds/order', this.baseUrl);
+		const { href: endpointUrl } = new URL('/feeds/order', API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.post(
@@ -54,7 +53,7 @@ class FeedService {
 	}
 
 	static deleteFeedData(id: string): Promise<AxiosResponse<string>> {
-		const { href: endpointUrl } = new URL(`/feeds?id=${id}`, this.baseUrl);
+		const { href: endpointUrl } = new URL(`/feeds?id=${id}`, API_ORIGIN);
 		const token = localStorage.getItem('token');
 
 		return axios.delete(endpointUrl, {

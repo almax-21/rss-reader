@@ -1,6 +1,7 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { Badge, CloseButton, ListGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
+import { AnyAction } from '@reduxjs/toolkit';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
@@ -65,7 +66,12 @@ const FeedItem: FC<FeedItemProps> = ({
 	};
 
 	const handleDeleteFeed = () => {
-		dispatch(deleteFeed(id));
+		dispatch(deleteFeed(id))
+			.then((action: AnyAction) => {
+				if (action.meta.requestStatus === 'rejected') {
+					handleCloseModal();
+				}
+			});
 	};
 
 	const setDraggable = () => () => {
