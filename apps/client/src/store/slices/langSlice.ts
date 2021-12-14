@@ -42,14 +42,6 @@ const langSlice = createSlice({
 			}
 		);
 		builder.addMatcher(
-			userAPI.endpoints.loginUser.matchFulfilled,
-			(state, action: PayloadAction<IUser>) => {
-				const { lang } = action.payload;
-
-				state.lang = lang;
-			}
-		);
-		builder.addMatcher(
 			userAPI.endpoints.authUser.matchFulfilled,
 			(state, action: PayloadAction<IUser>) => {
 				const { lang } = action.payload;

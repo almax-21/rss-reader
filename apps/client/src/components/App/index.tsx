@@ -3,6 +3,7 @@ import { IntlProvider } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter } from 'react-router-dom';
 
+import AuthContext from '../../contexts/AuthContext';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
@@ -20,7 +21,11 @@ import AppRouter from './AppRouter';
 import './style.scss';
 
 const App: FC = () => {
-	const { isLoading: isAuthPending } = userAPI.useAuthUserQuery();
+	// we need to auth user after success login (and not during login)
+	// because if user loss network connection after login
+	// and enter into offline mode (PWA) he get white screen
+	const { isLoading: isAuthPending, refetch: refetchAuthQuery } =
+		userAPI.useAuthUserQuery();
 
 	const { lang } = useTypedSelector(selectLang);
 	const { isAuth, userData } = useTypedSelector(selectUser);
@@ -46,7 +51,9 @@ const App: FC = () => {
 						<MySpinner />
 					</div>
 				) : (
-					<AppRouter />
+					<AuthContext.Provider value={{ refetchAuthQuery }}>
+						<AppRouter />
+					</AuthContext.Provider>
 				)}
 				<Footer />
 			</BrowserRouter>

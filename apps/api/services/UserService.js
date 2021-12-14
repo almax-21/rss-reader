@@ -12,7 +12,7 @@ class UserService {
 		return user.save();
 	}
 
-	static async authorizeUser(id) {
+	static async authUser(id) {
 		const user = await User.findOne({ _id: id });
 
 		const token = jwt.sign({ id: user.id }, config.get('secretKey'), {

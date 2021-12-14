@@ -1,6 +1,7 @@
-import React, { FC, useMemo, useRef } from 'react';
+import React, { FC, useContext, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
+import AuthContext from '../../contexts/AuthContext';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import setSignInSchema from '../../schemas/setSignInSchema';
@@ -9,7 +10,7 @@ import userAPI from '../../services/UserService';
 import { selectLang } from '../../store/selectors/langSelectors';
 
 import SignForm from './SignForm';
-import { SIGN_FORM_TYPES,SignFormValues } from './types';
+import { SIGN_FORM_TYPES, SignFormValues } from './types';
 
 import './style.scss';
 
@@ -23,6 +24,8 @@ const SignIn: FC = () => {
 		userAPI.useLoginUserMutation();
 
 	const loginErrorRef = useRef<string>('');
+
+	const authContext = useContext(AuthContext);
 
 	const { lang } = useTypedSelector(selectLang);
 	const intl = useIntl();
@@ -44,7 +47,13 @@ const SignIn: FC = () => {
 	const handleLogin = (values: SignFormValues) => {
 		const { username, password } = values;
 
-		loginUser({ username, password });
+		loginUser({ username, password }).then((res) => {
+			if ('error' in res) {
+				return;
+			}
+
+			authContext?.refetchAuthQuery();
+		});
 	};
 
 	return (

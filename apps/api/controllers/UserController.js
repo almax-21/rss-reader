@@ -46,9 +46,6 @@ class UserController {
 
 			return res.json({
 				token,
-				id: user.id,
-				username: user.username,
-				lang: user.lang,
 			});
 		} catch (err) {
 			console.error(err.message);
@@ -57,9 +54,9 @@ class UserController {
 		}
 	}
 
-	static async authorizeUser(req, res) {
+	static async authUser(req, res) {
 		try {
-			const userData = await UserService.authorizeUser(req.user.id);
+			const userData = await UserService.authUser(req.user.id);
 
 			return res.json(userData);
 		} catch (err) {

@@ -37,13 +37,6 @@ const userSlice = createSlice({
 			}
 		);
 		builder.addMatcher(
-			userAPI.endpoints.loginUser.matchFulfilled,
-			(state, action: PayloadAction<IUser>) => {
-				state.isAuth = true;
-				state.userData = action.payload;
-			}
-		);
-		builder.addMatcher(
 			userAPI.endpoints.authUser.matchFulfilled,
 			(state, action: PayloadAction<IUser>) => {
 				state.isAuth = true;

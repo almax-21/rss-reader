@@ -9,7 +9,7 @@ const router = new Router();
 
 router.post('/registration', validateUser, UserController.createUser);
 router.post('/login', UserController.loginUser);
-router.get('/auth', authMiddleware, UserController.authorizeUser);
+router.get('/auth', authMiddleware, UserController.authUser);
 router.put('/lang', authMiddleware, UserController.switchLang);
 
 module.exports = router;

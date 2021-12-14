@@ -19,6 +19,10 @@ export interface SignUpUserData extends SignInUserData {
 	lang: LocaleType;
 }
 
+export interface TokenData {
+	token: string;
+}
+
 export enum SORTS {
 	NEW_FIRST = 'NEW_FIRST',
 	OLD_FIRST = 'OLD_FIRST',

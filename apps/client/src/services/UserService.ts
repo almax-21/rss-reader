@@ -7,7 +7,7 @@ import {
 	notificationReqPending,
 	notificationReqSuccess,
 } from '../store/slices/notificationSlice';
-import { SignInUserData, SignUpUserData } from '../types';
+import { SignInUserData, SignUpUserData, TokenData } from '../types';
 import { API_ORIGIN } from '../types/index';
 
 const userAPI = createApi({
@@ -49,7 +49,7 @@ const userAPI = createApi({
 				}
 			},
 		}),
-		loginUser: build.mutation<IUser, SignInUserData>({
+		loginUser: build.mutation<TokenData, SignInUserData>({
 			query: (userData) => ({
 				url: '/login',
 				method: 'POST',
