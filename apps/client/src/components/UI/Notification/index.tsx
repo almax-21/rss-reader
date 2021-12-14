@@ -24,7 +24,9 @@ const Notification: FC<NotificationProps> = ({ data, isShow, onClose }) => {
 			variant={variant}
 			onClose={onClose}
 		>
-			<SvgIcon className="notification__icon" variant={variant} />
+			<div className="notification__icon">
+				<SvgIcon variant={variant} />
+			</div>
 			{message}
 		</Alert>
 	);

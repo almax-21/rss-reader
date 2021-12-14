@@ -1,10 +1,13 @@
 .notification {
 	z-index: 900;
 
-	display: flex;
-  flex-wrap: wrap;
+	padding-bottom: 10px !important;
 
 	&__icon {
-		margin-right: 20px;
+		display: inline-block;
+		vertical-align: middle;
+
+		padding-right: 15px;
+		padding-bottom: 10px;
 	}
 }
