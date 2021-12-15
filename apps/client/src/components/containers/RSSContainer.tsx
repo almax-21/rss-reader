@@ -5,13 +5,15 @@ import RSSForm from '../RSSForm';
 
 const RSSContainer: FC = () => {
 	return (
-		<Container fluid as="section" className="bg-dark p-4 pt-0">
-			<Row className="justify-content-center">
-				<Col className="text-white" lg="9" md="10">
-					<RSSForm />
-				</Col>
-			</Row>
-		</Container>
+		<div className="bg-dark">
+			<Container as="section" className="bg-dark p-4 pt-0">
+				<Row className="justify-content-center">
+					<Col className="text-white" md="11">
+						<RSSForm />
+					</Col>
+				</Row>
+			</Container>
+		</div>
 	);
 };
 

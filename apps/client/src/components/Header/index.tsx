@@ -14,30 +14,28 @@ const Header: FC = () => {
 	const { isAuth } = useTypedSelector(selectUser);
 
 	return (
-		<Container fluid as="header" className="bg-dark p-4">
-			<Row className="justify-content-center">
-				<Col
-					className="d-flex justify-content-between flex-wrap"
-					lg="9"
-					md="10"
-				>
-					<LocaleSwitcher classes="header__locale-switcher" />
-					{isAuth && <NavBar />}
-				</Col>
-			</Row>
-			<Row className="justify-content-center">
-				<Col className="text-white" lg="9" md="10">
-					<h1 className="display-3 mb-0">
-						<FormattedMessage id={MESSAGES.MAIN_HEADER} />
-					</h1>
-					{!isAuth && (
-						<p className="lead">
-							<FormattedMessage id={MESSAGES.LEAD} />
-						</p>
-					)}
-				</Col>
-			</Row>
-		</Container>
+		<div className="bg-dark">
+			<Container as="header" className="p-4">
+				<Row className="justify-content-center">
+					<Col className="d-flex justify-content-between flex-wrap" md="11">
+						<LocaleSwitcher classes="header__locale-switcher" />
+						{isAuth && <NavBar />}
+					</Col>
+				</Row>
+				<Row className="justify-content-center">
+					<Col className="text-white" md="11">
+						<h1 className="display-3 mb-0">
+							<FormattedMessage id={MESSAGES.MAIN_HEADER} />
+						</h1>
+						{!isAuth && (
+							<p className="lead">
+								<FormattedMessage id={MESSAGES.LEAD} />
+							</p>
+						)}
+					</Col>
+				</Row>
+			</Container>
+		</div>
 	);
 };
 

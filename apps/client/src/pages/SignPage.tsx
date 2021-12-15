@@ -10,9 +10,9 @@ const SignPage = () => {
 	const { location } = useHistory();
 
 	return (
-		<Container fluid as="section" className="p-4 pt-5">
+		<Container as="section" className="p-4 pt-5">
 			<Row className="d-flex justify-content-center align-items-center">
-				<Col className="mb-5" lg="9" md="10">
+				<Col className="mb-5" md="11">
 					{location.pathname === ROUTES.SIGN_IN ? (
 						<SignInForm />
 					) : (

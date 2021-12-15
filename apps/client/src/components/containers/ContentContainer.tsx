@@ -19,7 +19,7 @@ const ContentContainer: FC = () => {
 
 	if (isLoadingFromApi) {
 		return (
-			<Container fluid className="container-xxl p-4">
+			<Container className="container-xxl p-4">
 				<Row>
 					<ContentSkeleton />
 				</Row>
@@ -28,7 +28,7 @@ const ContentContainer: FC = () => {
 	}
 
 	return (
-		<Container fluid className="container-xxl p-4">
+		<Container className="container-xxl p-4">
 			{feeds.length === 0 ? (
 				<Row>
 					<h2 className="display-5 text-center">
