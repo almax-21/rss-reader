@@ -1,13 +1,19 @@
 .notification {
 	z-index: 900;
 
+	padding-top: 15px !important;
 	padding-bottom: 10px !important;
 
 	&__icon {
 		display: inline-block;
 		vertical-align: middle;
 
+		padding-top: 5px;
 		padding-right: 15px;
 		padding-bottom: 10px;
+	}
+
+	.btn-close {
+		padding-top: 31px !important;
 	}
 }

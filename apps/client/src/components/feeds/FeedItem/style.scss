@@ -6,6 +6,13 @@
 	&__title {
 		margin-right: 5px;
 	}
+
+	.badge {
+		align-self: flex-start;
+
+		margin-top: 2px;
+		margin-right: 4px;
+	}
 }
 
 .feed-item.active {
