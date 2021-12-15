@@ -1,3 +1,4 @@
+const Feed = require('../models/Feed');
 const FeedService = require('../services/FeedService');
 
 class FeedController {
@@ -15,6 +16,17 @@ class FeedController {
 
 	static async uploadFeed(req, res) {
 		try {
+			const { feedUrl } = req.body;
+
+			const isFeedExist = await Feed.findOne({
+				url: feedUrl,
+				userId: req.user.id,
+			});
+
+			if (isFeedExist) {
+				return res.status(400).json({ message: 'Feed already exists' });
+			}
+
 			const [feed, posts] = await FeedService.uploadFeed(req.body, req.user.id);
 
 			return res.json({ feed, posts });
