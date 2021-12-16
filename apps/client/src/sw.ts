@@ -52,6 +52,19 @@ registerRoute(
 	})
 );
 
+registerRoute(
+	({ url }) =>
+		url.origin === 'https://www.google.com' && url.pathname === '/s2/favicons',
+	new CacheFirst({
+		cacheName: 'feed-favicon-google-response',
+		plugins: [
+			new CacheableResponsePlugin({
+				statuses: [0, 200],
+			}),
+		],
+	})
+);
+
 self.addEventListener('message', (evt: ExtendableMessageEvent) => {
 	if (evt.data === DELETE_AUTH_CACHE) {
 		self.caches.delete('auth-api-response');

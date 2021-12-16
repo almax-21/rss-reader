@@ -22,12 +22,9 @@ const FeedList: FC<FeedListProps> = ({ feeds }) => {
 			{feeds.map((feed, order) => (
 				<FeedItem
 					key={feed._id}
-					description={feed.description}
 					dragHandlers={dragHandlers}
-					id={feed._id}
+					feed={feed}
 					order={order}
-					title={feed.title}
-					unreadPostsCount={feed.unreadPostsCount}
 				/>
 			))}
 		</ListGroup>

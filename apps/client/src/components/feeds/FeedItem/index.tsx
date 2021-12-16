@@ -7,6 +7,7 @@ import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { DragHandlers } from '../../../hooks/useDraggableList';
 import { MESSAGES } from '../../../i18n/types';
+import { IFeedWithCounter } from '../../../models/IFeed';
 import deleteFeed from '../../../store/async-actions/deleteFeed';
 import { selectFeeds } from '../../../store/selectors/contentSelectors';
 import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
@@ -19,33 +20,27 @@ import { MODAL_TYPES } from '../../UI/MyModal/types';
 import './style.scss';
 
 interface FeedItemProps {
-	id: string;
-	title: string;
-	description: string;
+	feed: IFeedWithCounter;
 	order: number;
-	unreadPostsCount: number;
 	dragHandlers: DragHandlers;
 }
 
-const FeedItem: FC<FeedItemProps> = ({
-	id,
-	title,
-	description,
-	unreadPostsCount,
-	order,
-	dragHandlers,
-}) => {
+const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 	const [isDraggable, setIsDraggable] = useState<boolean>(false);
 
+	const { _id, title, description, unreadPostsCount, url } = feed;
+
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
+	const isActiveFeed = _id === activeFeedId;
+
+	const urlHostname = new URL(url).hostname;
+
 	const feeds = useTypedSelector(selectFeeds);
 
 	const dispatch = useTypedDispatch();
 
 	const intl = useIntl();
-
-	const isActiveFeed = id === activeFeedId;
 
 	const handleOpenModal = (event: MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -62,11 +57,11 @@ const FeedItem: FC<FeedItemProps> = ({
 			return;
 		}
 
-		dispatch(updateActiveFeed(id));
+		dispatch(updateActiveFeed(_id));
 	};
 
 	const handleDeleteFeed = () => {
-		dispatch(deleteFeed(id))
+		dispatch(deleteFeed(_id))
 			.then((action: AnyAction) => {
 				if (action.meta.requestStatus === 'rejected') {
 					handleCloseModal();
@@ -105,6 +100,13 @@ const FeedItem: FC<FeedItemProps> = ({
 				<div className="ms-2 me-auto pe-none">
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
+						<img
+							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
+							className="feed-item__icon"
+							height="16"
+							src={`https://www.google.com/s2/favicons?domain=www.${urlHostname}`}
+							width="16"
+						/>
 						{!!unreadPostsCount && (
 							<Badge pill bg="danger" className="mb-2">
 								{unreadPostsCount}
