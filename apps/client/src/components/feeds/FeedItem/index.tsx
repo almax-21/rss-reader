@@ -34,7 +34,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
 	const isActiveFeed = _id === activeFeedId;
 
-	const urlHostname = new URL(url).hostname;
+	const urlFeedHostname = new URL(url).hostname;
 
 	const feeds = useTypedSelector(selectFeeds);
 
@@ -61,12 +61,11 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 	};
 
 	const handleDeleteFeed = () => {
-		dispatch(deleteFeed(_id))
-			.then((action: AnyAction) => {
-				if (action.meta.requestStatus === 'rejected') {
-					handleCloseModal();
-				}
-			});
+		dispatch(deleteFeed(_id)).then((action: AnyAction) => {
+			if (action.meta.requestStatus === 'rejected') {
+				handleCloseModal();
+			}
+		});
 	};
 
 	const setDraggable = () => () => {
@@ -101,10 +100,10 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						<img
-							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
+							alt=" "
 							className="feed-item__icon"
 							height="16"
-							src={`https://www.google.com/s2/favicons?sz=64&domain=www.${urlHostname}`}
+							src={`https://www.google.com/s2/favicons?sz=64&domain=www.${urlFeedHostname}`}
 							width="16"
 						/>
 						{!!unreadPostsCount && (
