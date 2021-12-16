@@ -55,7 +55,7 @@ registerRoute(
 registerRoute(
 	({ url }) =>
 		url.origin === 'https://www.google.com' && url.pathname === '/s2/favicons',
-	new CacheFirst({
+	new NetworkFirst({
 		cacheName: 'feed-favicon-google-response',
 		plugins: [
 			new CacheableResponsePlugin({
