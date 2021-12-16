@@ -104,7 +104,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
 							className="feed-item__icon"
 							height="16"
-							src={`https://www.google.com/s2/favicons?domain=www.${urlHostname}`}
+							src={`https://www.google.com/s2/favicons?sz=64&domain=www.${urlHostname}`}
 							width="16"
 						/>
 						{!!unreadPostsCount && (
