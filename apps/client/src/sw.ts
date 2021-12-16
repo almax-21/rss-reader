@@ -32,11 +32,6 @@ registerRoute(
 	({ url }) => url.origin === API_ORIGIN && url.pathname === '/user/auth',
 	new NetworkFirst({
 		cacheName: 'auth-api-response',
-		plugins: [
-			new CacheableResponsePlugin({
-				statuses: [0, 200],
-			}),
-		],
 	})
 );
 
@@ -44,11 +39,7 @@ registerRoute(
 	({ url }) => url.origin === API_ORIGIN && url.pathname === '/feeds',
 	new NetworkFirst({
 		cacheName: 'content-api-response',
-		plugins: [
-			new CacheableResponsePlugin({
-				statuses: [0, 200],
-			}),
-		],
+		networkTimeoutSeconds: 10,
 	})
 );
 
