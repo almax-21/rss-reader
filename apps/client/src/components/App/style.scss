@@ -29,6 +29,16 @@ img {
 	);
 }
 
+.list-item {
+	cursor: pointer !important;
+
+	transition: background-color 0.2s;
+}
+
+.list-item.active {
+	cursor: default !important;
+}
+
 @include media-breakpoint-up(md) {
 	.loading-bar {
 		height: 3px;

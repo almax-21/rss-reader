@@ -86,7 +86,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 				action={feeds.length > 1}
 				active={isActiveFeed && feeds.length > 1}
 				as="li"
-				className="feed-item d-flex justify-content-center"
+				className="list-item feed-item d-flex justify-content-center"
 				draggable={isDraggable}
 				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP_SELECT })}
 				onClick={handleUpdateActiveFeed}

@@ -1,0 +1,9 @@
+.menu-item {
+	&__text {
+		margin: 0 5px;
+	}
+
+	.accordion-header > button {
+		padding-left: 5px;
+	}
+}
