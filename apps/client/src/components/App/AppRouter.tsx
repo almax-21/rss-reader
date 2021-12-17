@@ -6,11 +6,11 @@ import useNotification from '../../hooks/useNotification';
 import { privateRoutes, publicRoutes } from '../../router/index';
 import { ROUTES } from '../../router/types';
 import { selectNotification } from '../../store/selectors/notificationSelectors';
-import { selectUser } from '../../store/selectors/userSelectors';
+import { selectAuthState } from '../../store/selectors/userSelectors';
 import Notification from '../UI/Notification';
 
 const AppRouter: FC = () => {
-	const { isAuth } = useTypedSelector(selectUser);
+	const isAuth = useTypedSelector(selectAuthState);
 
 	const { completedLoadStatus, successMessage, errorMessage } =
 		useTypedSelector(selectNotification);

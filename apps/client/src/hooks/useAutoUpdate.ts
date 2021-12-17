@@ -1,21 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { AnyAction } from 'redux';
 
-import updatePostsData from '../store/async-actions/updatePostsData';
+import updateFeedsData from '../store/async-actions/updateFeedsData';
 import { FeedUrlData } from '../types';
 import { getDiffBy } from '../utils/collection';
 
 import useTypedDispatch from './redux/useTypedDispatch';
 
-const UPDATE_PERIOD_MS = 60000;
+const UPDATE_PERIOD_MS = 180000;
 
-const useAutoUpdate = (urlDataset: FeedUrlData[]): void => {
+const useAutoUpdate = (
+	urlDataset: FeedUrlData[],
+	isAutoUpdateEnabled: boolean
+): void => {
 	const dispatch = useTypedDispatch();
 
 	const prevUrlDatasetRef = useRef<FeedUrlData[]>([]);
 
 	useEffect(() => {
-		if (urlDataset.length === 0) {
+		if (!isAutoUpdateEnabled || urlDataset.length === 0) {
 			prevUrlDatasetRef.current = [];
 
 			return;
@@ -23,7 +26,7 @@ const useAutoUpdate = (urlDataset: FeedUrlData[]): void => {
 
 		const checkForUpdate = (urlData: FeedUrlData, timeMs: number) => {
 			setTimeout(() => {
-				dispatch(updatePostsData(urlData)).then((action: AnyAction) => {
+				dispatch(updateFeedsData(urlData)).then((action: AnyAction) => {
 					const needToCancel = action?.meta?.condition ?? false;
 
 					if (needToCancel) {
@@ -46,7 +49,7 @@ const useAutoUpdate = (urlDataset: FeedUrlData[]): void => {
 		});
 
 		prevUrlDatasetRef.current = urlDataset;
-	}, [urlDataset]);
+	}, [isAutoUpdateEnabled, urlDataset]);
 };
 
 export default useAutoUpdate;

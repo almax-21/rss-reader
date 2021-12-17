@@ -7,7 +7,7 @@ import getDataFromApi from '../async-actions/getAllContentFromApi';
 import getContentFromRssSource from '../async-actions/getContentFromRssSource';
 import setAllActivePostsRead from '../async-actions/setAllActivePostsRead';
 import setPostRead from '../async-actions/setPostRead';
-import updatePostsData from '../async-actions/updatePostsData';
+import updateFeedsData from '../async-actions/updateFeedsData';
 import {
 	ApiContentData,
 	ApiFeedData,
@@ -84,7 +84,7 @@ const postsSlice = createSlice({
 				(post) => ({ ...post, state: POST_STATES.READ })
 			);
 		},
-		[updatePostsData.fulfilled.type]: (
+		[updateFeedsData.fulfilled.type]: (
 			state,
 			action: PayloadAction<NewPostsData>
 		) => {

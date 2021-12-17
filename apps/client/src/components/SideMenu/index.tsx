@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { ListGroup, Offcanvas } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { Form, ListGroup, Offcanvas } from 'react-bootstrap';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectUser } from '../../store/selectors/userSelectors';
+import userAPI from '../../services/UserService';
+import { selectUserData } from '../../store/selectors/userSelectors';
 import { logoutUser } from '../../store/slices/userSlice';
 import { DELETE_AUTH_CACHE } from '../../types';
 import LocaleSwitcher from '../LocaleSwitcher';
@@ -20,10 +21,16 @@ interface SideMenuProps {
 }
 
 const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
-	const { userData } = useTypedSelector(selectUser);
-	const { username } = userData;
+	const { username, isAutoUpdateEnabled } = useTypedSelector(selectUserData);
+
+	const [setIsAutoUpdateEnabled] = userAPI.useSetIsAutoUpdateEnabledMutation();
 
 	const dispatch = useTypedDispatch();
+	const intl = useIntl();
+
+	const handleAutoUpdateState = () => {
+		setIsAutoUpdateEnabled(!isAutoUpdateEnabled);
+	};
 
 	const handleSignOut = () => {
 		if ('serviceWorker' in navigator) {
@@ -44,7 +51,16 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				<ListGroup variant="flush">
-					<ListGroup.Item className="menu-item px-0 pb-0">
+					<ListGroup.Item className="menu-item px-2">
+						<Form.Switch
+							checked={isAutoUpdateEnabled}
+							id="feeds-auto-update"
+							label={intl.formatMessage({ id: MESSAGES.FEEDS_AUTOUPDATE })}
+							type="switch"
+							onChange={handleAutoUpdateState}
+						/>
+					</ListGroup.Item>
+					<ListGroup.Item className="menu-item p-0">
 						<LocaleSwitcher />
 					</ListGroup.Item>
 					<ListGroup.Item

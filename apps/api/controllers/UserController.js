@@ -66,6 +66,20 @@ class UserController {
 		}
 	}
 
+	static async setIsAutoUpdateEnabled(req, res) {
+		try {
+			const { isEnabled } = req.body;
+
+			await UserService.setIsAutoUpdateEnabled(isEnabled, req.user.id);
+
+			return res.json(isEnabled);
+		} catch (err) {
+			console.error(err.message);
+
+			res.status(500).send({ message: 'Server Error' });
+		}
+	}
+
 	static async switchLang(req, res) {
 		try {
 			const { lang } = req.body;

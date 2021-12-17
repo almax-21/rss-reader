@@ -7,8 +7,8 @@ import { getDiffBy } from '../../utils/collection';
 import parseRSS from '../../utils/parser';
 import { RootState } from '../types';
 
-const updatePostsData = createAsyncThunk(
-	'content/updatePostsData',
+const updateFeedsData = createAsyncThunk(
+	'content/updateFeedsData',
 	async (urlData: FeedUrlData, thunkAPI) => {
 		try {
 			const { posts } = thunkAPI.getState() as unknown as RootState;
@@ -43,16 +43,18 @@ const updatePostsData = createAsyncThunk(
 	},
 	{
 		condition: (urlData, { getState }) => {
-			const { rssMeta } = getState() as any;
+			const { rssMeta, user } = getState() as any;
+			const { isAutoUpdateEnabled } = user.userData;
+
 			const dispatchedFeedId = urlData.feedId;
 
-			const isStillExist = rssMeta.urlDataset.some(
+			const isFeedStillExist = rssMeta.urlDataset.some(
 				({ feedId }: FeedUrlData) => feedId === dispatchedFeedId
 			);
 
-			return isStillExist;
+			return isAutoUpdateEnabled && isFeedStillExist;
 		},
 	}
 );
 
-export default updatePostsData;
+export default updateFeedsData;

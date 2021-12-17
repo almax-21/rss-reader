@@ -93,6 +93,31 @@ const userAPI = createApi({
 				};
 			},
 		}),
+		setIsAutoUpdateEnabled: build.mutation<boolean, boolean>({
+			query: (isEnabled) => {
+				const token = localStorage.getItem('token');
+
+				return {
+					url: '/update',
+					method: 'PUT',
+					body: { isEnabled },
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
+			onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+				try {
+					dispatch(notificationReqPending());
+
+					await queryFulfilled;
+				} catch (e) {
+					navigator.onLine
+						? dispatch(notificationReqFailure(MESSAGES.ERROR_UNKNOWN))
+						: dispatch(notificationReqFailure(MESSAGES.ERROR_NETWORK));
+				}
+			},
+		}),
 		switchLang: build.mutation<string, LocaleType>({
 			query: (lang) => {
 				const token = localStorage.getItem('token');

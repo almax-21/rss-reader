@@ -11,6 +11,7 @@ const initialState: UserState = {
 		id: '',
 		token: '',
 		username: '',
+		isAutoUpdateEnabled: false,
 		lang: '' as LocaleType,
 	},
 };
@@ -25,6 +26,7 @@ const userSlice = createSlice({
 				id: '',
 				token: '',
 				username: '',
+				isAutoUpdateEnabled: false,
 				lang: '' as LocaleType,
 			};
 		},
@@ -41,6 +43,12 @@ const userSlice = createSlice({
 			(state, action: PayloadAction<IUser>) => {
 				state.isAuth = true;
 				state.userData = action.payload;
+			}
+		);
+		builder.addMatcher(
+			userAPI.endpoints.setIsAutoUpdateEnabled.matchFulfilled,
+			(state, action: PayloadAction<boolean>) => {
+				state.userData.isAutoUpdateEnabled = action.payload;
 			}
 		);
 	},

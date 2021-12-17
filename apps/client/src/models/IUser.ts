@@ -4,5 +4,6 @@ export interface IUser {
 	id: string;
 	token: string;
 	username: string;
+	isAutoUpdateEnabled: boolean;
 	lang: LocaleType;
 }

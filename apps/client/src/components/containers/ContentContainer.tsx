@@ -7,15 +7,19 @@ import useAutoUpdate from '../../hooks/useAutoUpdate';
 import { MESSAGES } from '../../i18n/types';
 import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
 import { selectRssMeta } from '../../store/selectors/rssMetaSelectors';
+import { selectUserData } from '../../store/selectors/userSelectors';
 import FeedContent from '../feeds';
 import PostContent from '../posts';
 import ContentSkeleton from '../UI/ContentSkeleton';
 
 const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
+
 	const { isLoadingFromApi, urlDataset } = useTypedSelector(selectRssMeta);
 
-	useAutoUpdate(urlDataset);
+	const { isAutoUpdateEnabled } = useTypedSelector(selectUserData);
+
+	useAutoUpdate(urlDataset, isAutoUpdateEnabled);
 
 	if (isLoadingFromApi) {
 		return (

@@ -7,14 +7,15 @@ import { LOCALES } from '../i18n/locales';
 import { LocaleType, MESSAGES } from '../i18n/types';
 import userAPI from '../services/UserService';
 import { selectLang } from '../store/selectors/langSelectors';
-import { selectUser } from '../store/selectors/userSelectors';
+import { selectAuthState } from '../store/selectors/userSelectors';
 
 import MySpinner from './UI/MySpinner';
 import SvgIcon from './UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from './UI/SvgIcon/types';
 
 const LocaleSwitcher: FC = () => {
-	const { isAuth } = useTypedSelector(selectUser);
+	const isAuth = useTypedSelector(selectAuthState);
+
 	const { isSwitchLangInProcess, lang: currentLang } =
 		useTypedSelector(selectLang);
 
