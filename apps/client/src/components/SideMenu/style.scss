@@ -1,3 +1,22 @@
+@import '../App/style.scss';
+
+.side-menu__header,
+.side-menu__body {
+	color: $dark;
+	background-color: $white;
+
+	transition: $switching-theme-transition;
+}
+
+.dark-theme {
+	.side-menu__header,
+	.side-menu__body {
+		color: $white;
+
+		background-color: $dark;
+	}
+}
+
 .menu-item {
 	&__text {
 		margin: 0 5px;

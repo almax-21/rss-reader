@@ -1,0 +1,7 @@
+@import '../../App/style.scss';
+
+.dark-theme .modal-content {
+	color: $white;
+
+	background-color: $dark;
+}

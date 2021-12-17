@@ -1,9 +1,14 @@
 import React, { FC } from 'react';
 import { Placeholder } from 'react-bootstrap';
 
+import useTypedSelector from '../../../hooks/redux/useTypedSelector';
+import { selectSettings } from '../../../store/selectors/settingsSelectors';
+
 import './style.scss';
 
 const ContentSkeleton: FC = () => {
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
 	return (
 		<div className="content-skeleton">
 			<div className="content-skeleton__item">
@@ -19,9 +24,21 @@ const ContentSkeleton: FC = () => {
 					className="d-flex justify-content-between mb-4"
 					xs={8}
 				>
-					<Placeholder.Button animation="wave" xs={3} />
-					<Placeholder.Button animation="wave" xs={3} />
-					<Placeholder.Button animation="wave" xs={3} />
+					<Placeholder.Button
+						animation="wave"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={3}
+					/>
+					<Placeholder.Button
+						animation="wave"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={3}
+					/>
+					<Placeholder.Button
+						animation="wave"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={3}
+					/>
 				</Placeholder>
 				<Placeholder
 					animation="glow"
@@ -30,7 +47,11 @@ const ContentSkeleton: FC = () => {
 					xs={12}
 				>
 					<Placeholder xs={10} />
-					<Placeholder.Button animation="glow" xs={1} />
+					<Placeholder.Button
+						animation="glow"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={1}
+					/>
 				</Placeholder>
 				<Placeholder
 					animation="wave"
@@ -39,7 +60,11 @@ const ContentSkeleton: FC = () => {
 					xs={12}
 				>
 					<Placeholder xs={10} />
-					<Placeholder.Button animation="wave" xs={1} />
+					<Placeholder.Button
+						animation="wave"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={1}
+					/>
 				</Placeholder>
 				<Placeholder
 					animation="glow"
@@ -48,7 +73,11 @@ const ContentSkeleton: FC = () => {
 					xs={12}
 				>
 					<Placeholder xs={10} />
-					<Placeholder.Button animation="glow" xs={1} />
+					<Placeholder.Button
+						animation="glow"
+						bg={isDarkTheme ? 'white' : 'primary'}
+						xs={1}
+					/>
 				</Placeholder>
 			</div>
 			<div className="content-skeleton__item">
@@ -56,7 +85,7 @@ const ContentSkeleton: FC = () => {
 					<Placeholder xs={2} />
 				</Placeholder>
 				<Placeholder animation="glow" as="h1" className="mb-3">
-					<Placeholder bg="primary" xs={12} />
+					<Placeholder bg={isDarkTheme ? 'black' : 'primary'} xs={12} />
 				</Placeholder>
 				<Placeholder animation="wave" as="h1" className="mb-3">
 					<Placeholder xs={12} />

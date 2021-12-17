@@ -1,0 +1,10 @@
+@import '../../App/style.scss';
+
+.rss {
+	background-color: $dark;
+	transition: $switching-theme-transition;
+}
+
+.dark-theme .rss {
+	background-color: $black;
+}

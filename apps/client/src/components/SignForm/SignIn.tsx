@@ -7,7 +7,7 @@ import { MESSAGES } from '../../i18n/types';
 import setSignInSchema from '../../schemas/setSignInSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
-import { selectLang } from '../../store/selectors/langSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 
 import SignForm from './SignForm';
 import { SIGN_FORM_TYPES, SignFormValues } from './types';
@@ -27,7 +27,7 @@ const SignIn: FC = () => {
 
 	const authContext = useContext(AuthContext);
 
-	const { lang } = useTypedSelector(selectLang);
+	const { lang } = useTypedSelector(selectSettings);
 	const intl = useIntl();
 
 	const validationSchema = useMemo(() => setSignInSchema(intl), [lang]);

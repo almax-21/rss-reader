@@ -9,7 +9,7 @@ import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { messages } from '../../i18n/messages';
 import userAPI from '../../services/UserService';
 import getAllContentFromApi from '../../store/async-actions/getAllContentFromApi';
-import { selectLang } from '../../store/selectors/langSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { selectUser } from '../../store/selectors/userSelectors';
 import Footer from '../Footer';
 import Header from '../Header';
@@ -27,7 +27,7 @@ const App: FC = () => {
 	const { isLoading: isAuthPending, refetch: refetchAuthQuery } =
 		userAPI.useAuthUserQuery();
 
-	const { lang } = useTypedSelector(selectLang);
+	const { lang, isDarkTheme } = useTypedSelector(selectSettings);
 	const { isAuth, userData } = useTypedSelector(selectUser);
 
 	const dispatch = useTypedDispatch();
@@ -40,6 +40,12 @@ const App: FC = () => {
 		}
 	}, [isAuth, userToken]);
 
+	useEffect(() => {
+		isDarkTheme
+			? document.body.classList.add('dark-theme')
+			: document.body.classList.remove('dark-theme');
+	}, [isDarkTheme]);
+
 	return (
 		<IntlProvider locale={lang} messages={messages[lang]}>
 			<AppHelmet />
@@ -48,7 +54,7 @@ const App: FC = () => {
 				<Header />
 				{isAuthPending ? (
 					<div className="d-flex justify-content-center mt-5">
-						<MySpinner />
+						<MySpinner variant={isDarkTheme ? 'light' : 'dark'} />
 					</div>
 				) : (
 					<AuthContext.Provider value={{ refetchAuthQuery }}>

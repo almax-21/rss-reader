@@ -4,7 +4,9 @@ import { LOCALES } from '../../i18n/locales';
 import { LocaleType } from '../../i18n/types';
 import { IUser } from '../../models/IUser';
 import userAPI from '../../services/UserService';
-import { LangState } from '../types';
+import { SettingsState } from '../types';
+
+const initDarkThemeState = Boolean(localStorage.getItem('isDarkTheme'));
 
 const BROWSER_LANGUAGE = navigator.language.split('-')[0] as LocaleType;
 
@@ -12,22 +14,24 @@ const initLang: LocaleType = Object.values(LOCALES).includes(BROWSER_LANGUAGE)
 	? BROWSER_LANGUAGE
 	: LOCALES.ENGLISH;
 
-const initialState: LangState = {
+const initialState: SettingsState = {
+	isDarkTheme: initDarkThemeState,
 	lang: initLang,
 	isSwitchLangInProcess: false,
 };
 
-const langSlice = createSlice({
-	name: 'lang',
+const settingsSlice = createSlice({
+	name: 'settings',
 	initialState,
-	reducers: {},
+	reducers: {
+		setIsDarkTheme: (state, action: PayloadAction<boolean>) => {
+			state.isDarkTheme = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
-		builder.addMatcher(
-			userAPI.endpoints.switchLang.matchPending,
-			(state) => {
-				state.isSwitchLangInProcess = true;
-			}
-		);
+		builder.addMatcher(userAPI.endpoints.switchLang.matchPending, (state) => {
+			state.isSwitchLangInProcess = true;
+		});
 		builder.addMatcher(
 			userAPI.endpoints.switchLang.matchFulfilled,
 			(state, action: PayloadAction<LocaleType>) => {
@@ -35,12 +39,9 @@ const langSlice = createSlice({
 				state.lang = action.payload;
 			}
 		);
-		builder.addMatcher(
-			userAPI.endpoints.switchLang.matchRejected,
-			(state) => {
-				state.isSwitchLangInProcess = false;
-			}
-		);
+		builder.addMatcher(userAPI.endpoints.switchLang.matchRejected, (state) => {
+			state.isSwitchLangInProcess = false;
+		});
 		builder.addMatcher(
 			userAPI.endpoints.authUser.matchFulfilled,
 			(state, action: PayloadAction<IUser>) => {
@@ -52,4 +53,6 @@ const langSlice = createSlice({
 	},
 });
 
-export default langSlice.reducer;
+export const { setIsDarkTheme } = settingsSlice.actions;
+
+export default settingsSlice.reducer;

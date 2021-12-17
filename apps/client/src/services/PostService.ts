@@ -1,13 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { IPost } from '../models/IPost';
-import { API_ORIGIN } from '../types/index';
+import { API_ORIGIN, TOKEN_KEY } from '../types/constants';
 import { ParsedPost } from '../utils/parser/types';
 
 class PostService {
 	static setPostRead(id: string): Promise<AxiosResponse<string>> {
 		const { href: endpointUrl } = new URL('/posts', API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.put(
 			endpointUrl,
@@ -22,7 +22,7 @@ class PostService {
 
 	static setAllActivePostsRead(feedId: string): Promise<AxiosResponse<string>> {
 		const { href: endpointUrl } = new URL('/posts/all', API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.put(
 			endpointUrl,
@@ -40,7 +40,7 @@ class PostService {
 		feedId: string
 	): Promise<AxiosResponse<IPost[]>> {
 		const { href: endpointUrl } = new URL('/posts/upload', API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.post(
 			endpointUrl,

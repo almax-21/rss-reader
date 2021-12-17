@@ -2,15 +2,17 @@ import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedSelector from '../../hooks/redux/useTypedSelector';
-import useAutoUpdate from '../../hooks/useAutoUpdate';
-import { MESSAGES } from '../../i18n/types';
-import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
-import { selectRssMeta } from '../../store/selectors/rssMetaSelectors';
-import { selectUserData } from '../../store/selectors/userSelectors';
-import FeedContent from '../feeds';
-import PostContent from '../posts';
-import ContentSkeleton from '../UI/ContentSkeleton';
+import useTypedSelector from '../../../hooks/redux/useTypedSelector';
+import useAutoUpdate from '../../../hooks/useAutoUpdate';
+import { MESSAGES } from '../../../i18n/types';
+import { selectFeedsWithCounter } from '../../../store/selectors/contentSelectors';
+import { selectRssMeta } from '../../../store/selectors/rssMetaSelectors';
+import { selectUserData } from '../../../store/selectors/userSelectors';
+import FeedContent from '../../feeds';
+import PostContent from '../../posts';
+import ContentSkeleton from '../../UI/ContentSkeleton';
+
+import './style.scss';
 
 const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);

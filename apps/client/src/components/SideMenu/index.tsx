@@ -6,9 +6,15 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import userAPI from '../../services/UserService';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { selectUserData } from '../../store/selectors/userSelectors';
+import { setIsDarkTheme } from '../../store/slices/settingsSlice';
 import { logoutUser } from '../../store/slices/userSlice';
-import { DELETE_AUTH_CACHE } from '../../types';
+import {
+	DARK_THEME_KEY,
+	DELETE_AUTH_CACHE,
+	TOKEN_KEY,
+} from '../../types/constants';
 import LocaleSwitcher from '../LocaleSwitcher';
 import SvgIcon from '../UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from '../UI/SvgIcon/types';
@@ -23,10 +29,23 @@ interface SideMenuProps {
 const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 	const { username, isAutoUpdateEnabled } = useTypedSelector(selectUserData);
 
+	const { isDarkTheme } = useTypedSelector(selectSettings);
 	const [setIsAutoUpdateEnabled] = userAPI.useSetIsAutoUpdateEnabledMutation();
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
+
+	const handleThemeState = () => {
+		const newDarkThemeState = !isDarkTheme;
+
+		dispatch(setIsDarkTheme(newDarkThemeState));
+
+		if (newDarkThemeState) {
+			localStorage.setItem(DARK_THEME_KEY, String(newDarkThemeState));
+		} else {
+			localStorage.removeItem(DARK_THEME_KEY);
+		}
+	};
 
 	const handleAutoUpdateState = () => {
 		setIsAutoUpdateEnabled(!isAutoUpdateEnabled);
@@ -38,20 +57,33 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 		}
 
 		dispatch(logoutUser());
-		localStorage.removeItem('token');
+		localStorage.removeItem(TOKEN_KEY);
 
 		handleClose();
 	};
 
 	return (
 		<Offcanvas placement="end" show={isShow} onHide={handleClose}>
-			<Offcanvas.Header closeButton className="p-4">
+			<Offcanvas.Header
+				closeButton
+				className="side-menu__header p-4"
+				closeVariant={isDarkTheme ? 'white' : undefined}
+			>
 				<SvgIcon height="32" variant={SVG_ICON_VARIANTS.USER} width="32" />
 				<Offcanvas.Title>{username}</Offcanvas.Title>
 			</Offcanvas.Header>
-			<Offcanvas.Body>
-				<ListGroup variant="flush">
-					<ListGroup.Item className="menu-item px-2">
+			<Offcanvas.Body className="side-menu__body">
+				<ListGroup as="ul" variant="flush">
+					<ListGroup.Item as="li" className="list-item menu-item px-2">
+						<Form.Switch
+							checked={isDarkTheme}
+							id="theme-mode"
+							label={intl.formatMessage({ id: MESSAGES.DARK_THEME })}
+							type="switch"
+							onChange={handleThemeState}
+						/>
+					</ListGroup.Item>
+					<ListGroup.Item as="li" className="list-item menu-item px-2">
 						<Form.Switch
 							checked={isAutoUpdateEnabled}
 							id="feeds-auto-update"
@@ -60,12 +92,13 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							onChange={handleAutoUpdateState}
 						/>
 					</ListGroup.Item>
-					<ListGroup.Item className="menu-item p-0">
+					<ListGroup.Item as="li" className="menu-item p-0">
 						<LocaleSwitcher />
 					</ListGroup.Item>
 					<ListGroup.Item
 						action
-						className="menu-item px-2"
+						as="li"
+						className="list-item menu-item px-2"
 						onClick={handleSignOut}
 					>
 						<SvgIcon

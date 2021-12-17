@@ -7,8 +7,8 @@ import './style.scss';
 
 const Footer: FC = () => {
 	return (
-		<footer className="bg-light border-top p-3">
-			<p className="text-center mb-0">
+		<footer className="footer p-3">
+			<p className="footer__text text-center mb-0">
 				<FormattedMessage id={MESSAGES.INSPIRED_BY} />
 				&nbsp;
 				<a

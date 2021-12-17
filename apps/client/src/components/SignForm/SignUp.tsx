@@ -9,7 +9,7 @@ import { ROUTES } from '../../router/types';
 import setSignUpSchema from '../../schemas/setSignUpSchema';
 import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
-import { selectLang } from '../../store/selectors/langSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 
 import SignForm from './SignForm';
 import { SIGN_FORM_TYPES, SignFormValues } from './types';
@@ -29,7 +29,7 @@ const SignUp: FC = () => {
 	const registrationErrorRef = useRef<string>('');
 
 	const router = useHistory();
-	const { lang } = useTypedSelector(selectLang);
+	const { lang } = useTypedSelector(selectSettings);
 	const intl = useIntl();
 
 	const validationSchema = useMemo(() => setSignUpSchema(intl), [lang]);

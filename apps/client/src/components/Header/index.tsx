@@ -25,8 +25,8 @@ const Header: FC = () => {
 	return (
 		<>
 			{isAuth && <SideMenu handleClose={handleCloseMenu} isShow={isShowMenu} />}
-			<div className="bg-dark">
-				<Container as="header" className="p-4">
+			<header className="header">
+				<Container className="p-4">
 					<Row className="justify-content-center">
 						<Col
 							className="d-flex justify-content-between align-items-center text-white"
@@ -48,7 +48,7 @@ const Header: FC = () => {
 						</Col>
 					</Row>
 				</Container>
-			</div>
+			</header>
 		</>
 	);
 };

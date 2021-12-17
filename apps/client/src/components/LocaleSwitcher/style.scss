@@ -1,0 +1,13 @@
+@import '../App/style.scss';
+
+.locale-switcher__header > .accordion-button,
+.locale-switcher__body {
+	transition: $switching-theme-transition;
+}
+
+.dark-theme .locale-switcher__header > .accordion-button,
+.dark-theme .locale-switcher__body {
+	color: $white;
+
+	background-color: $dark;
+}

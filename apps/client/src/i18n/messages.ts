@@ -6,6 +6,7 @@ export const messages: IMessages = {
 		[MESSAGES.LANGUAGE]: 'Language',
 		[MESSAGES.ENGLISH]: 'English',
 		[MESSAGES.RUSSIAN]: 'Russian',
+		[MESSAGES.DARK_THEME]: 'Dark theme',
 		[MESSAGES.MAIN_HEADER]: 'RSS Reader',
 		[MESSAGES.DESCRIPTION]:
 			'RSS Reader is one of the best ways to keep your finger on the pulse of events. For example, a compilation of the latest news will help you stay on top of your niche or hobby',
@@ -74,6 +75,7 @@ export const messages: IMessages = {
 		[MESSAGES.LANGUAGE]: 'Язык',
 		[MESSAGES.ENGLISH]: 'Английский',
 		[MESSAGES.RUSSIAN]: 'Русский',
+		[MESSAGES.DARK_THEME]: 'Темная тема',
 		[MESSAGES.MAIN_HEADER]: 'RSS Reader',
 		[MESSAGES.DESCRIPTION]:
 			'RSS Reader - одна из лучших возможностей держать руку на пульсе событий. Например, подборка последних новостей поможет быть в курсе дел вашей ниши или хобби',

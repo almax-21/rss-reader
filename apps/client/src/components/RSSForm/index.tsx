@@ -9,11 +9,11 @@ import { MESSAGES } from '../../i18n/types';
 import setRSSFormSchema from '../../schemas/setRSSFormSchema';
 import { RSS_FORM } from '../../schemas/types';
 import getContentFromRssSource from '../../store/async-actions/getContentFromRssSource';
-import { selectLang } from '../../store/selectors/langSelectors';
 import {
 	selectRssMeta,
 	selectUrls,
 } from '../../store/selectors/rssMetaSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 import MySpinner from '../UI/MySpinner';
 
 import './style.scss';
@@ -34,7 +34,7 @@ const RSSForm: FC = () => {
 
 	const urls = useTypedSelector(selectUrls);
 
-	const lang = useTypedSelector(selectLang);
+	const lang = useTypedSelector(selectSettings);
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
@@ -87,7 +87,7 @@ const RSSForm: FC = () => {
 								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
 							>
 								<Form.Control
-									className="rss-input pb-2 pt-4"
+									className="rss_input pb-2 pt-4"
 									isInvalid={!isValid}
 									name={RSS_FORM.URL}
 									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}

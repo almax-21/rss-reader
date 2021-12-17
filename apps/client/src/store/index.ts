@@ -5,20 +5,20 @@ import { combineReducers } from '@reduxjs/toolkit';
 import userAPI from '../services/UserService';
 
 import feedsReducer from './slices/feedsSlice';
-import langReducer from './slices/langSlice';
 import notificationReducer from './slices/notificationSlice';
 import postsReducer from './slices/postsSlice';
 import rssMetaReducer from './slices/rssMetaSlice';
+import settingsReducer from './slices/settingsSlice';
 import userReducer from './slices/userSlice';
 
 export const rootReducer = combineReducers({
-	lang: langReducer,
 	user: userReducer,
+	[userAPI.reducerPath]: userAPI.reducer,
+	settings: settingsReducer,
 	rssMeta: rssMetaReducer,
-	notification: notificationReducer,
 	feeds: feedsReducer,
 	posts: postsReducer,
-	[userAPI.reducerPath]: userAPI.reducer,
+	notification: notificationReducer,
 	loadingBar: loadingBarReducer,
 });
 

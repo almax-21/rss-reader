@@ -74,7 +74,7 @@ const SignForm: FC<SignFormProps> = ({
 					!!validationErrors[SIGN_FORM.PASSWORD_CONFIRMATION];
 
 				return (
-					<Card className="shadow">
+					<Card className="sign shadow">
 						<Card.Body as={Row} className="align-items-start p-4">
 							<Col className="sign__logo" md="5">
 								{isSignInFormType ? (

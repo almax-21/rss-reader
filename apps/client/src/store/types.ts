@@ -31,7 +31,8 @@ export interface ApiContentData {
 	posts: IPost[];
 }
 
-export interface LangState {
+export interface SettingsState {
+	isDarkTheme: boolean;
 	lang: LocaleType;
 	isSwitchLangInProcess: boolean;
 }

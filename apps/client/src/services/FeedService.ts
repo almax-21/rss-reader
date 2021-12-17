@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { ApiContentData, ApiFeedData } from '../store/types';
-import { API_ORIGIN } from '../types/index';
+import { API_ORIGIN, TOKEN_KEY } from '../types/constants';
 import { ParsedFeedData } from '../utils/parser/types';
 
 class FeedService {
@@ -10,7 +10,7 @@ class FeedService {
 		feedUrl: string
 	): Promise<AxiosResponse<ApiFeedData>> {
 		const { href: endpointUrl } = new URL('/feeds/upload', API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.post(
 			endpointUrl,
@@ -39,7 +39,7 @@ class FeedService {
 		newOrder: string[]
 	): Promise<AxiosResponse<ApiContentData>> {
 		const { href: endpointUrl } = new URL('/feeds/order', API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.post(
 			endpointUrl,
@@ -52,9 +52,12 @@ class FeedService {
 		);
 	}
 
-	static deleteFeedData(id: string, timeout = 30000): Promise<AxiosResponse<string>> {
+	static deleteFeedData(
+		id: string,
+		timeout = 30000
+	): Promise<AxiosResponse<string>> {
 		const { href: endpointUrl } = new URL(`/feeds?id=${id}`, API_ORIGIN);
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem(TOKEN_KEY);
 
 		return axios.delete(endpointUrl, {
 			headers: {

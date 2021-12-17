@@ -1,6 +1,19 @@
-footer {
+@import '../App/style.scss';
+
+.footer {
 	position: absolute;
 	bottom: 0;
 
 	width: 100%;
+
+	background-color: $light;
+
+	border-top: 1px solid $gray-400;
+}
+
+.dark-theme .footer,
+.dark-theme .footer__text {
+	color: $white;
+
+	background-color: $dark;
 }

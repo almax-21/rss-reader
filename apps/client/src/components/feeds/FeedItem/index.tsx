@@ -11,6 +11,7 @@ import { IFeedWithCounter } from '../../../models/IFeed';
 import deleteFeed from '../../../store/async-actions/deleteFeed';
 import { selectFeeds } from '../../../store/selectors/contentSelectors';
 import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
+import { selectSettings } from '../../../store/selectors/settingsSelectors';
 import { updateActiveFeed } from '../../../store/slices/feedsSlice';
 import { truncateText } from '../../../utils/text';
 import DnDBtn from '../../UI/DnDBtn';
@@ -37,6 +38,8 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 	const urlFeedHostname = new URL(url).hostname;
 
 	const feeds = useTypedSelector(selectFeeds);
+
+	const { isDarkTheme	 } = useTypedSelector(selectSettings);
 
 	const dispatch = useTypedDispatch();
 
@@ -115,7 +118,10 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 					<span>{truncateText(description)}</span>
 				</div>
 				<div className="d-flex flex-column justify-content-between">
-					<CloseButton onClick={handleOpenModal} />
+					<CloseButton
+						variant={isDarkTheme ? 'white' : undefined}
+						onClick={handleOpenModal}
+					/>
 					<DnDBtn setAncestorDraggable={setDraggable()} />
 				</div>
 			</ListGroup.Item>

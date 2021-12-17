@@ -4,7 +4,7 @@ import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 
-import { API_ORIGIN, DELETE_AUTH_CACHE } from './types';
+import { API_ORIGIN, DELETE_AUTH_CACHE } from './types/constants';
 
 declare const self: ServiceWorkerGlobalScope;
 

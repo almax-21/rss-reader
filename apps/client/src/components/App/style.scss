@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
 $animation-time: 0.2s;
+$switching-theme-transition: background-color $animation-time,
+	color $animation-time;
 
 body {
 	position: relative;
@@ -29,14 +31,39 @@ img {
 	);
 }
 
+main {
+	color: $dark;
+
+	transition: $switching-theme-transition;
+}
+
+.dark-theme {
+	background-color: $dark;
+}
+
+.dark-theme main {
+	color: $white;
+
+	background-color: $dark;
+}
+
 .list-item {
 	cursor: pointer !important;
 
-	transition: background-color 0.2s;
+	transition: $switching-theme-transition;
 }
 
 .list-item.active {
 	cursor: default !important;
+}
+
+.dark-theme .list-item {
+	color: white;
+	background-color: $dark;
+}
+
+.dark-theme .list-item.active {
+	background-color: $primary;
 }
 
 @include media-breakpoint-up(md) {

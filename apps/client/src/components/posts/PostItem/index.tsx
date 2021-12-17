@@ -2,14 +2,18 @@ import React, { FC, useState } from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
-import { MESSAGES } from '../../i18n/types';
-import { IPost } from '../../models/IPost';
-import setPostRead from '../../store/async-actions/setPostRead';
-import { POST_STATES } from '../../store/types';
-import { PostIdData } from '../../types';
-import MyModal from '../UI/MyModal';
-import { MODAL_TYPES } from '../UI/MyModal/types';
+import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
+import useTypedSelector from '../../../hooks/redux/useTypedSelector';
+import { MESSAGES } from '../../../i18n/types';
+import { IPost } from '../../../models/IPost';
+import setPostRead from '../../../store/async-actions/setPostRead';
+import { selectSettings } from '../../../store/selectors/settingsSelectors';
+import { POST_STATES } from '../../../store/types';
+import { PostIdData } from '../../../types';
+import MyModal from '../../UI/MyModal';
+import { MODAL_TYPES } from '../../UI/MyModal/types';
+
+import './style.scss';
 
 interface PostItemProps {
 	post: IPost;
@@ -19,7 +23,12 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
 	const { title, description, _id, feedId, url, state } = post;
+
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
 	const dispatch = useTypedDispatch();
+
+	const unreadPostClass = isDarkTheme ? 'text-light' : 'text-primary';
 
 	const handlePostRead = (postIDs: PostIdData) => () => {
 		if (state === POST_STATES.READ) {
@@ -43,6 +52,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 			<ListGroup.Item
 				as="li"
 				className="
+				post-item
 				d-flex
 				justify-content-between
 				align-items-center
@@ -51,11 +61,11 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 				border-0
 			"
 			>
-				<Card className="border-0" style={{ paddingRight: '10px' }}>
+				<Card className="post-item__body border-0">
 					<Card.Title className="h6 fw-bold">
 						<Card.Link
 							className={
-								state === POST_STATES.READ ? 'text-secondary' : 'text-primary'
+								state === POST_STATES.READ ? 'text-secondary' : unreadPostClass
 							}
 							href={url}
 							rel="noreferrer"
@@ -66,7 +76,11 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 						</Card.Link>
 					</Card.Title>
 				</Card>
-				<Button size="sm" variant="outline-primary" onClick={handleOpenModal}>
+				<Button
+					size="sm"
+					variant={isDarkTheme ? 'outline-light' : 'outline-primary'}
+					onClick={handleOpenModal}
+				>
 					<FormattedMessage id={MESSAGES.PREVIEW} />
 				</Button>
 			</ListGroup.Item>

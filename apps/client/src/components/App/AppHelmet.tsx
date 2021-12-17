@@ -4,10 +4,10 @@ import { useIntl } from 'react-intl';
 
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import { selectLang } from '../../store/selectors/langSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 
 const AppHelmet: FC = () => {
-	const { lang } = useTypedSelector(selectLang);
+	const { lang } = useTypedSelector(selectSettings);
 	const intl = useIntl();
 
 	return (
