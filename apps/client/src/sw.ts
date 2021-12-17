@@ -32,6 +32,7 @@ registerRoute(
 	({ url }) => url.origin === API_ORIGIN && url.pathname === '/user/auth',
 	new NetworkFirst({
 		cacheName: 'auth-api-response',
+		networkTimeoutSeconds: 2,
 	})
 );
 
