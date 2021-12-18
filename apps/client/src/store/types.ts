@@ -33,6 +33,7 @@ export interface ApiContentData {
 
 export interface SettingsState {
 	isDarkTheme: boolean;
+	isAutoUpdate: boolean;
 	lang: LocaleType;
 	isSwitchLangInProcess: boolean;
 }

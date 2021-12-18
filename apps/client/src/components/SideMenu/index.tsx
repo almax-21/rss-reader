@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
 import { Form, ListGroup, Offcanvas } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { AnyAction } from '@reduxjs/toolkit';
 
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
-import userAPI from '../../services/UserService';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { selectUserData } from '../../store/selectors/userSelectors';
-import { setIsDarkTheme } from '../../store/slices/settingsSlice';
+import {
+	setIsAutoUpdate,
+	setIsDarkTheme,
+} from '../../store/slices/settingsSlice';
 import { logoutUser } from '../../store/slices/userSlice';
 import {
+	AUTO_UPDATE_KEY,
 	DARK_THEME_KEY,
 	DELETE_AUTH_CACHE,
 	TOKEN_KEY,
@@ -27,28 +31,29 @@ interface SideMenuProps {
 }
 
 const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
-	const { username, isAutoUpdateEnabled } = useTypedSelector(selectUserData);
+	const { username } = useTypedSelector(selectUserData);
 
-	const { isDarkTheme } = useTypedSelector(selectSettings);
-	const [setIsAutoUpdateEnabled] = userAPI.useSetIsAutoUpdateEnabledMutation();
+	const { isDarkTheme, isAutoUpdate } = useTypedSelector(selectSettings);
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
 
-	const handleThemeState = () => {
-		const newDarkThemeState = !isDarkTheme;
+	const handleSwitchState = (
+		prevState: boolean,
+		actionCreator: (newState: boolean) => AnyAction,
+		storageKey: string
+	) => {
+		return () => {
+			const newState = !prevState;
 
-		dispatch(setIsDarkTheme(newDarkThemeState));
+			dispatch(actionCreator(newState));
 
-		if (newDarkThemeState) {
-			localStorage.setItem(DARK_THEME_KEY, String(newDarkThemeState));
-		} else {
-			localStorage.removeItem(DARK_THEME_KEY);
-		}
-	};
-
-	const handleAutoUpdateState = () => {
-		setIsAutoUpdateEnabled(!isAutoUpdateEnabled);
+			if (newState) {
+				localStorage.setItem(storageKey, String(newState));
+			} else {
+				localStorage.removeItem(storageKey);
+			}
+		};
 	};
 
 	const handleSignOut = () => {
@@ -80,16 +85,24 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							id="theme-mode"
 							label={intl.formatMessage({ id: MESSAGES.DARK_THEME })}
 							type="switch"
-							onChange={handleThemeState}
+							onChange={handleSwitchState(
+								isDarkTheme,
+								setIsDarkTheme,
+								DARK_THEME_KEY
+							)}
 						/>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="list-item menu-item px-2">
 						<Form.Switch
-							checked={isAutoUpdateEnabled}
+							checked={isAutoUpdate}
 							id="feeds-auto-update"
 							label={intl.formatMessage({ id: MESSAGES.FEEDS_AUTOUPDATE })}
 							type="switch"
-							onChange={handleAutoUpdateState}
+							onChange={handleSwitchState(
+								isAutoUpdate,
+								setIsAutoUpdate,
+								AUTO_UPDATE_KEY
+							)}
 						/>
 					</ListGroup.Item>
 					<ListGroup.Item as="li" className="menu-item p-0">

@@ -4,13 +4,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
-import { selectUserData } from '../../store/selectors/userSelectors';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 
 import FeedList from './FeedList';
 
 const FeedContent: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
-	const { isAutoUpdateEnabled } = useTypedSelector(selectUserData);
+	const { isAutoUpdate } = useTypedSelector(selectSettings);
 
 	const intl = useIntl();
 
@@ -22,7 +22,7 @@ const FeedContent: FC = () => {
 		<div>
 			<h2 className="h3 mb-4">
 				<FormattedMessage id={MESSAGES.FEEDS} />{' '}
-				{!isAutoUpdateEnabled && (
+				{!isAutoUpdate && (
 					<span style={{ fontSize: 18 }}>
 						{` (${autoUpdateDisabledMessage})`}
 					</span>

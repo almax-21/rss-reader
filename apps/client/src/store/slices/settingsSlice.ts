@@ -4,9 +4,11 @@ import { LOCALES } from '../../i18n/locales';
 import { LocaleType } from '../../i18n/types';
 import { IUser } from '../../models/IUser';
 import userAPI from '../../services/UserService';
+import { AUTO_UPDATE_KEY, DARK_THEME_KEY } from '../../types/constants';
 import { SettingsState } from '../types';
 
-const initDarkThemeState = Boolean(localStorage.getItem('isDarkTheme'));
+const initDarkThemeState = Boolean(localStorage.getItem(DARK_THEME_KEY));
+const initAutoUpdateState = Boolean(localStorage.getItem(AUTO_UPDATE_KEY));
 
 const BROWSER_LANGUAGE = navigator.language.split('-')[0] as LocaleType;
 
@@ -16,6 +18,7 @@ const initLang: LocaleType = Object.values(LOCALES).includes(BROWSER_LANGUAGE)
 
 const initialState: SettingsState = {
 	isDarkTheme: initDarkThemeState,
+	isAutoUpdate: initAutoUpdateState,
 	lang: initLang,
 	isSwitchLangInProcess: false,
 };
@@ -26,6 +29,9 @@ const settingsSlice = createSlice({
 	reducers: {
 		setIsDarkTheme: (state, action: PayloadAction<boolean>) => {
 			state.isDarkTheme = action.payload;
+		},
+		setIsAutoUpdate: (state, action: PayloadAction<boolean>) => {
+			state.isAutoUpdate = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -53,6 +59,6 @@ const settingsSlice = createSlice({
 	},
 });
 
-export const { setIsDarkTheme } = settingsSlice.actions;
+export const { setIsDarkTheme, setIsAutoUpdate } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

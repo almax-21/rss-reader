@@ -43,8 +43,8 @@ const updateFeedsData = createAsyncThunk(
 	},
 	{
 		condition: (urlData, { getState }) => {
-			const { rssMeta, user } = getState() as any;
-			const { isAutoUpdateEnabled } = user.userData;
+			const { rssMeta, settings } = getState() as any;
+			const { isAutoUpdate } = settings;
 
 			const dispatchedFeedId = urlData.feedId;
 
@@ -52,7 +52,7 @@ const updateFeedsData = createAsyncThunk(
 				({ feedId }: FeedUrlData) => feedId === dispatchedFeedId
 			);
 
-			return isAutoUpdateEnabled && isFeedStillExist;
+			return isAutoUpdate && isFeedStillExist;
 		},
 	}
 );

@@ -11,14 +11,14 @@ const UPDATE_PERIOD_MS = 180000;
 
 const useAutoUpdate = (
 	urlDataset: FeedUrlData[],
-	isAutoUpdateEnabled: boolean
+	isAutoUpdate: boolean
 ): void => {
 	const dispatch = useTypedDispatch();
 
 	const prevUrlDatasetRef = useRef<FeedUrlData[]>([]);
 
 	useEffect(() => {
-		if (!isAutoUpdateEnabled || urlDataset.length === 0) {
+		if (!isAutoUpdate || urlDataset.length === 0) {
 			prevUrlDatasetRef.current = [];
 
 			return;
@@ -49,7 +49,7 @@ const useAutoUpdate = (
 		});
 
 		prevUrlDatasetRef.current = urlDataset;
-	}, [isAutoUpdateEnabled, urlDataset]);
+	}, [isAutoUpdate, urlDataset]);
 };
 
 export default useAutoUpdate;

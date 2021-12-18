@@ -11,14 +11,15 @@ class UserService {
 			username,
 			password: hashPassword,
 			lang,
-			isAutoUpdateEnabled: true,
 		});
 
 		return user.save();
 	}
 
 	static async authUser(id) {
-		const { _id, username, isAutoUpdateEnabled, lang } = await User.findOne({ _id: id });
+		const { _id, username, lang } = await User.findOne({
+			_id: id,
+		});
 
 		const token = jwt.sign({ id: _id }, config.get('secretKey'), {
 			expiresIn: '30d',
@@ -28,15 +29,8 @@ class UserService {
 			token,
 			id: _id,
 			username,
-			isAutoUpdateEnabled,
 			lang,
 		};
-	}
-
-	static setIsAutoUpdateEnabled(isEnabled, _id) {
-		const newAutoUpdateState = { isAutoUpdateEnabled: isEnabled };
-
-		return User.updateOne({ _id }, newAutoUpdateState);
 	}
 
 	static switchLang(lang, _id) {
