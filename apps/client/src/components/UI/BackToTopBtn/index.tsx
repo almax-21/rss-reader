@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import { MESSAGES } from '../../../i18n/types';
 import { throttle } from '../../../utils/perfomance';
 
 import './style.scss';
@@ -36,6 +38,9 @@ const BackToTopBtn: FC = () => {
 			type="button"
 			onClick={handleBackToTop}
 		>
+			<span className="visually-hidden">
+				<FormattedMessage id={MESSAGES.SCROLL_TO_TOP} />
+			</span>
 			<svg height="24" viewBox="0 0 24 24" width="24">
 				<path d="M0 0h24v24H0V0z" fill="none" />
 				<path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />

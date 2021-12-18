@@ -16,7 +16,7 @@ const DnDBtn: FC<DnDBtnProps> = ({ setAncestorDraggable }) => {
 			className="p-0"
 			size="sm"
 			style={{ cursor: 'grab' }}
-			title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP_SORT })}
+			title={intl.formatMessage({ id: MESSAGES.CHOOSE_FEED })}
 			variant="light"
 			onPointerDown={setAncestorDraggable}
 		>

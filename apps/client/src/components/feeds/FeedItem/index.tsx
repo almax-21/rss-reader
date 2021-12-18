@@ -105,7 +105,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						<img
-							alt=" "
+							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
 							className="feed-item__icon"
 							height="16"
 							src={`https://www.google.com/s2/favicons?sz=64&domain=www.${urlFeedHostname}`}

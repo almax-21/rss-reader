@@ -12,6 +12,7 @@ const Footer: FC = () => {
 				<FormattedMessage id={MESSAGES.INSPIRED_BY} />
 				&nbsp;
 				<a
+					className="footer__link"
 					href="https://ru.hexlet.io/"
 					rel="noreferrer"
 					target="_blank"

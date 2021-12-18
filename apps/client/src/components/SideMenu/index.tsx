@@ -78,8 +78,8 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 				<Offcanvas.Title>{username}</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body className="side-menu__body">
-				<ListGroup as="ul" variant="flush">
-					<ListGroup.Item as="li" className="list-item menu-item px-2">
+				<ListGroup variant="flush">
+					<ListGroup.Item className="list-item menu-item px-2">
 						<Form.Switch
 							checked={isDarkTheme}
 							id="theme-mode"
@@ -92,7 +92,7 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							)}
 						/>
 					</ListGroup.Item>
-					<ListGroup.Item as="li" className="list-item menu-item px-2">
+					<ListGroup.Item className="list-item menu-item px-2">
 						<Form.Switch
 							checked={isAutoUpdate}
 							id="feeds-auto-update"
@@ -105,12 +105,12 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							)}
 						/>
 					</ListGroup.Item>
-					<ListGroup.Item as="li" className="menu-item p-0">
+					<ListGroup.Item className="menu-item p-0">
 						<LocaleSwitcher />
 					</ListGroup.Item>
 					<ListGroup.Item
 						action
-						as="li"
+						as="button"
 						className="list-item menu-item px-2"
 						onClick={handleSignOut}
 					>

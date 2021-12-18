@@ -50,13 +50,13 @@ const LocaleSwitcher: FC = () => {
 					{isSwitchLangInProcess && <MySpinner size="sm" />}
 				</Accordion.Header>
 				<Accordion.Body className="locale-switcher__body p-2">
-					<ListGroup as="ul" variant="flush">
+					<ListGroup variant="flush">
 						{langEntries.map(([langKey, langValue]) => (
 							<ListGroup.Item
 								key={langKey}
 								action
 								active={currentLang === langValue}
-								as="li"
+								as="button"
 								className="list-item"
 								onClick={handleSwitchLocale(langValue)}
 							>
