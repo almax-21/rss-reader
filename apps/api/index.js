@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const dotenv = require('dotenv');
+const compression = require('compression');
 const cors = require('cors');
 
 const userRouter = require('./router/user.routes');
@@ -10,6 +11,7 @@ const postRouter = require('./router/post.routes');
 
 const app = express();
 
+app.use(compression());
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
