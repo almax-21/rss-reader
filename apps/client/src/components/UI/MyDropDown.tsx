@@ -3,6 +3,8 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 import { FormattedMessage } from 'react-intl';
 
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { POST_STATE_TYPE } from '../../store/types';
 
 interface MyDropDownProps<T> {
@@ -20,8 +22,14 @@ const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 	activeValue,
 	handleSetActiveValue,
 }) => {
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
 	return (
-		<DropdownButton title={title} variant={variant}>
+		<DropdownButton
+			menuVariant={isDarkTheme ? 'dark' : undefined}
+			title={title}
+			variant={variant}
+		>
 			{values.map((value) => (
 				<Dropdown.Item
 					key={value}

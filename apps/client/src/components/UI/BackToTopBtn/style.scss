@@ -22,7 +22,7 @@
 	width: 45px;
 	height: 45px;
 
-	border: 1px solid gray;
+	border: 1px solid $dark;
 	border-radius: 50%;
 	background-color: transparent;
 
@@ -34,10 +34,18 @@
 		top: 50%;
 		left: 50%;
 
+		fill: $black;
+
 		transform: translate(-50%, -50%);
 	}
 }
 
-.dark-theme .back-to-top {
-	border-color: $white;
+.dark-theme {
+	.back-to-top {
+		border-color: $white;
+
+		svg {
+			fill: $white;
+		}
+	}
 }
