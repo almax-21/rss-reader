@@ -106,6 +106,17 @@ const userAPI = createApi({
 					},
 				};
 			},
+			onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
+				try {
+					dispatch(notificationReqPending());
+
+					await queryFulfilled;
+				} catch (e) {
+					navigator.onLine
+						? dispatch(notificationReqFailure(MESSAGES.ERROR_UNKNOWN))
+						: dispatch(notificationReqFailure(MESSAGES.ERROR_NETWORK));
+				}
+			},
 		}),
 	}),
 });
