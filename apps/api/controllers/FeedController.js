@@ -1,6 +1,8 @@
 const Feed = require('../models/Feed');
 const FeedService = require('../services/FeedService');
 
+const { FEEDS_LIMIT } = require('../constants');
+
 class FeedController {
 	static async getAllContent(req, res) {
 		try {
@@ -17,17 +19,25 @@ class FeedController {
 	static async uploadFeed(req, res) {
 		try {
 			const { feedUrl } = req.body;
+			const userId = req.user.id;
 
 			const isFeedExist = await Feed.findOne({
 				url: feedUrl,
-				userId: req.user.id,
+				userId,
 			});
 
 			if (isFeedExist) {
 				return res.status(400).json({ message: 'Feed already exists' });
 			}
 
-			const [feed, posts] = await FeedService.uploadFeed(req.body, req.user.id);
+			const feeds = await Feed.find({ userId });
+			const newFeedsCount = feeds.length + 1;
+
+			if (newFeedsCount > FEEDS_LIMIT) {
+				return res.status(400).json({ message: 'Feeds limit reached' });
+			}
+
+			const [feed, posts] = await FeedService.uploadFeed(req.body, userId);
 
 			return res.json({ feed, posts });
 		} catch (err) {

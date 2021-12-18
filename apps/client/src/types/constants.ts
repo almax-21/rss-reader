@@ -6,3 +6,5 @@ export const TOKEN_KEY = 'token';
 
 export const DARK_THEME_KEY = 'isDarkTheme';
 export const AUTO_UPDATE_KEY = 'isAutoUpdate';
+
+export const FEEDS_LIMIT = 7;
