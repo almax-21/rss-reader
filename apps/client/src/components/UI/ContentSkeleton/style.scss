@@ -1,6 +1,10 @@
 .content-skeleton {
 	display: flex;
 	flex-direction: column-reverse;
+
+	button {
+		border: none;
+	}
 }
 
 .content-skeleton__item:last-child {
