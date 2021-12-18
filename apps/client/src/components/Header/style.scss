@@ -1,5 +1,14 @@
 @import '../App/style.scss';
 
+.header {
+	background-color: $dark;
+	transition: $switching-theme-transition;
+}
+
+.dark-theme .header {
+	background-color: $material-darkgrey;
+}
+
 .header__locale-switcher {
 	margin-right: 20px;
 	margin-bottom: 15px;
@@ -7,13 +16,4 @@
 
 .header__navigation {
 	margin-bottom: 7px !important;
-}
-
-.header {
-	background-color: $dark;
-	transition: $switching-theme-transition;
-}
-
-.dark-theme .header {
-	background-color: $black;
 }

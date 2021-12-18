@@ -1,8 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-
-$animation-time: 0.2s;
-$switching-theme-transition: background-color $animation-time,
-	color $animation-time;
+@import './variables.scss';
 
 body {
 	position: relative;
