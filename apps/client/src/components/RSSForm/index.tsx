@@ -81,13 +81,13 @@ const RSSForm: FC = () => {
 			}) => (
 				<Form noValidate onSubmit={handleSubmit}>
 					<Form.Group as={Row} className="mb-3">
-						<Col className="text-dark" md="9">
+						<Col md="9">
 							<FloatingLabel
 								controlId="floatingInput"
 								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
 							>
 								<Form.Control
-									className="rss_input pb-2 pt-4"
+									className="rss__input pb-2 pt-4"
 									isInvalid={!isValid}
 									name={RSS_FORM.URL}
 									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}

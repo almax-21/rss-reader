@@ -21,10 +21,11 @@ const MyModal: FC<MyModalProps> = ({
 	url,
 }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);
+	const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
 	return (
 		<Modal
-			centered={window.matchMedia('(hover: none)').matches}
+			centered={isTouchDevice}
 			show={isShow}
 			onHide={handleClose}
 		>

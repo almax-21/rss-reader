@@ -39,7 +39,9 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 
 	const feeds = useTypedSelector(selectFeeds);
 
-	const { isDarkTheme	 } = useTypedSelector(selectSettings);
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
+	const isTouchDevice = window.matchMedia('(hover)').matches;
 
 	const dispatch = useTypedDispatch();
 
@@ -122,7 +124,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed, order, dragHandlers }) => {
 						variant={isDarkTheme ? 'white' : undefined}
 						onClick={handleOpenModal}
 					/>
-					<DnDBtn setAncestorDraggable={setDraggable()} />
+					{isTouchDevice && <DnDBtn setAncestorDraggable={setDraggable()} />}
 				</div>
 			</ListGroup.Item>
 			<MyModal

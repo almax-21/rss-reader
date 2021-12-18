@@ -1,10 +1,12 @@
 @import '../App/style.scss';
 
-.rss_input {
+.rss__input {
+	color: red;
+
 	margin-bottom: 12px;
 }
 
-.rss_input + .invalid-feedback {
+.rss__input + .invalid-feedback {
 	position: absolute;
 	transform: translateY(50px);
 }
@@ -14,11 +16,11 @@ small.form-text {
 }
 
 @include media-breakpoint-up(md) {
-	.rss_input {
+	.rss__input {
 		margin-bottom: 0;
 	}
 
-	.rss_input + .invalid-feedback {
+	.rss__input + .invalid-feedback {
 		transform: translateY(5px);
 	}
 }

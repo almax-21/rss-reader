@@ -63,6 +63,18 @@ main {
 	background-color: $primary;
 }
 
+.form-floating {
+	color: $dark;
+}
+
+.dark-theme .form-floating,
+.dark-theme .form-control,
+.dark-theme .form-control:focus {
+	color: $white;
+
+	background-color: $material-darkgrey;
+}
+
 @include media-breakpoint-up(md) {
 	.loading-bar {
 		height: 3px;

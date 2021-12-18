@@ -1,3 +1,5 @@
+@import '../../App/style.scss';
+
 .filter {
 	max-width: 540px;
 
@@ -34,6 +36,11 @@
 
 	.dropdown-toggle {
 		width: 150px;
+
 		margin-bottom: 20px;
 	}
+}
+
+.dark-theme .filter__input::placeholder {
+	color: $white;
 }

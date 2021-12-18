@@ -51,9 +51,9 @@
 }
 
 .dark-theme .page-item.active .page-link {
-	background-color: $darkgrey !important;
+	background-color: $material-darkgrey !important;
 
-	border-color: $darkgrey;
+	border-color: $darkgrey !important;
 }
 
 .animated .page-link {
