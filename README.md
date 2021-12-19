@@ -4,6 +4,12 @@
 
 It's a Progressive Web Application (**PWA**) with support **offline mode**, built on the **MERN** stack.
 
+Example links for test app:
+
+https://meduza.io/rss2/podcasts/tekst-nedeli
+
+https://3dnews.ru/news/rss/
+
 ### Requirements
 Node.js v14.0.0 and more
 
