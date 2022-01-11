@@ -1,10 +1,11 @@
 export enum SVG_ICON_VARIANTS {
-	SUCCESS = 'success',
+	WIFI_OFF = 'WIFI_OFF',
 	SORT = 'NEW_FIRST',
 	SORT_REVERSE = 'OLD_FIRST',
 	USER = 'USER',
 	LANG = 'LANG',
 	SIGN_OUT = 'SIGN_OUT',
+	SUCCESS = 'success',
 	DANGER = 'danger',
 }
 

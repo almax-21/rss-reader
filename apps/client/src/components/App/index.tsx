@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AuthContext from '../../contexts/AuthContext';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
+import useNetwork from '../../hooks/useNetwork';
 import { messages } from '../../i18n/messages';
 import userAPI from '../../services/UserService';
 import getAllContentFromApi from '../../store/async-actions/getAllContentFromApi';
@@ -13,6 +14,7 @@ import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { selectUser } from '../../store/selectors/userSelectors';
 import Footer from '../Footer';
 import Header from '../Header';
+import NetworkTooltip from '../NetworkTooltip/';
 import MySpinner from '../UI/MySpinner';
 
 import AppHelmet from './AppHelmet';
@@ -31,6 +33,8 @@ const App: FC = () => {
 	const { isAuth, userData } = useTypedSelector(selectUser);
 
 	const dispatch = useTypedDispatch();
+
+	const isOnline = useNetwork();
 
 	const userToken = userData.token;
 
@@ -51,6 +55,7 @@ const App: FC = () => {
 			<AppHelmet />
 			<LoadingBar className="loading-bar" />
 			<BrowserRouter>
+				{isOnline ? null : <NetworkTooltip />}
 				<Header />
 				{isAuthPending ? (
 					<div className="d-flex justify-content-center mt-5">
