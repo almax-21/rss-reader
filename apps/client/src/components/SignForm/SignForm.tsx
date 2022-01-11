@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import { ObjectSchema } from 'yup';
 
+import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
 import { SIGN_FORM } from '../../schemas/types';
+import { selectSettings } from '../../store/selectors/settingsSelectors';
 import MySpinner from '../UI/MySpinner';
 import SvgIcon from '../UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from '../UI/SvgIcon/types';
@@ -33,6 +35,8 @@ const SignForm: FC<SignFormProps> = ({
 	handleSubmit,
 	apiError,
 }) => {
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
 	const intl = useIntl();
 
 	const usernameInputRef = useRef<HTMLInputElement | null>(null);
@@ -186,7 +190,7 @@ const SignForm: FC<SignFormProps> = ({
 											variant="outline-primary"
 										>
 											{isLoading ? (
-												<MySpinner small />
+												<MySpinner small isDark={isDarkTheme ? false : true} />
 											) : (
 												<FormattedMessage id={type} />
 											)}
