@@ -1,0 +1,30 @@
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes smooth-color-change {
+	from {
+		background-color: $white;
+		border-color: $white;
+	}
+	to {
+		background-color: $primary;
+		border-color: $primary;
+	}
+}
+
+@keyframes smooth-translate {
+	from {
+		opacity: 0;
+		transform: translateY(25px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

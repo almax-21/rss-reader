@@ -18,7 +18,7 @@ import MySpinner from '../UI/MySpinner';
 import AppHelmet from './AppHelmet';
 import AppRouter from './AppRouter';
 
-import './style.scss';
+import './scss/style.scss';
 
 const App: FC = () => {
 	// we need to auth user after success login (and not during login)
@@ -54,7 +54,7 @@ const App: FC = () => {
 				<Header />
 				{isAuthPending ? (
 					<div className="d-flex justify-content-center mt-5">
-						<MySpinner variant={isDarkTheme ? 'light' : 'dark'} />
+						<MySpinner isDark={isDarkTheme ? false : true} />
 					</div>
 				) : (
 					<AuthContext.Provider value={{ refetchAuthQuery }}>

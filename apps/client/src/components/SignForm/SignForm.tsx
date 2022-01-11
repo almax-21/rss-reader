@@ -186,7 +186,7 @@ const SignForm: FC<SignFormProps> = ({
 											variant="outline-primary"
 										>
 											{isLoading ? (
-												<MySpinner size="sm" />
+												<MySpinner small />
 											) : (
 												<FormattedMessage id={type} />
 											)}

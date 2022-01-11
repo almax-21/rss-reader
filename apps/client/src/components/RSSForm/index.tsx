@@ -102,7 +102,7 @@ const RSSForm: FC = () => {
 						</Col>
 						<Col md="3" sm="5" xs="9">
 							<Button
-								className="w-100 h-100"
+								className="d-flex justify-content-center align-items-center w-100 h-100"
 								disabled={isContentLoading}
 								size="lg"
 								type="submit"

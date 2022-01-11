@@ -1,15 +1,4 @@
-@import '../../App/style.scss';
-
-@keyframes smooth-translate {
-	from {
-		opacity: 0;
-		transform: translateY(25px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
+@import '../../App/scss/style.scss';
 
 .back-to-top {
 	display: none;

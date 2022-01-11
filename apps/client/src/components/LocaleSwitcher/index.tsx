@@ -20,6 +20,8 @@ const LocaleSwitcher: FC = () => {
 	const { isSwitchLangInProcess, lang: currentLang } =
 		useTypedSelector(selectSettings);
 
+	const { isDarkTheme } = useTypedSelector(selectSettings);
+
 	const [switchLang] = userAPI.useSwitchLangMutation();
 	const langEntries = Object.entries(LOCALES);
 
@@ -47,7 +49,9 @@ const LocaleSwitcher: FC = () => {
 					<span className="menu-item__text">
 						<FormattedMessage id={MESSAGES.LANGUAGE} />
 					</span>
-					{isSwitchLangInProcess && <MySpinner size="sm" />}
+					{isSwitchLangInProcess && (
+						<MySpinner small isDark={isDarkTheme ? false : true} />
+					)}
 				</Accordion.Header>
 				<Accordion.Body className="locale-switcher__body p-2">
 					<ListGroup variant="flush">

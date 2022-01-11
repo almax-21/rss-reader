@@ -1,0 +1,49 @@
+@import '../../App/scss/style.scss';
+
+.spinner {
+	position: relative;
+
+	display: inline-block;
+	vertical-align: middle;
+
+	width: 2rem;
+	height: 2rem;
+
+	&--small {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	&__ring {
+		position: absolute;
+
+		display: block;
+
+		width: 100%;
+		height: 100%;
+
+		color: $light;
+
+		border: 0.25em solid currentColor;
+		border-radius: 50%;
+		border-color: currentColor transparent transparent transparent;
+
+		animation: rotation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+
+		&:nth-child(1) {
+			animation-delay: -0.45s;
+		}
+
+		&:nth-child(2) {
+			animation-delay: -0.3s;
+		}
+
+		&:nth-child(3) {
+			animation-delay: -0.15s;
+		}
+	}
+}
+
+.spinner--dark .spinner__ring {
+	color: $dark;
+}

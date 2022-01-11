@@ -44,7 +44,7 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 					onClick={handleAction}
 				>
 					{isFeedDeleteInProcess ? (
-						<MySpinner size="sm" />
+						<MySpinner small />
 					) : (
 						<FormattedMessage id={MESSAGES.DELETE} />
 					)}
