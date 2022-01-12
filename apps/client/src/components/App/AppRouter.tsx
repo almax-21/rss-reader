@@ -9,7 +9,7 @@ import { selectNotification } from '../../store/selectors/notificationSelectors'
 import { selectAuthState } from '../../store/selectors/userSelectors';
 import Notification from '../UI/Notification';
 
-const AppRouter: FC = () => {
+const AppRouter: FC = React.memo(() => {
 	const isAuth = useTypedSelector(selectAuthState);
 
 	const { completedLoadStatus, successMessage, errorMessage } =
@@ -54,6 +54,8 @@ const AppRouter: FC = () => {
 			</main>
 		</>
 	);
-};
+});
+
+AppRouter.displayName = 'AppRouter';
 
 export default AppRouter;
