@@ -54,6 +54,8 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 		const { value } = evt.target;
 
 		dispatch(updateFilterQuery(value));
+
+		resetActivePage();
 	}, 300);
 
 	const handleSwitchSortType = (newType: SORT_TYPE) => () => {
@@ -70,6 +72,7 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 		}
 
 		dispatch(switchFilterState(value));
+
 		resetActivePage();
 	};
 

@@ -35,6 +35,10 @@ const PostContent: FC = () => {
 	const prevActiveFeedId = useRef<string>('');
 
 	const resetActivePage = () => {
+		if (activePage === 1) {
+			return;
+		}
+
 		setActivePage(1);
 	};
 
