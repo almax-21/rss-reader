@@ -2,6 +2,8 @@ import React, { FC, useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter } from 'react-router-dom';
+import SpeechRecognition from 'react-speech-recognition';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 import AuthContext from '../../contexts/AuthContext';
 import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
@@ -22,6 +24,8 @@ import AppRouter from './AppRouter';
 
 import './scss/style.scss';
 
+const SPEECHLY_APP_ID = '4583ba0d-aa26-46cf-a3d3-1e303fe6c5f8';
+
 const App: FC = () => {
 	// we need to auth user after success login (and not during login)
 	// because if user loss network connection after login
@@ -37,6 +41,13 @@ const App: FC = () => {
 	const isOnline = useNetwork();
 
 	const userToken = userData.token;
+
+	useEffect(() => {
+		const SpeechlySpeechRecognition =
+			createSpeechlySpeechRecognition(SPEECHLY_APP_ID);
+
+		SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
+	}, []);
 
 	useEffect(() => {
 		if (isAuth && userToken) {

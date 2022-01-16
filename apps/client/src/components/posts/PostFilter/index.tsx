@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import React, { FC, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
@@ -13,15 +13,15 @@ import {
 import {
 	switchFilterState,
 	switchSortType,
-	updateFilterQuery,
 } from '../../../store/slices/postsSlice';
 import { POST_STATE_TYPE, POST_STATES } from '../../../store/types';
 import { IPostFilter, SORT_TYPE } from '../../../types';
-import { debounce } from '../../../utils/perfomance';
-import FilterSort from '../../UI/FilterSort';
 import MyDropDown from '../../UI/MyDropDown';
 import MyModal from '../../UI/MyModal/index';
 import { MODAL_TYPES } from '../../UI/MyModal/types';
+
+import FilterSearch from './FilterSearch';
+import FilterSort from './FilterSort';
 
 import './style.scss';
 
@@ -40,23 +40,6 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
-
-	const searchRef = useRef<HTMLInputElement | null>(null);
-
-	useEffect(() => {
-		if (searchRef.current) {
-			const input = searchRef.current;
-			input.value = '';
-		}
-	}, [activeFeedId]);
-
-	const handleSearch = debounce((evt: ChangeEvent<HTMLInputElement>) => {
-		const { value } = evt.target;
-
-		dispatch(updateFilterQuery(value));
-
-		resetActivePage();
-	}, 300);
 
 	const handleSwitchSortType = (newType: SORT_TYPE) => () => {
 		if (newType === postFilter.sort) {
@@ -93,16 +76,7 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 	return (
 		<>
 			<div className="filter">
-				<InputGroup className="filter__group">
-					<Form.Control
-						ref={searchRef}
-						aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
-						className="filter__input"
-						placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
-						type="text"
-						onChange={handleSearch}
-					/>
-				</InputGroup>
+				<FilterSearch resetActivePage={resetActivePage} />
 
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
 					<MyDropDown

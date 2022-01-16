@@ -18,6 +18,10 @@
 
 	&__btn {
 		width: 70px;
+
+		&--pulse {
+			animation: pulse 2s infinite;
+		}
 	}
 
 	&__sort {

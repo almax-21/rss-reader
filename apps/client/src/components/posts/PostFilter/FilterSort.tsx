@@ -2,10 +2,9 @@ import React, { FC } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
-import { MESSAGES } from '../../i18n/types';
-import { SORT_TYPE, SORTS } from '../../types';
-
-import SvgIcon from './SvgIcon';
+import { MESSAGES } from '../../../i18n/types';
+import { SORT_TYPE, SORTS } from '../../../types';
+import SvgIcon from '../../UI/SvgIcon';
 
 interface FilterSortProps {
 	activeSortType: SORT_TYPE;
