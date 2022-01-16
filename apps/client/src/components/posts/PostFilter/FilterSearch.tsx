@@ -13,6 +13,7 @@ import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
 import { selectSettings } from '../../../store/selectors/settingsSelectors';
 import { updateFilterQuery } from '../../../store/slices/postsSlice';
 import { debounce } from '../../../utils/perfomance';
+import CloseBtn from '../../UI/CloseBtn';
 import SvgIcon from '../../UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from '../../UI/SvgIcon/types';
 
@@ -45,6 +46,16 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 	const isCanNotUseSpeechRecognition =
 		!isMicrophoneAvailable || !navigator.onLine;
 
+	const updateSearchQuery = (newSearchQuery: string) => {
+		dispatch(updateFilterQuery(newSearchQuery));
+
+		if (searchRef.current) {
+			searchRef.current.value = newSearchQuery;
+		}
+
+		resetActivePage();
+	};
+
 	useEffect(() => {
 		if (!isMicrophoneAvailable) {
 			SpeechRecognition.stopListening();
@@ -61,20 +72,14 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		if (transcript && searchRef.current) {
 			const newSearchQuery = transcript.toLowerCase();
 
-			dispatch(updateFilterQuery(newSearchQuery));
-
-			searchRef.current.value = newSearchQuery;
-
-			resetActivePage();
+			updateSearchQuery(newSearchQuery);
 		}
 	}, [transcript]);
 
 	const handleSearchChange = debounce((evt: ChangeEvent<HTMLInputElement>) => {
 		const { value } = evt.target;
 
-		dispatch(updateFilterQuery(value));
-
-		resetActivePage();
+		updateSearchQuery(value);
 	}, SEARCH_DEBOUNCE_MS);
 
 	const handleToggleSpeechInput = () => {
@@ -87,6 +92,10 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 			: SpeechRecognition.startListening();
 	};
 
+	const handleResetSearch = () => {
+		updateSearchQuery('');
+	};
+
 	return (
 		<InputGroup className="filter__group">
 			<Form.Control
@@ -96,6 +105,11 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 				placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
 				type="text"
 				onChange={handleSearchChange}
+			/>
+			<CloseBtn
+				className="filter__btn filter__btn--close"
+				isVisible={searchRef.current?.value}
+				onClick={handleResetSearch}
 			/>
 			{isFullSupportSpeechRecognition && (
 				<Button

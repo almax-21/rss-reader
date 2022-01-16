@@ -4,6 +4,8 @@
 	max-width: 540px;
 
 	&__group {
+		position: relative;
+
 		display: flex;
 		flex-wrap: wrap;
 
@@ -14,10 +16,19 @@
 		display: block;
 
 		min-width: 155px !important;
+
+		padding-right: 40px !important;
 	}
 
 	&__btn {
 		width: 70px;
+
+		&--close {
+			position: absolute;
+			top: 7px;
+			right: 50px;
+			z-index: 100;
+		}
 
 		&--pulse {
 			animation: pulse 2s infinite;

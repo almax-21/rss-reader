@@ -14,6 +14,7 @@ import {
 	selectUrls,
 } from '../../store/selectors/rssMetaSelectors';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
+import CloseBtn from '../UI/CloseBtn';
 import MySpinner from '../UI/MySpinner';
 
 import './style.scss';
@@ -78,6 +79,7 @@ const RSSForm: FC = () => {
 				values,
 				isValid,
 				errors: validationFormErrors,
+				resetForm,
 			}) => (
 				<Form noValidate onSubmit={handleSubmit}>
 					<Form.Group as={Row} className="mb-3">
@@ -94,6 +96,11 @@ const RSSForm: FC = () => {
 									type="text"
 									value={values[RSS_FORM.URL]}
 									onChange={handleChange}
+								/>
+								<CloseBtn
+									className="rss__btn rss__btn--close"
+									isVisible={values[RSS_FORM.URL]}
+									onClick={resetForm}
 								/>
 								<Form.Control.Feedback type="invalid">
 									{validationFormErrors[RSS_FORM.URL]}

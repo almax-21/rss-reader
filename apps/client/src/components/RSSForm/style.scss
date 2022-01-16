@@ -1,9 +1,22 @@
 @import '../App/scss/style.scss';
 
 .rss__input {
+	position: relative;
+
+	padding-right: 45px !important;
+
 	color: red;
 
 	margin-bottom: 12px;
+}
+
+.rss__btn {
+	&--close {
+		position: absolute;
+		top: 18px;
+		right: 10px;
+		z-index: 100;
+	}
 }
 
 .rss__input + .invalid-feedback {
