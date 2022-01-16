@@ -26,8 +26,12 @@
 		&--close {
 			position: absolute;
 			top: 7px;
-			right: 50px;
+			right: 10px;
 			z-index: 100;
+		}
+
+		&--pad-right {
+			right: 50px;
 		}
 
 		&--pulse {

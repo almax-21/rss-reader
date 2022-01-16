@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import SpeechRecognition, {
 	useSpeechRecognition,
 } from 'react-speech-recognition';
+import cn from 'classnames';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
@@ -96,6 +97,10 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		updateSearchQuery('');
 	};
 
+	const closeBtnClasses = cn('filter__btn', 'filter__btn--close', {
+		'filter__btn--pad-right': isFullSupportSpeechRecognition,
+	});
+
 	return (
 		<InputGroup className="filter__group">
 			<Form.Control
@@ -107,8 +112,8 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 				onChange={handleSearchChange}
 			/>
 			<CloseBtn
-				className="filter__btn filter__btn--close"
-				isVisible={searchRef.current?.value}
+				className={closeBtnClasses}
+				isVisible={searchRef.current && searchRef.current.value}
 				onClick={handleResetSearch}
 			/>
 			{isFullSupportSpeechRecognition && (
