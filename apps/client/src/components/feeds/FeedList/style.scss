@@ -1,0 +1,8 @@
+@import '../../App/scss/style.scss';
+
+@include media-breakpoint-up(md) {
+	.feed-list {
+		position: sticky;
+		top: 24px;
+	}
+}

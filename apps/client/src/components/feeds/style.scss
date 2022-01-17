@@ -1,0 +1,11 @@
+@import '../App/scss/style.scss';
+
+.feeds-content {
+	position: relative;
+}
+
+@include media-breakpoint-up(md) {
+	.feeds-content {
+		height: 100%;
+	}
+}
