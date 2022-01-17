@@ -35,23 +35,6 @@ class FeedService {
 		});
 	}
 
-	static updateFeedsOrder(
-		newOrder: string[]
-	): Promise<AxiosResponse<ApiContentData>> {
-		const { href: endpointUrl } = new URL('/feeds/order', API_ORIGIN);
-		const token = localStorage.getItem(TOKEN_KEY);
-
-		return axios.post(
-			endpointUrl,
-			{ newOrder },
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			}
-		);
-	}
-
 	static deleteFeedData(
 		id: string,
 		timeout = 30000

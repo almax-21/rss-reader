@@ -21,9 +21,6 @@ const feedsSlice = createSlice({
 		updateActiveFeed: (state, action: PayloadAction<string>) => {
 			state.activeFeedId = action.payload;
 		},
-		updateFeedsOrder: (state, action: PayloadAction<string[]>) => {
-			state.ids = [...action.payload];
-		},
 	},
 	extraReducers: {
 		[getDataFromApi.fulfilled.type]: (
@@ -66,6 +63,6 @@ const feedsSlice = createSlice({
 	},
 });
 
-export const { updateActiveFeed, updateFeedsOrder } = feedsSlice.actions;
+export const { updateActiveFeed } = feedsSlice.actions;
 
 export default feedsSlice.reducer;

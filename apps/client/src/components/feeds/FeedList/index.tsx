@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import useTypedSelector from '../../../hooks/redux/useTypedSelector';
-import useDraggableList from '../../../hooks/useDraggableList';
 import { IFeedWithCounter } from '../../../models/IFeed';
-import { selectFeedIds } from '../../../store/selectors/contentSelectors';
 import FeedItem from '../FeedItem';
 
 import './style.scss';
@@ -13,23 +10,12 @@ interface FeedListProps {
 	feeds: IFeedWithCounter[];
 }
 
-const FeedList: FC<FeedListProps> = ({ feeds }) => {
-	const feedIds = useTypedSelector(selectFeedIds);
-
-	const dragHandlers = useDraggableList(feedIds);
-
-	return (
-		<ListGroup numbered as="ol" className="feed-list">
-			{feeds.map((feed, order) => (
-				<FeedItem
-					key={feed._id}
-					dragHandlers={dragHandlers}
-					feed={feed}
-					order={order}
-				/>
-			))}
-		</ListGroup>
-	);
-};
+const FeedList: FC<FeedListProps> = ({ feeds }) => (
+	<ListGroup numbered as="ol" className="feed-list">
+		{feeds.map((feed) => (
+			<FeedItem key={feed._id} feed={feed} />
+		))}
+	</ListGroup>
+);
 
 export default FeedList;
