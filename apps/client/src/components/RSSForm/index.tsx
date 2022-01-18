@@ -83,7 +83,7 @@ const RSSForm: FC = () => {
 			}) => (
 				<Form noValidate onSubmit={handleSubmit}>
 					<Form.Group as={Row} className="mb-3">
-						<Col md="9">
+						<Col className="position-relative" md="9">
 							<FloatingLabel
 								controlId="floatingInput"
 								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
@@ -97,15 +97,15 @@ const RSSForm: FC = () => {
 									value={values[RSS_FORM.URL]}
 									onChange={handleChange}
 								/>
-								<CloseBtn
-									className="rss__btn rss__btn--close"
-									isVisible={values[RSS_FORM.URL]}
-									onClick={resetForm}
-								/>
 								<Form.Control.Feedback type="invalid">
 									{validationFormErrors[RSS_FORM.URL]}
 								</Form.Control.Feedback>
 							</FloatingLabel>
+							<CloseBtn
+								className="rss__btn rss__btn--close"
+								isVisible={values[RSS_FORM.URL]}
+								onClick={resetForm}
+							/>
 						</Col>
 						<Col md="3" sm="5" xs="9">
 							<Button

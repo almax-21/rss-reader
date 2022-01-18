@@ -1,8 +1,6 @@
 @import '../App/scss/style.scss';
 
 .rss__input {
-	position: relative;
-
 	padding-right: 45px !important;
 
 	color: red;
@@ -14,7 +12,7 @@
 	&--close {
 		position: absolute;
 		top: 18px;
-		right: 10px;
+		right: 20px;
 		z-index: 100;
 	}
 }
