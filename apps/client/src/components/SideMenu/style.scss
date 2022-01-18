@@ -1,5 +1,10 @@
 @import '../App/scss/style.scss';
 
+.offcanvas {
+	width: 85% !important;
+	max-width: 400px !important;
+}
+
 .side-menu__header,
 .side-menu__body {
 	color: $dark;
