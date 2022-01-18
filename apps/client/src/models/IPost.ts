@@ -7,5 +7,6 @@ export interface IPost {
 	title: string;
 	description: string;
 	url: string;
+	imgSrc: string;
 	state: POST_STATE_TYPE;
 }

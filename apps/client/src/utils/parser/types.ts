@@ -5,6 +5,7 @@ export interface ParsedFeed {
 
 export interface ParsedPost extends ParsedFeed {
 	url: string;
+	imgSrc: string;
 }
 
 export interface ParsedFeedData {

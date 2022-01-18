@@ -17,4 +17,5 @@ export interface MyModalProps extends ModalActionBtnProps {
 	handleClose: () => void;
 	title: string;
 	description: string;
+	imgSrc?: string;
 }

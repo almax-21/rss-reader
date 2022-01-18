@@ -44,10 +44,19 @@ const parseRSS = (serializedData: string): ParsedFeedData => {
 
 		const postUrl = feedItem.querySelector('link')?.textContent || '';
 
+		const enclosureElement = feedItem.querySelector('enclosure');
+		const enclosureElementType = enclosureElement?.getAttribute('type') || '';
+		const enclosureElementUrl = enclosureElement?.getAttribute('url') || '';
+
+		const imgSrc = enclosureElementType.startsWith('image')
+			? enclosureElementUrl
+			: '';
+
 		return {
 			title,
 			description: filterText(description),
 			url: postUrl,
+			imgSrc,
 		};
 	});
 

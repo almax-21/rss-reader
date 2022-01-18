@@ -22,7 +22,7 @@ interface PostItemProps {
 const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-	const { title, description, _id, feedId, url, state } = post;
+	const { title, description, _id, feedId, url, imgSrc, state } = post;
 
 	const { isDarkTheme } = useTypedSelector(selectSettings);
 
@@ -87,6 +87,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 			<MyModal
 				description={description}
 				handleClose={handleCloseModal({ _id, feedId })}
+				imgSrc={imgSrc}
 				isShow={isShowModal}
 				title={title}
 				type={MODAL_TYPES.PREVIEW}

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../../i18n/types';
@@ -19,23 +19,32 @@ const MyModal: FC<MyModalProps> = ({
 	title,
 	description,
 	url,
+	imgSrc,
 }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);
 	const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
+	const intl = useIntl();
+
 	return (
-		<Modal
-			centered={isTouchDevice}
-			show={isShow}
-			onHide={handleClose}
-		>
+		<Modal centered={isTouchDevice} show={isShow} onHide={handleClose}>
 			<Modal.Header
 				closeButton
 				closeVariant={isDarkTheme ? 'white' : undefined}
 			>
 				<Modal.Title>{title}</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>{description}</Modal.Body>
+			<Modal.Body>
+				{imgSrc && (
+					<div className="modal__image-wrapper">
+						<img
+							alt={intl.formatMessage({ id: MESSAGES.CONTENT_IMAGE })}
+							src={imgSrc}
+						/>
+					</div>
+				)}
+				<p className="modal__description">{description}</p>
+			</Modal.Body>
 			<Modal.Footer>
 				<ModalActionBtn handleAction={handleAction} type={type} url={url} />
 				<Button variant="secondary" onClick={handleClose}>
