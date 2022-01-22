@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IFeed } from '../../models/IFeed';
+import { Feed } from '../../models/Feed';
 import deleteFeed from '../async-actions/deleteFeed';
 import getDataFromApi from '../async-actions/getAllContentFromApi';
 import getContentFromRssSource from '../async-actions/getContentFromRssSource';
@@ -29,7 +29,7 @@ const feedsSlice = createSlice({
 		) => {
 			const { feeds } = action.payload;
 
-			feeds.forEach((feed: IFeed) => {
+			feeds.forEach((feed: Feed) => {
 				state.entities[feed._id] = feed;
 				state.ids = [feed._id, ...state.ids];
 				state.activeFeedId = feed._id;

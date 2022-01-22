@@ -3,10 +3,10 @@ export interface ParsedFeed {
 	description: string;
 }
 
-export interface ParsedPost extends ParsedFeed {
+export type ParsedPost = ParsedFeed & {
 	url: string;
 	imgSrc: string;
-}
+};
 
 export interface ParsedFeedData {
 	parsedFeed: ParsedFeed;

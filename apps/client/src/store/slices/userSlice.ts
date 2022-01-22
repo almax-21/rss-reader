@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { LocaleType } from '../../i18n/types';
-import { IUser } from '../../models/IUser';
+import { User } from '../../models/User';
 import userAPI from '../../services/UserService';
 import { UserState } from '../types';
 
@@ -32,13 +32,13 @@ const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addMatcher(
 			userAPI.endpoints.createUser.matchFulfilled,
-			(state, action: PayloadAction<IUser>) => {
+			(state, action: PayloadAction<User>) => {
 				state.userData = action.payload;
 			}
 		);
 		builder.addMatcher(
 			userAPI.endpoints.authUser.matchFulfilled,
-			(state, action: PayloadAction<IUser>) => {
+			(state, action: PayloadAction<User>) => {
 				state.isAuth = true;
 				state.userData = action.payload;
 			}

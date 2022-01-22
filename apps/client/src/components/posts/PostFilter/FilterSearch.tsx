@@ -77,11 +77,14 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		}
 	}, [transcript]);
 
-	const handleSearchChange = debounce((evt: ChangeEvent<HTMLInputElement>) => {
-		const { value } = evt.target;
+	const handleSearchChange = debounce<ChangeEvent<HTMLInputElement>, void>(
+		(evt) => {
+			const { value } = evt.target;
 
-		updateSearchQuery(value);
-	}, SEARCH_DEBOUNCE_MS);
+			updateSearchQuery(value);
+		},
+		SEARCH_DEBOUNCE_MS
+	);
 
 	const handleToggleSpeechInput = () => {
 		if (!isMicrophoneAvailable) {

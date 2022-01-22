@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { IFeedWithCounter } from '../../../models/IFeed';
+import { FeedWithCounter } from '../../../models/Feed';
 import FeedItem from '../FeedItem';
 
 import './style.scss';
 
 interface FeedListProps {
-	feeds: IFeedWithCounter[];
+	feeds: FeedWithCounter[];
 }
 
 const FeedList: FC<FeedListProps> = ({ feeds }) => (

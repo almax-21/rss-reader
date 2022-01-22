@@ -1,9 +1,9 @@
 import { TimeoutId } from '../types';
 
-export const throttle = (cb: (...args: any[]) => any, delay: number) => {
+export function throttle<T, K>(cb: (...args: T[]) => K, delay: number) {
 	let isThrottle = false;
 
-	return (...args: any[]) => {
+	return function (...args: T[]) {
 		if (isThrottle) {
 			return;
 		}
@@ -16,16 +16,16 @@ export const throttle = (cb: (...args: any[]) => any, delay: number) => {
 			isThrottle = false;
 		}, delay);
 	};
-};
+}
 
-export const debounce = (cb: (...args: any[]) => any, delay: number) => {
+export function debounce<T, K>(cb: (...args: T[]) => K, delay: number) {
 	let timerId = -1 as unknown as TimeoutId;
 
-	return (...args: any[]) => {
+	return function (...args: T[]) {
 		clearTimeout(timerId);
 
 		const currentId = setTimeout(() => cb(...args), delay);
 
 		timerId = currentId;
 	};
-};
+}

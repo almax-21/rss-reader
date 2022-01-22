@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { LocaleType, MESSAGES } from '../i18n/types';
-import { IUser } from '../models/IUser';
+import { User } from '../models/User';
 import {
 	notificationReqFailure,
 	notificationReqPending,
@@ -16,7 +16,7 @@ const userAPI = createApi({
 		baseUrl: `${API_ORIGIN}/user`,
 	}),
 	endpoints: (build) => ({
-		createUser: build.mutation<IUser, SignUpUserData>({
+		createUser: build.mutation<User, SignUpUserData>({
 			query: (userData) => ({
 				url: '/registration',
 				method: 'POST',
@@ -80,7 +80,7 @@ const userAPI = createApi({
 				}
 			},
 		}),
-		authUser: build.query<IUser, void>({
+		authUser: build.query<User, void>({
 			query: () => {
 				const token = localStorage.getItem(TOKEN_KEY);
 

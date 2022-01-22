@@ -1,8 +1,8 @@
 import { LocaleType } from '../i18n/types';
-import { IFeed } from '../models/IFeed';
-import { IPost } from '../models/IPost';
-import { IUser } from '../models/IUser';
-import { FeedUrlData, IPostFilter } from '../types';
+import { Feed } from '../models/Feed';
+import { Post } from '../models/Post';
+import { User } from '../models/User';
+import { FeedUrlData, PostFilter } from '../types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';
@@ -22,13 +22,13 @@ export enum POST_STATES {
 export type POST_STATE_TYPE = typeof POST_STATES[keyof typeof POST_STATES];
 
 export interface ApiFeedData {
-	feed: IFeed;
-	posts: IPost[];
+	feed: Feed;
+	posts: Post[];
 }
 
 export interface ApiContentData {
-	feeds: IFeed[];
-	posts: IPost[];
+	feeds: Feed[];
+	posts: Post[];
 }
 
 export interface SettingsState {
@@ -40,7 +40,7 @@ export interface SettingsState {
 
 export interface UserState {
 	isAuth: boolean;
-	userData: IUser;
+	userData: User;
 }
 
 export interface RssState {
@@ -58,7 +58,7 @@ export interface NotificationState {
 
 export interface FeedsState {
 	entities: {
-		[key: string]: IFeed;
+		[key: string]: Feed;
 	};
 	ids: string[];
 	activeFeedId: string;
@@ -66,9 +66,9 @@ export interface FeedsState {
 
 export interface PostsState {
 	byFeedId: {
-		[key: string]: IPost[];
+		[key: string]: Post[];
 	};
-	filter: IPostFilter;
+	filter: PostFilter;
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

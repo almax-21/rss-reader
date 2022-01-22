@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IPost } from '../../models/IPost';
+import { Post } from '../../models/Post';
 import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '../../types';
 import deleteFeed from '../async-actions/deleteFeed';
 import getDataFromApi from '../async-actions/getAllContentFromApi';
@@ -23,7 +23,7 @@ const initialState: PostsState = {
 	filter: {
 		query: '',
 		state: POST_STATES.ALL,
-		sort: SORTS.NEW_FIRST,
+		sortType: SORTS.NEW_FIRST,
 	},
 };
 
@@ -35,7 +35,7 @@ const postsSlice = createSlice({
 			state.filter.query = action.payload;
 		},
 		switchSortType: (state, action: PayloadAction<SORT_TYPE>) => {
-			state.filter.sort = action.payload;
+			state.filter.sortType = action.payload;
 		},
 		switchFilterState: (state, action: PayloadAction<POST_STATE_TYPE>) => {
 			state.filter.state = action.payload;
@@ -48,7 +48,7 @@ const postsSlice = createSlice({
 		) => {
 			const { posts } = action.payload;
 
-			posts.reverse().forEach((post: IPost) => {
+			posts.reverse().forEach((post: Post) => {
 				const { feedId } = post;
 
 				state.byFeedId[feedId] = state.byFeedId[feedId] ?? [];
@@ -100,7 +100,7 @@ const postsSlice = createSlice({
 			state.filter = {
 				query: '',
 				state: POST_STATES.ALL,
-				sort: SORTS.NEW_FIRST,
+				sortType: SORTS.NEW_FIRST,
 			};
 		},
 	},

@@ -2,13 +2,13 @@ import { LOCALES } from './locales';
 
 export type LocaleType = typeof LOCALES[keyof typeof LOCALES];
 
-export interface ILocale {
+export interface Locale {
 	[key: string]: string;
 }
 
-export interface IMessages {
-	[LOCALES.ENGLISH]: ILocale;
-	[LOCALES.RUSSIAN]: ILocale;
+export interface Messages {
+	[LOCALES.ENGLISH]: Locale;
+	[LOCALES.RUSSIAN]: Locale;
 }
 
 export enum MESSAGES {

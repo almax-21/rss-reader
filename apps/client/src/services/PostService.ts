@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { IPost } from '../models/IPost';
+import { Post } from '../models/Post';
 import { API_ORIGIN, TOKEN_KEY } from '../types/constants';
 import { ParsedPost } from '../utils/parser/types';
 
@@ -38,7 +38,7 @@ class PostService {
 	static uploadNewPosts(
 		newPosts: ParsedPost[],
 		feedId: string
-	): Promise<AxiosResponse<IPost[]>> {
+	): Promise<AxiosResponse<Post[]>> {
 		const { href: endpointUrl } = new URL('/posts/upload', API_ORIGIN);
 		const token = localStorage.getItem(TOKEN_KEY);
 

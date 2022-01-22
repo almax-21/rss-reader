@@ -7,13 +7,13 @@ export const getPagesColl = (pagesCount: number): number[] =>
 		.fill('*')
 		.map((_item, index) => index + 1);
 
-export const showCurrentItems = (
-	items: any[],
+export function showCurrentItems<T>(
+	items: T[],
 	currentPage: number,
 	itemsLimit: number
-): any[] => {
+): T[] {
 	const start = (currentPage - 1) * itemsLimit;
 	const end = itemsLimit * currentPage;
 
 	return items.slice(start, end);
-};
+}

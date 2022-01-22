@@ -1,7 +1,7 @@
 import { LOCALES } from './locales';
-import { IMessages, MESSAGES } from './types';
+import { MESSAGES, Messages } from './types';
 
-export const messages: IMessages = {
+export const messages: Messages = {
 	[LOCALES.ENGLISH]: {
 		[MESSAGES.LANGUAGE]: 'Language',
 		[MESSAGES.ENGLISH]: 'English',

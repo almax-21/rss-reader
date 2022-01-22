@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { IPost } from '../../models/IPost';
+import { Post } from '../../models/Post';
 
 import PostItem from './PostItem';
 
 interface PostListProps {
-	posts: IPost[];
+	posts: Post[];
 }
 
 const PostList: FC<PostListProps> = React.memo(({ posts }) => (

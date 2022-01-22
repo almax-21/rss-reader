@@ -1,6 +1,6 @@
 import { POST_STATE_TYPE } from '../store/types';
 
-export interface IPost {
+interface IPost {
 	_id: string;
 	feedId: string;
 	userId: string;
@@ -10,3 +10,5 @@ export interface IPost {
 	imgSrc: string;
 	state: POST_STATE_TYPE;
 }
+
+export type Post = Readonly<IPost>;

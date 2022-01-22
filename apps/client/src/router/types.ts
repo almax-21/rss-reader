@@ -4,7 +4,7 @@ export enum ROUTES {
 	SIGN_IN = '/signin',
 }
 
-export interface IRoute {
+export interface Route {
 	path: string;
 	Component: React.ComponentType;
 	exact: boolean;

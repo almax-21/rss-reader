@@ -5,9 +5,9 @@ import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import usePaginator from '../../hooks/usePaginator';
 import { MESSAGES } from '../../i18n/types';
+import { Post } from '../../models/Post';
 import {
 	selectActiveFeedId,
-	selectFilter,
 	selectFilteredPosts,
 } from '../../store/selectors/contentSelectors';
 import { updateFilterQuery } from '../../store/slices/postsSlice';
@@ -24,7 +24,6 @@ const PostContent: FC = () => {
 	const posts = useTypedSelector(selectFilteredPosts);
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
 
-	const postFilter = useTypedSelector(selectFilter);
 	const dispatch = useTypedDispatch();
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
@@ -53,7 +52,7 @@ const PostContent: FC = () => {
 	}, [activeFeedId]);
 
 	const currentPosts = useMemo(
-		() => showCurrentItems(posts, activePage, POSTS_LIMIT),
+		() => showCurrentItems<Post>(posts, activePage, POSTS_LIMIT),
 		[posts, activePage, POSTS_LIMIT]
 	);
 
@@ -62,7 +61,7 @@ const PostContent: FC = () => {
 			<h2 className="h3 mb-4">
 				<FormattedMessage id={MESSAGES.POSTS} />
 			</h2>
-			<PostFilter postFilter={postFilter} resetActivePage={resetActivePage} />
+			<PostFilter resetActivePage={resetActivePage} />
 			<Paginator
 				activePage={activePage}
 				setActivePage={setActivePage}

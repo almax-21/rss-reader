@@ -12,7 +12,7 @@ export interface ModalActionBtnProps {
 	url?: string;
 }
 
-export interface MyModalProps extends ModalActionBtnProps {
+export type MyModalProps = ModalActionBtnProps & {
 	isShow: boolean;
 	handleClose: () => void;
 	title: string;

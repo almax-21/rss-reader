@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { IPost } from '../../models/IPost';
+import { Post } from '../../models/Post';
 import { SORTS } from '../../types';
 import { POST_STATES, RootState } from '../types';
 
@@ -26,7 +26,7 @@ export const selectUnreadPostsCount = createSelector(
 	}
 );
 
-export const selectUnreadPostsCountDynamically = (postsByFeedId: IPost[]) => {
+export const selectUnreadPostsCountDynamically = (postsByFeedId: Post[]) => {
 	const filteredPosts = postsByFeedId.filter(
 		({ state }) => state === POST_STATES.UNREAD
 	);
@@ -48,10 +48,10 @@ export const selectFeedsWithCounter = createSelector(
 	}
 );
 
-export const selectFilter = (state: RootState) => state.posts.filter;
+export const selectPostFilter = (state: RootState) => state.posts.filter;
 
 export const selectFilteredPosts = createSelector(
-	[selectActiveFeedId, selectFilter, selectPostEntities],
+	[selectActiveFeedId, selectPostFilter, selectPostEntities],
 	(activeFeedId, filter, postEntities) => {
 		if (!activeFeedId) {
 			return [];
@@ -64,7 +64,7 @@ export const selectFilteredPosts = createSelector(
 		);
 
 		const sortedPosts =
-			filter.sort === SORTS.OLD_FIRST ? searchedPosts.reverse() : searchedPosts;
+			filter.sortType === SORTS.OLD_FIRST ? searchedPosts.reverse() : searchedPosts;
 
 		if (filter.state === POST_STATES.ALL) {
 			return sortedPosts;

@@ -11,6 +11,6 @@ export interface PaginationProps {
 	handleSetActivePage: (page: number) => () => void;
 }
 
-export interface PaginationInnerProps extends PaginationProps {
+export type PaginationInnerProps = PaginationProps & {
 	disableAnimation?: boolean;
-}
+};

@@ -1,7 +1,7 @@
 // most used types or common
 
 import { LocaleType } from '../i18n/types';
-import { IPost } from '../models/IPost';
+import { Post } from '../models/Post';
 import { POST_STATE_TYPE } from '../store/types';
 
 export type TimeoutId = ReturnType<typeof setTimeout>;
@@ -11,9 +11,9 @@ export interface SignInUserData {
 	password: string;
 }
 
-export interface SignUpUserData extends SignInUserData {
+export type SignUpUserData = SignInUserData & {
 	lang: LocaleType;
-}
+};
 
 export interface TokenData {
 	token: string;
@@ -26,10 +26,10 @@ export enum SORTS {
 
 export type SORT_TYPE = typeof SORTS[keyof typeof SORTS];
 
-export interface IPostFilter {
+export interface PostFilter {
 	query: string;
 	state: POST_STATE_TYPE;
-	sort: SORT_TYPE;
+	sortType: SORT_TYPE;
 }
 
 export interface PostIdData {
@@ -44,5 +44,5 @@ export interface FeedUrlData {
 
 export interface NewPostsData {
 	feedId: string;
-	newPosts: IPost[];
+	newPosts: Post[];
 }

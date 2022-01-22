@@ -10,7 +10,7 @@ const BackToTopBtn: FC = () => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		const scrollHandler = throttle(() => {
+		const scrollHandler = throttle<Event, void>(() => {
 			if (buttonRef.current) {
 				buttonRef.current.style.display =
 					window.scrollY > 300 ? 'block' : 'none';

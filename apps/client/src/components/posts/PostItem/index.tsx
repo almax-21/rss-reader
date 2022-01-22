@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../../i18n/types';
-import { IPost } from '../../../models/IPost';
+import { Post } from '../../../models/Post';
 import setPostRead from '../../../store/async-actions/setPostRead';
 import { selectSettings } from '../../../store/selectors/settingsSelectors';
 import { POST_STATES } from '../../../store/types';
@@ -16,7 +16,7 @@ import { MODAL_TYPES } from '../../UI/MyModal/types';
 import './style.scss';
 
 interface PostItemProps {
-	post: IPost;
+	post: Post;
 }
 
 const PostItem: FC<PostItemProps> = React.memo(({ post }) => {

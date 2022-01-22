@@ -6,7 +6,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
 import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../../i18n/types';
-import { IFeedWithCounter } from '../../../models/IFeed';
+import { FeedWithCounter } from '../../../models/Feed';
 import deleteFeed from '../../../store/async-actions/deleteFeed';
 import { selectFeeds } from '../../../store/selectors/contentSelectors';
 import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
@@ -19,7 +19,7 @@ import { MODAL_TYPES } from '../../UI/MyModal/types';
 import './style.scss';
 
 interface FeedItemProps {
-	feed: IFeedWithCounter;
+	feed: FeedWithCounter;
 }
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {

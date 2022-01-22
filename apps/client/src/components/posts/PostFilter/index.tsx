@@ -8,6 +8,7 @@ import { MESSAGES } from '../../../i18n/types';
 import setAllActivePostsRead from '../../../store/async-actions/setAllActivePostsRead';
 import {
 	selectActiveFeedId,
+	selectPostFilter,
 	selectUnreadPostsCount,
 } from '../../../store/selectors/contentSelectors';
 import {
@@ -15,7 +16,7 @@ import {
 	switchSortType,
 } from '../../../store/slices/postsSlice';
 import { POST_STATE_TYPE, POST_STATES } from '../../../store/types';
-import { IPostFilter, SORT_TYPE } from '../../../types';
+import { SORT_TYPE } from '../../../types';
 import MyDropDown from '../../UI/MyDropDown';
 import MyModal from '../../UI/MyModal/index';
 import { MODAL_TYPES } from '../../UI/MyModal/types';
@@ -26,15 +27,15 @@ import FilterSort from './FilterSort';
 import './style.scss';
 
 interface PostFilterProps {
-	postFilter: IPostFilter;
 	resetActivePage: () => void;
 }
 
-const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
+const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
 	const filterValues = Object.values(POST_STATES);
 
+	const { state: filterState, sortType } = useTypedSelector(selectPostFilter);
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
 	const unreadPostsCount = useTypedSelector(selectUnreadPostsCount);
 
@@ -42,7 +43,7 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 	const intl = useIntl();
 
 	const handleSwitchSortType = (newType: SORT_TYPE) => () => {
-		if (newType === postFilter.sort) {
+		if (newType === sortType) {
 			return;
 		}
 
@@ -50,7 +51,7 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 	};
 
 	const handleSwitchFilterState = (value: POST_STATE_TYPE) => () => {
-		if (value === postFilter.state) {
+		if (value === filterState) {
 			return;
 		}
 
@@ -80,14 +81,14 @@ const PostFilter: FC<PostFilterProps> = ({ postFilter, resetActivePage }) => {
 
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
 					<MyDropDown
-						activeValue={postFilter.state}
+						activeValue={filterState}
 						handleSetActiveValue={handleSwitchFilterState}
-						title={intl.formatMessage({ id: postFilter.state })}
+						title={intl.formatMessage({ id: filterState })}
 						values={filterValues}
 						variant="outline-secondary"
 					/>
 					<FilterSort
-						activeSortType={postFilter.sort}
+						activeSortType={sortType}
 						classes="filter__sort"
 						sortHandler={handleSwitchSortType}
 					/>
