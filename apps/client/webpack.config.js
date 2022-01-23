@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const path = require('path');
-
 const webpack = require('webpack');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -13,6 +13,7 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const isDevMode = process.env.NODE_ENV === 'development';
 
@@ -75,6 +76,11 @@ module.exports = {
 		}),
 		new ESLintPlugin({
 			extensions: ['js', 'jsx', 'ts', 'tsx'],
+		}),
+		new BundleAnalyzerPlugin({
+			analyzerMode: 'disabled',
+			generateStatsFile: true,
+			statsOptions: { source: false },
 		}),
 	].filter(Boolean),
 	devServer: {
