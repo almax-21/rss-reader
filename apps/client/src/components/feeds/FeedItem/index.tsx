@@ -1,5 +1,5 @@
 import React, { FC, KeyboardEvent, MouseEvent, useState } from 'react';
-import { Badge, CloseButton, ListGroup } from 'react-bootstrap';
+import { Badge, ListGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import { AnyAction } from '@reduxjs/toolkit';
 
@@ -8,13 +8,15 @@ import useTypedSelector from '../../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../../i18n/types';
 import { FeedWithCounter } from '../../../models/Feed';
 import deleteFeed from '../../../store/async-actions/deleteFeed';
+import reloadFeed from '../../../store/async-actions/reloadFeed';
 import { selectFeeds } from '../../../store/selectors/contentSelectors';
 import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
-import { selectSettings } from '../../../store/selectors/settingsSelectors';
 import { updateActiveFeed } from '../../../store/slices/feedsSlice';
 import { truncateText } from '../../../utils/text';
 import MyModal from '../../UI/MyModal/index';
-import { MODAL_TYPES } from '../../UI/MyModal/types';
+import { MODAL_TYPE, MODAL_TYPES } from '../../UI/MyModal/types';
+
+import FeedBtnGroup from './FeedBtnGroup';
 
 import './style.scss';
 
@@ -24,6 +26,7 @@ interface FeedItemProps {
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
+	const [modalType, setModalType] = useState<MODAL_TYPE | null>(null);
 
 	const { _id, title, description, unreadPostsCount, url } = feed;
 
@@ -34,17 +37,17 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 
 	const feeds = useTypedSelector(selectFeeds);
 
-	const { isDarkTheme } = useTypedSelector(selectSettings);
-
 	const dispatch = useTypedDispatch();
 
 	const intl = useIntl();
 
-	const handleOpenModal = (event: MouseEvent<HTMLButtonElement>) => {
-		event.stopPropagation();
+	const handleOpenModal =
+		(modalType: MODAL_TYPE) => (event: MouseEvent<HTMLButtonElement>) => {
+			event.stopPropagation();
 
-		setIsShowModal(true);
-	};
+			setIsShowModal(true);
+			setModalType(modalType);
+		};
 
 	const handleCloseModal = () => {
 		setIsShowModal(false);
@@ -72,6 +75,11 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 		});
 	};
 
+	const handleReloadFeed = () => {
+		dispatch(reloadFeed({ url, feedId: _id }));
+		handleCloseModal();
+	};
+
 	return (
 		<>
 			<ListGroup.Item
@@ -84,7 +92,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 				onClick={handleUpdateActiveFeed}
 				onKeyPress={handleKeyPress}
 			>
-				<div className="ms-2 me-auto pe-none">
+				<div className="d-flex flex-column justify-content-between ms-2 me-auto pe-none">
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						<img
@@ -102,22 +110,28 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 					</div>
 					<span>{truncateText(description)}</span>
 				</div>
-				<div className="d-flex flex-column justify-content-between">
-					<CloseButton
-						variant={isDarkTheme ? 'white' : undefined}
-						onClick={handleOpenModal}
-					/>
-				</div>
+				<FeedBtnGroup handleOpenModal={handleOpenModal} />
 			</ListGroup.Item>
 
-			<MyModal
-				description={intl.formatMessage({ id: MESSAGES.FEEDS_DELETE_WARNING })}
-				handleAction={handleDeleteFeed}
-				handleClose={handleCloseModal}
-				isShow={isShowModal}
-				title={title}
-				type={MODAL_TYPES.DELETE}
-			/>
+			{modalType && (
+				<MyModal
+					description={intl.formatMessage({
+						id:
+							modalType === MODAL_TYPES.DELETE
+								? MESSAGES.FEEDS_DELETE_WARNING
+								: MESSAGES.FEEDS_RELOAD_WARNING,
+					})}
+					handleAction={
+						modalType === MODAL_TYPES.DELETE
+							? handleDeleteFeed
+							: handleReloadFeed
+					}
+					handleClose={handleCloseModal}
+					isShow={isShowModal}
+					title={title}
+					type={modalType}
+				/>
+			)}
 		</>
 	);
 };

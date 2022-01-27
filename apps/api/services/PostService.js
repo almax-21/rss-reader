@@ -31,6 +31,27 @@ class PostService {
 
 		return Post.insertMany(posts);
 	}
+
+	static async replacePosts(newPostsData, userId) {
+		const { newPosts, feedId } = newPostsData;
+
+		const posts = newPosts
+			.map(
+				(post) =>
+					new Post({
+						...post,
+						state: 'UNREAD',
+						feedId,
+						userId,
+						date: Date.now(),
+					})
+			)
+			.reverse();
+
+		await Post.deleteMany({ feedId, userId });
+
+		return Post.insertMany(posts);
+	}
 }
 
 module.exports = PostService;

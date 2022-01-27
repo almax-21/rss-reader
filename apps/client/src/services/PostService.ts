@@ -52,6 +52,24 @@ class PostService {
 			}
 		);
 	}
+
+	static replacePosts(
+		newPosts: ParsedPost[],
+		feedId: string
+	): Promise<AxiosResponse<Post[]>> {
+		const { href: endpointUrl } = new URL('/posts/replace', API_ORIGIN);
+		const token = localStorage.getItem(TOKEN_KEY);
+
+		return axios.post(
+			endpointUrl,
+			{ newPosts, feedId },
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
+	}
 }
 
 export default PostService;
