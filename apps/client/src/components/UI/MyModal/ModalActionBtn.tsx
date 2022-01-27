@@ -14,7 +14,8 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 	handleAction,
 	url,
 }) => {
-	const { isFeedDeleteInProcess } = useTypedSelector(selectRssMeta);
+	const { isFeedDeleteInProcess, isFeedReloadInProcess } =
+		useTypedSelector(selectRssMeta);
 
 	switch (type) {
 		case MODAL_TYPES.PREVIEW: {
@@ -48,6 +49,17 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 					) : (
 						<FormattedMessage id={MESSAGES.DELETE} />
 					)}
+				</Button>
+			);
+		}
+		case MODAL_TYPES.RELOAD: {
+			return (
+				<Button
+					disabled={isFeedReloadInProcess}
+					variant="primary"
+					onClick={handleAction}
+				>
+					<FormattedMessage id={MESSAGES.RELOAD} />
 				</Button>
 			);
 		}
