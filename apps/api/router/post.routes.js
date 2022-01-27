@@ -9,5 +9,6 @@ const router = new Router();
 router.put('/', authMiddleware, PostController.setPostRead);
 router.put('/all', authMiddleware, PostController.setAllActivePostsRead);
 router.post('/upload', authMiddleware, PostController.uploadNewPosts);
+router.post('/replace', authMiddleware, PostController.replacePosts);
 
 module.exports = router;

@@ -47,6 +47,7 @@ export interface RssState {
 	isLoadingFromApi: boolean;
 	isLoadingFromRssSource: boolean;
 	isFeedDeleteInProcess: boolean;
+	isFeedReloadInProcess: boolean;
 	urlDataset: FeedUrlData[];
 }
 

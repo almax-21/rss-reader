@@ -5,6 +5,7 @@ import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '../../types';
 import deleteFeed from '../async-actions/deleteFeed';
 import getDataFromApi from '../async-actions/getAllContentFromApi';
 import getContentFromRssSource from '../async-actions/getContentFromRssSource';
+import reloadFeed from '../async-actions/reloadFeed';
 import setAllActivePostsRead from '../async-actions/setAllActivePostsRead';
 import setPostRead from '../async-actions/setPostRead';
 import updateFeedsData from '../async-actions/updateFeedsData';
@@ -91,6 +92,14 @@ const postsSlice = createSlice({
 			const { feedId, newPosts } = action.payload;
 
 			state.byFeedId[feedId].unshift(...newPosts.reverse());
+		},
+		[reloadFeed.fulfilled.type]: (
+			state,
+			action: PayloadAction<NewPostsData>
+		) => {
+			const { feedId, newPosts } = action.payload;
+
+			state.byFeedId[feedId] = newPosts.reverse();
 		},
 		[deleteFeed.fulfilled.type]: (state, action: PayloadAction<string>) => {
 			delete state.byFeedId[action.payload];

@@ -1,6 +1,8 @@
 @import '../../App/scss/style.scss';
 
 .feed-item {
+	min-height: 85px;
+
 	&__title {
 		margin-right: 5px;
 	}
@@ -20,14 +22,64 @@
 	}
 }
 
+.feed-item__reload-btn {
+	position: relative;
+
+	width: 24px;
+	height: 24px;
+
+	border: none;
+
+	background-color: transparent;
+
+	cursor: pointer;
+
+	svg {
+		position: absolute;
+
+		fill: $secondary;
+
+		top: 50%;
+		left: 50%;
+
+		transform: translate(-50%, -50%);
+	}
+}
+
+.feed-item__reload-btn:hover svg {
+	fill: $dark;
+}
+
 .feed-item.active {
 	background-color: $primary !important;
 
 	border-color: $primary;
 }
 
-.dark-theme .feed-item.active {
-	background-color: $darkgrey !important;
+.feed-item.active .feed-item__reload-btn svg {
+	fill: rgba($color: $dark, $alpha: 0.7);
+}
 
-	border-color: $darkgrey;
+.feed-item.active .feed-item__reload-btn:hover svg {
+	fill: $dark;
+}
+
+.dark-theme {
+	.feed-item__reload-btn:hover svg {
+		fill: rgba($color: $light, $alpha: 0.7);
+	}
+
+	.feed-item.active {
+		background-color: $darkgrey !important;
+
+		border-color: $darkgrey;
+	}
+
+	.feed-item.active .feed-item__reload-btn svg {
+		fill: $secondary;
+	}
+
+	.feed-item.active .feed-item__reload-btn:hover svg {
+		fill: rgba($color: $light, $alpha: 0.7);
+	}
 }
