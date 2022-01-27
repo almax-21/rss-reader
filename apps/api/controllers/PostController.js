@@ -1,4 +1,5 @@
 const PostService = require('../services/PostService');
+const Feed = require('../models/Feed');
 
 class PostController {
 	static async setPostRead(req, res) {
@@ -39,7 +40,19 @@ class PostController {
 
 	static async replacePosts(req, res) {
 		try {
-			const posts = await PostService.replacePosts(req.body, req.user.id);
+			const { feedId } = req.body;
+			const userId = req.user.id;
+
+			const isFeedExist = await Feed.findOne({
+				feedId,
+				userId,
+			});
+
+			if (!isFeedExist) {
+				return res.status(400).json({ message: "Feed doesn't exist" });
+			}
+
+			const posts = await PostService.replacePosts(req.body, userId);
 
 			return res.json(posts);
 		} catch (err) {
