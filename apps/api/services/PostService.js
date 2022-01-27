@@ -16,18 +16,16 @@ class PostService {
 	static uploadNewPosts(newPostsData, userId) {
 		const { newPosts, feedId } = newPostsData;
 
-		const posts = newPosts
-			.map(
-				(post) =>
-					new Post({
-						...post,
-						state: 'UNREAD',
-						feedId,
-						userId,
-						date: Date.now(),
-					})
-			)
-			.reverse();
+		const posts = newPosts.map(
+			(post) =>
+				new Post({
+					...post,
+					state: 'UNREAD',
+					feedId,
+					userId,
+					date: Date.now(),
+				})
+		);
 
 		return Post.insertMany(posts);
 	}
@@ -35,18 +33,16 @@ class PostService {
 	static async replacePosts(newPostsData, userId) {
 		const { newPosts, feedId } = newPostsData;
 
-		const posts = newPosts
-			.map(
-				(post) =>
-					new Post({
-						...post,
-						state: 'UNREAD',
-						feedId,
-						userId,
-						date: Date.now(),
-					})
-			)
-			.reverse();
+		const posts = newPosts.map(
+			(post) =>
+				new Post({
+					...post,
+					state: 'UNREAD',
+					feedId,
+					userId,
+					date: Date.now(),
+				})
+		);
 
 		await Post.deleteMany({ feedId, userId });
 

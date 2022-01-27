@@ -26,7 +26,7 @@ class FeedService {
 					userId,
 					date: Date.now(),
 				})
-		).reverse();
+		);
 
 		return Promise.all([feed.save(), Post.insertMany(posts)]);
 	}
