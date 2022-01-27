@@ -59,7 +59,11 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 					variant="primary"
 					onClick={handleAction}
 				>
-					<FormattedMessage id={MESSAGES.RELOAD} />
+					{isFeedReloadInProcess ? (
+						<MySpinner small />
+					) : (
+						<FormattedMessage id={MESSAGES.RELOAD} />
+					)}
 				</Button>
 			);
 		}
