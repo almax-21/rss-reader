@@ -36,16 +36,6 @@ main {
 	transition: $switching-theme-transition;
 }
 
-.dark-theme {
-	background-color: $dark;
-}
-
-.dark-theme main {
-	color: $white;
-
-	background-color: $dark;
-}
-
 .list-item {
 	cursor: pointer !important;
 
@@ -56,25 +46,35 @@ main {
 	cursor: default !important;
 }
 
-.dark-theme .list-item {
-	color: white;
-	background-color: $dark;
-}
-
-.dark-theme .list-item.active {
-	background-color: $primary;
-}
-
 .form-floating {
 	color: $dark;
 }
 
-.dark-theme .form-floating,
-.dark-theme .form-control,
-.dark-theme .form-control:focus {
-	color: $white;
+.dark-theme {
+	background-color: $dark;
 
-	background-color: $material-darkgrey;
+	main {
+		color: $white;
+
+		background-color: $dark;
+	}
+
+	.list-item {
+		color: white;
+		background-color: $dark;
+	}
+
+	.list-item.active {
+		background-color: $primary;
+	}
+
+	.form-floating,
+	.form-control,
+	.form-control:focus {
+		color: $white;
+
+		background-color: $material-darkgrey;
+	}
 }
 
 @include media-breakpoint-up(md) {

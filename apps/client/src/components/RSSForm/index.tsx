@@ -1,5 +1,18 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
-import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import React, {
+	FC,
+	MouseEventHandler,
+	useEffect,
+	useMemo,
+	useRef,
+} from 'react';
+import {
+	Button,
+	CloseButton,
+	Col,
+	FloatingLabel,
+	Form,
+	Row,
+} from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 
@@ -14,7 +27,6 @@ import {
 	selectUrls,
 } from '../../store/selectors/rssMetaSelectors';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
-import CloseBtn from '../UI/CloseBtn';
 import MySpinner from '../UI/MySpinner';
 
 import './style.scss';
@@ -35,7 +47,7 @@ const RSSForm: FC = () => {
 
 	const urls = useTypedSelector(selectUrls);
 
-	const lang = useTypedSelector(selectSettings);
+	const { lang, isDarkTheme } = useTypedSelector(selectSettings);
 
 	const dispatch = useTypedDispatch();
 	const intl = useIntl();
@@ -101,11 +113,13 @@ const RSSForm: FC = () => {
 									{validationFormErrors[RSS_FORM.URL]}
 								</Form.Control.Feedback>
 							</FloatingLabel>
-							<CloseBtn
-								className="rss__btn rss__btn--close"
-								isVisible={values[RSS_FORM.URL]}
-								onClick={resetForm}
-							/>
+							{values[RSS_FORM.URL] && (
+								<CloseButton
+									className="rss__btn rss__btn--close"
+									variant={isDarkTheme ? 'white' : undefined}
+									onClick={resetForm as MouseEventHandler}
+								/>
+							)}
 						</Col>
 						<Col md="3" sm="5" xs="9">
 							<Button

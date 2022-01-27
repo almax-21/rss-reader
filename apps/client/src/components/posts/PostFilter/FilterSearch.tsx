@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, CloseButton, Form, InputGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import SpeechRecognition, {
 	useSpeechRecognition,
@@ -14,7 +14,6 @@ import { selectActiveFeedId } from '../../../store/selectors/contentSelectors';
 import { selectSettings } from '../../../store/selectors/settingsSelectors';
 import { updateFilterQuery } from '../../../store/slices/postsSlice';
 import { debounce } from '../../../utils/perfomance';
-import CloseBtn from '../../UI/CloseBtn';
 import SvgIcon from '../../UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from '../../UI/SvgIcon/types';
 
@@ -34,7 +33,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		isMicrophoneAvailable,
 	} = useSpeechRecognition();
 
-	const { lang } = useTypedSelector(selectSettings);
+	const { lang, isDarkTheme } = useTypedSelector(selectSettings);
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
 
 	const dispatch = useTypedDispatch();
@@ -114,11 +113,13 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 				type="text"
 				onChange={handleSearchChange}
 			/>
-			<CloseBtn
-				className={closeBtnClasses}
-				isVisible={searchRef.current && searchRef.current.value}
-				onClick={handleResetSearch}
-			/>
+			{searchRef.current?.value && (
+				<CloseButton
+					className={closeBtnClasses}
+					variant={isDarkTheme ? 'white' : undefined}
+					onClick={handleResetSearch}
+				/>
+			)}
 			{isFullSupportSpeechRecognition && (
 				<Button
 					active={listening}

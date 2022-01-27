@@ -5,9 +5,11 @@
 	transition: $switching-theme-transition;
 }
 
-.dark-theme .locale-switcher__header > .accordion-button,
-.dark-theme .locale-switcher__body {
-	color: $white;
+.dark-theme {
+	.locale-switcher__header > .accordion-button,
+	.locale-switcher__body {
+		color: $white;
 
-	background-color: $dark;
+		background-color: $dark;
+	}
 }

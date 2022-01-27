@@ -27,30 +27,32 @@
 	background-color: $primary !important;
 }
 
-.dark-theme .page-link {
-	color: $white !important;
-
-	background-color: $dark !important;
-
-	border-color: $secondary !important;
-
-	&:hover {
-		background-color: $gray-800 !important;
-	}
-}
-
-.dark-theme .page-item.active .page-link {
-	background-color: $material-darkgrey !important;
-
-	border-color: $darkgrey !important;
-}
-
 .animated .page-link {
 	animation: smooth-color-change 0.2s;
 }
 
-.dark-theme .animated .page-link {
-	animation: none;
+.dark-theme {
+	.page-link {
+		color: $white !important;
+
+		background-color: $dark !important;
+
+		border-color: $secondary !important;
+
+		&:hover {
+			background-color: $gray-800 !important;
+		}
+	}
+
+	.page-item.active .page-link {
+		background-color: $material-darkgrey !important;
+
+		border-color: $darkgrey !important;
+	}
+
+	.animated .page-link {
+		animation: none;
+	}
 }
 
 @include media-breakpoint-down(sm) {

@@ -15,9 +15,11 @@
 	}
 }
 
-.dark-theme .footer,
-.dark-theme .footer__text {
-	color: $white;
+.dark-theme {
+	.footer,
+	.footer__text {
+		color: $white;
 
-	background-color: $dark;
+		background-color: $dark;
+	}
 }
