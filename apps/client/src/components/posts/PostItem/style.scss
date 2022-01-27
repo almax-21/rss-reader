@@ -9,7 +9,9 @@
 	padding-right: 10px;
 }
 
-.dark-theme .post-item,
-.dark-theme .post-item__body {
-	background-color: $dark;
+.dark-theme {
+	.post-item,
+	.post-item__body {
+		background-color: $dark;
+	}
 }

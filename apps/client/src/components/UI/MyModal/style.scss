@@ -18,12 +18,14 @@
 	}
 }
 
-.dark-theme .modal-content {
-	color: $white;
+.dark-theme {
+	.modal-content {
+		color: $white;
 
-	background-color: $dark;
-}
+		background-color: $dark;
+	}
 
-.dark-theme .modal__image-wrapper {
-	outline-color: $light;
+	.modal__image-wrapper {
+		outline-color: $light;
+	}
 }

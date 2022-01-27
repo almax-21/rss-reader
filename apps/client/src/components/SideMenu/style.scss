@@ -13,15 +13,6 @@
 	transition: $switching-theme-transition;
 }
 
-.dark-theme {
-	.side-menu__header,
-	.side-menu__body {
-		color: $white;
-
-		background-color: $dark;
-	}
-}
-
 .menu-item {
 	&__text {
 		margin: 0 5px;
@@ -29,5 +20,14 @@
 
 	.accordion-header > button {
 		padding-left: 5px;
+	}
+}
+
+.dark-theme {
+	.side-menu__header,
+	.side-menu__body {
+		color: $white;
+
+		background-color: $dark;
 	}
 }

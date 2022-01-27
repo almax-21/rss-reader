@@ -60,6 +60,8 @@
 	}
 }
 
-.dark-theme .filter__input::placeholder {
-	color: $white;
+.dark-theme {
+	.filter__input::placeholder {
+		color: $white;
+	}
 }
