@@ -14,8 +14,7 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 	handleAction,
 	url,
 }) => {
-	const { isFeedDeleteInProcess, isFeedReloadInProcess } =
-		useTypedSelector(selectRssMeta);
+	const { isFeedDeleteInProcess } = useTypedSelector(selectRssMeta);
 
 	switch (type) {
 		case MODAL_TYPES.PREVIEW: {
@@ -54,16 +53,8 @@ const ModalActionBtn: FC<ModalActionBtnProps> = ({
 		}
 		case MODAL_TYPES.RELOAD: {
 			return (
-				<Button
-					disabled={isFeedReloadInProcess}
-					variant="primary"
-					onClick={handleAction}
-				>
-					{isFeedReloadInProcess ? (
-						<MySpinner small />
-					) : (
-						<FormattedMessage id={MESSAGES.RELOAD} />
-					)}
+				<Button variant="primary" onClick={handleAction}>
+					<FormattedMessage id={MESSAGES.RELOAD} />
 				</Button>
 			);
 		}

@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import deleteFeed from '../async-actions/deleteFeed';
 import getDataFromApi from '../async-actions/getAllContentFromApi';
 import getContentFromRssSource from '../async-actions/getContentFromRssSource';
-import reloadFeed from '../async-actions/reloadFeed';
 import { ApiContentData, ApiFeedData, RssState } from '../types';
 
 import { logoutUser } from './userSlice';
@@ -12,7 +11,6 @@ const initialState: RssState = {
 	isLoadingFromApi: false,
 	isLoadingFromRssSource: false,
 	isFeedDeleteInProcess: false,
-	isFeedReloadInProcess: false,
 	urlDataset: [],
 };
 
@@ -69,15 +67,6 @@ const rssMetaSlice = createSlice({
 		},
 		[deleteFeed.rejected.type]: (state) => {
 			state.isFeedDeleteInProcess = false;
-		},
-		[reloadFeed.pending.type]: (state) => {
-			state.isFeedReloadInProcess = true;
-		},
-		[reloadFeed.fulfilled.type]: (state) => {
-			state.isFeedReloadInProcess = false;
-		},
-		[reloadFeed.rejected.type]: (state) => {
-			state.isFeedReloadInProcess = false;
 		},
 		[logoutUser.type]: (state) => {
 			state.urlDataset = [];
