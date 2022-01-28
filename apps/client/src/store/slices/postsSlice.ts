@@ -49,7 +49,7 @@ const postsSlice = createSlice({
 		) => {
 			const { posts } = action.payload;
 
-			posts.forEach((post: Post) => {
+			posts.reverse().forEach((post: Post) => {
 				const { feedId } = post;
 
 				state.byFeedId[feedId] = state.byFeedId[feedId] ?? [];
@@ -63,7 +63,7 @@ const postsSlice = createSlice({
 		) => {
 			const { feed, posts } = action.payload;
 
-			state.byFeedId[feed._id] = posts;
+			state.byFeedId[feed._id] = posts.reverse();
 		},
 		[setPostRead.fulfilled.type]: (
 			state,
@@ -91,7 +91,7 @@ const postsSlice = createSlice({
 		) => {
 			const { feedId, newPosts } = action.payload;
 
-			state.byFeedId[feedId].unshift(...newPosts);
+			state.byFeedId[feedId].unshift(...newPosts.reverse());
 		},
 		[reloadFeed.fulfilled.type]: (
 			state,
@@ -99,7 +99,7 @@ const postsSlice = createSlice({
 		) => {
 			const { feedId, newPosts } = action.payload;
 
-			state.byFeedId[feedId] = newPosts;
+			state.byFeedId[feedId] = newPosts.reverse();
 		},
 		[deleteFeed.fulfilled.type]: (state, action: PayloadAction<string>) => {
 			delete state.byFeedId[action.payload];
