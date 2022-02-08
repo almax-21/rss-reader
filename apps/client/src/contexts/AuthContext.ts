@@ -4,6 +4,4 @@ interface AuthContextValues {
 	refetchAuthQuery: () => void;
 }
 
-const AuthContext = createContext<AuthContextValues | null>(null);
-
-export default AuthContext;
+export const AuthContext = createContext<AuthContextValues | null>(null);
