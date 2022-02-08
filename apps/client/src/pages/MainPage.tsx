@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-import ContentContainer from '../components/containers/ContentContainer';
-import RSSContainer from '../components/containers/RSSContainer';
-import BackToTopBtn from '../components/UI/BackToTopBtn';
+import { ContentContainer } from '../components/containers/content-container';
+import { RSSContainer } from '../components/containers/rss-container';
+import { BackToTopBtn } from '../components/ui/back-to-top-btn';
 
-const MainPage: FC = () => {
+export const MainPage: FC = () => {
 	return (
 		<>
 			<RSSContainer />
@@ -13,5 +13,3 @@ const MainPage: FC = () => {
 		</>
 	);
 };
-
-export default MainPage;
