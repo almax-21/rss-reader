@@ -9,7 +9,7 @@ import { SIGN_FORM } from '../../schemas/types';
 import userAPI from '../../services/UserService';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
 
-import { SignForm } from './sign-form';
+import { SignForm } from './SignForm';
 import { SIGN_FORM_TYPES, SignFormValues } from './types';
 
 import './style.scss';

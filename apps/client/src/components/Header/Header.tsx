@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import useTypedSelector from '../../hooks/redux/useTypedSelector';
 import { MESSAGES } from '../../i18n/types';
 import { selectAuthState } from '../../store/selectors/userSelectors';
-import { SideMenu } from '../side-menu';
-import { BurgerBtn } from '../ui/burger-btn';
+import { SideMenu } from '../SideMenu';
+import { BurgerBtn } from '../UI/BurgerBtn';
 
 import './style.scss';
 

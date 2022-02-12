@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import {
 	NOTIFICATION_VARIANT,
 	NotificationData,
-} from '../components/ui/notification/types';
+} from '../components/UI/Notification/types';
 import { COMPLETED_LOAD_STATUS } from '../store/types';
 import { TimeoutId } from '../types';
 

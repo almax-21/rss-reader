@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import { ContentContainer } from '../components/containers/content-container';
-import { RSSContainer } from '../components/containers/rss-container';
-import { BackToTopBtn } from '../components/ui/back-to-top-btn';
+import { ContentContainer } from '../components/Containers/ContentContainer';
+import { RSSContainer } from '../components/Containers/RSSContainer';
+import { BackToTopBtn } from '../components/UI/BackToTopBtn';
 
 export const MainPage: FC = () => {
 	return (

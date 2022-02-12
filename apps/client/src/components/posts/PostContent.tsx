@@ -12,10 +12,10 @@ import {
 } from '../../store/selectors/contentSelectors';
 import { updateFilterQuery } from '../../store/slices/postsSlice';
 import { showCurrentItems } from '../../utils/page';
-import { Paginator } from '../ui/pagination';
+import { Paginator } from '../UI/Pagination';
 
-import { PostFilter } from './post-filter';
-import { PostList } from './post-list';
+import { PostFilter } from './PostFilter';
+import { PostList } from './PostList';
 
 const POSTS_LIMIT = 20;
 const MIN_POSTS_COUNT = 10;

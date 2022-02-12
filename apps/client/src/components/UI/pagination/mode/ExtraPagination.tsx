@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-import { PaginationInner } from '../pagination-inner';
+import { PaginationInner } from '../PaginationInner';
 import { PaginationProps, PAGINATOR_CAPACITY } from '../types';
 
 export const ExtraPagination: FC<PaginationProps> = ({

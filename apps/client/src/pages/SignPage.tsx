@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-import { SignIn, SignUp } from '../components/signs';
+import { SignIn, SignUp } from '../components/Signs';
 import { ROUTES } from '../router/types';
 
 export const SignPage = () => {

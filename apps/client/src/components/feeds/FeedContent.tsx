@@ -6,7 +6,7 @@ import { MESSAGES } from '../../i18n/types';
 import { selectFeedsWithCounter } from '../../store/selectors/contentSelectors';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
 
-import { FeedList } from './feed-list';
+import { FeedList } from './FeedList';
 
 import './style.scss';
 

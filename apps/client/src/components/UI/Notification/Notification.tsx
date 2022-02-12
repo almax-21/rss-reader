@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
-import { SvgIcon } from '../svg-icon';
+import { SvgIcon } from '../SvgIcon';
 
 import { NotificationData } from './types';
 

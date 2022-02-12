@@ -14,13 +14,13 @@ import userAPI from '../../services/UserService';
 import getAllContentFromApi from '../../store/async-actions/getAllContentFromApi';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
 import { selectUser } from '../../store/selectors/userSelectors';
-import { Footer } from '../footer';
-import { Header } from '../header';
-import { NetworkTooltip } from '../network-tooltip';
-import { MySpinner } from '../ui/my-spinner';
+import { Footer } from '../Footer';
+import { Header } from '../Header';
+import { NetworkTooltip } from '../NetworkTooltip';
+import { MySpinner } from '../UI/MySpinner';
 
-import { AppHelmet } from './app-helmet';
-import { AppRouter } from './app-router';
+import { AppHelmet } from './AppHelmet';
+import { AppRouter } from './AppRouter';
 
 import './scss/style.scss';
 
