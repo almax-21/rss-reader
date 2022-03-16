@@ -1,6 +1,6 @@
 {
 	"name": "rss-reader",
-	"version": "1.8.5",
+	"version": "1.8.6",
 	"description": "Start reading RSS today! It's easy, it's beautiful",
 	"private": true,
 	"workspaces": [
