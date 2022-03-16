@@ -5,7 +5,7 @@ interface SerializedXMLContent {
 }
 
 class ProxyService {
-	static baseUrl = 'https://hexlet-allorigins.herokuapp.com/';
+	static baseUrl = 'https://allorigins.hexlet.app/';
 
 	static getXML(
 		url: string,
