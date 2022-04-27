@@ -1,6 +1,13 @@
-import React, { FC, KeyboardEvent, MouseEvent, useState } from 'react';
+import React, {
+	FC,
+	KeyboardEvent,
+	MouseEvent,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { AnyAction } from '@reduxjs/toolkit';
 
 import useTypedDispatch from '../../../hooks/redux/useTypedDispatch';
@@ -31,11 +38,13 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	const { _id, title, description, unreadPostsCount, url } = feed;
 
 	const activeFeedId = useTypedSelector(selectActiveFeedId);
-	const isActiveFeed = _id === activeFeedId;
+	const isActive = _id === activeFeedId;
 
 	const urlFeedHostname = new URL(url).hostname;
 
 	const feeds = useTypedSelector(selectFeeds);
+
+	const feedRef = useRef<HTMLLIElement>(null);
 
 	const dispatch = useTypedDispatch();
 
@@ -54,7 +63,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	};
 
 	const handleUpdateActiveFeed = () => {
-		if (isActiveFeed) {
+		if (isActive) {
 			return;
 		}
 
@@ -62,7 +71,9 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	};
 
 	const handleKeyPress = (evt: KeyboardEvent<HTMLLIElement>) => {
-		if (evt.key === 'Enter') {
+		if (evt.key === 'Enter' || evt.key === ' ') {
+			evt.preventDefault();
+
 			handleUpdateActiveFeed();
 		}
 	};
@@ -80,15 +91,24 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 		handleCloseModal();
 	};
 
+	// we need to override bootstrap's tabIndex every time
+	useEffect(() => {
+		if (feedRef.current) {
+			feedRef.current.tabIndex = 0;
+		}
+	}, [isActive]);
+
 	return (
 		<>
 			<ListGroup.Item
+				ref={feedRef}
 				action={feeds.length > 1}
-				active={isActiveFeed && feeds.length > 1}
+				active={isActive && feeds.length > 1}
+				aria-role="tab"
+				aria-selected={isActive && feeds.length > 1}
 				as="li"
 				className="list-item feed-item d-flex justify-content-center"
-				tabIndex={0}
-				title={intl.formatMessage({ id: MESSAGES.FEEDS_TOOLTIP_SELECT })}
+				id={_id}
 				onClick={handleUpdateActiveFeed}
 				onKeyPress={handleKeyPress}
 			>
@@ -96,6 +116,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 					<div className="d-flex align-items-center">
 						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
 						<img
+							aria-hidden
 							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
 							className="feed-item__icon"
 							height="16"
@@ -104,11 +125,14 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 						/>
 						{!!unreadPostsCount && (
 							<Badge pill bg="danger" className="mb-2">
+								<span className="visually-hidden">
+									<FormattedMessage id={MESSAGES.POSTS_UNREAD_COUNT} />:
+								</span>
 								{unreadPostsCount}
 							</Badge>
 						)}
 					</div>
-					<span>{truncateText(description)}</span>
+					<span aria-hidden>{truncateText(description)}</span>
 				</div>
 				<FeedBtnGroup handleOpenModal={handleOpenModal} />
 			</ListGroup.Item>

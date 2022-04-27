@@ -9,7 +9,7 @@ import './style.scss';
 
 const NetworkTooltip = () => {
 	return (
-		<div className="network-tooltip">
+		<div className="network-tooltip" role='alert'>
 			<p className="network-tooltip__text">
 				<SvgIcon
 					className="network-tooltip__icon"

@@ -11,3 +11,9 @@ export const filterText = (text: string): string => {
 
 	return text.replace(TagAndMnemonicRegEx, ' ');
 };
+
+export const getTextValuesFromObject = (obj: { [key: string]: string }) => {
+	const textSet = new Set(Object.values(obj));
+
+	return Array.from(textSet).join(' ');
+};

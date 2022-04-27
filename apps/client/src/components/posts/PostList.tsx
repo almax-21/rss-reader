@@ -10,7 +10,7 @@ interface PostListProps {
 }
 
 const PostList: FC<PostListProps> = React.memo(({ posts }) => (
-	<ListGroup as="ul">
+	<ListGroup aria-live="polite" as="ul">
 		{posts.map((post) => (
 			<PostItem key={post._id} post={post} />
 		))}

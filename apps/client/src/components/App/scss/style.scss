@@ -46,7 +46,10 @@ main {
 	cursor: default !important;
 }
 
-.form-floating {
+.form-floating,
+.form-control:-webkit-autofill ~ label,
+.form-control:-webkit-autofill:hover ~ label, 
+.form-control:-webkit-autofill:focus ~ label {
 	color: $dark;
 }
 

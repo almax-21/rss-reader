@@ -27,12 +27,20 @@ const MyModal: FC<MyModalProps> = ({
 	const intl = useIntl();
 
 	return (
-		<Modal centered={isTouchDevice} show={isShow} onHide={handleClose}>
+		<Modal
+			centered={isTouchDevice}
+			role="alert"
+			show={isShow}
+			onHide={handleClose}
+		>
 			<Modal.Header
 				closeButton
+				closeLabel={intl.formatMessage({ id: MESSAGES.CLOSE_MODAL })}
 				closeVariant={isDarkTheme ? 'white' : undefined}
 			>
-				<Modal.Title>{title}</Modal.Title>
+				<Modal.Title>
+					<h3 className="h4">{title}</h3>
+				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				{imgSrc && (

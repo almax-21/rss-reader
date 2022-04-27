@@ -42,12 +42,12 @@ const ContentContainer: FC = () => {
 					</h2>
 				</Row>
 			) : (
-				<Row className="flex-wrap-reverse">
-					<Col as="section" className="mb-5">
-						<PostContent />
-					</Col>
+				<Row className="flex-row-reverse flex-wrap">
 					<Col as="section" className="mb-5">
 						<FeedContent />
+					</Col>
+					<Col as="section" className="mb-5">
+						<PostContent />
 					</Col>
 				</Row>
 			)}

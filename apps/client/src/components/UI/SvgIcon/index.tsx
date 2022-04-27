@@ -100,6 +100,7 @@ const SvgIcon: FC<SvgIconProps> = ({
 
 	return (
 		<svg
+			aria-hidden
 			className={className}
 			fill={fill}
 			height={height}
