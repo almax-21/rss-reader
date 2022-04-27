@@ -20,7 +20,7 @@ const initialValues: SignFormValues = {
 };
 
 const SignIn: FC = () => {
-	const [loginUser, { isLoading, error: loginError }] =
+	const [loginUser, { isLoading, isError, error: loginError }] =
 		userAPI.useLoginUserMutation();
 
 	const loginErrorRef = useRef<string>('');
@@ -57,14 +57,20 @@ const SignIn: FC = () => {
 	};
 
 	return (
-		<SignForm
-			apiError={loginErrorRef.current}
-			handleSubmit={handleLogin}
-			initialValues={initialValues}
-			isLoading={isLoading}
-			type={SIGN_FORM_TYPES.SIGN_IN}
-			validationSchema={validationSchema}
-		/>
+		<>
+			<SignForm
+				apiError={loginErrorRef.current}
+				handleSubmit={handleLogin}
+				initialValues={initialValues}
+				isLoading={isLoading}
+				type={SIGN_FORM_TYPES.SIGN_IN}
+				validationSchema={validationSchema}
+			/>
+			{/* a11y */}
+			<p className="visually-hidden" role="alert">
+				{isError && loginErrorRef.current}
+			</p>
+		</>
 	);
 };
 

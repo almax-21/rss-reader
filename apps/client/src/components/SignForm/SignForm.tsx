@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { MESSAGES } from '../../i18n/types';
 import { ROUTES } from '../../router/types';
 import { SIGN_FORM } from '../../schemas/types';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
+import { getTextValuesFromObject } from '../../utils/text';
 import MySpinner from '../UI/MySpinner';
 import SvgIcon from '../UI/SvgIcon';
 import { SVG_ICON_VARIANTS } from '../UI/SvgIcon/types';
@@ -35,6 +36,8 @@ const SignForm: FC<SignFormProps> = ({
 	handleSubmit,
 	apiError,
 }) => {
+	const [triedToSubmit, setTriedToSubmit] = useState(false);
+
 	const { isDarkTheme } = useTypedSelector(selectSettings);
 
 	const intl = useIntl();
@@ -56,10 +59,11 @@ const SignForm: FC<SignFormProps> = ({
 			onSubmit={handleSubmit}
 		>
 			{({
-				handleSubmit,
+				handleSubmit: formikSubmitHandler,
 				handleChange,
 				values,
 				touched,
+				isValid,
 				errors: validationErrors,
 			}) => {
 				const isUsernameValidationError =
@@ -76,6 +80,13 @@ const SignForm: FC<SignFormProps> = ({
 				const isInvalidPasswordConfirmation =
 					touched[SIGN_FORM.PASSWORD_CONFIRMATION] &&
 					!!validationErrors[SIGN_FORM.PASSWORD_CONFIRMATION];
+
+				const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+					evt.preventDefault();
+
+					formikSubmitHandler();
+					setTriedToSubmit(true);
+				};
 
 				return (
 					<Card className="sign shadow">
@@ -98,120 +109,130 @@ const SignForm: FC<SignFormProps> = ({
 								)}
 							</Col>
 							<Col>
-								<Form
-									className="d-flex flex-column justify-content-around"
-									onSubmit={handleSubmit}
-								>
-									<h2 className="mb-4">
-										<FormattedMessage id={type} />
-									</h2>
+								<Form onSubmit={handleSubmit}>
+									<fieldset className="d-flex flex-column justify-content-around">
+										<legend className="mb-4">
+											<h2>
+												<FormattedMessage id={type} />
+											</h2>
+										</legend>
 
-									<FloatingLabel
-										className="sign__label"
-										controlId="floatingUsername"
-										label={intl.formatMessage({ id: MESSAGES.USERNAME })}
-									>
-										<Form.Control
-											ref={usernameInputRef}
-											className="pb-2 pt-4"
-											isInvalid={isInvalidUsername}
-											name={SIGN_FORM.USERNAME}
-											placeholder={intl.formatMessage({
-												id: MESSAGES.USERNAME,
-											})}
-											type="text"
-											value={values[SIGN_FORM.USERNAME]}
-											onChange={handleChange}
-										/>
-										{isSignInFormType ? (
-											isApiError ? null : (
-												<Form.Control.Feedback tooltip type="invalid">
-													{validationErrors[SIGN_FORM.USERNAME]}
-												</Form.Control.Feedback>
-											)
-										) : (
-											<Form.Control.Feedback tooltip type="invalid">
-												{validationErrors[SIGN_FORM.USERNAME] || apiError}
-											</Form.Control.Feedback>
-										)}
-									</FloatingLabel>
-
-									<FloatingLabel
-										className="sign__label"
-										controlId="floatingPassword"
-										label={intl.formatMessage({ id: MESSAGES.PASSWORD })}
-									>
-										<Form.Control
-											className="pb-2 pt-4"
-											isInvalid={isInvalidPassword}
-											name={SIGN_FORM.PASSWORD}
-											placeholder={intl.formatMessage({
-												id: MESSAGES.PASSWORD,
-											})}
-											type="password"
-											value={values[SIGN_FORM.PASSWORD]}
-											onChange={handleChange}
-										/>
-										<Form.Control.Feedback tooltip type="invalid">
-											{validationErrors[SIGN_FORM.PASSWORD] ||
-												(isSignInFormType && apiError)}
-										</Form.Control.Feedback>
-									</FloatingLabel>
-
-									{isSignUpFormType && (
 										<FloatingLabel
 											className="sign__label"
-											controlId="floatingRepeatPassword"
-											label={intl.formatMessage({
-												id: MESSAGES.PASSWORD_CONFIRMATION,
-											})}
+											controlId="floatingUsername"
+											label={intl.formatMessage({ id: MESSAGES.USERNAME })}
+										>
+											<Form.Control
+												ref={usernameInputRef}
+												className="pb-2 pt-4"
+												isInvalid={isInvalidUsername}
+												name={SIGN_FORM.USERNAME}
+												placeholder={intl.formatMessage({
+													id: MESSAGES.USERNAME,
+												})}
+												type="text"
+												value={values[SIGN_FORM.USERNAME]}
+												onChange={handleChange}
+											/>
+											{isSignInFormType ? (
+												!isApiError && (
+													<Form.Control.Feedback tooltip type="invalid">
+														{validationErrors[SIGN_FORM.USERNAME]}
+													</Form.Control.Feedback>
+												)
+											) : (
+												<Form.Control.Feedback tooltip type="invalid">
+													{validationErrors[SIGN_FORM.USERNAME] || apiError}
+												</Form.Control.Feedback>
+											)}
+										</FloatingLabel>
+
+										<FloatingLabel
+											className="sign__label"
+											controlId="floatingPassword"
+											label={intl.formatMessage({ id: MESSAGES.PASSWORD })}
 										>
 											<Form.Control
 												className="pb-2 pt-4"
-												isInvalid={isInvalidPasswordConfirmation}
-												name={SIGN_FORM.PASSWORD_CONFIRMATION}
+												isInvalid={isInvalidPassword}
+												name={SIGN_FORM.PASSWORD}
 												placeholder={intl.formatMessage({
-													id: MESSAGES.PASSWORD_CONFIRMATION,
+													id: MESSAGES.PASSWORD,
 												})}
 												type="password"
-												value={values[SIGN_FORM.PASSWORD_CONFIRMATION]}
+												value={values[SIGN_FORM.PASSWORD]}
 												onChange={handleChange}
 											/>
 											<Form.Control.Feedback tooltip type="invalid">
-												{validationErrors[SIGN_FORM.PASSWORD_CONFIRMATION]}
+												{validationErrors[SIGN_FORM.PASSWORD] ||
+													(isSignInFormType && apiError)}
 											</Form.Control.Feedback>
 										</FloatingLabel>
-									)}
-									<Form.Group className="d-flex justify-content-start align-items-center flex-wrap">
-										<Button
-											className="sign__btn mb-3"
-											disabled={isLoading}
-											type="submit"
-											variant="outline-primary"
-										>
-											{isLoading ? (
-												<MySpinner small isDark={isDarkTheme ? false : true} />
-											) : (
-												<FormattedMessage id={type} />
-											)}
-										</Button>
 
-										<p className="mt-0 mb-3">
-											{isSignInFormType ? (
-												<>
-													<FormattedMessage id={MESSAGES.NO_ACCOUNT} />
-													?&nbsp;
-													<Link to={ROUTES.SIGN_UP}>
-														<FormattedMessage id={MESSAGES.SIGN_UP} />
+										{isSignUpFormType && (
+											<FloatingLabel
+												className="sign__label"
+												controlId="floatingRepeatPassword"
+												label={intl.formatMessage({
+													id: MESSAGES.PASSWORD_CONFIRMATION,
+												})}
+											>
+												<Form.Control
+													className="pb-2 pt-4"
+													isInvalid={isInvalidPasswordConfirmation}
+													name={SIGN_FORM.PASSWORD_CONFIRMATION}
+													placeholder={intl.formatMessage({
+														id: MESSAGES.PASSWORD_CONFIRMATION,
+													})}
+													type="password"
+													value={values[SIGN_FORM.PASSWORD_CONFIRMATION]}
+													onChange={handleChange}
+												/>
+												<Form.Control.Feedback tooltip type="invalid">
+													{validationErrors[SIGN_FORM.PASSWORD_CONFIRMATION]}
+												</Form.Control.Feedback>
+											</FloatingLabel>
+										)}
+										<Form.Group className="d-flex justify-content-start align-items-center flex-wrap">
+											<Button
+												className="sign__btn mb-3"
+												disabled={isLoading}
+												type="submit"
+												variant="outline-primary"
+											>
+												{isLoading ? (
+													<MySpinner
+														small
+														isDark={!isDarkTheme}
+													/>
+												) : (
+													<FormattedMessage id={type} />
+												)}
+											</Button>
+
+											<p className="mt-0 mb-3">
+												{isSignInFormType ? (
+													<>
+														<FormattedMessage id={MESSAGES.NO_ACCOUNT} />
+														?&nbsp;
+														<Link to={ROUTES.SIGN_UP}>
+															<FormattedMessage id={MESSAGES.SIGN_UP} />
+														</Link>
+													</>
+												) : (
+													<Link to={ROUTES.SIGN_IN}>
+														<FormattedMessage id={MESSAGES.BACK} />
 													</Link>
-												</>
-											) : (
-												<Link to={ROUTES.SIGN_IN}>
-													<FormattedMessage id={MESSAGES.BACK} />
-												</Link>
-											)}
+												)}
+											</p>
+										</Form.Group>
+										{/* a11y */}
+										<p className="visually-hidden" role="alert">
+											{triedToSubmit &&
+												!isValid &&
+												getTextValuesFromObject(validationErrors)}
 										</p>
-									</Form.Group>
+									</fieldset>
 								</Form>
 							</Col>
 						</Card.Body>

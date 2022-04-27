@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { Button, CloseButton, Form, InputGroup } from 'react-bootstrap';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import SpeechRecognition, {
 	useSpeechRecognition,
 } from 'react-speech-recognition';
@@ -97,6 +97,10 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 
 	const handleResetSearch = () => {
 		updateSearchQuery('');
+
+		if (searchRef.current) {
+			searchRef.current.focus();
+		}
 	};
 
 	const closeBtnClasses = cn('filter__btn', 'filter__btn--close', {
@@ -107,7 +111,6 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		<InputGroup className="filter__group">
 			<Form.Control
 				ref={searchRef}
-				aria-label={intl.formatMessage({ id: MESSAGES.SEARCH })}
 				className="filter__input"
 				placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
 				type="text"
@@ -115,6 +118,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 			/>
 			{searchRef.current?.value && (
 				<CloseButton
+					aria-label={intl.formatMessage({ id: MESSAGES.CLEAR })}
 					className={closeBtnClasses}
 					variant={isDarkTheme ? 'white' : undefined}
 					onClick={handleResetSearch}
@@ -126,9 +130,17 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 					aria-label={intl.formatMessage({ id: MESSAGES.VOICE_INPUT })}
 					className={listening ? 'filter__btn--pulse' : ''}
 					disabled={isCanNotUseSpeechRecognition}
+					role="alert"
 					variant="outline-primary"
 					onClick={handleToggleSpeechInput}
 				>
+					<span className="visually-hidden">
+						{listening ? (
+							<FormattedMessage id={MESSAGES.MICROPHONE_ON} />
+						) : (
+							<FormattedMessage id={MESSAGES.MICROPHONE_OFF} />
+						)}
+					</span>
 					<SvgIcon
 						height={18}
 						variant={

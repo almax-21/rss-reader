@@ -23,7 +23,7 @@ const initialValues: SignFormValues = {
 };
 
 const SignUp: FC = () => {
-	const [createUser, { isLoading, error: registrationError }] =
+	const [createUser, { isLoading, isError, error: registrationError }] =
 		userAPI.useCreateUserMutation();
 
 	const registrationErrorRef = useRef<string>('');
@@ -61,14 +61,20 @@ const SignUp: FC = () => {
 	};
 
 	return (
-		<SignForm
-			apiError={registrationErrorRef.current}
-			handleSubmit={handleRegistration}
-			initialValues={initialValues}
-			isLoading={isLoading}
-			type={SIGN_FORM_TYPES.SIGN_UP}
-			validationSchema={validationSchema}
-		/>
+		<>
+			<SignForm
+				apiError={registrationErrorRef.current}
+				handleSubmit={handleRegistration}
+				initialValues={initialValues}
+				isLoading={isLoading}
+				type={SIGN_FORM_TYPES.SIGN_UP}
+				validationSchema={validationSchema}
+			/>
+			{/* a11y */}
+			<p className="visually-hidden" role="alert">
+				{isError && registrationErrorRef.current}
+			</p>
+		</>
 	);
 };
 

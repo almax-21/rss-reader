@@ -68,7 +68,7 @@ const PostContent: FC = () => {
 				totalPages={totalPages}
 			/>
 			{currentPosts.length === 0 ? (
-				<h3 className="h4 mt-4">
+				<h3 aria-live="assertive" className="h4 mt-4">
 					<FormattedMessage id={MESSAGES.NOT_FOUND} />
 				</h3>
 			) : (

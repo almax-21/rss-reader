@@ -28,10 +28,11 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 
 	const dispatch = useTypedDispatch();
 
+	const isPostRead = state === POST_STATES.READ;
 	const unreadPostClass = isDarkTheme ? 'text-light' : 'text-primary';
 
 	const handlePostRead = (postIDs: PostIdData) => () => {
-		if (state === POST_STATES.READ) {
+		if (isPostRead) {
 			return;
 		}
 
@@ -64,15 +65,20 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 				<Card className="post-item__body border-0">
 					<Card.Title className="h6 fw-bold">
 						<Card.Link
-							className={
-								state === POST_STATES.READ ? 'text-secondary' : unreadPostClass
-							}
+							className={isPostRead ? 'text-secondary' : unreadPostClass}
 							href={url}
 							rel="noreferrer"
 							target="_blank"
 							onClick={handlePostRead({ _id, feedId })}
 						>
 							{title}
+							<span className="visually-hidden">
+								{isPostRead ? (
+									<FormattedMessage id={MESSAGES.READ} />
+								) : (
+									<FormattedMessage id={MESSAGES.UNREAD} />
+								)}
+							</span>
 						</Card.Link>
 					</Card.Title>
 				</Card>

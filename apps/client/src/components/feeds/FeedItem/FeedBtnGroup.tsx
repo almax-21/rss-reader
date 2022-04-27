@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, KeyboardEvent, MouseEvent } from 'react';
 import { CloseButton } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
@@ -20,6 +20,8 @@ const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 
 	const intl = useIntl();
 
+	const handleKeyPress = (evt: KeyboardEvent) => evt.stopPropagation();
+
 	return (
 		<div className="d-flex flex-column justify-content-between">
 			<CloseButton
@@ -27,6 +29,7 @@ const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 				title={intl.formatMessage({ id: MESSAGES.DELETE })}
 				variant={isDarkTheme ? 'white' : undefined}
 				onClick={handleOpenModal(MODAL_TYPES.DELETE)}
+				onKeyPress={handleKeyPress}
 			/>
 			<button
 				aria-label={intl.formatMessage({ id: MESSAGES.RELOAD })}
@@ -34,6 +37,7 @@ const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 				title={intl.formatMessage({ id: MESSAGES.RELOAD })}
 				type="button"
 				onClick={handleOpenModal(MODAL_TYPES.RELOAD)}
+				onKeyPress={handleKeyPress}
 			>
 				<SvgIcon variant={SVG_ICON_VARIANTS.RELOAD} />
 			</button>

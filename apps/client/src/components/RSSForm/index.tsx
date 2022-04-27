@@ -1,10 +1,4 @@
-import React, {
-	FC,
-	MouseEventHandler,
-	useEffect,
-	useMemo,
-	useRef,
-} from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 import {
 	Button,
 	CloseButton,
@@ -27,6 +21,7 @@ import {
 	selectUrls,
 } from '../../store/selectors/rssMetaSelectors';
 import { selectSettings } from '../../store/selectors/settingsSelectors';
+import { getTextValuesFromObject } from '../../utils/text';
 import MySpinner from '../UI/MySpinner';
 
 import './style.scss';
@@ -53,6 +48,7 @@ const RSSForm: FC = () => {
 	const intl = useIntl();
 
 	const formikRef = useRef<FormikProps<RSSFormValues>>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 	const urlCountRef = useRef<number>(-1);
 
 	const validationSchema = useMemo(
@@ -90,55 +86,79 @@ const RSSForm: FC = () => {
 				handleChange,
 				values,
 				isValid,
-				errors: validationFormErrors,
+				errors: validationErrors,
 				resetForm,
-			}) => (
-				<Form noValidate onSubmit={handleSubmit}>
-					<Form.Group as={Row} className="mb-3">
-						<Col className="position-relative" md="9">
-							<FloatingLabel
-								controlId="floatingInput"
-								label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
-							>
-								<Form.Control
-									className="rss__input pb-2 pt-4"
-									isInvalid={!isValid}
-									name={RSS_FORM.URL}
-									placeholder={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
-									type="text"
-									value={values[RSS_FORM.URL]}
-									onChange={handleChange}
-								/>
-								<Form.Control.Feedback type="invalid">
-									{validationFormErrors[RSS_FORM.URL]}
-								</Form.Control.Feedback>
-							</FloatingLabel>
-							{values[RSS_FORM.URL] && (
-								<CloseButton
-									className="rss__btn rss__btn--close"
-									variant={isDarkTheme ? 'white' : undefined}
-									onClick={resetForm as MouseEventHandler}
-								/>
-							)}
-						</Col>
-						<Col md="3" sm="5" xs="9">
-							<Button
-								className="d-flex justify-content-center align-items-center w-100 h-100"
-								disabled={isContentLoading}
-								size="lg"
-								type="submit"
-								variant="primary"
-							>
-								{isContentLoading ? (
-									<MySpinner />
-								) : (
-									<FormattedMessage id={MESSAGES.ADD} />
-								)}
-							</Button>
-						</Col>
-					</Form.Group>
-				</Form>
-			)}
+			}) => {
+				const handleResetForm = () => {
+					resetForm();
+
+					if (inputRef.current) {
+						inputRef.current.focus();
+					}
+				};
+
+				return (
+					<Form noValidate onSubmit={handleSubmit}>
+						<fieldset>
+							<legend className="visually-hidden">
+								<h2>
+									<FormattedMessage id={MESSAGES.ADD_NEW_FEED} />
+								</h2>
+							</legend>
+							<Form.Group as={Row} className="mb-3">
+								<Col className="position-relative" md="9">
+									<FloatingLabel
+										controlId="floatingInput"
+										label={intl.formatMessage({ id: MESSAGES.RSS_INPUT })}
+									>
+										<Form.Control
+											ref={inputRef}
+											className="rss__input pb-2 pt-4"
+											isInvalid={!isValid}
+											name={RSS_FORM.URL}
+											placeholder={intl.formatMessage({
+												id: MESSAGES.RSS_INPUT,
+											})}
+											type="text"
+											value={values[RSS_FORM.URL]}
+											onChange={handleChange}
+										/>
+										<Form.Control.Feedback type="invalid">
+											{validationErrors[RSS_FORM.URL]}
+										</Form.Control.Feedback>
+									</FloatingLabel>
+									{values[RSS_FORM.URL] && (
+										<CloseButton
+											aria-label={intl.formatMessage({ id: MESSAGES.CLEAR })}
+											className="rss__btn rss__btn--close"
+											variant={isDarkTheme ? 'white' : undefined}
+											onClick={handleResetForm}
+										/>
+									)}
+								</Col>
+								<Col md="3" sm="5" xs="9">
+									<Button
+										className="d-flex justify-content-center align-items-center w-100 h-100"
+										disabled={isContentLoading}
+										size="lg"
+										type="submit"
+										variant="primary"
+									>
+										{isContentLoading ? (
+											<MySpinner />
+										) : (
+											<FormattedMessage id={MESSAGES.ADD} />
+										)}
+									</Button>
+								</Col>
+							</Form.Group>
+							<p className="visually-hidden" role="alert">
+								{!isValid && getTextValuesFromObject(validationErrors)}
+							</p>
+						</fieldset>
+					</Form>
+				);
+			}}
 		</Formik>
 	);
 };

@@ -55,18 +55,27 @@ const LocaleSwitcher: FC = () => {
 				</Accordion.Header>
 				<Accordion.Body className="locale-switcher__body p-2">
 					<ListGroup variant="flush">
-						{langEntries.map(([langKey, langValue]) => (
-							<ListGroup.Item
-								key={langKey}
-								action
-								active={currentLang === langValue}
-								as="button"
-								className="list-item"
-								onClick={handleSwitchLocale(langValue)}
-							>
-								<FormattedMessage id={langKey} />
-							</ListGroup.Item>
-						))}
+						{langEntries.map(([langKey, langValue]) => {
+							const isActive = currentLang === langValue;
+
+							return (
+								<ListGroup.Item
+									key={langKey}
+									action
+									active={isActive}
+									as="button"
+									className="list-item"
+									onClick={handleSwitchLocale(langValue)}
+								>
+									<FormattedMessage id={langKey} />
+									{isActive && (
+										<span className="visually-hidden">
+											<FormattedMessage id={MESSAGES.ACTIVE} />
+										</span>
+									)}
+								</ListGroup.Item>
+							);
+						})}
 					</ListGroup>
 				</Accordion.Body>
 			</Accordion.Item>

@@ -4,14 +4,16 @@ import { useIntl } from 'react-intl';
 import { MESSAGES } from '../../i18n/types';
 
 interface BurgerBtnProps {
+	isActive: boolean;
 	onClick: () => void;
 }
 
-const BurgerBtn: FC<BurgerBtnProps> = ({ onClick }) => {
+const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
 	const intl = useIntl();
 
 	return (
 		<button
+			aria-expanded={isActive}
 			aria-label={intl.formatMessage({ id: MESSAGES.SETTINGS })}
 			className="btn p-0"
 			type="button"
