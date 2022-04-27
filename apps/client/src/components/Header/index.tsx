@@ -35,7 +35,9 @@ const Header: FC = () => {
 							<h1 className="display-3 mb-0">
 								<FormattedMessage id={MESSAGES.MAIN_HEADER} />
 							</h1>
-							{isAuth && <BurgerBtn onClick={handleShowMenu} />}
+							{isAuth && (
+								<BurgerBtn isActive={isShowMenu} onClick={handleShowMenu} />
+							)}
 						</Col>
 					</Row>
 					<Row className="justify-content-center">

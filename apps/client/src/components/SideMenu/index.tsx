@@ -75,6 +75,9 @@ const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 				closeVariant={isDarkTheme ? 'white' : undefined}
 			>
 				<SvgIcon height="32" variant={SVG_ICON_VARIANTS.USER} width="32" />
+				<h3 className="visually-hidden">
+					<FormattedMessage id={MESSAGES.SETTINGS_MENU} />
+				</h3>
 				<Offcanvas.Title>{username}</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body className="side-menu__body">
