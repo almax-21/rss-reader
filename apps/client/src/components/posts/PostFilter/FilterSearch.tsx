@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
 import { Button, CloseButton, Form, InputGroup } from 'react-bootstrap';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import SpeechRecognition, {
 	useSpeechRecognition,
 } from 'react-speech-recognition';
@@ -28,7 +28,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 
 	const {
 		transcript,
-		listening,
+		listening: isListening,
 		browserSupportsSpeechRecognition,
 		isMicrophoneAvailable,
 	} = useSpeechRecognition();
@@ -90,7 +90,7 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 			return;
 		}
 
-		listening
+		isListening
 			? SpeechRecognition.stopListening()
 			: SpeechRecognition.startListening();
 	};
@@ -126,21 +126,15 @@ const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 			)}
 			{isFullSupportSpeechRecognition && (
 				<Button
-					active={listening}
+					active={isListening}
+					aria-checked={isListening}
 					aria-label={intl.formatMessage({ id: MESSAGES.VOICE_INPUT })}
-					className={listening ? 'filter__btn--pulse' : ''}
+					className={isListening ? 'filter__btn--pulse' : ''}
 					disabled={isCanNotUseSpeechRecognition}
-					role="alert"
+					role="switch"
 					variant="outline-primary"
 					onClick={handleToggleSpeechInput}
 				>
-					<span className="visually-hidden">
-						{listening ? (
-							<FormattedMessage id={MESSAGES.MICROPHONE_ON} />
-						) : (
-							<FormattedMessage id={MESSAGES.MICROPHONE_OFF} />
-						)}
-					</span>
 					<SvgIcon
 						height={18}
 						variant={
