@@ -83,6 +83,7 @@ const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 					</Card.Title>
 				</Card>
 				<Button
+					aria-haspopup="dialog"
 					size="sm"
 					variant={isDarkTheme ? 'outline-light' : 'outline-primary'}
 					onClick={handleOpenModal}

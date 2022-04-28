@@ -25,6 +25,7 @@ const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 	return (
 		<div className="d-flex flex-column justify-content-between">
 			<CloseButton
+				aria-haspopup="dialog"
 				aria-label={intl.formatMessage({ id: MESSAGES.DELETE })}
 				title={intl.formatMessage({ id: MESSAGES.DELETE })}
 				variant={isDarkTheme ? 'white' : undefined}
@@ -32,6 +33,7 @@ const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 				onKeyPress={handleKeyPress}
 			/>
 			<button
+				aria-haspopup="dialog"
 				aria-label={intl.formatMessage({ id: MESSAGES.RELOAD })}
 				className="btn feed-item__reload-btn"
 				title={intl.formatMessage({ id: MESSAGES.RELOAD })}
