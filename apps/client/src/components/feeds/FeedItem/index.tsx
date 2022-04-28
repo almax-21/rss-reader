@@ -104,11 +104,11 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 				ref={feedRef}
 				action={feeds.length > 1}
 				active={isActive && feeds.length > 1}
-				aria-role="tab"
 				aria-selected={isActive && feeds.length > 1}
 				as="li"
 				className="list-item feed-item d-flex justify-content-center"
 				id={_id}
+				role="tab"
 				onClick={handleUpdateActiveFeed}
 				onKeyPress={handleKeyPress}
 			>
