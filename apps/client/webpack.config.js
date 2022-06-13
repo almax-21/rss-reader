@@ -45,6 +45,9 @@ module.exports = {
 		path: path.resolve(__dirname, 'build'),
 	},
 	resolve: {
+		alias: {
+			'@': path.join(__dirname, 'src'),
+		},
 		extensions: ['.ts', '.tsx', '.js'],
 	},
 	optimization: setupOptimizationConfig(),
