@@ -34,7 +34,7 @@ const initValues: RSSFormValues = {
 	[RSS_FORM.URL]: '',
 };
 
-const RSSForm: FC = () => {
+export const RSSForm: FC = () => {
 	const { isLoadingFromRssSource, isLoadingFromApi } =
 		useTypedSelector(selectRssMeta);
 
@@ -162,5 +162,3 @@ const RSSForm: FC = () => {
 		</Formik>
 	);
 };
-
-export default RSSForm;

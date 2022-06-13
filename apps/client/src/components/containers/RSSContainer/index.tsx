@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import RSSForm from '../../RSSForm';
+import { RSSForm } from '@/components/rss-form';
 
 import './style.scss';
 
