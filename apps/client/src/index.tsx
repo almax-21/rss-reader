@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import { App } from '@/components/app';
+import { App } from '@/components/appERROR';
 
 import { setupStore } from './store';
 import registerServiceWorker from './swRegistration';
