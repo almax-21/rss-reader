@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap';
 
 import SvgIcon from '@/components/UI/SvgIcon';
 
-import { NotificationData } from './types';
+import { NotificationData } from './typesERROR';
 
 import './style.scss';
 
