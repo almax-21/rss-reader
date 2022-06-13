@@ -10,19 +10,19 @@ import {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik, FormikProps } from 'formik';
 
-import useTypedDispatch from '../../hooks/redux/useTypedDispatch';
-import useTypedSelector from '../../hooks/redux/useTypedSelector';
-import { MESSAGES } from '../../i18n/types';
-import setRSSFormSchema from '../../schemas/setRSSFormSchema';
-import { RSS_FORM } from '../../schemas/types';
-import getContentFromRssSource from '../../store/async-actions/getContentFromRssSource';
+import { MySpinner } from '@/components/UI/my-spinner';
+import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
+import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { MESSAGES } from '@/i18n/types';
+import setRSSFormSchema from '@/schemas/setRSSFormSchema';
+import { RSS_FORM } from '@/schemas/types';
+import getContentFromRssSource from '@/store/async-actions/getContentFromRssSource';
 import {
 	selectRssMeta,
 	selectUrls,
-} from '../../store/selectors/rssMetaSelectors';
-import { selectSettings } from '../../store/selectors/settingsSelectors';
-import { getTextValuesFromObject } from '../../utils/text';
-import MySpinner from '../UI/MySpinner';
+} from '@/store/selectors/rssMetaSelectors';
+import { selectSettings } from '@/store/selectors/settingsSelectors';
+import { getTextValuesFromObject } from '@/utils/text';
 
 import './style.scss';
 

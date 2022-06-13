@@ -2,9 +2,9 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-import SignInForm from '../components/SignForm/SignIn';
-import SignUpForm from '../components/SignForm/SignUp';
-import { ROUTES } from '../router/types';
+import { SignIn } from '@/components/sign-form/sign-in';
+import { SignUp } from '@/components/sign-form/sign-up';
+import { ROUTES } from '@/router/types';
 
 const SignPage = () => {
 	const { location } = useHistory();
@@ -14,9 +14,9 @@ const SignPage = () => {
 			<Row className="d-flex justify-content-center align-items-center">
 				<Col className="mb-5" md="11">
 					{location.pathname === ROUTES.SIGN_IN ? (
-						<SignInForm />
+						<SignIn />
 					) : (
-						<SignUpForm />
+						<SignUp />
 					)}
 				</Col>
 			</Row>
