@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { MySpinner } from '@/components/UI/my-spinner';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectRssMeta } from '@/store/selectors/rssMetaSelectors';
 

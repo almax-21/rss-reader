@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { AnyAction } from 'redux';
 
-import updateFeedsData from '../store/async-actions/updateFeedsData';
-import { FeedUrlData } from '../types';
-import { getDiffBy } from '../utils/collection';
+import { updateFeedsData } from '@/store/async-actions';
+import { FeedUrlData } from '@/types';
+import { getDiffBy } from '@/utils/collection';
 
-import useTypedDispatch from './redux/useTypedDispatch';
+import { useTypedDispatch } from './redux/useTypedDispatch';
 
 const UPDATE_PERIOD_MS = 180000;
 
-const useAutoUpdate = (
+export const useAutoUpdate = (
 	urlDataset: FeedUrlData[],
 	isAutoUpdate: boolean
 ): void => {
@@ -51,5 +51,3 @@ const useAutoUpdate = (
 		prevUrlDatasetRef.current = urlDataset;
 	}, [isAutoUpdate, urlDataset]);
 };
-
-export default useAutoUpdate;

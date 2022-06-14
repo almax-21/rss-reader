@@ -1,19 +1,15 @@
-import React, { FC, KeyboardEvent, MouseEvent } from 'react';
+import React, { FC, KeyboardEvent } from 'react';
 import { CloseButton } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
-import { MODAL_TYPE, MODAL_TYPES } from '@/components/UI/my-modal/types';
-import SvgIcon from '@/components/UI/SvgIcon/index';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { MODAL_TYPES } from '@/components/UI/my-modal/types';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
-interface FeedBtnGroupProps {
-	handleOpenModal: (
-		modalType: MODAL_TYPE
-	) => (event: MouseEvent<HTMLButtonElement>) => void;
-}
+import { FeedBtnGroupProps } from './types';
 
 export const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);

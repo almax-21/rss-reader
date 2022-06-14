@@ -4,7 +4,7 @@ import { ContentContainer } from '@/components/containers/content-container';
 import { RSSContainer } from '@/components/containers/rss-container';
 import { ScrollTopBtn } from '@/components/UI/scroll-top-btn';
 
-const MainPage: FC = () => {
+export const MainPage: FC = () => {
 	return (
 		<>
 			<RSSContainer />
@@ -13,5 +13,3 @@ const MainPage: FC = () => {
 		</>
 	);
 };
-
-export default MainPage;

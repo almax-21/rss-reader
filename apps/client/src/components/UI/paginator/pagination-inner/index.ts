@@ -1,0 +1,1 @@
+export { PaginationInner } from './PaginationInner';

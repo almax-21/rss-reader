@@ -1,13 +1,9 @@
 import React, { FC } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import { Post } from '@/models/Post';
-
 import { PostItem } from '../post-item';
 
-interface PostListProps {
-	posts: Post[];
-}
+import { PostListProps } from './types';
 
 export const PostList: FC<PostListProps> = React.memo(({ posts }) => (
 	<ListGroup aria-live="polite" as="ul">

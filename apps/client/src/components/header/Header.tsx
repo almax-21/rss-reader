@@ -3,8 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { SideMenu } from '@/components/side-menu';
-import BurgerBtn from '@/components/UI/BurgerBtn';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { BurgerBtn } from '@/components/UI/burger-btn';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectAuthState } from '@/store/selectors/userSelectors';
 

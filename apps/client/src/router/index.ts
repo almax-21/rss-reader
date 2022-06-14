@@ -1,5 +1,5 @@
-import MainPage from '../pages/MainPage';
-import SignPage from '../pages/SignPage';
+
+import { MainPage, SignPage } from '@/pages';
 
 import { Route, ROUTES } from './types';
 

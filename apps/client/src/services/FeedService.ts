@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { ApiContentData, ApiFeedData } from '../store/types';
-import { API_ORIGIN, TOKEN_KEY } from '../types/constants';
-import { ParsedFeedData } from '../utils/parser/types';
+import { ApiContentData, ApiFeedData } from '@/store/types';
+import { API_ORIGIN, TOKEN_KEY } from '@/types/constants';
+import { ParsedFeedData } from '@/utils/parser/types';
 
 class FeedService {
 	static uploadNewFeedData(

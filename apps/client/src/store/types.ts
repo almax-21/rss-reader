@@ -1,8 +1,8 @@
-import { LocaleType } from '../i18n/types';
-import { Feed } from '../models/Feed';
-import { Post } from '../models/Post';
-import { User } from '../models/User';
-import { FeedUrlData, PostFilter } from '../types';
+import { LocaleType } from '@/i18n/types';
+import { Feed } from '@/models/Feed';
+import { Post } from '@/models/Post';
+import { User } from '@/models/User';
+import { FeedUrlData, PostFilter } from '@/types';
 
 import { rootReducer } from './index';
 import { setupStore } from './index';

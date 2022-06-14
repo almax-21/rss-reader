@@ -2,11 +2,12 @@ import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
-import { MESSAGES } from '../../../../i18n/types';
-import PaginationInner from '../PaginationInner';
-import { PaginationProps } from '../types';
+import { MESSAGES } from '@/i18n/types';
 
-const SimplePagination: FC<PaginationProps> = ({
+import { PaginationInner } from '../../pagination-inner';
+import { PaginationProps } from '../../types';
+
+export const SimplePagination: FC<PaginationProps> = ({
 	pages,
 	activePage,
 	handleSetActivePage,
@@ -40,5 +41,3 @@ const SimplePagination: FC<PaginationProps> = ({
 		</nav>
 	);
 };
-
-export default SimplePagination;

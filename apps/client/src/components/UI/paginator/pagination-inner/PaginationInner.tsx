@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Pagination } from 'react-bootstrap';
 import cn from 'classnames';
 
-import { PaginationInnerProps } from './types';
+import { PaginationInnerProps } from '../types';
 
-const PaginationInner: FC<PaginationInnerProps> = ({
+export const PaginationInner: FC<PaginationInnerProps> = ({
 	pages,
 	activePage,
 	handleSetActivePage,
@@ -29,5 +29,3 @@ const PaginationInner: FC<PaginationInnerProps> = ({
 		})}
 	</>
 );
-
-export default PaginationInner;

@@ -3,15 +3,12 @@ import { ListGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
 import { MESSAGES } from '@/i18n/types';
-import { FeedWithCounter } from '@/models/Feed';
 
 import { FeedItem } from '../feed-item';
 
-import './style.scss';
+import { FeedListProps } from './types';
 
-interface FeedListProps {
-	feeds: FeedWithCounter[];
-}
+import './style.scss';
 
 export const FeedList: FC<FeedListProps> = ({ feeds }) => {
 	const intl = useIntl();

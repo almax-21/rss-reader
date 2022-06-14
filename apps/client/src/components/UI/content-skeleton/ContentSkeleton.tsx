@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Placeholder } from 'react-bootstrap';
 
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedSelector } from '@/hooks';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import './style.scss';

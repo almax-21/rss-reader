@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Feed } from '../../models/Feed';
-import deleteFeed from '../async-actions/deleteFeed';
-import getDataFromApi from '../async-actions/getAllContentFromApi';
-import getContentFromRssSource from '../async-actions/getContentFromRssSource';
+import { Feed } from '@/models/Feed';
+
+import {deleteFeed, getAllContentFromApi, getContentFromRssSource } from '../async-actions';
 import { ApiContentData, ApiFeedData, FeedsState } from '../types';
 
 import { logoutUser } from './userSlice';
@@ -23,7 +22,7 @@ const feedsSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[getDataFromApi.fulfilled.type]: (
+		[getAllContentFromApi.fulfilled.type]: (
 			state,
 			action: PayloadAction<ApiContentData>
 		) => {

@@ -1,16 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MESSAGES } from '../../i18n/types';
-import PostService from '../../services/PostService';
-import ProxyService from '../../services/ProxyService';
-import { FeedUrlData } from '../../types';
-import parseRSS from '../../utils/parser/index';
+import { MESSAGES } from '@/i18n/types';
+import PostService from '@/services/PostService';
+import ProxyService from '@/services/ProxyService';
+import { FeedUrlData } from '@/types';
+import parseRSS from '@/utils/parser/index';
+
 import {
 	notificationReqFailure,
 	notificationReqPending,
 } from '../slices/notificationSlice';
 
-const reloadFeed = createAsyncThunk(
+export const reloadFeed = createAsyncThunk(
 	'content/reloadFeed',
 	async (urlData: FeedUrlData, thunkAPI) => {
 		try {
@@ -45,5 +46,3 @@ const reloadFeed = createAsyncThunk(
 		}
 	}
 );
-
-export default reloadFeed;

@@ -1,17 +1,18 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MESSAGES } from '../../i18n/types';
-import FeedService from '../../services/FeedService';
-import ProxyService from '../../services/ProxyService';
-import parseRSS from '../../utils/parser';
+import { MESSAGES } from '@/i18n/types';
+import FeedService from '@/services/FeedService';
+import ProxyService from '@/services/ProxyService';
+import parseRSS from '@/utils/parser';
+
 import {
 	notificationReqFailure,
 	notificationReqPending,
 	notificationReqSuccess,
 } from '../slices/notificationSlice';
 
-const getContentFromRssSource = createAsyncThunk(
+export const getContentFromRssSource = createAsyncThunk(
 	'content/getContentFromRssSource',
 	async (feedUrl: string, thunkAPI) => {
 		try {
@@ -53,5 +54,3 @@ const getContentFromRssSource = createAsyncThunk(
 		}
 	}
 );
-
-export default getContentFromRssSource;

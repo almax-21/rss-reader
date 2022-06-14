@@ -3,30 +3,20 @@ import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
-import { ObjectSchema } from 'yup';
 
 import { MySpinner } from '@/components/UI/my-spinner';
-import SvgIcon from '@/components/UI/SvgIcon';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { ROUTES } from '@/router/types';
 import { SIGN_FORM } from '@/schemas/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { getTextValuesFromObject } from '@/utils/text';
 
-import { SIGN_FORM_TYPES, SignFormType, SignFormValues } from './types';
+import { SIGN_FORM_TYPES, SignFormProps } from './types';
 
 import './style.scss';
-
-interface SignFormProps {
-	type: SignFormType;
-	initialValues: SignFormValues;
-	validationSchema: ObjectSchema<any>;
-	isLoading: boolean;
-	handleSubmit: (values: SignFormValues) => void;
-	apiError: string;
-}
 
 export const SignForm: FC<SignFormProps> = ({
 	type,

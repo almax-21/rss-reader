@@ -1,4 +1,5 @@
-import { MESSAGES } from '../../i18n/types';
+import { MESSAGES } from '@/i18n/types';
+
 import { filterText } from '../text';
 
 import { ParsedFeedData, ParsedPost } from './types';

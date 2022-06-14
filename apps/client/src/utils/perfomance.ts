@@ -1,4 +1,4 @@
-import { TimeoutId } from '../types';
+import { TimeoutId } from '@/types';
 
 export function throttle<T, K>(cb: (...args: T[]) => K, delay: number) {
 	let isThrottle = false;

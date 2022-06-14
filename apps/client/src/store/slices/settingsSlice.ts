@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { LOCALES } from '../../i18n/locales';
-import { LocaleType } from '../../i18n/types';
-import { User } from '../../models/User';
-import userAPI from '../../services/UserService';
-import { AUTO_UPDATE_KEY, DARK_THEME_KEY } from '../../types/constants';
+import { LOCALES } from '@/i18n/locales';
+import { LocaleType } from '@/i18n/types';
+import { User } from '@/models/User';
+import userAPI from '@/services/UserService';
+import { AUTO_UPDATE_KEY, DARK_THEME_KEY } from '@/types/constants';
+
 import { SettingsState } from '../types';
 
 const initDarkThemeState = Boolean(localStorage.getItem(DARK_THEME_KEY));

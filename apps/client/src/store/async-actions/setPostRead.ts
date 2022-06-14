@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import PostService from '../../services/PostService';
-import { PostIdData } from '../../types';
+import PostService from '@/services/PostService';
+import { PostIdData } from '@/types';
 
-const setPostRead = createAsyncThunk(
+export const setPostRead = createAsyncThunk(
 	'posts/setPostRead',
 	async (postIDs: PostIdData, thunkAPI) => {
 		try {
@@ -20,5 +20,3 @@ const setPostRead = createAsyncThunk(
 		}
 	}
 );
-
-export default setPostRead;

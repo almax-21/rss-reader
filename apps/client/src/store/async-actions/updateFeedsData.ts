@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import PostService from '../../services/PostService';
-import ProxyService from '../../services/ProxyService';
-import { FeedUrlData } from '../../types';
-import { getDiffBy } from '../../utils/collection';
-import parseRSS from '../../utils/parser';
+import PostService from '@/services/PostService';
+import ProxyService from '@/services/ProxyService';
+import { FeedUrlData } from '@/types';
+import { getDiffBy } from '@/utils/collection';
+import parseRSS from '@/utils/parser';
+
 import { RootState } from '../types';
 
-const updateFeedsData = createAsyncThunk(
+export const updateFeedsData = createAsyncThunk(
 	'content/updateFeedsData',
 	async (urlData: FeedUrlData, thunkAPI) => {
 		try {
@@ -56,5 +57,3 @@ const updateFeedsData = createAsyncThunk(
 		},
 	}
 );
-
-export default updateFeedsData;

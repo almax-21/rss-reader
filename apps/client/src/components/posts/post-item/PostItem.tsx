@@ -4,20 +4,16 @@ import { FormattedMessage } from 'react-intl';
 
 import { MyModal } from '@/components/UI/my-modal';
 import { MODAL_TYPES } from '@/components/UI/my-modal/types';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
-import { Post } from '@/models/Post';
-import setPostRead from '@/store/async-actions/setPostRead';
+import { setPostRead } from '@/store/async-actions';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { POST_STATES } from '@/store/types';
 import { PostIdData } from '@/types';
 
-import './style.scss';
+import { PostItemProps } from './types';
 
-interface PostItemProps {
-	post: Post;
-}
+import './style.scss';
 
 export const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);

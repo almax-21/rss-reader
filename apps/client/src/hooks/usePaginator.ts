@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { getPagesCount } from '../utils/page';
+import { getPagesCount } from '@/utils/page';
 
 interface ReturnedHookData {
 	totalPages: number;
@@ -9,7 +9,7 @@ interface ReturnedHookData {
 	setActivePage: (activePage: number) => void;
 }
 
-const usePaginator = (items: any[], limit: number): ReturnedHookData => {
+export const usePaginator = (items: any[], limit: number): ReturnedHookData => {
 	const [totalPages, setTotalPages] = useState<number>(1);
 	const [activePage, setActivePage] = useState<number>(1);
 
@@ -22,5 +22,3 @@ const usePaginator = (items: any[], limit: number): ReturnedHookData => {
 
 	return { totalPages, setTotalPages, activePage, setActivePage };
 };
-
-export default usePaginator;

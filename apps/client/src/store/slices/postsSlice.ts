@@ -1,14 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Post } from '../../models/Post';
-import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '../../types';
-import deleteFeed from '../async-actions/deleteFeed';
-import getDataFromApi from '../async-actions/getAllContentFromApi';
-import getContentFromRssSource from '../async-actions/getContentFromRssSource';
-import reloadFeed from '../async-actions/reloadFeed';
-import setAllActivePostsRead from '../async-actions/setAllActivePostsRead';
-import setPostRead from '../async-actions/setPostRead';
-import updateFeedsData from '../async-actions/updateFeedsData';
+import { Post } from '@/models/Post';
+import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '@/types';
+
+import {
+	deleteFeed,
+	getAllContentFromApi,
+	getContentFromRssSource,
+	reloadFeed,
+	setAllActivePostsRead,
+	setPostRead,
+	updateFeedsData,
+} from '../async-actions';
 import {
 	ApiContentData,
 	ApiFeedData,
@@ -43,7 +46,7 @@ const postsSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[getDataFromApi.fulfilled.type]: (
+		[getAllContentFromApi.fulfilled.type]: (
 			state,
 			action: PayloadAction<ApiContentData>
 		) => {

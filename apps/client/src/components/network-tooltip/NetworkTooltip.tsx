@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import SvgIcon from '@/components/UI/SvgIcon';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
 import { MESSAGES } from '@/i18n/types';
 
 import './style.scss';

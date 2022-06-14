@@ -1,10 +1,8 @@
 import React, { FC, useEffect, useMemo, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Paginator from '@/components/UI/Paginator/index';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
-import usePaginator from '@/hooks/usePaginator';
+import { Paginator } from '@/components/UI/paginator';
+import { usePaginator, useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { Post } from '@/models/Post';
 import {
