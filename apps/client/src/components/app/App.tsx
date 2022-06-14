@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import SpeechRecognition from 'react-speech-recognition';
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
-import { Footer } from '@/components/footerERROR';
-import { Header } from '@/components/headerERROR';
+import { Footer } from '@/components/footer';
+import { Header } from '@/components/header';
 import { NetworkTooltip } from '@/components/network-tooltip';
 import { MySpinner } from '@/components/UI/my-spinner';
 import AuthContext from '@/contexts/AuthContext';
@@ -19,8 +19,8 @@ import getAllContentFromApi from '@/store/async-actions/getAllContentFromApi';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectUser } from '@/store/selectors/userSelectors';
 
-import { AppHelmet } from './app-helmetERROR';
-import { AppRouter } from './app-routerERROR';
+import { AppHelmet } from './app-helmet';
+import { AppRouter } from './app-router';
 
 import './scss/style.scss';
 
