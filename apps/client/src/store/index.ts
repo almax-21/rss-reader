@@ -2,7 +2,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 
-import userAPI from '../services/UserService';
+import userAPI from '@/services/UserService';
 
 import feedsReducer from './slices/feedsSlice';
 import notificationReducer from './slices/notificationSlice';

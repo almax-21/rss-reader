@@ -6,7 +6,7 @@ import { SignIn } from '@/components/sign-form/sign-in';
 import { SignUp } from '@/components/sign-form/sign-up';
 import { ROUTES } from '@/router/types';
 
-const SignPage = () => {
+export const SignPage = () => {
 	const { location } = useHistory();
 
 	return (
@@ -23,5 +23,3 @@ const SignPage = () => {
 		</Container>
 	);
 };
-
-export default SignPage;

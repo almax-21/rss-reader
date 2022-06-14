@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MESSAGES } from '../../i18n/types';
-import FeedService from '../../services/FeedService';
+import { MESSAGES } from '@/i18n/types';
+import FeedService from '@/services/FeedService';
+
 import { notificationReqFailure } from '../slices/notificationSlice';
 
-const getAllContentFromApi = createAsyncThunk(
+export const getAllContentFromApi = createAsyncThunk(
 	'content/getAllContentFromApi',
 	async (token: string, thunkAPI) => {
 		try {
@@ -22,5 +23,3 @@ const getAllContentFromApi = createAsyncThunk(
 		}
 	}
 );
-
-export default getAllContentFromApi;

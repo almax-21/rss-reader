@@ -4,10 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { AnyAction } from '@reduxjs/toolkit';
 
 import { LocaleSwitcher } from '@/components/locale-switcher';
-import SvgIcon from '@/components/UI/SvgIcon';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
+import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectUserData } from '@/store/selectors/userSelectors';
@@ -23,12 +22,9 @@ import {
 	TOKEN_KEY,
 } from '@/types/constants';
 
-import './style.scss';
+import { SideMenuProps } from './types';
 
-interface SideMenuProps {
-	isShow: boolean;
-	handleClose: () => void;
-}
+import './style.scss';
 
 export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 	const { username } = useTypedSelector(selectUserData);

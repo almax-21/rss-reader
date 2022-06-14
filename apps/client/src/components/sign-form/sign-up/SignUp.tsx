@@ -3,10 +3,10 @@ import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { ROUTES } from '@/router/types';
-import setSignUpSchema from '@/schemas/setSignUpSchema';
+import { setSignUpSchema } from '@/schemas';
 import { SIGN_FORM } from '@/schemas/types';
 import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';

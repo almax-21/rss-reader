@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import { IntlShape } from '@formatjs/intl';
 import * as Yup from 'yup';
 
-import { MESSAGES } from '../i18n/types';
+import { MESSAGES } from '@/i18n/types';
 
 import { PASSWORD_LENGTH, SIGN_FORM, USERNAME_LENGTH } from './types';
 
-const setSignUpSchema = (intl: IntlShape<string | ReactNode>) => {
+export const setSignUpSchema = (intl: IntlShape<string | ReactNode>) => {
 	return Yup.object().shape({
 		[SIGN_FORM.USERNAME]: Yup.string()
 			.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
@@ -45,5 +45,3 @@ const setSignUpSchema = (intl: IntlShape<string | ReactNode>) => {
 			),
 	});
 };
-
-export default setSignUpSchema;

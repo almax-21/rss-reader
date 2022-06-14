@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { Post } from '../models/Post';
-import { API_ORIGIN, TOKEN_KEY } from '../types/constants';
-import { ParsedPost } from '../utils/parser/types';
+import { Post } from '@/models/Post';
+import { API_ORIGIN, TOKEN_KEY } from '@/types/constants';
+import { ParsedPost } from '@/utils/parser/types';
 
 class PostService {
 	static setPostRead(id: string): Promise<AxiosResponse<string>> {

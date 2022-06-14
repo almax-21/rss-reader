@@ -1,21 +1,14 @@
 import React, { FC } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { Variant } from 'react-bootstrap/esm/types';
 import { FormattedMessage } from 'react-intl';
 
-import useTypedSelector from '../../hooks/redux/useTypedSelector';
-import { selectSettings } from '../../store/selectors/settingsSelectors';
-import { POST_STATE_TYPE } from '../../store/types';
+import { useTypedSelector } from '@/hooks';
+import { selectSettings } from '@/store/selectors/settingsSelectors';
+import { POST_STATE_TYPE } from '@/store/types';
 
-interface MyDropDownProps<T> {
-	variant: Variant;
-	title: string;
-	values: Array<T>;
-	activeValue: T;
-	handleSetActiveValue: (value: T) => () => void;
-}
+import { MyDropDownProps } from './types';
 
-const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
+export const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 	variant,
 	title,
 	values,
@@ -42,5 +35,3 @@ const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 		</DropdownButton>
 	);
 };
-
-export default MyDropDown;

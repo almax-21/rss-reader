@@ -4,12 +4,9 @@ import cn from 'classnames';
 
 import { MESSAGES } from '@/i18n/types';
 
-import './style.scss';
+import { MySpinnerProps } from './types';
 
-interface MySpinnerProps {
-	small?: boolean;
-	isDark?: boolean;
-}
+import './style.scss';
 
 export const MySpinner: FC<MySpinnerProps> = ({ small = false, isDark = false }) => {
 	const classes = cn('spinner', {

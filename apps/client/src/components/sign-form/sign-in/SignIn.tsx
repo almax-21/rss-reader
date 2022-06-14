@@ -1,10 +1,10 @@
 import React, { FC, useContext, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
-import AuthContext from '@/contexts/AuthContext';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { AuthContext } from '@/contexts';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
-import setSignInSchema from '@/schemas/setSignInSchema';
+import { setSignInSchema } from '@/schemas';
 import { SIGN_FORM } from '@/schemas/types';
 import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';

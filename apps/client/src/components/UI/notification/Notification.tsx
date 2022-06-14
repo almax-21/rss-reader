@@ -1,17 +1,11 @@
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
-import SvgIcon from '@/components/UI/SvgIcon';
+import { SvgIcon } from '@/components/UI/svg-icon';
 
-import { NotificationData } from './types';
+import { NotificationProps } from './types';
 
 import './style.scss';
-
-interface NotificationProps {
-	data: NotificationData;
-	isShow: boolean;
-	onClose: () => void;
-}
 
 export const Notification: FC<NotificationProps> = ({
 	data,

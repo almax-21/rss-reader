@@ -9,13 +9,11 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NetworkTooltip } from '@/components/network-tooltip';
 import { MySpinner } from '@/components/UI/my-spinner';
-import AuthContext from '@/contexts/AuthContext';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
-import useNetwork from '@/hooks/useNetwork';
+import { AuthContext } from '@/contexts';
+import { useNetwork, useTypedDispatch, useTypedSelector } from '@/hooks';
 import { messages } from '@/i18n/messages';
 import userAPI from '@/services/UserService';
-import getAllContentFromApi from '@/store/async-actions/getAllContentFromApi';
+import { getAllContentFromApi } from '@/store/async-actions';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectUser } from '@/store/selectors/userSelectors';
 

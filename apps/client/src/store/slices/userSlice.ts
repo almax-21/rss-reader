@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { LocaleType } from '../../i18n/types';
-import { User } from '../../models/User';
-import userAPI from '../../services/UserService';
+import { LocaleType } from '@/i18n/types';
+import { User } from '@/models/User';
+import userAPI from '@/services/UserService';
+
 import { UserState } from '../types';
 
 const initialState: UserState = {

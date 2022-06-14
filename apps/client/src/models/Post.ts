@@ -1,4 +1,4 @@
-import { POST_STATE_TYPE } from '../store/types';
+import { POST_STATE_TYPE } from '@/store/types';
 
 interface IPost {
 	_id: string;

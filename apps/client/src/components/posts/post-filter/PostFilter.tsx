@@ -2,13 +2,12 @@ import React, { FC, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { MyDropDown } from '@/components/UI/my-drop-down';
 import { MyModal } from '@/components/UI/my-modal';
 import { MODAL_TYPES } from '@/components/UI/my-modal/types';
-import MyDropDown from '@/components/UI/MyDropDown';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
-import setAllActivePostsRead from '@/store/async-actions/setAllActivePostsRead';
+import { setAllActivePostsRead } from '@/store/async-actions';
 import {
 	selectActiveFeedId,
 	selectPostFilter,
@@ -20,12 +19,9 @@ import { SORT_TYPE } from '@/types';
 
 import { FilterSearch } from './filter-search';
 import { FilterSort } from './filter-sort';
+import { PostFilterProps } from './types';
 
 import './style.scss';
-
-interface PostFilterProps {
-	resetActivePage: () => void;
-}
 
 export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);

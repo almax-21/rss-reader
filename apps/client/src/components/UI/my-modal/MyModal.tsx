@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 

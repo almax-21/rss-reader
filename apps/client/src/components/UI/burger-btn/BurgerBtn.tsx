@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
 import { useIntl } from 'react-intl';
 
-import { MESSAGES } from '../../i18n/types';
+import { MESSAGES } from '@/i18n/types';
 
-interface BurgerBtnProps {
-	isActive: boolean;
-	onClick: () => void;
-}
+import { BurgerBtnProps } from './types';
 
-const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
+export const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
 	const intl = useIntl();
 
 	return (
@@ -29,5 +26,3 @@ const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
 		</button>
 	);
 };
-
-export default BurgerBtn;

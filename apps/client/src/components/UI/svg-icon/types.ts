@@ -14,3 +14,11 @@ export enum SVG_ICON_VARIANTS {
 
 export type SVG_ICON_TYPE =
 	typeof SVG_ICON_VARIANTS[keyof typeof SVG_ICON_VARIANTS];
+
+export interface SvgIconProps {
+	variant: SVG_ICON_TYPE | string;
+	className?: string;
+	width?: string | number;
+	height?: string | number;
+	fill?: string;
+}

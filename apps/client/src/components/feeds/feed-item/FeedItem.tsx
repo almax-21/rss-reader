@@ -12,12 +12,9 @@ import { AnyAction } from '@reduxjs/toolkit';
 
 import { MyModal } from '@/components/UI/my-modal';
 import { MODAL_TYPE, MODAL_TYPES } from '@/components/UI/my-modal/types';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
-import { FeedWithCounter } from '@/models/Feed';
-import deleteFeed from '@/store/async-actions/deleteFeed';
-import reloadFeed from '@/store/async-actions/reloadFeed';
+import { deleteFeed, reloadFeed } from '@/store/async-actions';
 import { selectFeeds } from '@/store/selectors/contentSelectors';
 import { selectActiveFeedId } from '@/store/selectors/contentSelectors';
 import { updateActiveFeed } from '@/store/slices/feedsSlice';
@@ -25,11 +22,9 @@ import { truncateText } from '@/utils/text';
 
 import { FeedBtnGroup } from '../feed-btn-group';
 
-import './style.scss';
+import { FeedItemProps } from './types';
 
-interface FeedItemProps {
-	feed: FeedWithCounter;
-}
+import './style.scss';
 
 export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);

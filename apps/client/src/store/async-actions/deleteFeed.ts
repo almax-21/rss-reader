@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MESSAGES } from '../../i18n/types';
-import FeedService from '../../services/FeedService';
+import { MESSAGES } from '@/i18n/types';
+import FeedService from '@/services/FeedService';
+
 import {
 	notificationReqFailure,
 	notificationReqPending,
 } from '../slices/notificationSlice';
 
-const deleteFeed = createAsyncThunk(
+export const deleteFeed = createAsyncThunk(
 	'content/deleteFeed',
 	async (id: string, thunkAPI) => {
 		try {
@@ -32,5 +33,3 @@ const deleteFeed = createAsyncThunk(
 		}
 	}
 );
-
-export default deleteFeed;

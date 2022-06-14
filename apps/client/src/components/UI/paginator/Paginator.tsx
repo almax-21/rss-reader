@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-import { getPagesColl } from '../../../utils/page';
+import { getPagesColl } from '@/utils/page';
 
-import ExtraPagination from './mode/ExtraPagination';
-import SimplePagination from './mode/SimplePagination';
+import { ExtraPagination } from './variants/extra-paginaton';
+import { SimplePagination } from './variants/simple-paginaton';
 import { PAGINATOR_CAPACITY } from './types';
 
 import './style.scss';
@@ -14,7 +14,7 @@ interface PaginatorProps {
 	setActivePage: (page: number) => void;
 }
 
-const Paginator: FC<PaginatorProps> = React.memo(
+export const Paginator: FC<PaginatorProps> = React.memo(
 	({ totalPages, activePage, setActivePage }) => {
 		if (totalPages < PAGINATOR_CAPACITY.MIN) {
 			return null;
@@ -43,5 +43,3 @@ const Paginator: FC<PaginatorProps> = React.memo(
 );
 
 Paginator.displayName = 'Paginator';
-
-export default Paginator;

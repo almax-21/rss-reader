@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 import { IntlShape } from '@formatjs/intl';
 import * as Yup from 'yup';
 
-import { MESSAGES } from '../i18n/types';
-import { FEEDS_LIMIT } from '../types/constants';
+import { MESSAGES } from '@/i18n/types';
+import { FEEDS_LIMIT } from '@/types/constants';
 
 import { RSS_FORM } from './types';
 
-const setRSSFormSchema = (
+export const setRSSFormSchema = (
 	urls: string[],
 	intl: IntlShape<string | ReactNode>
 ) => {
@@ -40,5 +40,3 @@ const setRSSFormSchema = (
 			}),
 	});
 };
-
-export default setRSSFormSchema;

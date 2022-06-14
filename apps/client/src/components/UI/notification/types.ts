@@ -9,3 +9,9 @@ export interface NotificationData {
 	variant: Variant;
 	message: string;
 }
+
+export interface NotificationProps {
+	data: NotificationData;
+	isShow: boolean;
+	onClose: () => void;
+}

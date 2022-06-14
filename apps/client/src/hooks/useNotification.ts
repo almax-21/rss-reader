@@ -4,10 +4,9 @@ import { useIntl } from 'react-intl';
 import {
 	NOTIFICATION_VARIANT,
 	NotificationData,
-} from '@/components/UI/Notification/types';
-
-import { COMPLETED_LOAD_STATUS } from '../store/types';
-import { TimeoutId } from '../types';
+} from '@/components/UI/notification/types';
+import { COMPLETED_LOAD_STATUS } from '@/store/types';
+import { TimeoutId } from '@/types';
 
 interface ReturnedHookData {
 	isShowNotification: boolean;
@@ -15,7 +14,7 @@ interface ReturnedHookData {
 	hideNotification: () => void;
 }
 
-const useNotification = (
+export const useNotification = (
 	completedLoadStatus: COMPLETED_LOAD_STATUS,
 	successMessage: string,
 	errorMessage: string,
@@ -75,5 +74,3 @@ const useNotification = (
 		hideNotification,
 	};
 };
-
-export default useNotification;

@@ -3,9 +3,9 @@ import { Accordion, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { MySpinner } from '@/components/UI/my-spinner';
-import SvgIcon from '@/components/UI/SvgIcon';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
+import { useTypedSelector } from '@/hooks';
 import { LOCALES } from '@/i18n/locales';
 import { LocaleType, MESSAGES } from '@/i18n/types';
 import userAPI from '@/services/UserService';

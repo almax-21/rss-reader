@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const useNetwork = (): boolean => {
+export const useNetwork = (): boolean => {
 	const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
 
 	useEffect(() => {
@@ -24,5 +23,3 @@ const useNetwork = (): boolean => {
 
 	return isOnline;
 };
-
-export default useNetwork;

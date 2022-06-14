@@ -6,10 +6,9 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 import cn from 'classnames';
 
-import SvgIcon from '@/components/UI/SvgIcon';
-import { SVG_ICON_VARIANTS } from '@/components/UI/SvgIcon/types';
-import useTypedDispatch from '@/hooks/redux/useTypedDispatch';
-import useTypedSelector from '@/hooks/redux/useTypedSelector';
+import { SvgIcon } from '@/components/UI/svg-icon';
+import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
+import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { LOCALES } from '@/i18n/locales';
 import { MESSAGES } from '@/i18n/types';
 import { selectActiveFeedId } from '@/store/selectors/contentSelectors';
@@ -17,9 +16,7 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { updateFilterQuery } from '@/store/slices/postsSlice';
 import { debounce } from '@/utils/perfomance';
 
-interface FilterSearchProps {
-	resetActivePage: () => void;
-}
+import { FilterSearchProps } from './types';
 
 const SEARCH_DEBOUNCE_MS = 300;
 

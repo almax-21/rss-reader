@@ -1,13 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MESSAGES } from '../../i18n/types';
-import PostService from '../../services/PostService';
+import { MESSAGES } from '@/i18n/types';
+import PostService from '@/services/PostService';
+
 import {
 	notificationReqFailure,
 	notificationReqPending,
 } from '../slices/notificationSlice';
 
-const setAllActivePostsRead = createAsyncThunk(
+export const setAllActivePostsRead = createAsyncThunk(
 	'posts/setAllActivePostsRead',
 	async (feedId: string, thunkAPI) => {
 		try {
@@ -27,5 +28,3 @@ const setAllActivePostsRead = createAsyncThunk(
 		}
 	}
 );
-
-export default setAllActivePostsRead;
