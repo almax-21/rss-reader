@@ -1,1 +1,1 @@
-export { AppHelmet } from './AppHelmetERROR';
+export { AppHelmet } from './AppHelmet';

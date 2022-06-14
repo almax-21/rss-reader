@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Redirect, Route } from 'react-router';
 
-import { Notification } from '@/components/UI/notificationERROR';
+import { Notification } from '@/components/UI/notification';
 import useTypedSelector from '@/hooks/redux/useTypedSelector';
 import useNotification from '@/hooks/useNotification';
 import { privateRoutes, publicRoutes } from '@/router';

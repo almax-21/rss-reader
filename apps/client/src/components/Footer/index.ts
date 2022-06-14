@@ -1,1 +1,1 @@
-export { Footer } from './FooterERROR';
+export { Footer } from './Footer';

@@ -1,1 +1,1 @@
-export { AppRouter } from './AppRouterERROR';
+export { AppRouter } from './AppRouter';
