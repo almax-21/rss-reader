@@ -1,12 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import './variables.scss';
+@import './fonts.scss';
 @import './keyframes.scss';
 
 body {
 	position: relative;
-
 	min-height: 100vh;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 img {
