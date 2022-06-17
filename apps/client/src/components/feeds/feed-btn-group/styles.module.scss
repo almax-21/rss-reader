@@ -1,0 +1,61 @@
+@import '@/styles/main';
+
+.reload-btn {
+	position: relative;
+
+	width: 24px;
+	height: 24px;
+
+	border: none;
+
+	background-color: transparent;
+
+	cursor: pointer;
+
+	svg {
+		position: absolute;
+
+		fill: $secondary;
+
+		top: 50%;
+		left: 50%;
+
+		transform: translate(-50%, -50%);
+	}
+
+	&:hover svg {
+		fill: $dark;
+	}
+}
+
+:global(.active) {
+	.reload-btn {
+		svg {
+			fill: rgba($color: $dark, $alpha: 0.7);
+		}
+
+		&:hover svg {
+			fill: $dark;
+		}
+	}
+}
+
+:global(.dark-theme) {
+	.reload-btn {
+		&:hover svg {
+			fill: rgba($color: $light, $alpha: 0.7);
+		}
+	}
+
+	:global(.active) {
+		.reload-btn {
+			svg {
+				fill: $secondary;
+			}
+
+			&:hover svg {
+				fill: rgba($color: $light, $alpha: 0.7);
+			}
+		}
+	}
+}

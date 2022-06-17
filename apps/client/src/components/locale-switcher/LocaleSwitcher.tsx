@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Accordion, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import cn from 'classnames';
 
 import { MySpinner } from '@/components/UI/my-spinner';
 import { SvgIcon } from '@/components/UI/svg-icon';
@@ -12,7 +13,7 @@ import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectAuthState } from '@/store/selectors/userSelectors';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const LocaleSwitcher: FC = () => {
 	const isAuth = useTypedSelector(selectAuthState);
@@ -42,9 +43,9 @@ export const LocaleSwitcher: FC = () => {
 	};
 
 	return (
-		<Accordion flush className="locale-switcher">
+		<Accordion flush className={styles['locale-switcher']}>
 			<Accordion.Item eventKey="0">
-				<Accordion.Header className="locale-switcher__header">
+				<Accordion.Header className={styles['locale-switcher__header']}>
 					<SvgIcon height="18" variant={SVG_ICON_VARIANTS.LANG} width="18" />
 					<span className="menu-item__text">
 						<FormattedMessage id={MESSAGES.LANGUAGE} />
@@ -53,7 +54,7 @@ export const LocaleSwitcher: FC = () => {
 						<MySpinner small isDark={isDarkTheme ? false : true} />
 					)}
 				</Accordion.Header>
-				<Accordion.Body className="locale-switcher__body p-2">
+				<Accordion.Body className={cn(styles['locale-switcher__body'], 'p-2')}>
 					<ListGroup variant="flush">
 						{langEntries.map(([langKey, langValue]) => {
 							const isActive = currentLang === langValue;

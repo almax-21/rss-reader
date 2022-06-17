@@ -1,4 +1,4 @@
-@import '../../app/scss/style.scss';
+@import '@/styles/main';
 
 @include media-breakpoint-up(md) {
 	.feed-list {

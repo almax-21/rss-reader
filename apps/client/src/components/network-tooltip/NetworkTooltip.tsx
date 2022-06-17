@@ -5,14 +5,14 @@ import { SvgIcon } from '@/components/UI/svg-icon';
 import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
 import { MESSAGES } from '@/i18n/types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const NetworkTooltip = () => {
 	return (
-		<div className="network-tooltip" role='alert'>
-			<p className="network-tooltip__text">
+		<div className={styles['network-tooltip']} role="alert">
+			<p className={styles['network-tooltip__text']}>
 				<SvgIcon
-					className="network-tooltip__icon"
+					className={styles['network-tooltip__icon']}
 					height={20}
 					variant={SVG_ICON_VARIANTS.WIFI_OFF}
 					width={20}
@@ -22,4 +22,3 @@ export const NetworkTooltip = () => {
 		</div>
 	);
 };
-

@@ -20,7 +20,7 @@ import { selectUser } from '@/store/selectors/userSelectors';
 import { AppHelmet } from './app-helmet';
 import { AppRouter } from './app-router';
 
-import './scss/style.scss';
+import '@/styles/main.scss';
 
 const SPEECHLY_APP_ID = '4583ba0d-aa26-46cf-a3d3-1e303fe6c5f8';
 
@@ -64,7 +64,7 @@ export const App: FC = () => {
 			<AppHelmet />
 			<LoadingBar className="loading-bar" />
 			<BrowserRouter>
-				{isOnline ? null : <NetworkTooltip />}
+				{!isOnline && <NetworkTooltip />}
 				<Header />
 				{isAuthPending ? (
 					<div className="d-flex justify-content-center mt-5">

@@ -1,4 +1,6 @@
-@import '../../app/scss/style.scss';
+// not a module because only bootsrap's classNames
+
+@import '@/styles/main';
 
 .page-item {
 	width: 45px;

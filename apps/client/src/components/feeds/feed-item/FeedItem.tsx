@@ -9,6 +9,7 @@ import React, {
 import { Badge, ListGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AnyAction } from '@reduxjs/toolkit';
+import cn from 'classnames';
 
 import { MyModal } from '@/components/UI/my-modal';
 import { MODAL_TYPE, MODAL_TYPES } from '@/components/UI/my-modal/types';
@@ -24,7 +25,7 @@ import { FeedBtnGroup } from '../feed-btn-group';
 
 import { FeedItemProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
@@ -101,7 +102,12 @@ export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 				active={isActive && feeds.length > 1}
 				aria-selected={isActive && feeds.length > 1}
 				as="li"
-				className="list-item feed-item d-flex justify-content-center"
+				className={cn(
+					styles['feed-item'],
+					'list-item',
+					'd-flex',
+					'justify-content-center'
+				)}
 				id={_id}
 				role="tab"
 				onClick={handleUpdateActiveFeed}
@@ -109,11 +115,13 @@ export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 			>
 				<div className="d-flex flex-column justify-content-between ms-2 me-auto pe-none">
 					<div className="d-flex align-items-center">
-						<h3 className="feed-item__title h5 fw-bold">{title}</h3>
+						<h3 className={cn(styles['feed-item__title'], 'h5', 'fw-bold')}>
+							{title}
+						</h3>
 						<img
 							aria-hidden
 							alt={intl.formatMessage({ id: MESSAGES.FEED_LOGO })}
-							className="feed-item__icon"
+							className={styles['feed-item__icon']}
 							height="16"
 							src={`https://www.google.com/s2/favicons?sz=64&domain=www.${urlFeedHostname}`}
 							width="16"

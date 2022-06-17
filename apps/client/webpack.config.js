@@ -111,9 +111,9 @@ module.exports = {
 				use: [
 					isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
-					'postcss-loader',
+					!isDevMode && 'postcss-loader',
 					'sass-loader',
-				],
+				].filter(Boolean),
 			},
 			{
 				test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,

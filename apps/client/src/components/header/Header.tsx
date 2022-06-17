@@ -8,7 +8,7 @@ import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectAuthState } from '@/store/selectors/userSelectors';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const Header: FC = () => {
 	const [isShowMenu, setIsShowMenu] = useState(false);
@@ -25,7 +25,7 @@ export const Header: FC = () => {
 	return (
 		<>
 			{isAuth && <SideMenu handleClose={handleCloseMenu} isShow={isShowMenu} />}
-			<header className="header">
+			<header className={styles.header}>
 				<Container className="p-4">
 					<Row className="justify-content-center">
 						<Col

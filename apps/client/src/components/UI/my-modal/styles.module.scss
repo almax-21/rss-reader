@@ -1,4 +1,4 @@
-@import '../../app/scss/style.scss';
+@import '@/styles/main';
 
 .modal {
 	&__image-wrapper {
@@ -18,8 +18,8 @@
 	}
 }
 
-.dark-theme {
-	.modal-content {
+:global(.dark-theme) {
+	:global(.modal-content) {
 		color: $white;
 
 		background-color: $dark;

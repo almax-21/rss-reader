@@ -8,6 +8,7 @@ import {
 	Row,
 } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import cn from 'classnames';
 import { Formik, FormikProps } from 'formik';
 
 import { MySpinner } from '@/components/UI/my-spinner';
@@ -16,16 +17,13 @@ import { MESSAGES } from '@/i18n/types';
 import { setRSSFormSchema } from '@/schemas';
 import { RSS_FORM } from '@/schemas/types';
 import { getContentFromRssSource } from '@/store/async-actions';
-import {
-	selectRssMeta,
-	selectUrls,
-} from '@/store/selectors/rssMetaSelectors';
+import { selectRssMeta, selectUrls } from '@/store/selectors/rssMetaSelectors';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { getTextValuesFromObject } from '@/utils/text';
 
 import { RSSFormValues } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 const initValues: RSSFormValues = {
 	[RSS_FORM.URL]: '',
@@ -110,7 +108,7 @@ export const RSSForm: FC = () => {
 									>
 										<Form.Control
 											ref={inputRef}
-											className="rss__input pb-2 pt-4"
+											className={cn(styles.rss__input, 'pb-2', 'pt-4')}
 											isInvalid={!isValid}
 											name={RSS_FORM.URL}
 											placeholder={intl.formatMessage({
@@ -127,7 +125,7 @@ export const RSSForm: FC = () => {
 									{values[RSS_FORM.URL] && (
 										<CloseButton
 											aria-label={intl.formatMessage({ id: MESSAGES.CLEAR })}
-											className="rss__btn rss__btn--close"
+											className={cn(styles.rss__btn, styles['rss__btn--close'])}
 											variant={isDarkTheme ? 'white' : undefined}
 											onClick={handleResetForm}
 										/>

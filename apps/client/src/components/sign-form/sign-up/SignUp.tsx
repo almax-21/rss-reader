@@ -14,8 +14,6 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { SignForm } from '../SignForm';
 import { SIGN_FORM_TYPES, SignFormValues } from '../types';
 
-import '../style.scss';
-
 const initialValues: SignFormValues = {
 	[SIGN_FORM.USERNAME]: '',
 	[SIGN_FORM.PASSWORD]: '',

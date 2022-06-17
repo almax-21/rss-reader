@@ -8,7 +8,7 @@ import { FeedItem } from '../feed-item';
 
 import { FeedListProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const FeedList: FC<FeedListProps> = ({ feeds }) => {
 	const intl = useIntl();
@@ -17,7 +17,7 @@ export const FeedList: FC<FeedListProps> = ({ feeds }) => {
 		<ListGroup
 			numbered
 			as="ol"
-			className="feed-list"
+			className={styles['feed-list']}
 			role="tablist"
 			title={intl.formatMessage({ id: MESSAGES.FEEDS })}
 		>

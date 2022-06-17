@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import cn from 'classnames';
 
 import { MyModal } from '@/components/UI/my-modal';
 import { MODAL_TYPES } from '@/components/UI/my-modal/types';
@@ -13,7 +14,7 @@ import { PostIdData } from '@/types';
 
 import { PostItemProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
@@ -48,17 +49,9 @@ export const PostItem: FC<PostItemProps> = React.memo(({ post }) => {
 		<>
 			<ListGroup.Item
 				as="li"
-				className="
-				post-item
-				d-flex
-				justify-content-between
-				align-items-center
-				mb-4
-				p-0
-				border-0
-			"
+				className={cn(styles['post-item'], 'mb-4', 'p-0', 'border-0')}
 			>
-				<Card className="post-item__body border-0">
+				<Card className={cn(styles['post-item__body'], 'border-0')}>
 					<Card.Title className="h6 fw-bold">
 						<Card.Link
 							className={isPostRead ? 'text-secondary' : unreadPostClass}

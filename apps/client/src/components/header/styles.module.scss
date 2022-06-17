@@ -1,0 +1,12 @@
+@import '@/styles/main';
+
+.header {
+	background-color: $dark;
+	transition: $switching-theme-transition;
+}
+
+:global(.dark-theme) {
+	.header {
+		background-color: $darkgrey;
+	}
+}

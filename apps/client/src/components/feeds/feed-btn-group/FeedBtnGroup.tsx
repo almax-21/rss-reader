@@ -1,6 +1,7 @@
 import React, { FC, KeyboardEvent } from 'react';
 import { CloseButton } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
+import cn from 'classnames';
 
 import { MODAL_TYPES } from '@/components/UI/my-modal/types';
 import { SvgIcon } from '@/components/UI/svg-icon';
@@ -10,6 +11,8 @@ import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import { FeedBtnGroupProps } from './types';
+
+import styles from './styles.module.scss'
 
 export const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);
@@ -31,7 +34,7 @@ export const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 			<button
 				aria-haspopup="dialog"
 				aria-label={intl.formatMessage({ id: MESSAGES.RELOAD })}
-				className="btn feed-item__reload-btn"
+				className={cn('btn', styles['reload-btn'])}
 				title={intl.formatMessage({ id: MESSAGES.RELOAD })}
 				type="button"
 				onClick={handleOpenModal(MODAL_TYPES.RELOAD)}

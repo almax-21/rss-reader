@@ -8,7 +8,7 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import { FeedList } from './feed-list';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const FeedContent: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
@@ -21,7 +21,7 @@ export const FeedContent: FC = () => {
 		.toLowerCase();
 
 	return (
-		<div className="feeds-content">
+		<div className={styles['feeds-content']}>
 			<h2 className="h3 mb-4">
 				<FormattedMessage id={MESSAGES.FEEDS} />{' '}
 				{!isAutoUpdate && (

@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Alert } from 'react-bootstrap';
+import cn from 'classnames';
 
 import { SvgIcon } from '@/components/UI/svg-icon';
 
 import { NotificationProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const Notification: FC<NotificationProps> = ({
 	data,
@@ -17,12 +18,12 @@ export const Notification: FC<NotificationProps> = ({
 	return (
 		<Alert
 			dismissible
-			className="notification fixed-top"
+			className={cn(styles.notification, 'fixed-top')}
 			show={isShow}
 			variant={variant}
 			onClose={onClose}
 		>
-			<div className="notification__icon">
+			<div className={styles.notification__icon}>
 				<SvgIcon variant={variant} />
 			</div>
 			{message}

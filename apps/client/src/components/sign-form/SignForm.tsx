@@ -2,6 +2,7 @@ import React, { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 import { Formik } from 'formik';
 
 import { MySpinner } from '@/components/UI/my-spinner';
@@ -16,7 +17,7 @@ import { getTextValuesFromObject } from '@/utils/text';
 
 import { SIGN_FORM_TYPES, SignFormProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const SignForm: FC<SignFormProps> = ({
 	type,
@@ -79,9 +80,9 @@ export const SignForm: FC<SignFormProps> = ({
 				};
 
 				return (
-					<Card className="sign shadow">
+					<Card className={cn(styles.sign, 'shadow')}>
 						<Card.Body as={Row} className="align-items-start p-4">
-							<Col className="sign__logo" md="5">
+							<Col className={styles.sign__logo} md="5">
 								{isSignInFormType ? (
 									<img
 										alt={intl.formatMessage({ id: MESSAGES.APP_LOGO })}
@@ -108,7 +109,7 @@ export const SignForm: FC<SignFormProps> = ({
 										</legend>
 
 										<FloatingLabel
-											className="sign__label"
+											className={styles.sign__label}
 											controlId="floatingUsername"
 											label={intl.formatMessage({ id: MESSAGES.USERNAME })}
 										>
@@ -138,7 +139,7 @@ export const SignForm: FC<SignFormProps> = ({
 										</FloatingLabel>
 
 										<FloatingLabel
-											className="sign__label"
+											className={styles.sign__label}
 											controlId="floatingPassword"
 											label={intl.formatMessage({ id: MESSAGES.PASSWORD })}
 										>
@@ -161,7 +162,7 @@ export const SignForm: FC<SignFormProps> = ({
 
 										{isSignUpFormType && (
 											<FloatingLabel
-												className="sign__label"
+												className={styles.sign__label}
 												controlId="floatingRepeatPassword"
 												label={intl.formatMessage({
 													id: MESSAGES.PASSWORD_CONFIRMATION,
@@ -185,16 +186,13 @@ export const SignForm: FC<SignFormProps> = ({
 										)}
 										<Form.Group className="d-flex justify-content-start align-items-center flex-wrap">
 											<Button
-												className="sign__btn mb-3"
+												className={cn(styles.sign__btn, 'mb-3')}
 												disabled={isLoading}
 												type="submit"
 												variant="outline-primary"
 											>
 												{isLoading ? (
-													<MySpinner
-														small
-														isDark={!isDarkTheme}
-													/>
+													<MySpinner small isDark={!isDarkTheme} />
 												) : (
 													<FormattedMessage id={type} />
 												)}

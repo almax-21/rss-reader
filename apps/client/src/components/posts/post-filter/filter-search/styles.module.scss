@@ -1,9 +1,7 @@
-@import '../../app/scss/style.scss';
+@import '@/styles/main';
 
 .filter {
-	max-width: 540px;
-
-	&__group {
+  &__group {
 		position: relative;
 
 		display: flex;
@@ -12,7 +10,7 @@
 		margin-bottom: 20px;
 	}
 
-	&__input {
+  &__input {
 		display: block;
 
 		min-width: 155px !important;
@@ -20,7 +18,7 @@
 		padding-right: 40px !important;
 	}
 
-	&__btn {
+  &__btn {
 		width: 70px;
 
 		&--close {
@@ -38,29 +36,9 @@
 			animation: pulse 2s infinite;
 		}
 	}
-
-	&__sort {
-		margin-left: 15px;
-		margin-right: 15px;
-		margin-bottom: 20px;
-	}
-
-	&__btn--mark-all {
-		width: auto;
-
-		margin-bottom: 20px;
-
-		font-size: 14px;
-	}
-
-	.dropdown-toggle {
-		width: 150px;
-
-		margin-bottom: 20px;
-	}
 }
 
-.dark-theme {
+:global(.dark-theme) {
 	.filter__input::placeholder {
 		color: $white;
 	}

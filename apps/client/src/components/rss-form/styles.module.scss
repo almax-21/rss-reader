@@ -1,4 +1,4 @@
-@import '../app/scss/style.scss';
+@import '@/styles/main';
 
 .rss__input {
 	padding-right: 45px !important;
@@ -17,13 +17,9 @@
 	}
 }
 
-.rss__input + .invalid-feedback {
+.rss__input + :global(.invalid-feedback) {
 	position: absolute;
 	transform: translateY(50px);
-}
-
-small.form-text {
-	font-size: 16px;
 }
 
 @include media-breakpoint-up(md) {
@@ -31,7 +27,7 @@ small.form-text {
 		margin-bottom: 0;
 	}
 
-	.rss__input + .invalid-feedback {
+	.rss__input + :global(.invalid-feedback) {
 		transform: translateY(5px);
 	}
 }
