@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@import './mixins';
 
 @include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Light', 300);
 @include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Regular', 400);

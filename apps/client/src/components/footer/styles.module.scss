@@ -1,4 +1,4 @@
-@import '../app/scss/style.scss';
+@import '@/styles/main';
 
 .footer {
 	position: absolute;
@@ -15,11 +15,9 @@
 	}
 }
 
-.dark-theme {
-	.footer,
-	.footer__text {
+:global(.dark-theme) {
+	.footer {
 		color: $white;
-
 		background-color: $dark;
 	}
 }

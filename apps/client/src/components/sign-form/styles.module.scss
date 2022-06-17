@@ -1,0 +1,51 @@
+@import '@/styles/main';
+
+.sign {
+	color: $dark;
+
+	background-color: $white;
+
+	&__logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	
+		margin-bottom: 20px;
+	}
+	
+	&__label {
+		color: $dark;
+	
+		margin-bottom: 35px;
+	}
+	
+	&__btn {
+		width: 200px;
+	
+		margin-right: 15px;
+	}
+
+	:global(.invalid-tooltip) {
+		font-size: 12px !important;
+	}
+}
+
+:global(.dark-theme) {
+	.sign {
+		color: $white;
+	
+		background-color: $dark;
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.sign {
+		&__logo {
+			margin-bottom: 0;
+		}
+	
+		:global(.invalid-tooltip) {
+			font-size: 14px !important;
+		}
+	}
+}

@@ -18,6 +18,8 @@ import { debounce } from '@/utils/perfomance';
 
 import { FilterSearchProps } from './types';
 
+import styles from './styles.module.scss';
+
 const SEARCH_DEBOUNCE_MS = 300;
 
 export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
@@ -100,15 +102,15 @@ export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		}
 	};
 
-	const closeBtnClasses = cn('filter__btn', 'filter__btn--close', {
-		'filter__btn--pad-right': isFullSupportSpeechRecognition,
+	const closeBtnClasses = cn(styles.filter__btn, styles['filter__btn--close'], {
+		[styles['filter__btn--pad-right']]: isFullSupportSpeechRecognition,
 	});
 
 	return (
-		<InputGroup className="filter__group">
+		<InputGroup className={styles.filter__group}>
 			<Form.Control
 				ref={searchRef}
-				className="filter__input"
+				className={styles.filter__input}
 				placeholder={intl.formatMessage({ id: MESSAGES.SEARCH }) + '...'}
 				type="text"
 				onChange={handleSearchChange}
@@ -126,7 +128,7 @@ export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 					active={isListening}
 					aria-checked={isListening}
 					aria-label={intl.formatMessage({ id: MESSAGES.VOICE_INPUT })}
-					className={isListening ? 'filter__btn--pulse' : ''}
+					className={isListening ? styles['filter__btn--pulse'] : ''}
 					disabled={isCanNotUseSpeechRecognition}
 					role="switch"
 					variant="outline-primary"

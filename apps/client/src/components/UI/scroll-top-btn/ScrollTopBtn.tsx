@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 
 import { throttle } from '@/utils/perfomance';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const ScrollTopBtn: FC = () => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
@@ -33,7 +33,7 @@ export const ScrollTopBtn: FC = () => {
 		<button
 			ref={buttonRef}
 			aria-hidden
-			className="scroll-top"
+			className={styles['scroll-top']}
 			type="button"
 			onClick={handleBackToTop}
 		>

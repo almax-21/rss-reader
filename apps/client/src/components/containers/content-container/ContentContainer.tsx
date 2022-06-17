@@ -12,8 +12,6 @@ import { selectFeedsWithCounter } from '@/store/selectors/contentSelectors';
 import { selectRssMeta } from '@/store/selectors/rssMetaSelectors';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
-import './style.scss';
-
 export const ContentContainer: FC = () => {
 	const feeds = useTypedSelector(selectFeedsWithCounter);
 

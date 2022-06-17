@@ -1,0 +1,12 @@
+@import '@/styles/main';
+
+.rss {
+	background-color: $dark;
+	transition: $switching-theme-transition;
+}
+
+:global(.dark-theme) {
+	.rss {
+		background-color: $darkgrey;
+	}
+}

@@ -1,0 +1,21 @@
+@import '@/styles/main';
+
+.post-item {
+	display: flex !important;
+	justify-content: space-between;
+	align-items: center;
+	transition: $switching-theme-transition;
+
+	&__body {
+		padding-right: 10px;
+		transition: $switching-theme-transition;
+	}
+}
+
+:global(.dark-theme) {
+	.post-item,
+	.post-item__body {
+		transition: none;
+		background-color: $dark;
+	}
+}

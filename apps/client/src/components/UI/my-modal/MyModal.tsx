@@ -9,7 +9,7 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { ModalActionBtn } from './modal-action-btn';
 import { MyModalProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const MyModal: FC<MyModalProps> = ({
 	type,
@@ -44,14 +44,14 @@ export const MyModal: FC<MyModalProps> = ({
 			</Modal.Header>
 			<Modal.Body>
 				{imgSrc && (
-					<div className="modal__image-wrapper">
+					<div className={styles['modal__image-wrapper']}>
 						<img
 							alt={intl.formatMessage({ id: MESSAGES.CONTENT_IMAGE })}
 							src={imgSrc}
 						/>
 					</div>
 				)}
-				<p className="modal__description">{description}</p>
+				<p className={styles['modal__description']}>{description}</p>
 			</Modal.Body>
 			<Modal.Footer>
 				<ModalActionBtn handleAction={handleAction} type={type} url={url} />

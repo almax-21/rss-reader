@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Form, ListGroup, Offcanvas } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AnyAction } from '@reduxjs/toolkit';
+import cn from 'classnames';
 
 import { LocaleSwitcher } from '@/components/locale-switcher';
 import { SvgIcon } from '@/components/UI/svg-icon';
@@ -10,10 +11,7 @@ import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectUserData } from '@/store/selectors/userSelectors';
-import {
-	setIsAutoUpdate,
-	setIsDarkTheme,
-} from '@/store/slices/settingsSlice';
+import { setIsAutoUpdate, setIsDarkTheme } from '@/store/slices/settingsSlice';
 import { logoutUser } from '@/store/slices/userSlice';
 import {
 	AUTO_UPDATE_KEY,
@@ -24,7 +22,7 @@ import {
 
 import { SideMenuProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 	const { username } = useTypedSelector(selectUserData);
@@ -67,7 +65,7 @@ export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 		<Offcanvas placement="end" show={isShow} onHide={handleClose}>
 			<Offcanvas.Header
 				closeButton
-				className="side-menu__header p-4"
+				className={cn(styles['side-menu__header'], 'p-4')}
 				closeVariant={isDarkTheme ? 'white' : undefined}
 			>
 				<SvgIcon height="32" variant={SVG_ICON_VARIANTS.USER} width="32" />
@@ -76,7 +74,7 @@ export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 				</h3>
 				<Offcanvas.Title>{username}</Offcanvas.Title>
 			</Offcanvas.Header>
-			<Offcanvas.Body className="side-menu__body">
+			<Offcanvas.Body className={styles['side-menu__body']}>
 				<ListGroup variant="flush">
 					<ListGroup.Item className="list-item menu-item px-2">
 						<Form.Switch

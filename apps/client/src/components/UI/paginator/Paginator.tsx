@@ -6,6 +6,7 @@ import { ExtraPagination } from './variants/extra-paginaton';
 import { SimplePagination } from './variants/simple-paginaton';
 import { PAGINATOR_CAPACITY } from './types';
 
+// not a module because only bootsrap's classNames
 import './style.scss';
 
 interface PaginatorProps {

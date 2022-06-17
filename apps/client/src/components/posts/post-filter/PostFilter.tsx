@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
+import cn from 'classnames';
 
 import { MyDropDown } from '@/components/UI/my-drop-down';
 import { MyModal } from '@/components/UI/my-modal';
@@ -21,7 +22,7 @@ import { FilterSearch } from './filter-search';
 import { FilterSort } from './filter-sort';
 import { PostFilterProps } from './types';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
@@ -69,7 +70,7 @@ export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 
 	return (
 		<>
-			<div className="filter">
+			<div className={styles.filter}>
 				<FilterSearch resetActivePage={resetActivePage} />
 
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
@@ -82,11 +83,11 @@ export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 					/>
 					<FilterSort
 						activeSortType={sortType}
-						classes="filter__sort"
+						classes={styles.filter__sort}
 						sortHandler={handleSwitchSortType}
 					/>
 					<Button
-						className="filter__btn filter__btn--mark-all"
+						className={cn(styles.filter__btn, styles['filter__btn--mark-all'])}
 						disabled={unreadPostsCount === 0}
 						variant="outline-danger"
 						onClick={handleOpenModal}

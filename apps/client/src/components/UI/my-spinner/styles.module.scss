@@ -1,4 +1,4 @@
-@import '../../app/scss/style.scss';
+@import '@/styles/main';
 
 .spinner {
 	position: relative;
@@ -44,6 +44,8 @@
 	}
 }
 
-.spinner--dark .spinner__ring {
-	color: $dark;
+.spinner--dark {
+	.spinner__ring {
+		color: $dark;
+	}
 }

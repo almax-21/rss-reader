@@ -1,4 +1,4 @@
-@import '../../app/scss/style.scss';
+@import '@/styles/main';
 
 .scroll-top {
 	display: none;
@@ -29,7 +29,7 @@
 	}
 }
 
-.dark-theme {
+:global(.dark-theme) {
 	.scroll-top {
 		border-color: $white;
 
