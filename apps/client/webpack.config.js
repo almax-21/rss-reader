@@ -60,7 +60,6 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [
 				{ from: 'assets/icons', to: 'icons/' },
-				{ from: 'assets/fonts', to: 'fonts/' },
 				{ from: 'manifest.webmanifest' },
 			],
 		}),
