@@ -106,12 +106,40 @@ module.exports = {
 				},
 			},
 			{
-				test: /.s?css$/,
+				test: /\.module\.s(a|c)ss$/,
+				use: [
+					isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								localIdentName:'[local]_[hash:base64:5]',
+							},
+							sourceMap: isDevMode,			
+						},
+					},
+					!isDevMode && 'postcss-loader',
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: isDevMode,
+						},
+					},
+				].filter(Boolean),
+			},
+			{
+				test: /\.s(a|c)ss$/,
+				exclude: /\.module.(s(a|c)ss)$/,
 				use: [
 					isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
 					!isDevMode && 'postcss-loader',
-					'sass-loader',
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: isDevMode,
+						},
+					},
 				].filter(Boolean),
 			},
 			{
