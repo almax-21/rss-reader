@@ -4,6 +4,19 @@
 @import './fonts';
 @import './keyframes';
 
+*::-webkit-scrollbar {
+	width: 7.5px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: $scrollbar-thumb;
+	border-radius: 12px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: $scrollbar-thumb-hover;
+}
+
 body {
 	position: relative;
 	min-height: 100vh;
@@ -49,7 +62,7 @@ main {
 
 .form-floating,
 .form-control:-webkit-autofill ~ label,
-.form-control:-webkit-autofill:hover ~ label, 
+.form-control:-webkit-autofill:hover ~ label,
 .form-control:-webkit-autofill:focus ~ label {
 	color: $dark;
 }
