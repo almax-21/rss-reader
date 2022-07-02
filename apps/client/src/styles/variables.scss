@@ -1,5 +1,13 @@
+$white: #ffffff;
+$black: #000000;
+$primary: #0d6efd;
+$secondary: #6c757d;
+$light: #f8f9fa;
+$dark: #212529;
 $darkgrey: #121212;
 $material-darkgrey: #212121;
+$gray-400: #ced4da;
+$gray-800: #343a40;
 $scrollbar-thumb-hover: #a09e9e;
 $scrollbar-thumb: #717171;
 
@@ -7,3 +15,12 @@ $animation-time: 0.2s;
 
 $switching-theme-transition: background-color $animation-time,
 	color $animation-time;
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+);

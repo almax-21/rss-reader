@@ -1,4 +1,4 @@
-@import '@/styles/main';
+@import '@/styles/variables';
 
 .network-tooltip {
 	position: fixed;
@@ -12,7 +12,7 @@
 	text-align: center;
 
 	color: $light;
-	background-color: black;
+	background-color: $black;
 
 	&__text {
 		margin: 0;
