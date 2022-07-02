@@ -1,6 +1,7 @@
 // not a module because only bootsrap's classNames
 
-@import '@/styles/main';
+@import '@/styles/variables';
+@import '@/styles/mixins';
 
 .page-item {
 	width: 45px;

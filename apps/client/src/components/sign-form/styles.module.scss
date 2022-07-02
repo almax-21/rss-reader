@@ -1,4 +1,5 @@
-@import '@/styles/main';
+@import '@/styles/variables';
+@import '@/styles/mixins';
 
 .sign {
 	color: $dark;
