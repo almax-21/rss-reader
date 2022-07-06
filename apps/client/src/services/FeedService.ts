@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
+import $api from '@/http';
 import { ApiContentData, ApiFeedData } from '@/store/types';
-import { API_ORIGIN, TOKEN_KEY } from '@/types/constants';
+import { FEEDS_URL } from '@/types/constants';
 import { ParsedFeedData } from '@/utils/parser/types';
 
 class FeedService {
@@ -9,26 +10,13 @@ class FeedService {
 		parsedfeedData: ParsedFeedData,
 		feedUrl: string
 	): Promise<AxiosResponse<ApiFeedData>> {
-		const { href: endpointUrl } = new URL('/feeds/upload', API_ORIGIN);
-		const token = localStorage.getItem(TOKEN_KEY);
-
-		return axios.post(
-			endpointUrl,
-			{ ...parsedfeedData, feedUrl },
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			}
-		);
+		return $api.post('/feeds/upload', { ...parsedfeedData, feedUrl });
 	}
 
 	static downloadContentData(
 		token: string | null
 	): Promise<AxiosResponse<ApiContentData>> {
-		const { href: endpointUrl } = new URL('/feeds', API_ORIGIN);
-
-		return axios.get(endpointUrl, {
+		return $api.get(FEEDS_URL, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
@@ -39,15 +27,7 @@ class FeedService {
 		id: string,
 		timeout = 30000
 	): Promise<AxiosResponse<string>> {
-		const { href: endpointUrl } = new URL(`/feeds?id=${id}`, API_ORIGIN);
-		const token = localStorage.getItem(TOKEN_KEY);
-
-		return axios.delete(endpointUrl, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-			timeout,
-		});
+		return $api.delete(`/feeds?id=${id}`, { timeout });
 	}
 }
 

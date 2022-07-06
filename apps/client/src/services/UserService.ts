@@ -14,6 +14,12 @@ const userAPI = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${API_ORIGIN}/user`,
+		prepareHeaders: (headers) => {
+			const token = localStorage.getItem(TOKEN_KEY);
+			headers.set('Authorization', `Bearer ${token}`);
+
+			return headers;
+		},
 	}),
 	endpoints: (build) => ({
 		createUser: build.mutation<User, SignUpUserData>({
@@ -81,31 +87,17 @@ const userAPI = createApi({
 			},
 		}),
 		authUser: build.query<User, void>({
-			query: () => {
-				const token = localStorage.getItem(TOKEN_KEY);
-
-				return {
-					url: '/auth',
-					method: 'GET',
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				};
-			},
+			query: () => ({
+				url: '/auth',
+				method: 'GET',
+			}),
 		}),
 		switchLang: build.mutation<string, LocaleType>({
-			query: (lang) => {
-				const token = localStorage.getItem(TOKEN_KEY);
-
-				return {
-					url: '/lang',
-					method: 'PUT',
-					body: { lang },
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				};
-			},
+			query: (lang) => ({
+				url: '/lang',
+				method: 'PUT',
+				body: { lang },
+			}),
 			onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
 				try {
 					dispatch(notificationReqPending());

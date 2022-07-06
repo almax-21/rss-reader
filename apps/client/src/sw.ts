@@ -4,7 +4,7 @@ import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 
-import { API_ORIGIN, DELETE_AUTH_CACHE } from './types/constants';
+import { API_ORIGIN, DELETE_AUTH_CACHE, FEEDS_URL } from '@/types/constants';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -37,7 +37,7 @@ registerRoute(
 );
 
 registerRoute(
-	({ url }) => url.origin === API_ORIGIN && url.pathname === '/feeds',
+	({ url }) => url.origin === API_ORIGIN && url.pathname === FEEDS_URL,
 	new NetworkFirst({
 		cacheName: 'content-api-response',
 		networkTimeoutSeconds: 10,
