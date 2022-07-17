@@ -116,7 +116,7 @@ export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 				<div className="d-flex flex-column justify-content-between ms-2 me-auto pe-none">
 					<div className="d-flex align-items-center">
 						<h3 className={cn(styles['feed-item__title'], 'h5', 'fw-bold')}>
-							{title}
+							{truncateText(title, 20)}
 						</h3>
 						<img
 							aria-hidden
