@@ -50,7 +50,7 @@ export const RSSForm: FC = () => {
 
 	const validationSchema = useMemo(
 		() => setRSSFormSchema(urls, intl),
-		[urls, lang]
+		[urls, lang],
 	);
 
 	useEffect(() => {

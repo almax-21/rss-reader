@@ -15,14 +15,14 @@ class PostService {
 
 	static uploadNewPosts(
 		newPosts: ParsedPost[],
-		feedId: string
+		feedId: string,
 	): Promise<AxiosResponse<Post[]>> {
 		return $api.post('/posts/upload', { newPosts, feedId });
 	}
 
 	static replacePosts(
 		newPosts: ParsedPost[],
-		feedId: string
+		feedId: string,
 	): Promise<AxiosResponse<Post[]>> {
 		return $api.post('/posts/replace', { newPosts, feedId });
 	}

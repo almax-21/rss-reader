@@ -28,7 +28,7 @@ const rssMetaSlice = createSlice({
 		},
 		[getAllContentFromApi.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiContentData>
+			action: PayloadAction<ApiContentData>,
 		) => {
 			const { feeds } = action.payload;
 
@@ -47,7 +47,7 @@ const rssMetaSlice = createSlice({
 		},
 		[getContentFromRssSource.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiFeedData>
+			action: PayloadAction<ApiFeedData>,
 		) => {
 			const { feed } = action.payload;
 
@@ -66,7 +66,7 @@ const rssMetaSlice = createSlice({
 			state.isFeedDeleteInProcess = false;
 
 			state.urlDataset = state.urlDataset.filter(
-				({ feedId }) => feedId !== action.payload
+				({ feedId }) => feedId !== action.payload,
 			);
 		},
 		[deleteFeed.rejected.type]: (state) => {

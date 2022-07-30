@@ -13,11 +13,7 @@ export const SignPage = () => {
 		<Container as="section" className="p-4 pt-5">
 			<Row className="d-flex justify-content-center align-items-center">
 				<Col className="mb-5" md="11">
-					{location.pathname === ROUTES.SIGN_IN ? (
-						<SignIn />
-					) : (
-						<SignUp />
-					)}
+					{location.pathname === ROUTES.SIGN_IN ? <SignIn /> : <SignUp />}
 				</Col>
 			</Row>
 		</Container>

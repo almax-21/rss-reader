@@ -3,7 +3,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router';
 
 import { Notification } from '@/components/UI/notification';
-import { useNotification,useTypedSelector } from '@/hooks';
+import { useNotification, useTypedSelector } from '@/hooks';
 import { privateRoutes, publicRoutes } from '@/router';
 import { ROUTES } from '@/router/types';
 import { selectNotification } from '@/store/selectors/notificationSelectors';

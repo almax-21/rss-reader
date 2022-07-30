@@ -1,4 +1,3 @@
-
 import { MainPage, SignPage } from '@/pages';
 
 import type { Route } from './types';

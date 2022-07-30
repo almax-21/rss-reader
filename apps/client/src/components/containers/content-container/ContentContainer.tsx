@@ -7,7 +7,7 @@ import { FeedContent } from '@/components/feeds';
 import { PostContent } from '@/components/posts';
 import { ContentSkeleton } from '@/components/UI/content-skeleton';
 import { useAutoUpdate } from '@/hooks';
-import{ useTypedSelector } from '@/hooks';
+import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectFeedsWithCounter } from '@/store/selectors/contentSelectors';
 import { selectRssMeta } from '@/store/selectors/rssMetaSelectors';

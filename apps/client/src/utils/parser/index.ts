@@ -9,7 +9,7 @@ const parseRSS = (serializedData: string): ParsedFeedData => {
 
 	const XMLDoc: XMLDocument = parser.parseFromString(
 		serializedData,
-		'application/xml'
+		'application/xml',
 	);
 
 	const parseError = XMLDoc.querySelector('parsererror');

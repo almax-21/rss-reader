@@ -18,10 +18,9 @@ import type {
 	ApiContentData,
 	ApiFeedData,
 	POST_STATE_TYPE,
-	PostsState} from '../types';
-import {
-	POST_STATES
+	PostsState,
 } from '../types';
+import { POST_STATES } from '../types';
 
 import { logoutUser } from './userSlice';
 
@@ -51,7 +50,7 @@ const postsSlice = createSlice({
 	extraReducers: {
 		[getAllContentFromApi.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiContentData>
+			action: PayloadAction<ApiContentData>,
 		) => {
 			const { posts } = action.payload;
 
@@ -65,7 +64,7 @@ const postsSlice = createSlice({
 		},
 		[getContentFromRssSource.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiFeedData>
+			action: PayloadAction<ApiFeedData>,
 		) => {
 			const { feed, posts } = action.payload;
 
@@ -73,7 +72,7 @@ const postsSlice = createSlice({
 		},
 		[setPostRead.fulfilled.type]: (
 			state,
-			action: PayloadAction<PostIdData>
+			action: PayloadAction<PostIdData>,
 		) => {
 			const { _id, feedId } = action.payload;
 
@@ -83,17 +82,17 @@ const postsSlice = createSlice({
 		},
 		[setAllActivePostsRead.fulfilled.type]: (
 			state,
-			action: PayloadAction<string>
+			action: PayloadAction<string>,
 		) => {
 			const activeFeedId = action.payload;
 
 			state.byFeedId[activeFeedId] = state.byFeedId[activeFeedId].map(
-				(post) => ({ ...post, state: POST_STATES.READ })
+				(post) => ({ ...post, state: POST_STATES.READ }),
 			);
 		},
 		[updateFeedsData.fulfilled.type]: (
 			state,
-			action: PayloadAction<NewPostsData>
+			action: PayloadAction<NewPostsData>,
 		) => {
 			const { feedId, newPosts } = action.payload;
 
@@ -101,7 +100,7 @@ const postsSlice = createSlice({
 		},
 		[reloadFeed.fulfilled.type]: (
 			state,
-			action: PayloadAction<NewPostsData>
+			action: PayloadAction<NewPostsData>,
 		) => {
 			const { feedId, newPosts } = action.payload;
 

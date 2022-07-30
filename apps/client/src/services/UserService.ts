@@ -36,7 +36,9 @@ const userAPI = createApi({
 					await queryFulfilled;
 
 					dispatch(
-						notificationReqSuccess(MESSAGES.REGISTRATION_SUCCESSFULLY_COMPLETED)
+						notificationReqSuccess(
+							MESSAGES.REGISTRATION_SUCCESSFULLY_COMPLETED,
+						),
 					);
 				} catch (e) {
 					const errorData = e as any;

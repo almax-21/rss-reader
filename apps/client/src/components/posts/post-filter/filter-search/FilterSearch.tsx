@@ -82,7 +82,7 @@ export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 
 			updateSearchQuery(value);
 		},
-		SEARCH_DEBOUNCE_MS
+		SEARCH_DEBOUNCE_MS,
 	);
 
 	const handleToggleSpeechInput = () => {

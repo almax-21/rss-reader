@@ -26,11 +26,11 @@ export const getContentFromRssSource = createAsyncThunk(
 
 			const apiResponse = await FeedService.uploadNewFeedData(
 				parsedFeedData,
-				feedUrl
+				feedUrl,
 			);
 
 			thunkAPI.dispatch(
-				notificationReqSuccess(MESSAGES.RSS_SUCCESSFULLY_LOADED)
+				notificationReqSuccess(MESSAGES.RSS_SUCCESSFULLY_LOADED),
 			);
 
 			return apiResponse.data;
@@ -52,5 +52,5 @@ export const getContentFromRssSource = createAsyncThunk(
 		} finally {
 			thunkAPI.dispatch(hideLoading());
 		}
-	}
+	},
 );

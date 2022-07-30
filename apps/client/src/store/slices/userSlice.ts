@@ -36,14 +36,14 @@ const userSlice = createSlice({
 			userAPI.endpoints.createUser.matchFulfilled,
 			(state, action: PayloadAction<User>) => {
 				state.userData = action.payload;
-			}
+			},
 		);
 		builder.addMatcher(
 			userAPI.endpoints.authUser.matchFulfilled,
 			(state, action: PayloadAction<User>) => {
 				state.isAuth = true;
 				state.userData = action.payload;
-			}
+			},
 		);
 	},
 });

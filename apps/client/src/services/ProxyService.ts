@@ -10,11 +10,11 @@ class ProxyService {
 
 	static getXML(
 		url: string,
-		timeout = 30000
+		timeout = 30000,
 	): Promise<AxiosResponse<SerializedXMLContent>> {
 		const { href: endpointUrl } = new URL(
 			`get?disableCache=true&url=${encodeURIComponent(url)}`,
-			this.baseUrl
+			this.baseUrl,
 		);
 
 		return axios.get(endpointUrl, { timeout });

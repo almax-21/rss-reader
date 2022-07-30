@@ -27,7 +27,7 @@ export const PostContent: FC = () => {
 
 	const { totalPages, activePage, setActivePage } = usePaginator(
 		posts,
-		POSTS_LIMIT
+		POSTS_LIMIT,
 	);
 
 	const prevActiveFeedId = useRef<string>('');
@@ -52,7 +52,7 @@ export const PostContent: FC = () => {
 
 	const currentPosts = useMemo(
 		() => showCurrentItems<Post>(posts, activePage, POSTS_LIMIT),
-		[posts, activePage, POSTS_LIMIT]
+		[posts, activePage, POSTS_LIMIT],
 	);
 
 	return (
