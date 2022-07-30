@@ -1,18 +1,20 @@
-import React, {
+import type {
 	FC,
 	KeyboardEvent,
-	MouseEvent,
+	MouseEvent } from 'react';
+import React, {
 	useEffect,
 	useRef,
 	useState,
 } from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AnyAction } from '@reduxjs/toolkit';
+import type { AnyAction } from '@reduxjs/toolkit';
 import cn from 'classnames';
 
 import { MyModal } from '@/components/UI/my-modal';
-import { MODAL_TYPE, MODAL_TYPES } from '@/components/UI/my-modal/types';
+import type { MODAL_TYPE } from '@/components/UI/my-modal/types';
+import { MODAL_TYPES } from '@/components/UI/my-modal/types';
 import { useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { deleteFeed, reloadFeed } from '@/store/async-actions';
@@ -23,7 +25,7 @@ import { truncateText } from '@/utils/text';
 
 import { FeedBtnGroup } from '../feed-btn-group';
 
-import { FeedItemProps } from './types';
+import type { FeedItemProps } from './types';
 
 import styles from './styles.module.scss';
 

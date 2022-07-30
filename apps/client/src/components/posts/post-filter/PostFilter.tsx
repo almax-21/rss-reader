@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import cn from 'classnames';
@@ -15,12 +16,13 @@ import {
 	selectUnreadPostsCount,
 } from '@/store/selectors/contentSelectors';
 import { switchFilterState, switchSortType } from '@/store/slices/postsSlice';
-import { POST_STATE_TYPE, POST_STATES } from '@/store/types';
-import { SORT_TYPE } from '@/types';
+import type { POST_STATE_TYPE } from '@/store/types';
+import { POST_STATES } from '@/store/types';
+import type { SORT_TYPE } from '@/types';
 
 import { FilterSearch } from './filter-search';
 import { FilterSort } from './filter-sort';
-import { PostFilterProps } from './types';
+import type { PostFilterProps } from './types';
 
 import styles from './styles.module.scss';
 

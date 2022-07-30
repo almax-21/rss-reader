@@ -1,4 +1,5 @@
-import React, { FC, useContext, useMemo, useRef } from 'react';
+import type { FC } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AuthContext } from '@/contexts';
@@ -10,7 +11,8 @@ import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import { SignForm } from '../SignForm';
-import { SIGN_FORM_TYPES, SignFormValues } from '../types';
+import type { SignFormValues } from '../types';
+import { SIGN_FORM_TYPES } from '../types';
 
 const initialValues: SignFormValues = {
 	[SIGN_FORM.USERNAME]: '',

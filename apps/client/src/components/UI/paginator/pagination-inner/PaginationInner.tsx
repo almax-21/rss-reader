@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import cn from 'classnames';
 
-import { PaginationInnerProps } from '../types';
+import type { PaginationInnerProps } from '../types';
 
 export const PaginationInner: FC<PaginationInnerProps> = ({
 	pages,

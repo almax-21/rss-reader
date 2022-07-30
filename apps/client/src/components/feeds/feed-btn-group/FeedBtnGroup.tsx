@@ -1,4 +1,5 @@
-import React, { FC, KeyboardEvent } from 'react';
+import type { FC, KeyboardEvent } from 'react';
+import React from 'react';
 import { CloseButton } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import cn from 'classnames';
@@ -10,7 +11,7 @@ import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
-import { FeedBtnGroupProps } from './types';
+import type { FeedBtnGroupProps } from './types';
 
 import styles from './styles.module.scss'
 

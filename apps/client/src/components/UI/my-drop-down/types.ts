@@ -1,4 +1,4 @@
-import { Variant } from 'react-bootstrap/esm/types';
+import type { Variant } from 'react-bootstrap/esm/types';
 
 export interface MyDropDownProps<T> {
 	variant: Variant;

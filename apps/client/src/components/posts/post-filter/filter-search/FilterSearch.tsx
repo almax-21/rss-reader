@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
+import type { ChangeEvent, FC } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button, CloseButton, Form, InputGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 import SpeechRecognition, {
@@ -16,7 +17,7 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { updateFilterQuery } from '@/store/slices/postsSlice';
 import { debounce } from '@/utils/perfomance';
 
-import { FilterSearchProps } from './types';
+import type { FilterSearchProps } from './types';
 
 import styles from './styles.module.scss';
 

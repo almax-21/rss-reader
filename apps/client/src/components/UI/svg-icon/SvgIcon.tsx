@@ -1,6 +1,8 @@
-import React, { FC, ReactElement, useRef } from 'react';
+import type { FC, ReactElement } from 'react';
+import React, { useRef } from 'react';
 
-import { SVG_ICON_VARIANTS,SvgIconProps } from './types';
+import type {SvgIconProps } from './types';
+import { SVG_ICON_VARIANTS } from './types';
 
 export const SvgIcon: FC<SvgIconProps> = ({
 	variant,

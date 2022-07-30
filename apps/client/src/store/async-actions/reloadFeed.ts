@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { MESSAGES } from '@/i18n/types';
 import PostService from '@/services/PostService';
 import ProxyService from '@/services/ProxyService';
-import { FeedUrlData } from '@/types';
+import type { FeedUrlData } from '@/types';
 import parseRSS from '@/utils/parser/index';
 
 import {

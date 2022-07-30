@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
+import type { FC } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
 	Button,
 	CloseButton,
@@ -9,7 +10,8 @@ import {
 } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import cn from 'classnames';
-import { Formik, FormikProps } from 'formik';
+import type { FormikProps } from 'formik';
+import { Formik } from 'formik';
 
 import { MySpinner } from '@/components/UI/my-spinner';
 import { useTypedDispatch, useTypedSelector } from '@/hooks';
@@ -21,7 +23,7 @@ import { selectRssMeta, selectUrls } from '@/store/selectors/rssMetaSelectors';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { getTextValuesFromObject } from '@/utils/text';
 
-import { RSSFormValues } from './types';
+import type { RSSFormValues } from './types';
 
 import styles from './styles.module.scss';
 

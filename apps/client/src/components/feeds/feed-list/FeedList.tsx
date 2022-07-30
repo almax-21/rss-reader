@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
@@ -6,7 +7,7 @@ import { MESSAGES } from '@/i18n/types';
 
 import { FeedItem } from '../feed-item';
 
-import { FeedListProps } from './types';
+import type { FeedListProps } from './types';
 
 import styles from './styles.module.scss';
 

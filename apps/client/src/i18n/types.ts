@@ -1,4 +1,4 @@
-import { LOCALES } from './locales';
+import type { LOCALES } from './locales';
 
 export type LocaleType = typeof LOCALES[keyof typeof LOCALES];
 

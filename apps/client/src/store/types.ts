@@ -1,11 +1,11 @@
-import { LocaleType } from '@/i18n/types';
-import { Feed } from '@/models/Feed';
-import { Post } from '@/models/Post';
-import { User } from '@/models/User';
-import { FeedUrlData, PostFilter } from '@/types';
+import type { LocaleType } from '@/i18n/types';
+import type { Feed } from '@/models/Feed';
+import type { Post } from '@/models/Post';
+import type { User } from '@/models/User';
+import type { FeedUrlData, PostFilter } from '@/types';
 
-import { rootReducer } from './index';
-import { setupStore } from './index';
+import type { rootReducer } from './index';
+import type { setupStore } from './index';
 
 export enum COMPLETED_LOAD_STATUS {
 	SUCCESS = 'SUCCESS',

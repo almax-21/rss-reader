@@ -10,6 +10,7 @@
 	],
 	"rules": {
 		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/consistent-type-imports": "error",
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "off",
 		"react/prop-types": "off",

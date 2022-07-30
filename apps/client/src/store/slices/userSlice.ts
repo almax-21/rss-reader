@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { LocaleType } from '@/i18n/types';
-import { User } from '@/models/User';
+import type { LocaleType } from '@/i18n/types';
+import type { User } from '@/models/User';
 import userAPI from '@/services/UserService';
 
-import { UserState } from '../types';
+import type { UserState } from '../types';
 
 const initialState: UserState = {
 	isAuth: false,

@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { IntlShape } from '@formatjs/intl';
+import type { ReactNode } from 'react';
+import type { IntlShape } from '@formatjs/intl';
 import * as Yup from 'yup';
 
 import { MESSAGES } from '@/i18n/types';

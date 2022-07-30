@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
@@ -6,7 +7,7 @@ import { SvgIcon } from '@/components/UI/svg-icon';
 import { MESSAGES } from '@/i18n/types';
 import { SORTS } from '@/types';
 
-import { FilterSortProps } from './types';
+import type { FilterSortProps } from './types';
 
 export const FilterSort: FC<FilterSortProps> = ({
 	activeSortType,

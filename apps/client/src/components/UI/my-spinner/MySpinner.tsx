@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import cn from 'classnames';
 
 import { MESSAGES } from '@/i18n/types';
 
-import { MySpinnerProps } from './types';
+import type { MySpinnerProps } from './types';
 
 import styles from './styles.module.scss';
 

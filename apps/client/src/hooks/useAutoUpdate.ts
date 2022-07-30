@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux';
 
 import { updateFeedsData } from '@/store/async-actions';
-import { FeedUrlData } from '@/types';
+import type { FeedUrlData } from '@/types';
 import { getDiffBy } from '@/utils/collection';
 
 import { useTypedDispatch } from './redux/useTypedDispatch';

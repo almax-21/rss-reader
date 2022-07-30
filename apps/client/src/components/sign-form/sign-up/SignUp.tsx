@@ -1,7 +1,8 @@
-import React, { FC, useMemo, useRef } from 'react';
+import type { FC } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
@@ -12,7 +13,8 @@ import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import { SignForm } from '../SignForm';
-import { SIGN_FORM_TYPES, SignFormValues } from '../types';
+import type { SignFormValues } from '../types';
+import { SIGN_FORM_TYPES } from '../types';
 
 const initialValues: SignFormValues = {
 	[SIGN_FORM.USERNAME]: '',

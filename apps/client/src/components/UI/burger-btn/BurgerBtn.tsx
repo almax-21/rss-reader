@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { MESSAGES } from '@/i18n/types';
 
-import { BurgerBtnProps } from './types';
+import type { BurgerBtnProps } from './types';
 
 export const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
 	const intl = useIntl();

@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect';
 
-import { Post } from '@/models/Post';
+import type { Post } from '@/models/Post';
 import { SORTS } from '@/types';
 
-import { POST_STATES, RootState } from '../types';
+import type { RootState } from '../types';
+import { POST_STATES } from '../types';
 
 export const selectFeeds = (state: RootState) => {
 	const feeds = state.feeds.ids.map((id) => state.feeds.entities[id]);

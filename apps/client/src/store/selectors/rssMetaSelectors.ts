@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { RootState, RssState } from '../types';
+import type { RootState, RssState } from '../types';
 
 export const selectRssMeta = (state: RootState) => state.rssMeta;
 

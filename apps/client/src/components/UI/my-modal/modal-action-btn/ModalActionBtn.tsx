@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,7 +8,8 @@ import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectRssMeta } from '@/store/selectors/rssMetaSelectors';
 
-import { MODAL_TYPES, ModalActionBtnProps } from '../types';
+import type { ModalActionBtnProps } from '../types';
+import { MODAL_TYPES } from '../types';
 
 export const ModalActionBtn: FC<ModalActionBtnProps> = ({
 	type,

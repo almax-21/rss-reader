@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
+import type { FC } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Paginator } from '@/components/UI/paginator';
 import { usePaginator, useTypedDispatch, useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
-import { Post } from '@/models/Post';
+import type { Post } from '@/models/Post';
 import {
 	selectActiveFeedId,
 	selectFilteredPosts,

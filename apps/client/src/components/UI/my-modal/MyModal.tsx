@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,7 +8,7 @@ import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import { ModalActionBtn } from './modal-action-btn';
-import { MyModalProps } from './types';
+import type { MyModalProps } from './types';
 
 import styles from './styles.module.scss';
 
