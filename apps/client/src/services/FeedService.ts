@@ -8,13 +8,13 @@ import type { ParsedFeedData } from '@/utils/parser/types';
 class FeedService {
 	static uploadNewFeedData(
 		parsedfeedData: ParsedFeedData,
-		feedUrl: string
+		feedUrl: string,
 	): Promise<AxiosResponse<ApiFeedData>> {
 		return $api.post('/feeds/upload', { ...parsedfeedData, feedUrl });
 	}
 
 	static downloadContentData(
-		token: string | null
+		token: string | null,
 	): Promise<AxiosResponse<ApiContentData>> {
 		return $api.get(FEEDS_URL, {
 			headers: {
@@ -25,7 +25,7 @@ class FeedService {
 
 	static deleteFeedData(
 		id: string,
-		timeout = 30000
+		timeout = 30000,
 	): Promise<AxiosResponse<string>> {
 		return $api.delete(`/feeds?id=${id}`, { timeout });
 	}

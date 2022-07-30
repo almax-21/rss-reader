@@ -23,12 +23,12 @@ export const updateFeedsData = createAsyncThunk(
 			const differencedPosts = getDiffBy(
 				parsedPosts,
 				posts.byFeedId[feedId],
-				'title'
+				'title',
 			);
 
 			const apiResponse = await PostService.uploadNewPosts(
 				differencedPosts,
-				feedId
+				feedId,
 			);
 
 			return {
@@ -50,10 +50,10 @@ export const updateFeedsData = createAsyncThunk(
 			const dispatchedFeedId = urlData.feedId;
 
 			const isFeedStillExist = rssMeta.urlDataset.some(
-				({ feedId }: FeedUrlData) => feedId === dispatchedFeedId
+				({ feedId }: FeedUrlData) => feedId === dispatchedFeedId,
 			);
 
 			return isAutoUpdate && isFeedStillExist;
 		},
-	}
+	},
 );

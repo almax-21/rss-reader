@@ -31,5 +31,5 @@ export const deleteFeed = createAsyncThunk(
 
 			return thunkAPI.rejectWithValue(message);
 		}
-	}
+	},
 );

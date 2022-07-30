@@ -36,7 +36,7 @@ export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 	const handleSwitchState = (
 		prevState: boolean,
 		actionCreator: (newState: boolean) => AnyAction,
-		storageKey: string
+		storageKey: string,
 	) => {
 		return () => {
 			const newState = !prevState;
@@ -86,7 +86,7 @@ export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							onChange={handleSwitchState(
 								isDarkTheme,
 								setIsDarkTheme,
-								DARK_THEME_KEY
+								DARK_THEME_KEY,
 							)}
 						/>
 					</ListGroup.Item>
@@ -99,7 +99,7 @@ export const SideMenu: FC<SideMenuProps> = ({ isShow, handleClose }) => {
 							onChange={handleSwitchState(
 								isAutoUpdate,
 								setIsAutoUpdate,
-								AUTO_UPDATE_KEY
+								AUTO_UPDATE_KEY,
 							)}
 						/>
 					</ListGroup.Item>

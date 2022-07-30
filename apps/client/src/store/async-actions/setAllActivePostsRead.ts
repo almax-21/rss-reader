@@ -26,5 +26,5 @@ export const setAllActivePostsRead = createAsyncThunk(
 
 			return thunkAPI.rejectWithValue(message);
 		}
-	}
+	},
 );

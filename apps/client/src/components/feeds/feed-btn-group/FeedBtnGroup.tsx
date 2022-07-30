@@ -13,7 +13,7 @@ import { selectSettings } from '@/store/selectors/settingsSelectors';
 
 import type { FeedBtnGroupProps } from './types';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 export const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);
@@ -46,4 +46,3 @@ export const FeedBtnGroup: FC<FeedBtnGroupProps> = ({ handleOpenModal }) => {
 		</div>
 	);
 };
-

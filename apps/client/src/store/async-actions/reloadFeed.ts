@@ -44,5 +44,5 @@ export const reloadFeed = createAsyncThunk(
 
 			return thunkAPI.rejectWithValue(message);
 		}
-	}
+	},
 );

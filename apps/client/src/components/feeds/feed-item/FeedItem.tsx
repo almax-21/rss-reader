@@ -1,12 +1,5 @@
-import type {
-	FC,
-	KeyboardEvent,
-	MouseEvent } from 'react';
-import React, {
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import type { FC, KeyboardEvent, MouseEvent } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Badge, ListGroup } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import type { AnyAction } from '@reduxjs/toolkit';
@@ -108,7 +101,7 @@ export const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 					styles['feed-item'],
 					'list-item',
 					'd-flex',
-					'justify-content-center'
+					'justify-content-center',
 				)}
 				id={_id}
 				role="tab"

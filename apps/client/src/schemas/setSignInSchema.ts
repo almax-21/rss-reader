@@ -9,10 +9,10 @@ import { SIGN_FORM } from './types';
 export const setSignInSchema = (intl: IntlShape<string | ReactNode>) => {
 	return Yup.object().shape({
 		[SIGN_FORM.USERNAME]: Yup.string().required(
-			intl.formatMessage({ id: MESSAGES.ERROR_EMPTY })
+			intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }),
 		),
 		[SIGN_FORM.PASSWORD]: Yup.string().required(
-			intl.formatMessage({ id: MESSAGES.ERROR_EMPTY })
+			intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }),
 		),
 	});
 };

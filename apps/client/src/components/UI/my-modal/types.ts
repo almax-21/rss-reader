@@ -19,4 +19,4 @@ export type MyModalProps = ModalActionBtnProps & {
 	title: string;
 	description: string;
 	imgSrc?: string;
-}
+};
