@@ -9,7 +9,7 @@ import { RSS_FORM } from './types';
 
 export const setRSSFormSchema = (
 	urls: string[],
-	intl: IntlShape<string | ReactNode>
+	intl: IntlShape<string | ReactNode>,
 ) => {
 	return Yup.object().shape({
 		[RSS_FORM.URL]: Yup.string()

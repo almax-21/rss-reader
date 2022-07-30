@@ -18,5 +18,5 @@ export const setPostRead = createAsyncThunk(
 			console.error(message);
 			return thunkAPI.rejectWithValue(message);
 		}
-	}
+	},
 );

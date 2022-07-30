@@ -11,7 +11,7 @@ const UPDATE_PERIOD_MS = 180000;
 
 export const useAutoUpdate = (
 	urlDataset: FeedUrlData[],
-	isAutoUpdate: boolean
+	isAutoUpdate: boolean,
 ): void => {
 	const dispatch = useTypedDispatch();
 
@@ -41,7 +41,7 @@ export const useAutoUpdate = (
 		const newUrlDataset = getDiffBy(
 			urlDataset,
 			prevUrlDatasetRef.current,
-			'feedId'
+			'feedId',
 		);
 
 		newUrlDataset.forEach((urlData) => {

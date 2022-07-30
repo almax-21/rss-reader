@@ -41,7 +41,7 @@ export const setSignUpSchema = (intl: IntlShape<string | ReactNode>) => {
 			.required(intl.formatMessage({ id: MESSAGES.ERROR_EMPTY }))
 			.oneOf(
 				[Yup.ref(SIGN_FORM.PASSWORD), null],
-				intl.formatMessage({ id: MESSAGES.ERROR_PASSWORD_NOT_MATCH })
+				intl.formatMessage({ id: MESSAGES.ERROR_PASSWORD_NOT_MATCH }),
 			),
 	});
 };

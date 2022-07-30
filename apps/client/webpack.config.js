@@ -113,9 +113,9 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							modules: {
-								localIdentName:'[local]_[hash:base64:5]',
+								localIdentName: '[local]_[hash:base64:5]',
 							},
-							sourceMap: isDevMode,			
+							sourceMap: isDevMode,
 						},
 					},
 					!isDevMode && 'postcss-loader',

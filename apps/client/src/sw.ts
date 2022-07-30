@@ -25,7 +25,7 @@ registerRoute(
 				statuses: [0, 200],
 			}),
 		],
-	})
+	}),
 );
 
 registerRoute(
@@ -33,7 +33,7 @@ registerRoute(
 	new NetworkFirst({
 		cacheName: 'auth-api-response',
 		networkTimeoutSeconds: 2,
-	})
+	}),
 );
 
 registerRoute(
@@ -41,7 +41,7 @@ registerRoute(
 	new NetworkFirst({
 		cacheName: 'content-api-response',
 		networkTimeoutSeconds: 10,
-	})
+	}),
 );
 
 self.addEventListener('message', (evt: ExtendableMessageEvent) => {

@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import type {
-	NotificationData } from '@/components/UI/notification/types';
-import {
-	NOTIFICATION_VARIANT
-} from '@/components/UI/notification/types';
+import type { NotificationData } from '@/components/UI/notification/types';
+import { NOTIFICATION_VARIANT } from '@/components/UI/notification/types';
 import { COMPLETED_LOAD_STATUS } from '@/store/types';
 import type { TimeoutId } from '@/types';
 
@@ -19,7 +16,7 @@ export const useNotification = (
 	completedLoadStatus: COMPLETED_LOAD_STATUS,
 	successMessage: string,
 	errorMessage: string,
-	timeMs = 3500
+	timeMs = 3500,
 ): ReturnedHookData => {
 	const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
 
@@ -42,7 +39,7 @@ export const useNotification = (
 				case COMPLETED_LOAD_STATUS.SUCCESS:
 					notificationDataRef.current = {
 						variant: NOTIFICATION_VARIANT.SUCCESS,
-						message: intl.formatMessage({ id: successMessage })
+						message: intl.formatMessage({ id: successMessage }),
 					};
 					break;
 				case COMPLETED_LOAD_STATUS.FAILURE:

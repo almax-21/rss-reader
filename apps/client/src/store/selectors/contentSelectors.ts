@@ -21,16 +21,16 @@ export const selectUnreadPostsCount = createSelector(
 	[selectActiveFeedId, selectPostEntities],
 	(activeFeedId, postEntities) => {
 		const filteredPosts = postEntities[activeFeedId].filter(
-			({ state }) => state === POST_STATES.UNREAD
+			({ state }) => state === POST_STATES.UNREAD,
 		);
 
 		return filteredPosts.length;
-	}
+	},
 );
 
 export const selectUnreadPostsCountDynamically = (postsByFeedId: Post[]) => {
 	const filteredPosts = postsByFeedId.filter(
-		({ state }) => state === POST_STATES.UNREAD
+		({ state }) => state === POST_STATES.UNREAD,
 	);
 
 	return filteredPosts.length;
@@ -42,12 +42,12 @@ export const selectFeedsWithCounter = createSelector(
 		const feedsWithCounter = feeds.map((feed) => ({
 			...feed,
 			unreadPostsCount: selectUnreadPostsCountDynamically(
-				postEntities[feed._id]
+				postEntities[feed._id],
 			),
 		}));
 
 		return feedsWithCounter;
-	}
+	},
 );
 
 export const selectPostFilter = (state: RootState) => state.posts.filter;
@@ -62,20 +62,22 @@ export const selectFilteredPosts = createSelector(
 		const posts = postEntities[activeFeedId];
 
 		const searchedPosts = posts.filter((post) =>
-			post.title.toLowerCase().includes(filter.query.toLowerCase())
+			post.title.toLowerCase().includes(filter.query.toLowerCase()),
 		);
 
 		const sortedPosts =
-			filter.sortType === SORTS.OLD_FIRST ? searchedPosts.reverse() : searchedPosts;
+			filter.sortType === SORTS.OLD_FIRST
+				? searchedPosts.reverse()
+				: searchedPosts;
 
 		if (filter.state === POST_STATES.ALL) {
 			return sortedPosts;
 		}
 
 		const filteredPosts = sortedPosts.filter(
-			(post) => post.state === filter.state
+			(post) => post.state === filter.state,
 		);
 
 		return filteredPosts;
-	}
+	},
 );

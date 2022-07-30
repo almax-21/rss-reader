@@ -45,7 +45,7 @@ const settingsSlice = createSlice({
 			(state, action: PayloadAction<LocaleType>) => {
 				state.isSwitchLangInProcess = false;
 				state.lang = action.payload;
-			}
+			},
 		);
 		builder.addMatcher(userAPI.endpoints.switchLang.matchRejected, (state) => {
 			state.isSwitchLangInProcess = false;
@@ -56,7 +56,7 @@ const settingsSlice = createSlice({
 				const { lang } = action.payload;
 
 				state.lang = lang;
-			}
+			},
 		);
 	},
 });

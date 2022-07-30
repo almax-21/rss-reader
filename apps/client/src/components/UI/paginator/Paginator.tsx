@@ -41,7 +41,7 @@ export const Paginator: FC<PaginatorProps> = React.memo(
 				pages={pagesColl}
 			/>
 		);
-	}
+	},
 );
 
 Paginator.displayName = 'Paginator';

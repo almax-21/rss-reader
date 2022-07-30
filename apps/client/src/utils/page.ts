@@ -10,7 +10,7 @@ export const getPagesColl = (pagesCount: number): number[] =>
 export function showCurrentItems<T>(
 	items: T[],
 	currentPage: number,
-	itemsLimit: number
+	itemsLimit: number,
 ): T[] {
 	const start = (currentPage - 1) * itemsLimit;
 	const end = itemsLimit * currentPage;

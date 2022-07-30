@@ -3,7 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { Feed } from '@/models/Feed';
 
-import {deleteFeed, getAllContentFromApi, getContentFromRssSource } from '../async-actions';
+import {
+	deleteFeed,
+	getAllContentFromApi,
+	getContentFromRssSource,
+} from '../async-actions';
 import type { ApiContentData, ApiFeedData, FeedsState } from '../types';
 
 import { logoutUser } from './userSlice';
@@ -25,7 +29,7 @@ const feedsSlice = createSlice({
 	extraReducers: {
 		[getAllContentFromApi.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiContentData>
+			action: PayloadAction<ApiContentData>,
 		) => {
 			const { feeds } = action.payload;
 
@@ -37,7 +41,7 @@ const feedsSlice = createSlice({
 		},
 		[getContentFromRssSource.fulfilled.type]: (
 			state,
-			action: PayloadAction<ApiFeedData>
+			action: PayloadAction<ApiFeedData>,
 		) => {
 			const { feed } = action.payload;
 

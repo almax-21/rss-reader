@@ -21,5 +21,5 @@ export const getAllContentFromApi = createAsyncThunk(
 
 			return thunkAPI.rejectWithValue(message);
 		}
-	}
+	},
 );
