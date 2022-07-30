@@ -1,6 +1,6 @@
 {
 	"name": "@rss-reader/client",
-	"version": "1.11.8",
+	"version": "1.11.9",
 	"description": "frontend part",
 	"browserslist": "> 0.25%, not dead",
 	"scripts": {
