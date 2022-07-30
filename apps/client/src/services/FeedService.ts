@@ -1,9 +1,9 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 import $api from '@/http';
-import { ApiContentData, ApiFeedData } from '@/store/types';
+import type { ApiContentData, ApiFeedData } from '@/store/types';
 import { FEEDS_URL } from '@/types/constants';
-import { ParsedFeedData } from '@/utils/parser/types';
+import type { ParsedFeedData } from '@/utils/parser/types';
 
 class FeedService {
 	static uploadNewFeedData(

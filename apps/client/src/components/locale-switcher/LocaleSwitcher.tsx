@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Accordion, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import cn from 'classnames';
@@ -8,7 +9,8 @@ import { SvgIcon } from '@/components/UI/svg-icon';
 import { SVG_ICON_VARIANTS } from '@/components/UI/svg-icon/types';
 import { useTypedSelector } from '@/hooks';
 import { LOCALES } from '@/i18n/locales';
-import { LocaleType, MESSAGES } from '@/i18n/types';
+import type { LocaleType } from '@/i18n/types';
+import { MESSAGES } from '@/i18n/types';
 import userAPI from '@/services/UserService';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { selectAuthState } from '@/store/selectors/userSelectors';

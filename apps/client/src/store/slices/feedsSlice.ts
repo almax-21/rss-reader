@@ -1,9 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { Feed } from '@/models/Feed';
+import type { Feed } from '@/models/Feed';
 
 import {deleteFeed, getAllContentFromApi, getContentFromRssSource } from '../async-actions';
-import { ApiContentData, ApiFeedData, FeedsState } from '../types';
+import type { ApiContentData, ApiFeedData, FeedsState } from '../types';
 
 import { logoutUser } from './userSlice';
 

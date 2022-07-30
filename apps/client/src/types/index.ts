@@ -1,8 +1,8 @@
 // most used types or common
 
-import { LocaleType } from '@/i18n/types';
-import { Post } from '@/models/Post';
-import { POST_STATE_TYPE } from '@/store/types';
+import type { LocaleType } from '@/i18n/types';
+import type { Post } from '@/models/Post';
+import type { POST_STATE_TYPE } from '@/store/types';
 
 export type TimeoutId = ReturnType<typeof setTimeout>;
 

@@ -1,8 +1,8 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 import $api from '@/http';
-import { Post } from '@/models/Post';
-import { ParsedPost } from '@/utils/parser/types';
+import type { Post } from '@/models/Post';
+import type { ParsedPost } from '@/utils/parser/types';
 
 class PostService {
 	static setPostRead(id: string): Promise<AxiosResponse<string>> {

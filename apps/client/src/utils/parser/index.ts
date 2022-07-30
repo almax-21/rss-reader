@@ -2,7 +2,7 @@ import { MESSAGES } from '@/i18n/types';
 
 import { filterText } from '../text';
 
-import { ParsedFeedData, ParsedPost } from './types';
+import type { ParsedFeedData, ParsedPost } from './types';
 
 const parseRSS = (serializedData: string): ParsedFeedData => {
 	const parser = new DOMParser();

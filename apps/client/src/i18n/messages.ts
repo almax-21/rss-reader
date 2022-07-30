@@ -1,5 +1,6 @@
 import { LOCALES } from './locales';
-import { MESSAGES, Messages } from './types';
+import type { Messages } from './types';
+import { MESSAGES } from './types';
 
 export const messages: Messages = {
 	[LOCALES.ENGLISH]: {

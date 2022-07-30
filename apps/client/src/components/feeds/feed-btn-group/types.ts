@@ -1,6 +1,6 @@
-import { MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 
-import { MODAL_TYPE } from '@/components/UI/my-modal/types';
+import type { MODAL_TYPE } from '@/components/UI/my-modal/types';
 
 export interface FeedBtnGroupProps {
 	handleOpenModal: (

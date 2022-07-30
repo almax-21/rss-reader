@@ -1,4 +1,5 @@
-import { Workbox, WorkboxLifecycleEvent } from 'workbox-window';
+import type { WorkboxLifecycleEvent } from 'workbox-window';
+import { Workbox } from 'workbox-window';
 
 const registerServiceWorker = () => {
 	if (process.env.NODE_ENV !== 'production') {

@@ -1,6 +1,6 @@
-import { ObjectSchema } from 'yup';
+import type { ObjectSchema } from 'yup';
 
-import { SIGN_FORM } from '@/schemas/types';
+import type { SIGN_FORM } from '@/schemas/types';
 
 export enum SIGN_FORM_TYPES {
 	SIGN_IN = 'SIGN_IN',

@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import type {
+	NotificationData } from '@/components/UI/notification/types';
 import {
-	NOTIFICATION_VARIANT,
-	NotificationData,
+	NOTIFICATION_VARIANT
 } from '@/components/UI/notification/types';
 import { COMPLETED_LOAD_STATUS } from '@/store/types';
-import { TimeoutId } from '@/types';
+import type { TimeoutId } from '@/types';
 
 interface ReturnedHookData {
 	isShowNotification: boolean;

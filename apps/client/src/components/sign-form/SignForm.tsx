@@ -1,4 +1,5 @@
-import React, { FC, FormEvent, useEffect, useRef, useState } from 'react';
+import type { FC, FormEvent } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,8 @@ import { SIGN_FORM } from '@/schemas/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { getTextValuesFromObject } from '@/utils/text';
 
-import { SIGN_FORM_TYPES, SignFormProps } from './types';
+import type { SignFormProps } from './types';
+import { SIGN_FORM_TYPES } from './types';
 
 import styles from './styles.module.scss';
 

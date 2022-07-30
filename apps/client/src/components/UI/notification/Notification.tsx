@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Alert } from 'react-bootstrap';
 import cn from 'classnames';
 
 import { SvgIcon } from '@/components/UI/svg-icon';
 
-import { NotificationProps } from './types';
+import type { NotificationProps } from './types';
 
 import styles from './styles.module.scss';
 

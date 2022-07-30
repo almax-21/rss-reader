@@ -1,4 +1,4 @@
-import { SORT_TYPE } from '@/types';
+import type { SORT_TYPE } from '@/types';
 
 export interface FilterSortProps {
 	activeSortType: SORT_TYPE;

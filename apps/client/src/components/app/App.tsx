@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter } from 'react-router-dom';

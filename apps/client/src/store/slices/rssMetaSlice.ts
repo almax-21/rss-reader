@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import {
 	deleteFeed,
@@ -6,7 +7,7 @@ import {
 	getContentFromRssSource,
 } from '@/store/async-actions';
 
-import { ApiContentData, ApiFeedData, RssState } from '../types';
+import type { ApiContentData, ApiFeedData, RssState } from '../types';
 
 import { logoutUser } from './userSlice';
 

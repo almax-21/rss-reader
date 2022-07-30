@@ -1,4 +1,4 @@
-import { LocaleType } from '@/i18n/types';
+import type { LocaleType } from '@/i18n/types';
 
 interface IUser {
 	id: string;

@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Form, ListGroup, Offcanvas } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AnyAction } from '@reduxjs/toolkit';
+import type { AnyAction } from '@reduxjs/toolkit';
 import cn from 'classnames';
 
 import { LocaleSwitcher } from '@/components/locale-switcher';
@@ -20,7 +21,7 @@ import {
 	TOKEN_KEY,
 } from '@/types/constants';
 
-import { SideMenuProps } from './types';
+import type { SideMenuProps } from './types';
 
 import styles from './styles.module.scss';
 

@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import { useTypedSelector } from '@/hooks';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
-import { POST_STATE_TYPE } from '@/store/types';
+import type { POST_STATE_TYPE } from '@/store/types';
 
-import { MyDropDownProps } from './types';
+import type { MyDropDownProps } from './types';
 
 export const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 	variant,

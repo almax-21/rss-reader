@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Redirect, Route } from 'react-router';
 
 import { Notification } from '@/components/UI/notification';

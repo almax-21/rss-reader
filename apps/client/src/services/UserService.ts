@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { LocaleType, MESSAGES } from '@/i18n/types';
-import { User } from '@/models/User';
+import type { LocaleType } from '@/i18n/types';
+import { MESSAGES } from '@/i18n/types';
+import type { User } from '@/models/User';
 import {
 	notificationReqFailure,
 	notificationReqPending,
 	notificationReqSuccess,
 } from '@/store/slices/notificationSlice';
-import { SignInUserData, SignUpUserData, TokenData } from '@/types';
+import type { SignInUserData, SignUpUserData, TokenData } from '@/types';
 import { API_ORIGIN, TOKEN_KEY } from '@/types/constants';
 
 const userAPI = createApi({

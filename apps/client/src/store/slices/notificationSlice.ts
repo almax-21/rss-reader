@@ -1,6 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { COMPLETED_LOAD_STATUS, NotificationState } from '../types';
+import type { NotificationState } from '../types';
+import { COMPLETED_LOAD_STATUS } from '../types';
 
 const initialState: NotificationState = {
 	completedLoadStatus: COMPLETED_LOAD_STATUS.IDLE,

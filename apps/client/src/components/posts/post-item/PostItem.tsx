@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import cn from 'classnames';
@@ -10,9 +11,9 @@ import { MESSAGES } from '@/i18n/types';
 import { setPostRead } from '@/store/async-actions';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import { POST_STATES } from '@/store/types';
-import { PostIdData } from '@/types';
+import type { PostIdData } from '@/types';
 
-import { PostItemProps } from './types';
+import type { PostItemProps } from './types';
 
 import styles from './styles.module.scss';
 

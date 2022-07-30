@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 
 import { ContentContainer } from '@/components/containers/content-container';
 import { RSSContainer } from '@/components/containers/rss-container';

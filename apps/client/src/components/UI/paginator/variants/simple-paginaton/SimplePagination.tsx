@@ -1,11 +1,12 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
 import { MESSAGES } from '@/i18n/types';
 
 import { PaginationInner } from '../../pagination-inner';
-import { PaginationProps } from '../../types';
+import type { PaginationProps } from '../../types';
 
 export const SimplePagination: FC<PaginationProps> = ({
 	pages,

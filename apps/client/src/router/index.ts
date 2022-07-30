@@ -1,7 +1,8 @@
 
 import { MainPage, SignPage } from '@/pages';
 
-import { Route, ROUTES } from './types';
+import type { Route } from './types';
+import { ROUTES } from './types';
 
 export const privateRoutes: Route[] = [
 	{ path: ROUTES.ROOT, Component: MainPage, exact: true },

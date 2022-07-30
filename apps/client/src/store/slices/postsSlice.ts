@@ -1,7 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { Post } from '@/models/Post';
-import { NewPostsData, PostIdData, SORT_TYPE, SORTS } from '@/types';
+import type { Post } from '@/models/Post';
+import type { NewPostsData, PostIdData, SORT_TYPE } from '@/types';
+import { SORTS } from '@/types';
 
 import {
 	deleteFeed,
@@ -12,12 +14,13 @@ import {
 	setPostRead,
 	updateFeedsData,
 } from '../async-actions';
-import {
+import type {
 	ApiContentData,
 	ApiFeedData,
 	POST_STATE_TYPE,
-	POST_STATES,
-	PostsState,
+	PostsState} from '../types';
+import {
+	POST_STATES
 } from '../types';
 
 import { logoutUser } from './userSlice';
