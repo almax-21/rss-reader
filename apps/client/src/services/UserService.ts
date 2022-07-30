@@ -95,7 +95,7 @@ const userAPI = createApi({
 				method: 'GET',
 			}),
 		}),
-		switchLang: build.mutation<string, LocaleType>({
+		switchLang: build.mutation<LocaleType, LocaleType>({
 			query: (lang) => ({
 				url: '/lang',
 				method: 'PUT',

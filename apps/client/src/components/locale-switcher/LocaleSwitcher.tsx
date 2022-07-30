@@ -37,11 +37,7 @@ export const LocaleSwitcher: FC = () => {
 			return;
 		}
 
-		if (value) {
-			const newLang = value as LocaleType;
-
-			switchLang(newLang);
-		}
+		switchLang(value);
 	};
 
 	return (
