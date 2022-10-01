@@ -72,9 +72,8 @@ export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 
 	return (
 		<>
+			<FilterSearch resetActivePage={resetActivePage} />
 			<div className={styles.filter}>
-				<FilterSearch resetActivePage={resetActivePage} />
-
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
 					<MyDropDown
 						activeValue={filterState}
