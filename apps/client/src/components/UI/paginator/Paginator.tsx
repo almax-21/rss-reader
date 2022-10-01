@@ -11,13 +11,14 @@ import { PAGINATOR_CAPACITY } from './types';
 import './style.scss';
 
 interface PaginatorProps {
+	withScroll?: boolean;
 	totalPages: number;
 	activePage: number;
 	setActivePage: (page: number) => void;
 }
 
 export const Paginator: FC<PaginatorProps> = React.memo(
-	({ totalPages, activePage, setActivePage }) => {
+	({ totalPages, activePage, setActivePage, withScroll }) => {
 		if (totalPages < PAGINATOR_CAPACITY.MIN) {
 			return null;
 		}
@@ -26,6 +27,15 @@ export const Paginator: FC<PaginatorProps> = React.memo(
 
 		const handleSetActivePage = (pageNumber: number) => () => {
 			setActivePage(pageNumber);
+
+			if (withScroll) {
+				const postContainerEl = document.getElementById('post-container');
+
+				window.scrollTo({
+					top: postContainerEl?.offsetTop,
+					behavior: 'smooth',
+				});
+			}
 		};
 
 		return totalPages < PAGINATOR_CAPACITY.EXTRA ? (

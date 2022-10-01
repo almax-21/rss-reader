@@ -107,6 +107,10 @@ export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 		[styles['filter__btn--pad-right']]: isFullSupportSpeechRecognition,
 	});
 
+	const voiceBtnClasses = cn(styles.filter__btn, styles['filter__btn--voice'], {
+		[styles['filter__btn--pulse']]: isListening,
+	});
+
 	return (
 		<InputGroup className={styles.filter__group}>
 			<Form.Control
@@ -129,7 +133,7 @@ export const FilterSearch: FC<FilterSearchProps> = ({ resetActivePage }) => {
 					active={isListening}
 					aria-checked={isListening}
 					aria-label={intl.formatMessage({ id: MESSAGES.VOICE_INPUT })}
-					className={isListening ? styles['filter__btn--pulse'] : ''}
+					className={voiceBtnClasses}
 					disabled={isCanNotUseSpeechRecognition}
 					role="switch"
 					variant="outline-primary"

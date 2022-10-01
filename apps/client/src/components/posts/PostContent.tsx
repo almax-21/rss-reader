@@ -16,7 +16,7 @@ import { showCurrentItems } from '@/utils/page';
 import { PostFilter } from './post-filter';
 import { PostList } from './post-list';
 
-const POSTS_LIMIT = 20;
+const POSTS_LIMIT = 25;
 const MIN_POSTS_COUNT = 10;
 
 export const PostContent: FC = () => {
@@ -56,7 +56,7 @@ export const PostContent: FC = () => {
 	);
 
 	return (
-		<div>
+		<div id="post-container">
 			<h2 className="h3 mb-4">
 				<FormattedMessage id={MESSAGES.POSTS} />
 			</h2>
@@ -75,6 +75,7 @@ export const PostContent: FC = () => {
 			)}
 			{currentPosts.length > MIN_POSTS_COUNT && (
 				<Paginator
+					withScroll
 					activePage={activePage}
 					setActivePage={setActivePage}
 					totalPages={totalPages}
