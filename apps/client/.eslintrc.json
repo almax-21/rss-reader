@@ -7,10 +7,12 @@
 		"@typescript-eslint",
 		"react-hooks",
 		"simple-import-sort",
+		"jest",
 		"prettier"
 	],
 	"extends": [
 		"plugin:react/recommended",
+		"plugin:jest/recommended",
 		"plugin:@typescript-eslint/recommended",
 		"prettier"
 	],
