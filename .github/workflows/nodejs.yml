@@ -24,6 +24,6 @@ jobs:
       - name: install
         run: |
           npm ci
-      - name: Run linter
+      - name: run checks
         run: |
           npm test
