@@ -11,3 +11,6 @@ build/
 coverage/
 *.env
 data/
+current/
+difference/
+storybook-static/
