@@ -1,33 +1,31 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 :global(.offcanvas) {
-	width: 85% !important;
-	max-width: 400px !important;
+  width: 85% !important;
+  max-width: 400px !important;
 }
 
 .side-menu__header,
 .side-menu__body {
-	color: $dark;
-	background-color: $white;
-
-	transition: $switching-theme-transition;
+  color: $dark;
+  background-color: $white;
+  transition: $switching-theme-transition;
 }
 
 :global(.menu-item) {
-	&__text {
-		margin: 0 5px;
-	}
+  &__text {
+    margin: 0 5px;
+  }
 
-	:global(.accordion-header > button) {
-		padding-left: 5px;
-	}
+  :global(.accordion-header > button) {
+    padding-left: 5px;
+  }
 }
 
 :global(.dark-theme) {
-	.side-menu__header,
-	.side-menu__body {
-		color: $white;
-
-		background-color: $dark;
-	}
+  .side-menu__header,
+  .side-menu__body {
+    color: $white;
+    background-color: $dark;
+  }
 }

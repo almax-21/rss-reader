@@ -1,29 +1,29 @@
 .content-skeleton {
-	display: flex;
-	flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
 
-	&__item {
-		&:last-child {
-			margin-bottom: 30px;
-		}
-	}
+  &__item {
+    &:last-child {
+      margin-bottom: 30px;
+    }
+  }
 
-	button {
-		border: none;
-	}
+  button {
+    border: none;
+  }
 }
 
 @media (min-width: 481px) {
-	.content-skeleton {
-		flex-direction: row;
-		justify-content: space-between;
+  .content-skeleton {
+    flex-direction: row;
+    justify-content: space-between;
 
-		&__item {
-			width: 49%;
+    &__item {
+      width: 49%;
 
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

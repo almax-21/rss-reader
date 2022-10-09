@@ -1,34 +1,32 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .rss__input {
-	padding-right: 45px !important;
-
-	color: red;
-
-	margin-bottom: 12px;
+  padding-right: 45px !important;
+  color: red;
+  margin-bottom: 12px;
 }
 
 .rss__btn {
-	&--close {
-		position: absolute;
-		top: 18px;
-		right: 20px;
-		z-index: 100;
-	}
+  &--close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 100;
+  }
 }
 
 .rss__input + :global(.invalid-feedback) {
-	position: absolute;
-	transform: translateY(50px);
+  position: absolute;
+  transform: translateY(50px);
 }
 
 @include media-breakpoint-up(md) {
-	.rss__input {
-		margin-bottom: 0;
-	}
+  .rss__input {
+    margin-bottom: 0;
+  }
 
-	.rss__input + :global(.invalid-feedback) {
-		transform: translateY(5px);
-	}
+  .rss__input + :global(.invalid-feedback) {
+    transform: translateY(5px);
+  }
 }

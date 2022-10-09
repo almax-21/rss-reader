@@ -1,12 +1,12 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .rss {
-	background-color: $dark;
-	transition: $switching-theme-transition;
+  background-color: $dark;
+  transition: $switching-theme-transition;
 }
 
 :global(.dark-theme) {
-	.rss {
-		background-color: $darkgrey;
-	}
+  .rss {
+    background-color: $darkgrey;
+  }
 }

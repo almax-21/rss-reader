@@ -1,9 +1,8 @@
-@import './mixins';
-
-@include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Light', 300);
-@include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Regular', 400);
-@include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Medium', 500);
-@include font-face('Ubuntu', '@/assets/fonts/ubuntu/Ubuntu-Bold', 700);
+@import "./mixins";
+@include font-face("Ubuntu", "@/assets/fonts/ubuntu/Ubuntu-Light", 300);
+@include font-face("Ubuntu", "@/assets/fonts/ubuntu/Ubuntu-Regular", 400);
+@include font-face("Ubuntu", "@/assets/fonts/ubuntu/Ubuntu-Medium", 500);
+@include font-face("Ubuntu", "@/assets/fonts/ubuntu/Ubuntu-Bold", 700);
 
 // 100 - Thin (Hairline)
 // 200 - Extra Light (Ultra Light)

@@ -1,77 +1,71 @@
-@import '@/styles/variables';
-@import '@/styles/keyframes';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/keyframes";
+@import "@/styles/mixins";
 
 .filter {
   &__group:global(.input-group) {
-		position: sticky;
-		top: 12px;
-		left: 0;
-		z-index: 300;
-
-		max-width: 540px;
-
-		display: flex;
-		flex-wrap: wrap;
-
-		margin-bottom: 20px;
-	}
+    position: sticky;
+    top: 12px;
+    left: 0;
+    z-index: 300;
+    max-width: 540px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
 
   &__input:global(.form-control) {
-		display: block;
-
-		min-width: 155px !important;
-
-		padding-right: 40px !important;
-
-		border-color: $black;
-	}
+    display: block;
+    min-width: 155px !important;
+    padding-right: 40px !important;
+    border-color: $black;
+  }
 
   &__btn {
-		width: auto;
+    width: auto;
 
-		&--close {
-			position: absolute;
-			top: 7px;
-			right: 10px;
-			z-index: 100;
-		}
+    &--close {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      z-index: 100;
+    }
 
-		&--pad-right {
-			right: 50px;
-		}
+    &--pad-right {
+      right: 50px;
+    }
 
-		&--voice:not(:hover):not(:global(.active)) {
-			background-color: $light;
-		}
+    &--voice:not(:hover, :global(.active)) {
+      background-color: $light;
+    }
 
-		&--pulse {
-			animation: pulse 2s infinite;
-		}
-	}
+    &--pulse {
+      animation: pulse 2s infinite;
+    }
+  }
 }
 
 :global(.dark-theme) {
-	.filter {
-		&__input:global(.form-control) {
-			border-color: $gray-400;
-		}
+  .filter {
+    &__input:global(.form-control) {
+      border-color: $gray-400;
+    }
 
-		&__input::placeholder {
-			color: $white;
-		}
+    &__input::placeholder {
+      color: $white;
+    }
 
-		&__btn--voice:not(:hover):not(:global(.active)) {
-			background-color: $dark;
-		}
-	}
+    &__btn--voice:not(:hover, :global(.active)) {
+      background-color: $dark;
+    }
+  }
 }
 
 @include media-breakpoint-up(md) {
-	.filter {
-		&__group:global(.input-group) {
-			position: relative;
-			top: 0;
-		}
-	}
+  .filter {
+    &__group:global(.input-group) {
+      position: relative;
+      top: 0;
+    }
+  }
 }

@@ -1,37 +1,33 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .feed-item {
-	min-height: 85px;
+  min-height: 85px;
 
-	&__title {
-		margin-right: 5px;
-	}
+  &__title {
+    margin-right: 5px;
+  }
 
-	&__icon {
-		align-self: flex-start;
+  &__icon {
+    align-self: flex-start;
+    margin: 4px;
+    margin-right: 7px;
+  }
 
-		margin: 4px;
-		margin-right: 7px;
-	}
-
-	:global(.badge) {
-		align-self: flex-start;
-
-		margin-top: 2px;
-		margin-right: 4px;
-	}
+  :global(.badge) {
+    align-self: flex-start;
+    margin-top: 2px;
+    margin-right: 4px;
+  }
 }
 
 .feed-item:global(.active) {
-	background-color: $primary !important;
-
-	border-color: $primary;
+  background-color: $primary !important;
+  border-color: $primary;
 }
 
 :global(.dark-theme) {
-	.feed-item:global(.active) {
-		background-color: $darkgrey !important;
-
-		border-color: $darkgrey;
-	}
+  .feed-item:global(.active) {
+    background-color: $darkgrey !important;
+    border-color: $darkgrey;
+  }
 }
