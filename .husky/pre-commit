@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm test && npx lerna --scope @rss-reader/client exec -- npm run test:screenshots
+npm test && npx lerna --scope @rss-reader/client exec -- npm run test:screenshots-ci
