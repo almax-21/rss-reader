@@ -1,12 +1,12 @@
-@import '@/styles/variables';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/mixins";
 
 .feeds-content {
-	position: relative;
+  position: relative;
 }
 
 @include media-breakpoint-up(md) {
-	.feeds-content {
-		height: 100%;
-	}
+  .feeds-content {
+    height: 100%;
+  }
 }

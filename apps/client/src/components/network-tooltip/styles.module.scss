@@ -1,25 +1,22 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .network-tooltip {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  line-height: 1.8;
+  text-align: center;
+  color: $light;
+  background-color: $black;
 
-	width: 100%;
+  &__text {
+    margin: 0;
+  }
 
-	line-height: 1.8;
-	text-align: center;
-
-	color: $light;
-	background-color: $black;
-
-	&__text {
-		margin: 0;
-	}
-
-	&__icon {
-		margin-right: 10px;
+  &__icon {
+    margin-right: 10px;
     margin-bottom: 4px;
-	}
+  }
 }

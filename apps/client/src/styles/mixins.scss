@@ -1,35 +1,42 @@
-@import './variables';
-@import './functions';
+@import "./variables";
+@import "./functions";
 
 @mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
-	@font-face {
-		font-family: $font-family;
-		font-weight: $weight;
-		font-style: $style;
-		font-display: swap;
-		src: url('#{$file-path}.woff2') format('woff2'),
-			url('#{$file-path}.woff') format('woff');
-	}
+  @font-face {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+    src:
+      url("#{$file-path}.woff2") format("woff2"),
+      url("#{$file-path}.woff") format("woff");
+  }
 }
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
+
   @if $min {
     @media (min-width: $min) {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     @content;
   }
 }
 
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
   $max: breakpoint-max($name, $breakpoints);
+
   @if $max {
     @media (max-width: $max) {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     @content;
   }
 }

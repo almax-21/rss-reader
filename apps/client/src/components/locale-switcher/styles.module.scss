@@ -1,15 +1,14 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .locale-switcher__header > :global(.accordion-button),
 .locale-switcher__body {
-	transition: $switching-theme-transition;
+  transition: $switching-theme-transition;
 }
 
 :global(.dark-theme) {
-	.locale-switcher__header > :global(.accordion-button),
-	.locale-switcher__body {
-		color: $white;
-
-		background-color: $dark;
-	}
+  .locale-switcher__header > :global(.accordion-button),
+  .locale-switcher__body {
+    color: $white;
+    background-color: $dark;
+  }
 }

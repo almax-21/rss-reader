@@ -1,31 +1,28 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .modal {
-	&__image-wrapper {
-		margin-bottom: 24px;
+  &__image-wrapper {
+    margin-bottom: 24px;
+    text-align: center;
+    outline: 1px solid $secondary;
 
-		text-align: center;
+    img {
+      width: 100%;
+    }
+  }
 
-		outline: 1px solid $secondary;
-
-		img {
-			width: 100%;
-		}
-	}
-
-	&__description {
-		margin-bottom: 4px;
-	}
+  &__description {
+    margin-bottom: 4px;
+  }
 }
 
 :global(.dark-theme) {
-	:global(.modal-content) {
-		color: $white;
+  :global(.modal-content) {
+    color: $white;
+    background-color: $dark;
+  }
 
-		background-color: $dark;
-	}
-
-	.modal__image-wrapper {
-		outline-color: $light;
-	}
+  .modal__image-wrapper {
+    outline-color: $light;
+  }
 }

@@ -1,41 +1,35 @@
-@import '@/styles/variables';
-@import '@/styles/keyframes';
+@import "@/styles/variables";
+@import "@/styles/keyframes";
 
 .scroll-top {
-	display: none;
+  display: none;
+  position: fixed;
+  bottom: 2.5vw;
+  right: 2.5vw;
+  z-index: 300;
+  width: 45px;
+  height: 45px;
+  border: 1px solid $dark;
+  border-radius: 50%;
+  background-color: transparent;
+  animation: smooth-translate $animation-time;
+  transition: background-color $animation-time;
 
-	position: fixed;
-	bottom: 2.5vw;
-	right: 2.5vw;
-	z-index: 300;
-
-	width: 45px;
-	height: 45px;
-
-	border: 1px solid $dark;
-	border-radius: 50%;
-	background-color: transparent;
-
-	animation: smooth-translate $animation-time;
-	transition: background-color $animation-time;
-
-	svg {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-
-		fill: $black;
-
-		transform: translate(-50%, -50%);
-	}
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    fill: $black;
+    transform: translate(-50%, -50%);
+  }
 }
 
 :global(.dark-theme) {
-	.scroll-top {
-		border-color: $white;
+  .scroll-top {
+    border-color: $white;
 
-		svg {
-			fill: $white;
-		}
-	}
+    svg {
+      fill: $white;
+    }
+  }
 }

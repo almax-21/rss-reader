@@ -1,12 +1,12 @@
-@import '@/styles/variables';
+@import "@/styles/variables";
 
 .header {
-	background-color: $dark;
-	transition: $switching-theme-transition;
+  background-color: $dark;
+  transition: $switching-theme-transition;
 }
 
 :global(.dark-theme) {
-	.header {
-		background-color: $darkgrey;
-	}
+  .header {
+    background-color: $darkgrey;
+  }
 }

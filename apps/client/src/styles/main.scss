@@ -1,88 +1,82 @@
-@import '~bootstrap/scss/bootstrap';
-
-@import './variables';
-@import './fonts';
-@import './keyframes';
+@import "~bootstrap/scss/bootstrap";
+@import "./variables";
+@import "./fonts";
+@import "./keyframes";
 
 body {
-	position: relative;
-	min-height: 100vh;
-	font-family: 'Ubuntu', sans-serif;
+  position: relative;
+  min-height: 100vh;
+  font-family: "Ubuntu", sans-serif;
 }
 
 img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .loading-bar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 1075;
-
-	height: 4px;
-
-	background: linear-gradient(
-		90deg,
-		rgba(2, 0, 36, 1) 0%,
-		rgba(9, 9, 121, 1) 50%,
-		rgba(0, 212, 255, 1) 100%
-	);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1075;
+  height: 4px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(9, 9, 121, 1) 50%,
+      rgba(0, 212, 255, 1) 100%
+    );
 }
 
 main {
-	color: $dark;
-
-	transition: $switching-theme-transition;
+  color: $dark;
+  transition: $switching-theme-transition;
 }
 
 .list-item {
-	cursor: pointer !important;
-
-	transition: $switching-theme-transition;
+  cursor: pointer !important;
+  transition: $switching-theme-transition;
 }
 
 .list-item.active {
-	cursor: default !important;
+  cursor: default !important;
 }
 
 .form-floating,
 .form-control:-webkit-autofill ~ label,
 .form-control:-webkit-autofill:hover ~ label,
 .form-control:-webkit-autofill:focus ~ label {
-	color: $dark;
+  color: $dark;
 }
 
 .dark-theme {
-	background-color: $dark;
+  background-color: $dark;
 
-	main {
-		color: $white;
+  main {
+    color: $white;
+    background-color: $dark;
+  }
 
-		background-color: $dark;
-	}
+  .list-item {
+    color: $white;
+    background-color: $dark;
+  }
 
-	.list-item {
-		color: $white;
-		background-color: $dark;
-	}
+  .list-item.active {
+    background-color: $primary;
+  }
 
-	.list-item.active {
-		background-color: $primary;
-	}
-
-	.form-floating,
-	.form-control,
-	.form-control:focus {
-		color: $white;
-
-		background-color: $material-darkgrey;
-	}
+  .form-floating,
+  .form-control,
+  .form-control:focus {
+    color: $white;
+    background-color: $material-darkgrey;
+  }
 }
 
 @include media-breakpoint-up(md) {
-	.loading-bar {
-		height: 3px;
-	}
+  .loading-bar {
+    height: 3px;
+  }
 }

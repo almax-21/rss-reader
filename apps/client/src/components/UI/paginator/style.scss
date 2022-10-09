@@ -1,66 +1,62 @@
 // not a module because only bootsrap's classNames
 
-@import '@/styles/variables';
-@import '@/styles/keyframes';
-@import '@/styles/mixins';
+@import "@/styles/variables";
+@import "@/styles/keyframes";
+@import "@/styles/mixins";
 
 .page-item {
-	width: 45px;
+  width: 45px;
 
-	.page-link {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+  .page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 !important;
+  }
 
-		border-radius: 0 !important;
-	}
+  &:first-child .page-link {
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+  }
 
-	&:first-child .page-link {
-		border-top-left-radius: 5px !important;
-		border-bottom-left-radius: 5px !important;
-	}
-
-	&:last-child .page-link {
-		border-top-right-radius: 5px !important;
-		border-bottom-right-radius: 5px !important;
-	}
+  &:last-child .page-link {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+  }
 }
 
 .page-item.active .page-link,
 .page-item.active .page-link:hover {
-	background-color: $primary !important;
+  background-color: $primary !important;
 }
 
 .animated .page-link {
-	animation: smooth-color-change 0.2s;
+  animation: smooth-color-change 0.2s;
 }
 
 .dark-theme {
-	.page-link {
-		color: $white !important;
+  .page-link {
+    color: $white !important;
+    background-color: $dark !important;
+    border-color: $secondary !important;
 
-		background-color: $dark !important;
+    &:hover {
+      background-color: $gray-800 !important;
+    }
+  }
 
-		border-color: $secondary !important;
+  .page-item.active .page-link {
+    background-color: $material-darkgrey !important;
+    border-color: $darkgrey !important;
+  }
 
-		&:hover {
-			background-color: $gray-800 !important;
-		}
-	}
-
-	.page-item.active .page-link {
-		background-color: $material-darkgrey !important;
-
-		border-color: $darkgrey !important;
-	}
-
-	.animated .page-link {
-		animation: none;
-	}
+  .animated .page-link {
+    animation: none;
+  }
 }
 
 @include media-breakpoint-down(sm) {
-	.page-item {
-		width: 30px;
-	}
+  .page-item {
+    width: 30px;
+  }
 }
