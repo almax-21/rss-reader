@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { useIntl } from 'react-intl';
 
 import { SvgIcon } from '@/components/UI/svg-icon';
+import type { SVG_ICON_TYPE } from '@/components/UI/svg-icon/types';
 import { MESSAGES } from '@/i18n/types';
 import { SORTS } from '@/types';
 
@@ -38,7 +39,11 @@ export const FilterSort: FC<FilterSortProps> = ({
 						variant="outline-secondary"
 						onClick={sortHandler(type)}
 					>
-						<SvgIcon height="16" variant={type} width="16" />
+						<SvgIcon
+							height="16"
+							variant={type as unknown as SVG_ICON_TYPE}
+							width="16"
+						/>
 					</Button>
 				);
 			})}

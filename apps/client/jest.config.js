@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const tsconfig = require('./tsconfig.json');
-const moduleNameMapper = require('tsconfig-paths-jest')(tsconfig);
 
 /** @type {import('jest').Config} */
 module.exports = {
@@ -15,5 +14,8 @@ module.exports = {
 	transform: {
 		'^.+\\.[t|j]sx?$': 'babel-jest',
 	},
-	moduleNameMapper,
+	moduleNameMapper: {
+		...require('tsconfig-paths-jest')(tsconfig),
+		'.+\\.(css|sass|scss)$': 'identity-obj-proxy',
+	},
 };

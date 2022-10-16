@@ -32,6 +32,20 @@ export const PostContent: FC = () => {
 
 	const prevActiveFeedId = useRef<string>('');
 
+	const handleSetActivePage =
+		(withScroll?: boolean) => (pageNumber: number) => () => {
+			setActivePage(pageNumber);
+
+			if (withScroll) {
+				const postContainerEl = document.getElementById('post-container');
+
+				window.scrollTo({
+					top: postContainerEl?.offsetTop,
+					behavior: 'smooth',
+				});
+			}
+		};
+
 	const resetActivePage = () => {
 		if (activePage === 1) {
 			return;
@@ -63,8 +77,8 @@ export const PostContent: FC = () => {
 			<PostFilter resetActivePage={resetActivePage} />
 			<Paginator
 				activePage={activePage}
-				setActivePage={setActivePage}
 				totalPages={totalPages}
+				onClick={handleSetActivePage()}
 			/>
 			{currentPosts.length === 0 ? (
 				<h3 aria-live="assertive" className="h4 mt-4">
@@ -75,10 +89,9 @@ export const PostContent: FC = () => {
 			)}
 			{currentPosts.length > MIN_POSTS_COUNT && (
 				<Paginator
-					withScroll
 					activePage={activePage}
-					setActivePage={setActivePage}
 					totalPages={totalPages}
+					onClick={handleSetActivePage(true)}
 				/>
 			)}
 		</div>

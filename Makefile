@@ -1,5 +1,5 @@
 install:
 	npx lerna bootstrap --hoist
 
-lint:
+test:
 	npx lerna run test

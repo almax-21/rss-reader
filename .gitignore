@@ -14,3 +14,6 @@ data/
 current/
 difference/
 storybook-static/
+reg-diff/
+reg.json
+report.html

@@ -1,8 +1,16 @@
 import type { FC, ReactElement } from 'react';
 import React, { useRef } from 'react';
 
-import type { SvgIconProps } from './types';
+import type { SVG_ICON_TYPE } from './types';
 import { SVG_ICON_VARIANTS } from './types';
+
+export interface SvgIconProps {
+	variant?: SVG_ICON_TYPE;
+	className?: string;
+	width?: string | number;
+	height?: string | number;
+	fill?: string;
+}
 
 export const SvgIcon: FC<SvgIconProps> = ({
 	variant,

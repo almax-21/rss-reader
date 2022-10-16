@@ -10,46 +10,34 @@ import { PAGINATOR_CAPACITY } from './types';
 // not a module because only bootsrap's classNames
 import './style.scss';
 
-interface PaginatorProps {
-	withScroll?: boolean;
+export interface PaginatorProps {
 	totalPages: number;
 	activePage: number;
-	setActivePage: (page: number) => void;
+	onClick: (page: number) => () => void;
 }
 
 export const Paginator: FC<PaginatorProps> = React.memo(
-	({ totalPages, activePage, setActivePage, withScroll }) => {
+	({ totalPages, activePage, onClick }) => {
 		if (totalPages < PAGINATOR_CAPACITY.MIN) {
 			return null;
 		}
 
-		const pagesColl: number[] = getPagesColl(totalPages);
+		const pagesColl = getPagesColl(totalPages);
 
-		const handleSetActivePage = (pageNumber: number) => () => {
-			setActivePage(pageNumber);
-
-			if (withScroll) {
-				const postContainerEl = document.getElementById('post-container');
-
-				window.scrollTo({
-					top: postContainerEl?.offsetTop,
-					behavior: 'smooth',
-				});
-			}
+		const props = {
+			activePage,
+			pages: pagesColl,
+			onClick,
 		};
 
-		return totalPages < PAGINATOR_CAPACITY.EXTRA ? (
-			<SimplePagination
-				activePage={activePage}
-				handleSetActivePage={handleSetActivePage}
-				pages={pagesColl}
-			/>
-		) : (
-			<ExtraPagination
-				activePage={activePage}
-				handleSetActivePage={handleSetActivePage}
-				pages={pagesColl}
-			/>
+		return (
+			<nav>
+				{totalPages < PAGINATOR_CAPACITY.EXTRA ? (
+					<SimplePagination {...props} />
+				) : (
+					<ExtraPagination {...props} />
+				)}
+			</nav>
 		);
 	},
 );
