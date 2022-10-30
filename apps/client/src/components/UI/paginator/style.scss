@@ -30,10 +30,6 @@
   background-color: $primary !important;
 }
 
-.animated .page-link {
-  animation: smooth-color-change 0.2s;
-}
-
 .dark-theme {
   .page-link {
     color: $white !important;
@@ -48,10 +44,6 @@
   .page-item.active .page-link {
     background-color: $material-darkgrey !important;
     border-color: $darkgrey !important;
-  }
-
-  .animated .page-link {
-    animation: none;
   }
 }
 

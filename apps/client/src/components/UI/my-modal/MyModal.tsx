@@ -1,16 +1,26 @@
 import type { FC } from 'react';
+import { useContext } from 'react';
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { AppRootElContext } from '@/contexts';
 import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 
+import type { ModalActionBtnProps } from './modal-action-btn/ModalActionBtn';
 import { ModalActionBtn } from './modal-action-btn';
-import type { MyModalProps } from './types';
 
 import styles from './styles.module.scss';
+
+export type MyModalProps = ModalActionBtnProps & {
+	isShow?: boolean;
+	handleClose: () => void;
+	title: string;
+	description: string;
+	imgSrc?: string;
+};
 
 export const MyModal: FC<MyModalProps> = ({
 	type,
@@ -27,9 +37,12 @@ export const MyModal: FC<MyModalProps> = ({
 
 	const intl = useIntl();
 
+	const appRootEl = useContext(AppRootElContext);
+
 	return (
 		<Modal
 			centered={isTouchDevice}
+			container={appRootEl}
 			role="alert"
 			show={isShow}
 			onHide={handleClose}

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { IntlProvider } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { NetworkTooltip } from '@/components/network-tooltip';
 import { MySpinner } from '@/components/UI/my-spinner';
-import { AuthContext } from '@/contexts';
+import { AppRootElContext, AuthContext } from '@/contexts';
 import { useNetwork, useTypedDispatch, useTypedSelector } from '@/hooks';
 import { messages } from '@/i18n/messages';
 import userAPI from '@/services/UserService';
@@ -41,11 +41,15 @@ export const App: FC = () => {
 
 	const userToken = userData.token;
 
+	const AppRootElRef = useRef<HTMLElement | null>(null);
+
 	useEffect(() => {
 		const SpeechlySpeechRecognition =
 			createSpeechlySpeechRecognition(SPEECHLY_APP_ID);
 
 		SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
+
+		AppRootElRef.current = document.querySelector('#root');
 	}, []);
 
 	useEffect(() => {
@@ -62,22 +66,24 @@ export const App: FC = () => {
 
 	return (
 		<IntlProvider locale={lang} messages={messages[lang]}>
-			<AppHelmet />
-			<LoadingBar className="loading-bar" />
-			<BrowserRouter>
-				{!isOnline && <NetworkTooltip />}
-				<Header />
-				{isAuthPending ? (
-					<div className="d-flex justify-content-center mt-5">
-						<MySpinner isDark={isDarkTheme ? false : true} />
-					</div>
-				) : (
-					<AuthContext.Provider value={{ refetchAuthQuery }}>
-						<AppRouter />
-					</AuthContext.Provider>
-				)}
-				<Footer />
-			</BrowserRouter>
+			<AppRootElContext.Provider value={AppRootElRef.current}>
+				<AppHelmet />
+				<LoadingBar className="loading-bar" />
+				<BrowserRouter>
+					{!isOnline && <NetworkTooltip />}
+					<Header />
+					{isAuthPending ? (
+						<div className="d-flex justify-content-center mt-5">
+							<MySpinner isDark={isDarkTheme ? false : true} />
+						</div>
+					) : (
+						<AuthContext.Provider value={{ refetchAuthQuery }}>
+							<AppRouter />
+						</AuthContext.Provider>
+					)}
+					<Footer />
+				</BrowserRouter>
+			</AppRootElContext.Provider>
 		</IntlProvider>
 	);
 };

@@ -5,9 +5,12 @@ import cn from 'classnames';
 
 import { MESSAGES } from '@/i18n/types';
 
-import type { MySpinnerProps } from './types';
-
 import styles from './styles.module.scss';
+
+export interface MySpinnerProps {
+	small?: boolean;
+	isDark?: boolean;
+}
 
 export const MySpinner: FC<MySpinnerProps> = ({
 	small = false,

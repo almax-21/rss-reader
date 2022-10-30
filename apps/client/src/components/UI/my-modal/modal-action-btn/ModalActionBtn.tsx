@@ -8,8 +8,14 @@ import { useTypedSelector } from '@/hooks';
 import { MESSAGES } from '@/i18n/types';
 import { selectRssMeta } from '@/store/selectors/rssMetaSelectors';
 
-import type { ModalActionBtnProps } from '../types';
+import type { MODAL_TYPE } from '../types';
 import { MODAL_TYPES } from '../types';
+
+export interface ModalActionBtnProps {
+	type: MODAL_TYPE;
+	handleAction?: () => void;
+	url?: string;
+}
 
 export const ModalActionBtn: FC<ModalActionBtnProps> = ({
 	type,

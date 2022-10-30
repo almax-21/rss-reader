@@ -8,9 +8,5 @@ export enum PAGINATOR_CAPACITY {
 export interface PaginationProps {
 	pages: number[];
 	activePage: number;
-	handleSetActivePage: (page: number) => () => void;
+	onClick: (page: number) => () => void;
 }
-
-export type PaginationInnerProps = PaginationProps & {
-	disableAnimation?: boolean;
-};

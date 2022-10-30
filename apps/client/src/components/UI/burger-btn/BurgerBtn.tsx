@@ -4,7 +4,10 @@ import { useIntl } from 'react-intl';
 
 import { MESSAGES } from '@/i18n/types';
 
-import type { BurgerBtnProps } from './types';
+export interface BurgerBtnProps {
+	isActive: boolean;
+	onClick: () => void;
+}
 
 export const BurgerBtn: FC<BurgerBtnProps> = ({ isActive, onClick }) => {
 	const intl = useIntl();

@@ -12,39 +12,39 @@ import { PAGINATOR_CAPACITY } from '../../types';
 export const ExtraPagination: FC<PaginationProps> = ({
 	pages,
 	activePage,
-	handleSetActivePage,
+	onClick,
 }) => {
 	const intl = useIntl();
+
+	const isFirstPageActive = activePage === 1;
 
 	// first pages of pagination
 	if (activePage < PAGINATOR_CAPACITY.MIDPOINT) {
 		const firstPages = pages.slice(0, PAGINATOR_CAPACITY.MIDPOINT);
 
 		return (
-			<nav>
-				<Pagination
-					aria-label={intl.formatMessage({ id: MESSAGES.PAGINATION })}
-					role="navigation"
-				>
-					<Pagination.Prev
-						disabled={activePage === 1}
-						onClick={handleSetActivePage(activePage - 1)}
-					/>
-					<PaginationInner
-						activePage={activePage}
-						handleSetActivePage={handleSetActivePage}
-						pages={firstPages}
-					/>
-					<Pagination.Ellipsis disabled />
-					<Pagination.Last onClick={handleSetActivePage(pages.length)}>
-						{pages.length}
-					</Pagination.Last>
-					<Pagination.Next
-						disabled={activePage === pages.length}
-						onClick={handleSetActivePage(activePage + 1)}
-					/>
-				</Pagination>
-			</nav>
+			<Pagination
+				aria-label={intl.formatMessage({ id: MESSAGES.PAGINATION })}
+				role="navigation"
+			>
+				<Pagination.Prev
+					disabled={isFirstPageActive}
+					onClick={onClick(activePage - 1)}
+				/>
+				<PaginationInner
+					activePage={activePage}
+					pages={firstPages}
+					onClick={onClick}
+				/>
+				<Pagination.Ellipsis disabled />
+				<Pagination.Last onClick={onClick(pages.length)}>
+					{pages.length}
+				</Pagination.Last>
+				<Pagination.Next
+					disabled={activePage === pages.length}
+					onClick={onClick(activePage + 1)}
+				/>
+			</Pagination>
 		);
 	}
 
@@ -59,21 +59,19 @@ export const ExtraPagination: FC<PaginationProps> = ({
 					role="navigation"
 				>
 					<Pagination.Prev
-						disabled={activePage === 1}
-						onClick={handleSetActivePage(activePage - 1)}
+						disabled={isFirstPageActive}
+						onClick={onClick(activePage - 1)}
 					/>
-					<Pagination.First onClick={handleSetActivePage(1)}>
-						{1}
-					</Pagination.First>
+					<Pagination.First onClick={onClick(1)}>{1}</Pagination.First>
 					<Pagination.Ellipsis disabled />
 					<PaginationInner
 						activePage={activePage}
-						handleSetActivePage={handleSetActivePage}
 						pages={lastPages}
+						onClick={onClick}
 					/>
 					<Pagination.Next
 						disabled={activePage === pages.length}
-						onClick={handleSetActivePage(activePage + 1)}
+						onClick={onClick(activePage + 1)}
 					/>
 				</Pagination>
 			</nav>
@@ -99,32 +97,28 @@ export const ExtraPagination: FC<PaginationProps> = ({
 				role="navigation"
 			>
 				<Pagination.Prev
-					disabled={activePage === 1}
-					onClick={handleSetActivePage(activePage - 1)}
+					disabled={isFirstPageActive}
+					onClick={onClick(activePage - 1)}
 				/>
-				<Pagination.First
-					active={activePage === 1}
-					onClick={handleSetActivePage(1)}
-				>
+				<Pagination.First active={isFirstPageActive} onClick={onClick(1)}>
 					{1}
 				</Pagination.First>
 				<Pagination.Ellipsis disabled />
 				<PaginationInner
-					disableAnimation
 					activePage={activePage}
-					handleSetActivePage={handleSetActivePage}
 					pages={innerPages}
+					onClick={onClick}
 				/>
 				<Pagination.Ellipsis disabled />
 				<Pagination.Last
 					active={activePage === pages.length}
-					onClick={handleSetActivePage(pages.length)}
+					onClick={onClick(pages.length)}
 				>
 					{pages.length}
 				</Pagination.Last>
 				<Pagination.Next
 					disabled={activePage === pages.length}
-					onClick={handleSetActivePage(activePage + 1)}
+					onClick={onClick(activePage + 1)}
 				/>
 			</Pagination>
 		</nav>

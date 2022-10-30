@@ -1,20 +1,27 @@
 import type { FC } from 'react';
 import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import type { Variant } from 'react-bootstrap/esm/types';
 import { FormattedMessage } from 'react-intl';
 
 import { useTypedSelector } from '@/hooks';
 import { selectSettings } from '@/store/selectors/settingsSelectors';
 import type { POST_STATE_TYPE } from '@/store/types';
 
-import type { MyDropDownProps } from './types';
+export interface MyDropDownProps<T> {
+	variant: Variant;
+	title: string;
+	values: Array<T>;
+	activeValue: T;
+	onItemClick: (value: T) => () => void;
+}
 
 export const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 	variant,
 	title,
 	values,
 	activeValue,
-	handleSetActiveValue,
+	onItemClick,
 }) => {
 	const { isDarkTheme } = useTypedSelector(selectSettings);
 
@@ -28,7 +35,7 @@ export const MyDropDown: FC<MyDropDownProps<POST_STATE_TYPE>> = ({
 				<Dropdown.Item
 					key={value}
 					active={value === activeValue}
-					onClick={handleSetActiveValue(value)}
+					onClick={onItemClick(value)}
 				>
 					<FormattedMessage id={value} />
 				</Dropdown.Item>

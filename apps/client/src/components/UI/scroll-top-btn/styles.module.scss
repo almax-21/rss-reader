@@ -33,3 +33,8 @@
     }
   }
 }
+
+// screenshot tests only
+*[loki-test] .scroll-top {
+  display: block;
+}

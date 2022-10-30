@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should toggle drop-down on click 1`] = `
+<div>
+  <div
+    class="dropdown"
+  >
+    <button
+      aria-expanded="false"
+      class="dropdown-toggle btn btn-outline-secondary"
+      type="button"
+    >
+      LOL
+    </button>
+  </div>
+</div>
+`;
+
+exports[`should toggle drop-down on click 2`] = `
+<div>
+  <div
+    class="show dropdown"
+  >
+    <button
+      aria-expanded="true"
+      class="dropdown-toggle btn btn-outline-secondary"
+      type="button"
+    >
+      LOL
+    </button>
+    <div
+      aria-labelledby=""
+      class="dropdown-menu show"
+      data-popper-escaped="true"
+      data-popper-placement="bottom-start"
+      data-popper-reference-hidden="true"
+      style="position: absolute; top: 0px; left: 0px; transform: translate(0px, 2px);"
+      x-placement="bottom-start"
+    >
+      <a
+        aria-selected="false"
+        class="dropdown-item"
+        data-rr-ui-dropdown-item=""
+        href="#"
+        role="button"
+        tabindex="0"
+      >
+        Read
+      </a>
+      <a
+        aria-selected="false"
+        class="dropdown-item"
+        data-rr-ui-dropdown-item=""
+        href="#"
+        role="button"
+        tabindex="0"
+      >
+        Unread
+      </a>
+      <a
+        aria-selected="true"
+        class="dropdown-item active"
+        data-rr-ui-dropdown-item=""
+        href="#"
+        role="button"
+        tabindex="0"
+      >
+        All
+      </a>
+    </div>
+  </div>
+</div>
+`;

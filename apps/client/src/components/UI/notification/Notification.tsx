@@ -5,9 +5,17 @@ import cn from 'classnames';
 
 import { SvgIcon } from '@/components/UI/svg-icon';
 
-import type { NotificationProps } from './types';
+import type { SVG_ICON_TYPE } from '../svg-icon/types';
+
+import type { NotificationData } from './types';
 
 import styles from './styles.module.scss';
+
+export interface NotificationProps {
+	data: NotificationData;
+	isShow: boolean;
+	onClose: () => void;
+}
 
 export const Notification: FC<NotificationProps> = ({
 	data,
@@ -25,7 +33,7 @@ export const Notification: FC<NotificationProps> = ({
 			onClose={onClose}
 		>
 			<div className={styles.notification__icon}>
-				<SvgIcon variant={variant} />
+				<SvgIcon variant={variant as SVG_ICON_TYPE} />
 			</div>
 			{message}
 		</Alert>

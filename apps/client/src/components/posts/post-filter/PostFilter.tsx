@@ -77,10 +77,10 @@ export const PostFilter: FC<PostFilterProps> = ({ resetActivePage }) => {
 				<div className="d-flex flex-wrap justify-content-between flex-grow-1">
 					<MyDropDown
 						activeValue={filterState}
-						handleSetActiveValue={handleSwitchFilterState}
 						title={intl.formatMessage({ id: filterState })}
 						values={filterValues}
 						variant="outline-secondary"
+						onItemClick={handleSwitchFilterState}
 					/>
 					<FilterSort
 						activeSortType={sortType}

@@ -1,19 +1,20 @@
 import React from 'react';
-import { IntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { messages } from '@/i18n/messages';
+import withIntl from '@/hocs/withIntl';
 
+import type { BurgerBtnProps } from './BurgerBtn';
 import { BurgerBtn } from './BurgerBtn';
 
-it('должен отрендерить компонент', () => {
-	const lang = 'ru';
+it('should call onClick', () => {
+	const BurgerBtnSmart = withIntl<BurgerBtnProps>(BurgerBtn);
+	const onClick = jest.fn();
 
-	render(
-		<IntlProvider locale={lang} messages={messages[lang]}>
-			<BurgerBtn isActive onClick={() => 'kek'} />
-		</IntlProvider>,
-	);
+	render(<BurgerBtnSmart isActive={false} onClick={onClick} />);
 
-	expect(screen.getByRole('button')).toBeInTheDocument();
+	const btn = screen.getByRole('button', { name: 'Settings', expanded: false });
+	userEvent.click(btn);
+
+	expect(onClick).toHaveBeenCalledTimes(1);
 });
