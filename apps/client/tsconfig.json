@@ -1,15 +1,25 @@
 {
 	"compilerOptions": {
 		"target": "es5",
+		"module": "esnext",
 		"lib": ["dom", "dom.iterable", "esnext", "webworker"],
+		"strict": true,
 		"allowJs": true,
+		"allowUnreachableCode": false,
+		"exactOptionalPropertyTypes": false,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"strict": true,
 		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		// because of @typescript-eslint/no-unused-vars
+		"noUnusedLocals": false,
+		"noUnusedParameters": true,
+		"useUnknownInCatchVariables": true,
 		"noFallthroughCasesInSwitch": true,
-		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
@@ -18,7 +28,7 @@
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"]
-		}
+		},
 	},
 	"include": ["src"]
 }
