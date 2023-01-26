@@ -1,6 +1,6 @@
 {
 	"name": "@rss-reader/api",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"description": "backend part",
 	"scripts": {
 		"test": "npx eslint .",
