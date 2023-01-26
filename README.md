@@ -6,7 +6,7 @@ It's a Progressive Web Application (**PWA**) with support **offline mode**, buil
 
 Example links for test app:
 
-https://meduza.io/rss2/podcasts/tekst-nedeli
+https://vc.ru/rss/new
 
 https://3dnews.ru/news/rss/
 
